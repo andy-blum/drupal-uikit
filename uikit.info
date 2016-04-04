@@ -1,1 +1,3 @@
 name = UIkit
+description = A lightweight frontend framework with a comprehensive collection of HTML, CSS, and JS components.
+core = 7.x
