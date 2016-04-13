@@ -1,3 +1,16 @@
 name = UIkit
 description = A lightweight frontend framework with a comprehensive collection of HTML, CSS, and JS components.
 core = 7.x
+
+stylesheets[all][] = css/uikit.gradient.min.css
+
+scripts[] = js/uikit.min.js
+
+regions[navigation]     = 'Navigation'
+regions[header]         = 'Page heading'
+regions[highlighted]    = 'Highlighted'
+regions[help]           = 'Help'
+regions[content]        = 'Content'
+regions[sidebar_first]  = 'Sidebar first'
+regions[sidebar_second] = 'Sidebar second'
+regions[footer]         = 'Footer'
