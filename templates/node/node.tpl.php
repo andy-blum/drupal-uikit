@@ -105,7 +105,13 @@
     ?>
   </div>
 
-  <?php print render($content['links']); ?>
+  <div class="node-links uk-text-right">
+    <?php print render($content['links']); ?>
+  </div>
   <?php print render($content['comments']); ?>
 
 </article>
+
+<?php if ($teaser): ?>
+  <hr class="uk-article-divider">
+<?php endif; ?>

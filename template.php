@@ -47,6 +47,13 @@ function uikit_process_page(&$variables) {
 }
 
 /**
+ * Implements template_preprocess_node().
+ */
+function uikit_preprocess_node(&$variables) {
+  $variables['title_attributes_array']['class'][] = 'uk-article-title';
+}
+
+/**
  * Implements hook_preprocess_HOOK() for theme_button().
  */
 function uikit_preprocess_button(&$variables) {
@@ -112,13 +119,29 @@ function uikit_preprocess_container(&$variables) {
  * Implements hook_preprocess_HOOK() for theme_field().
  */
 function uikit_preprocess_field(&$variables) {
-  // Add top and bottom margin utility classes to image fields.
-  $formatter = $variables['element']['#formatter'];
+  $type = $variables['element']['#field_type'];
+  $classes = $variables['classes_array'];
 
-  if ($formatter == 'image') {
-    $variables['classes_array'][] = 'uk-margin-top';
-    $variables['classes_array'][] = 'uk-margin-bottom';
+  // Add top and bottom margin utility classes to image fields.
+  switch ($type) {
+    case 'image':
+      $classes[] = 'uk-float-left';
+      $classes[] = 'uk-margin-right';
+      $classes[] = 'uk-margin-bottom';
+      break;
+
+    case 'taxonomy_term_reference':
+      $classes[] = 'uk-margin-top';
+      $classes[] = 'uk-margin-bottom';
+      break;
+
+    case 'text':
+    case 'text_with_summary':
+      $classes[] = 'uk-clearfix';
+      break;
   }
+
+  $variables['classes_array'] = $classes;
 }
 
 /**
@@ -188,6 +211,12 @@ function uikit_preprocess_form_element(&$variables) {
       drupal_add_css($theme . '/css/components/form-select.min.css');
       break;
   }
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for theme_links().
+ */
+function uikit_preprocess_links(&$variables) {
 }
 
 /**
