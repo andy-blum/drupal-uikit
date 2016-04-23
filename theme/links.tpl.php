@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Returns HTML for a set of links.
+ */
+
 $links = $variables['links'];
 $attributes = $variables['attributes'];
 $heading = $variables['heading'];

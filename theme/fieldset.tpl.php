@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Returns HTML for a fieldset form element and its children.
+ */
+
 $element = $variables['element'];
 element_set_attributes($element, array('id'));
 _form_set_class($element, array('form-wrapper'));

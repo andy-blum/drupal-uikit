@@ -1,3 +1,12 @@
+/**
+ * @file
+ * Override Drupal's password behaviors.
+ *
+ * UIkit's password component requires changes to the password field template.
+ * This causes the User module's user.js to not work as expected, so this script
+ * replaces it.
+ */
+
 (function ($) {
 
 /**
@@ -16,7 +25,7 @@ Drupal.behaviors.password = {
       innerWrapper.addClass('password-parent');
 
       // Add the password confirmation layer.
-      $('input.password-confirm', outerWrapper).parent().parent().find('.pass-confirm-target').append('<div class="password-confirm">' + translate['confirmTitle'] + ' <span></span></div>').addClass('confirm-parent');
+      $('input.password-confirm', outerWrapper).parent().parent().find('.pass-confirm-target').append('<div class="password-confirm">' + translate['confirmTitle'] + '<span></span></div>').addClass('confirm-parent');
       var confirmInput = $('input.password-confirm', outerWrapper);
       var confirmResult = $('div.password-confirm', outerWrapper);
       var confirmChild = $('span', confirmResult);
@@ -158,13 +167,17 @@ Drupal.evaluatePasswordStrength = function (password, translate) {
   }
 
   // Based on the strength, work out what text should be shown by the password strength meter.
+  var indicatorText;
   if (strength < 60) {
     indicatorText = translate.weak;
-  } else if (strength < 70) {
+  }
+  else if (strength < 70) {
     indicatorText = translate.fair;
-  } else if (strength < 80) {
+  }
+  else if (strength < 80) {
     indicatorText = translate.good;
-  } else if (strength <= 100) {
+  }
+  else if (strength <= 100) {
     indicatorText = translate.strong;
   }
 

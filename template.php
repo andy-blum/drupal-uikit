@@ -1,6 +1,7 @@
 <?php
 /**
  * @file
+ * Conditional logic and data processing for the UIkit theme.
  */
 
 /**
@@ -18,13 +19,13 @@ function uikit_preprocess_page(&$variables) {
   // Assign sidebar_first attributes.
   $variables['sidebar_first_attributes_array'] = array(
     'id' => 'sidebar-first',
-    'class' => array('uk-width-1-1', 'uk-width-medium-1-4')
+    'class' => array('uk-width-1-1', 'uk-width-medium-1-4'),
   );
 
   // Assign sidebar_second attributes.
   $variables['sidebar_second_attributes_array'] = array(
     'id' => 'sidebar-second',
-    'class' => array('uk-width-1-1', 'uk-width-medium-1-4')
+    'class' => array('uk-width-1-1', 'uk-width-medium-1-4'),
   );
 
   // Assign additional content attributes if either sidebar is not empty.
@@ -149,7 +150,7 @@ function uikit_preprocess_fieldset(&$variables) {
 }
 
 /**
- * Implements hook_preprocess_HOOK() for theme_form.
+ * Implements hook_preprocess_HOOK() for theme_form().
  */
 function uikit_preprocess_form(&$variables) {
   // Add the uk-form class to all forms.

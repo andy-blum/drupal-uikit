@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Returns HTML for a single local task link.
+ */
+
 $link = $variables['element']['#link'];
 $link_text = $link['title'];
 

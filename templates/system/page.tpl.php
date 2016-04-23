@@ -93,26 +93,26 @@
         'links' => $main_menu,
         'attributes' => array(
           'id' => 'main-menu',
-          'class' => array('uk-navbar-nav', 'uk-hidden-small')
+          'class' => array('uk-navbar-nav', 'uk-hidden-small'),
         ),
         'heading' => array(
           'text' => t('Main menu'),
           'level' => 'h2',
-          'class' => 'element-invisible'
-        )
+          'class' => 'element-invisible',
+        ),
       )); ?>
 
       <?php print theme('links__system_secondary_menu', array(
         'links' => $secondary_menu,
         'attributes' => array(
           'id' => 'secondary-menu',
-          'class' => array('uk-navbar-nav', 'uk-float-right', 'uk-hidden-small')
+          'class' => array('uk-navbar-nav', 'uk-float-right', 'uk-hidden-small'),
         ),
         'heading' => array(
           'text' => t('Secondary menu'),
           'level' => 'h2',
-          'class' => 'element-invisible'
-        )
+          'class' => 'element-invisible',
+        ),
       )); ?>
     <?php endif; ?>
 
@@ -213,26 +213,26 @@
         'links' => $main_menu,
         'attributes' => array(
           'id' => 'main-menu--offcanvas',
-          'class' => array('uk-nav', 'uk-nav-offcanvas')
+          'class' => array('uk-nav', 'uk-nav-offcanvas'),
         ),
         'heading' => array(
           'text' => t('Main menu'),
           'level' => 'h2',
-          'class' => 'element-invisible'
-        )
+          'class' => 'element-invisible',
+        ),
       )); ?>
 
       <?php print theme('links__system_secondary_menu', array(
         'links' => $secondary_menu,
         'attributes' => array(
           'id' => 'secondary-menu--offcanvas',
-          'class' => array('uk-nav', 'uk-nav-offcanvas')
+          'class' => array('uk-nav', 'uk-nav-offcanvas'),
         ),
         'heading' => array(
           'text' => t('Secondary menu'),
           'level' => 'h2',
-          'class' => 'element-invisible'
-        )
+          'class' => 'element-invisible',
+        ),
       )); ?>
     <?php endif; ?>
   </div> <!-- /.uk-offcanvas-bar -->

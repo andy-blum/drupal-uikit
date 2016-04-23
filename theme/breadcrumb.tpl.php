@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Returns HTML for a breadcrumb trail.
+ */
+
 $breadcrumb = $variables['breadcrumb'];
 
 if (!empty($breadcrumb)) {

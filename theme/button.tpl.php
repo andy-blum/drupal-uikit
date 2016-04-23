@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Returns HTML for a button form element.
+ */
+
 $element = $variables['element'];
 $element['#attributes']['type'] = 'submit';
 element_set_attributes($element, array('id', 'name', 'value'));

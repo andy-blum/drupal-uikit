@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Returns HTML for a form element.
+ */
+
 $element = &$variables['element'];
 $name = !empty($element['#name']) ? $element['#name'] : FALSE;
 $type = !empty($element['#type']) ? $element['#type'] : FALSE;

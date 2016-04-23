@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Returns HTML for a form element label and required marker.
+ */
+
 $element = $variables['element'];
 $display = isset($element['#title_display']) ? $element['#title_display'] : 'before';
 $type = !empty($element['#type']) ? $element['#type'] : FALSE;

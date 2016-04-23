@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Returns HTML for primary and secondary local tasks.
+ */
+
 $output = '';
 
 if (!empty($variables['primary'])) {

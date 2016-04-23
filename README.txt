@@ -56,6 +56,9 @@ MAINTAINERS
 -----------
 
 Current maintainers:
- * Richard C Buchanan, III (Richard Buchanan) - https://www.drupal.org/u/richard-buchanan
- * Darryl Norris (darol100) - https://www.drupal.org/u/darol100
- * Devanand Babu (devanandb) - https://www.drupal.org/u/devanandb
+ * Richard C Buchanan, III (Richard Buchanan)
+   - https://www.drupal.org/u/richard-buchanan
+ * Darryl Norris (darol100)
+   - https://www.drupal.org/u/darol100
+ * Devanand Babu (devanandb)
+   - https://www.drupal.org/u/devanandb
