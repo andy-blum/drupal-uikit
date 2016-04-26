@@ -167,7 +167,7 @@
     <div<?php print $content_attributes; ?>>
       <?php print render($title_prefix); ?>
       <?php if ($title): ?>
-        <h1 id="page-title" class="uk-heading-large"><?php print $title; ?></h1><?php endif; ?>
+        <h1 id="page-title" class="uk-article-title"><?php print $title; ?></h1><?php endif; ?>
       <?php print render($title_suffix); ?>
 
       <?php if ($tabs): ?>
@@ -183,7 +183,7 @@
       <?php print render($page['help']); ?>
 
       <?php if ($action_links): ?>
-        <ul class="action-links"><?php print render($action_links); ?></ul>
+        <ul class="action-links uk-subnav uk-subnav-pill"><?php print render($action_links); ?></ul>
       <?php endif; ?>
 
       <?php print render($page['content']); ?>

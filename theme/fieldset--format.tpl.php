@@ -7,12 +7,12 @@
 
 $element = $variables['element'];
 element_set_attributes($element, array('id'));
-_form_set_class($element, array('form-wrapper'));
+_form_set_class($element, array('form-wrapper', 'uk-panel', 'uk-panel-box'));
 
 // Grouped fieldsets are fieldsets grouped together, such as vertical tabs.
 $group_fieldset = isset($element['#group_fieldset']) && $element['#group_fieldset'];
 
-$output = '<fieldset' . drupal_attributes($element['#attributes']) . '>';
+$output = '<div' . drupal_attributes($element['#attributes']) . '>';
 
 if (!empty($element['#title'])) {
   $output .= '<legend><span class="fieldset-legend">' . $element['#title'] . '</span></legend>';
@@ -31,6 +31,6 @@ if (isset($element['#value'])) {
 }
 
 $output .= '</div>';
-$output .= "</fieldset>\n";
+$output .= "</div>\n";
 
 print $output;

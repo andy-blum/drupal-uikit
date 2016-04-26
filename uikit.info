@@ -3,6 +3,7 @@ description = A lightweight frontend framework with a comprehensive collection o
 core = 7.x
 
 stylesheets[all][] = css/uikit.gradient.min.css
+stylesheets[all][] = overrides/overrides.css
 
 scripts[] = js/uikit.min.js
 

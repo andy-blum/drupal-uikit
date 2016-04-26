@@ -1,0 +1,29 @@
+.table-filter-tips td.get {
+  white-space: nowrap;
+}
+.table-filter-tips td.type>code {
+  display: block;
+  font: 12px/18px Consolas, monospace, serif;
+  -moz-tab-size: 4;
+  tab-size: 4;
+  overflow: auto;
+  white-space: normal;
+  border: 1px solid #e5e5e5;
+  border-radius: 3px;
+  padding: 10px;
+}
+
+a.contextual-links-trigger {
+  background-image: none;
+  border: 0;
+  overflow: visible;
+  text-indent: 4px;
+  position: relative;
+  top: 2px;
+}
+.contextual-links-region .uk-dropdown,
+.contextual-links-region .uk-dropdown-blank {
+  min-width: 0;
+  right: 0;
+  top: 30px;
+}

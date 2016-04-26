@@ -8,11 +8,11 @@
 $element = &$variables['element'];
 $name = !empty($element['#name']) ? $element['#name'] : FALSE;
 $type = !empty($element['#type']) ? $element['#type'] : FALSE;
+$prefix = isset($element['#field_prefix']) ? $element['#field_prefix'] : '';
+$suffix = isset($element['#field_suffix']) ? $element['#field_suffix'] : '';
 $checkbox = $type && $type === 'checkbox';
 $password = $type && $type === 'password';
 $radio = $type && $type === 'radio';
-$prefix = isset($element['#field_prefix']) ? $element['#field_prefix'] : '';
-$suffix = isset($element['#field_suffix']) ? $element['#field_suffix'] : '';
 
 // Create an attributes array for the wrapping container.
 if (empty($element['#wrapper_attributes'])) {
@@ -73,6 +73,11 @@ if ($password) {
   }
 }
 
+// Add a space before the labels of checkboxes and radios.
+if (($checkbox || $radio) && isset($element['#title'])) {
+  $variables['element']['#title'] = ' ' . $element['#title'];
+}
+
 // Create a render array for the form element.
 $build = array(
   '#theme_wrappers' => array('container__form_element'),
@@ -120,7 +125,7 @@ if (!empty($element['#description'])) {
   $build['description'] = array(
     '#type' => 'container',
     '#attributes' => array(
-      'class' => array('uk-form-help-block'),
+      'class' => array('uk-form-help-block', 'uk-text-muted'),
     ),
     '#weight' => 20,
     0 => array('#markup' => $element['#description']),

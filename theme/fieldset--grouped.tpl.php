@@ -15,10 +15,11 @@ $group_fieldset = isset($element['#group_fieldset']) && $element['#group_fieldse
 $output = '<fieldset' . drupal_attributes($element['#attributes']) . '>';
 
 if (!empty($element['#title'])) {
+  // Always wrap fieldset legends in a SPAN for CSS positioning.
   $output .= '<legend><span class="fieldset-legend">' . $element['#title'] . '</span></legend>';
 }
 
-$output .= '<div class="fieldset-wrapper">';
+$output .= '<div class="fieldset-wrapper uk-margin-top uk-margin-bottom">';
 
 if (!empty($element['#description'])) {
   $output .= '<div class="uk-form-help-block"><p>' . $element['#description'] . '</p></div>';

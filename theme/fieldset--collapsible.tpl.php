@@ -15,10 +15,23 @@ $group_fieldset = isset($element['#group_fieldset']) && $element['#group_fieldse
 $output = '<fieldset' . drupal_attributes($element['#attributes']) . '>';
 
 if (!empty($element['#title'])) {
-  $output .= '<legend><span class="fieldset-legend">' . $element['#title'] . '</span></legend>';
+  if (!$group_fieldset) {
+    // Use an H3 element for non-grouped fieldset titles.
+    $output .= '<h3 class="uk-accordion-title"><span class="fieldset-legend">' . $element['#title'] . '</span></h3>';
+  }
+  else {
+    // Always wrap fieldset legends in a SPAN for CSS positioning.
+    $output .= '<legend><span class="fieldset-legend">' . $element['#title'] . '</span></legend>';
+  }
 }
 
-$output .= '<div class="fieldset-wrapper">';
+if (!$group_fieldset) {
+  // Use the uk-accordion-content class for non-grouped fieldsets.
+  $output .= '<div class="uk-accordion-content">';
+}
+else {
+  $output .= '<div class="fieldset-wrapper uk-margin-top uk-margin-bottom">';
+}
 
 if (!empty($element['#description'])) {
   $output .= '<div class="uk-form-help-block"><p>' . $element['#description'] . '</p></div>';

@@ -105,9 +105,10 @@
     ?>
   </div>
 
-  <div class="node-links uk-text-right">
+  <div class="node-links uk-clearfix">
     <?php print render($content['links']); ?>
   </div>
+
   <?php print render($content['comments']); ?>
 
 </article>

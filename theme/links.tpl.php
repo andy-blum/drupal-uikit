@@ -8,6 +8,8 @@
 $links = $variables['links'];
 $attributes = $variables['attributes'];
 $heading = $variables['heading'];
+$theme_hook_original = $variables['theme_hook_original'];
+$contextual_links = $theme_hook_original === 'links__contextual';
 global $language_url;
 $output = '';
 
@@ -31,6 +33,9 @@ if (count($links) > 0) {
     $output .= '>' . check_plain($heading['text']) . '</' . $heading['level'] . '>';
   }
 
+  if ($contextual_links) {
+    $output .= '<div class="uk-dropdown uk-dropdown-small">';
+  }
   $output .= '<ul' . drupal_attributes($attributes) . '>';
 
   $num_links = count($links);
@@ -75,6 +80,9 @@ if (count($links) > 0) {
   }
 
   $output .= '</ul>';
+  if ($contextual_links) {
+    $output .= '</div>';
+  }
 }
 
 print $output;

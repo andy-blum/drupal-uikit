@@ -6,6 +6,7 @@
  */
 
 $breadcrumb = $variables['breadcrumb'];
+$path = explode('/', current_path());
 
 if (!empty($breadcrumb)) {
   // Provide a navigational heading to give context for breadcrumb links to
