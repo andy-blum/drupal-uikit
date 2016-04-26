@@ -481,7 +481,7 @@ function uikit_preprocess_item_list(&$variables) {
  * Implements hook_preprocess_HOOK() for theme_links().
  */
 function uikit_preprocess_links(&$variables) {
-  $theme_hook_original = $variables['theme_hook_original'];
+  $theme_hook_original = isset($variables['theme_hook_original']) ? $variables['theme_hook_original'] : '';
   $classes = $variables['attributes']['class'];
 
   // Removes default classes from inline links and adds uk-subnav and

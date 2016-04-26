@@ -8,7 +8,7 @@
 $links = $variables['links'];
 $attributes = $variables['attributes'];
 $heading = $variables['heading'];
-$theme_hook_original = $variables['theme_hook_original'];
+$theme_hook_original = isset($variables['theme_hook_original']) ? $variables['theme_hook_original'] : '';
 $contextual_links = $theme_hook_original === 'links__contextual';
 global $language_url;
 $output = '';

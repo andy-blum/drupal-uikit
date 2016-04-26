@@ -7,7 +7,7 @@
 
 $element = $variables['element'];
 $name = !empty($element['#name']) ? $element['#name'] : FALSE;
-$search = $name && $name = 'search_block_form';
+$search = $name && $name === 'search_block_form';
 element_set_attributes($element, array(
   'id',
   'name',
@@ -17,13 +17,13 @@ element_set_attributes($element, array(
 ));
 _form_set_class($element, array('form-text'));
 
-if (!$search) {
-  $element['#attributes']['type'] = 'text';
-}
-else {
+if ($search) {
   $element['#attributes']['type'] = 'search';
   $element['#attributes']['class'][] = 'uk-search-field';
   $element['#attributes']['placeholder'] = 'Search ...';
+}
+else {
+  $element['#attributes']['type'] = 'text';
 }
 
 $extra = '';

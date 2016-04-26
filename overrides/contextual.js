@@ -17,7 +17,7 @@ Drupal.behaviors.contextualLinks = {
       var $region = $wrapper.closest('.contextual-links-region');
       var $links = $wrapper.find('.uk-dropdown');
       var configure = Drupal.t('Configure');
-      var $trigger = $('<a class="contextual-links-trigger" href="#" />').html('<i class="uk-icon-cog uk-icon-medium"><span class="element-invisible">' + configure + '</span>').click(
+      var $trigger = $('<a class="contextual-links-trigger" href="#" />').html('<i class="uk-icon-cog uk-icon-small"><span class="element-invisible">' + configure + '</span>').click(
         function () {
           $links.stop(true, true).slideToggle(100);
           $wrapper.toggleClass('contextual-links-active');
