@@ -44,13 +44,15 @@
  * @ingroup themeable
  */
 ?>
-<div id="<?php print $block_html_id; ?>" class="<?php print $classes; ?>"<?php print $attributes; ?>>
+<?php if ($content): ?>
+  <div id="<?php print $block_html_id; ?>" class="<?php print $classes; ?>"<?php print $attributes; ?>>
 
-  <div<?php print $content_attributes; ?>>
+    <div<?php print $content_attributes; ?>>
 
-    <?php print render($title_prefix); ?>
-    <?php print render($title_suffix); ?>
+      <?php print render($title_prefix); ?>
+      <?php print render($title_suffix); ?>
 
-    <?php print $block_menu; ?>
+      <?php print $block_menu; ?>
+    </div>
   </div>
-</div>
+<?php endif; ?>

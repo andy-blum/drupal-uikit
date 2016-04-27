@@ -8,119 +8,6 @@
  * Implements template_preprocess_page().
  */
 function uikit_preprocess_page(&$variables) {
-  $uid = $variables['user']->uid;
-  $page_title = drupal_get_title();
-  $path = explode('/', current_path());
-  $user = $path[0] === 'user';
-  $user_view = $user && (isset($path[1]) && is_numeric($path[1])) && !isset($path[2]);
-  $devel = $user && in_array('devel', $path);
-  $edit = $user && in_array('edit', $path);
-  $login = $user && (!isset($path[1]) || in_array('login', $path));
-  $password = $user && in_array('password', $path);
-  $register = $user && in_array('register', $path);
-  $shortcuts = $user && in_array('shortcuts', $path);
-
-  if ($user) {
-    // Set the active menu items for user paths.
-    menu_set_active_item('user');
-  }
-
-  if ($user_view) {
-    if ($uid) {
-      $name = $variables['user']->name;
-    }
-    else {
-      $user_obj = user_load($path[1]);
-      $name = $user_obj->name;
-    }
-
-    // Set a more semantic page title.
-    drupal_set_title(t("@name's account", array('@name' => $name)));
-  }
-
-  if ($devel) {
-    if (!isset($path[3])) {
-      // Set a more semantic page title.
-      drupal_set_title(t('Debug @name (load)', array('@name' => $variables['user']->name)));
-
-      // Set the breadcrumb for the user register path.
-      drupal_set_breadcrumb(array(
-        l(t('Home'), NULL),
-        l(t('User account'), 'user'),
-      ));
-    }
-    else {
-      // Set a more semantic page title.
-      drupal_set_title(t('Debug @name (render)', array('@name' => $variables['user']->name)));
-
-      // Set the breadcrumb for the user register path.
-      drupal_set_breadcrumb(array(
-        l(t('Home'), NULL),
-        l(t('User account'), 'user'),
-        l(t('Devel'), 'user/' . $path[1] . '/devel'),
-      ));
-    }
-  }
-
-  if ($edit) {
-    // Set a more semantic page title.
-    drupal_set_title(t("Edit @name's account", array('@name' => $variables['user']->name)));
-
-    // Set the breadcrumb for the user register path.
-    drupal_set_breadcrumb(array(
-      l(t('Home'), NULL),
-      l(t('User account'), 'user'),
-    ));
-  }
-
-  if ($login) {
-    // Set a more semantic page title.
-    drupal_set_title(t('Log in'));
-
-    // Set the active menu items for user login paths.
-    menu_set_active_item('user');
-    menu_set_active_item('user/login');
-
-    // Set the breadcrumb for the user register path.
-    drupal_set_breadcrumb(array(
-      l(t('Home'), NULL),
-      l(t('User account'), 'user'),
-    ));
-  }
-
-  if ($password) {
-    // Set a more semantic page title.
-    drupal_set_title(t('Request new password'));
-
-    // Set the breadcrumb for the user password path.
-    drupal_set_breadcrumb(array(
-      l(t('Home'), NULL),
-      l(t('@title', array('@title' => $page_title)), 'user'),
-    ));
-  }
-
-  if ($register) {
-    // Set a more semantic page title.
-    drupal_set_title(t('Create new account'));
-
-    // Set the breadcrumb for the user register path.
-    drupal_set_breadcrumb(array(
-      l(t('Home'), NULL),
-      l(t('@title', array('@title' => $page_title)), 'user'),
-    ));
-  }
-
-  if ($shortcuts) {
-    // Set a more semantic page title.
-    drupal_set_title(t("@name's shortcuts", array('@name' => $variables['user']->name)));
-
-    // Set the breadcrumb for the user register path.
-    drupal_set_breadcrumb(array(
-      l(t('Home'), NULL),
-      l(t('User account'), 'user'),
-    ));
-  }
-
   $sidebar_first = $variables['page']['sidebar_first'];
   $sidebar_second = $variables['page']['sidebar_second'];
 
@@ -173,14 +60,17 @@ function uikit_process_page(&$variables) {
 function uikit_preprocess_node(&$variables) {
   // Add the uk-article-title class to all node titles.
   $variables['title_attributes_array']['class'][] = 'uk-article-title';
+
+  // Add the uk-flex-right class to node links to align them.
+  $variables['content']['links']['#attributes']['class'][] = 'uk-flex-right';
 }
 
 /**
  * Implements template_preprocess_block().
  */
 function uikit_preprocess_block(&$variables) {
-  $region = $variables['elements']['#block']->region;
   $delta = $variables['elements']['#block']->delta;
+  $region = $variables['elements']['#block']->region;
   $subject = $variables['block']->subject;
   $classes = $variables['classes_array'];
 
@@ -249,13 +139,6 @@ function uikit_preprocess_button(&$variables) {
 }
 
 /**
- * Implements hook_preprocess_HOOK() for theme_checkboxes().
- */
-function uikit_preprocess_checkboxes(&$variables) {
-  $variables['element']['#attributes']['class'][] = 'uk-form-row';
-}
-
-/**
  * Implements template_preprocess_comment().
  */
 function uikit_preprocess_comment(&$variables) {
@@ -318,7 +201,6 @@ function uikit_preprocess_container(&$variables) {
   $type = !empty($variables['element']['#type']) ? $variables['element']['#type'] : 0;
   $container = $type && $type === 'container';
   $classes = isset($variables['element']['#attributes']['class']) ? $variables['element']['#attributes']['class'] : array();
-  $checkbox = in_array('form-type-checkbox', $classes);
   $help_block = in_array('uk-form-help-block', $classes);
   $inline = in_array('container-inline', $classes);
   $radio = in_array('form-type-radio', $classes);
@@ -362,10 +244,6 @@ function uikit_preprocess_field(&$variables) {
       $classes[] = 'uk-float-left';
       $classes[] = 'uk-margin-right';
       $classes[] = 'uk-margin-bottom';
-      break;
-
-    case 'taxonomy_term_reference':
-      $classes[] = 'uk-margin';
       break;
 
     case 'text':
@@ -425,7 +303,7 @@ function uikit_preprocess_fieldset(&$variables) {
  * Implements hook_preprocess_HOOK() for theme_form().
  */
 function uikit_preprocess_form(&$variables) {
-  // Add the uk-form class to all but vertical tab forms.
+  // Add the uk-form class to all forms.
   $variables['element']['#attributes']['class'][] = 'uk-form';
   $variables['element']['#attributes']['class'][] = 'uk-form-stacked';
 
@@ -440,13 +318,9 @@ function uikit_preprocess_form(&$variables) {
 function uikit_preprocess_form_element(&$variables) {
   $element = $variables['element'];
   $type = !empty($element['#type']) ? $element['#type'] : FALSE;
-  $checkboxes = $type === 'checkbox';
-  $radios = $type === 'radio';
 
-  // Add the uk-form-row class to all but radios and checkboxes.
-  if (!$checkboxes && !$radios) {
-    $variables['element']['#wrapper_attributes']['class'][] = 'uk-form-row';
-  }
+  // Add the uk-form-row class.
+  $variables['element']['#wrapper_attributes']['class'][] = 'uk-form-row';
 
   // Load advanced form element component stylsheets.
   $theme = drupal_get_path('theme', 'uikit');
@@ -484,23 +358,15 @@ function uikit_preprocess_links(&$variables) {
   $theme_hook_original = isset($variables['theme_hook_original']) ? $variables['theme_hook_original'] : '';
   $classes = $variables['attributes']['class'];
 
-  // Removes default classes from inline links and adds uk-subnav and
-  // uk-subnav-line classes.
+  // Add uk-subnav and uk-subnav-line classes to inline links.
   $inline = in_array('inline', $classes);
 
   if ($inline) {
-    foreach ($variables['attributes']['class'] as $key => $class) {
-      if ($class == 'links' || $class == 'inline') {
-        unset($variables['attributes']['class'][$key]);
-        array_values($variables['attributes']['class']);
-      }
-    }
-
     $variables['attributes']['class'][] = 'uk-subnav';
     $variables['attributes']['class'][] = 'uk-subnav-line';
-    $variables['attributes']['class'][] = 'uk-float-right';
   }
 
+  // Add uk-nav class to contextual links.
   if ($theme_hook_original == 'links__contextual') {
     $variables['attributes']['class'] = array('uk-nav');
   }
@@ -510,26 +376,8 @@ function uikit_preprocess_links(&$variables) {
  * Implements hook_preprocess_HOOK() for theme_menu_link().
  */
 function uikit_preprocess_menu_link(&$variables) {
-  $attributes = $variables['element']['#attributes'];
-
-  // Remove the leaf class from menu links.
-  if (isset($attributes['class'])) {
-    foreach ($attributes['class'] as $key => $class) {
-      if ($class == 'leaf') {
-        unset($attributes['class'][$key]);
-      }
-    }
-  }
-
-  // Re-index the class array for the menu link.
-  $variables['element']['#attributes']['class'] = array_values($attributes['class']);
-}
-
-/**
- * Implements hook_preprocess_HOOK() for theme_radios().
- */
-function uikit_preprocess_radios(&$variables) {
-  $variables['element']['#attributes']['class'][] = 'uk-form-row';
+  $element = $variables['element'];
+  $attributes = $element['#attributes'];
 }
 
 /**
@@ -579,6 +427,12 @@ function uikit_css_alter(&$css) {
   unset($css[drupal_get_path('module', 'system') . '/system.messages.css']);
   unset($css[drupal_get_path('module', 'system') . '/system.theme.css']);
   unset($css[drupal_get_path('module', 'system') . '/system.menus.css']);
+
+  // Replace the book module's book.css with a custom version.
+  $book_css = drupal_get_path('module', 'book') . '/book.css';
+  if (isset($css[$book_css])) {
+    $css[$book_css]['data'] = $theme . '/overrides/book.css';
+  }
 
   // Replace the user module's user.css with a custom version.
   $user_css = drupal_get_path('module', 'user') . '/user.css';
@@ -674,25 +528,37 @@ function uikit_menu_local_tasks_alter(&$data, $router_item, $root_path) {
 
   foreach ($data['actions']['output'] as $key => $action) {
     // Add icon based on link path.
-    switch ($action['#link']['path']) {
-      case 'node/add':
-      case 'admin/structure/block/add':
-      case 'admin/structure/types/add':
-      case 'admin/structure/menu/add':
-      case 'admin/structure/taxonomy/add':
-      case 'admin/structure/taxonomy/%/add':
-      case 'admin/appearance/install':
-      case 'admin/people/create':
-      case 'admin/modules/install':
-      case 'admin/config/content/formats/add':
-      case 'admin/config/media/image-styles/add':
-      case 'admin/config/search/path/add':
-      case 'admin/config/regional/date-time/types/add':
-      case 'admin/config/user-interface/shortcut/add-set':
-        $title = $plus . $data['actions']['output'][$key]['#link']['title'];
-        $data['actions']['output'][$key]['#link']['title'] = $title;
-        $data['actions']['output'][$key]['#link']['localized_options']['html'] = TRUE;
-        break;
+    if (isset($action['#link']['path'])) {
+      switch ($action['#link']['path']) {
+        case 'node/add':
+        case 'admin/structure/block/add':
+        case 'admin/structure/types/add':
+        case 'admin/structure/menu/add':
+        case 'admin/structure/taxonomy/add':
+        case 'admin/structure/taxonomy/%/add':
+        case 'admin/appearance/install':
+        case 'admin/people/create':
+        case 'admin/modules/install':
+        case 'admin/config/content/formats/add':
+        case 'admin/config/media/image-styles/add':
+        case 'admin/config/search/path/add':
+        case 'admin/config/regional/date-time/types/add':
+        case 'admin/config/user-interface/shortcut/add-set':
+          $title = $plus . $data['actions']['output'][$key]['#link']['title'];
+          $data['actions']['output'][$key]['#link']['title'] = $title;
+          $data['actions']['output'][$key]['#link']['localized_options']['html'] = TRUE;
+          break;
+      }
+    }
+    // Some actions use the href key instead of the path key.
+    elseif (isset($action['#link']['href'])) {
+      switch ($action['#link']['href']) {
+        case 'node/add/blog':
+          $title = $plus . $data['actions']['output'][$key]['#link']['title'];
+          $data['actions']['output'][$key]['#link']['title'] = $title;
+          $data['actions']['output'][$key]['#link']['localized_options']['html'] = TRUE;
+          break;
+      }
     }
   }
 }
