@@ -2,7 +2,7 @@ name = UIkit
 description = A lightweight frontend framework with a comprehensive collection of HTML, CSS, and JS components.
 core = 7.x
 
-stylesheets[all][] = css/uikit.gradient.min.css
+stylesheets[all][] = css/uikit.css
 stylesheets[all][] = overrides/overrides.css
 
 scripts[] = js/uikit.min.js
@@ -15,3 +15,15 @@ regions[content]        = 'Content'
 regions[sidebar_first]  = 'Sidebar first'
 regions[sidebar_second] = 'Sidebar second'
 regions[footer]         = 'Footer'
+
+settings[basic_style] = 0
+settings[page_container] = 1
+settings[page_centering] = 1
+settings[page_margin] = 'uk-margin'
+settings[navbar_container] = 1
+settings[navbar_centering] = 1
+settings[navbar_attached] = 0
+settings[navbar_margin_top] = 1
+settings[navbar_margin_bottom] = 1
+settings[main_menu_alignment] = 0
+settings[secondary_menu_alignment] = 1

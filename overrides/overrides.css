@@ -21,9 +21,20 @@ a.contextual-links-trigger {
   position: relative;
   top: 2px;
 }
+div.contextual-links-wrapper {
+  top: 0;
+  right: 0;
+}
 .contextual-links-region .uk-dropdown,
 .contextual-links-region .uk-dropdown-blank {
   min-width: 0;
   right: 0;
-  top: 30px;
+  top: 20px;
+}
+div.contextual-links-active a.contextual-links-trigger {
+  background-color: transparent;
+  border: 0;
+}
+div.contextual-links-active a.contextual-links-trigger-active {
+  color: #059;
 }

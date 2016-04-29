@@ -73,9 +73,8 @@
  * @ingroup themeable
  */
 ?>
-<div class="uk-container uk-container-center uk-margin-top uk-margin-large-bottom">
-
-  <nav class="uk-navbar">
+<header<?php print $header_attributes; ?>>
+  <nav<?php print $navbar_attributes; ?>>
     <?php if ($logo): ?>
       <a href="<?php print $front_page; ?>" id="logo" class="uk-navbar-brand uk-hidden-small" title="<?php print t('Home'); ?>" rel="home">
         <img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>"/>
@@ -88,32 +87,10 @@
       </a>
     <?php endif; ?>
 
-    <?php if ($main_menu || $secondary_menu || $page['navigation']): ?>
-      <?php print theme('links__system_main_menu', array(
-        'links' => $main_menu,
-        'attributes' => array(
-          'id' => 'main-menu',
-          'class' => array('uk-navbar-nav', 'uk-hidden-small'),
-        ),
-        'heading' => array(
-          'text' => t('Main menu'),
-          'level' => 'h2',
-          'class' => 'element-invisible',
-        ),
-      )); ?>
-
-      <?php print theme('links__system_secondary_menu', array(
-        'links' => $secondary_menu,
-        'attributes' => array(
-          'id' => 'secondary-menu',
-          'class' => array('uk-navbar-nav', 'uk-float-right', 'uk-hidden-small'),
-        ),
-        'heading' => array(
-          'text' => t('Secondary menu'),
-          'level' => 'h2',
-          'class' => 'element-invisible',
-        ),
-      )); ?>
+    <?php if ($main_menu || $secondary_menu || $navbar_menus): ?>
+      <?php print $navbar_main; ?>
+      <?php print $navbar_secondary; ?>
+      <?php print $navbar_menus; ?>
     <?php endif; ?>
 
     <a href="#offcanvas" class="uk-navbar-toggle uk-visible-small" data-uk-offcanvas></a>
@@ -134,10 +111,12 @@
       </div> <!-- /#site-branding -->
     <?php endif; ?>
   </nav> <!-- /.ui-navbar -->
+</header>
 
+<div<?php print $page_container_attributes; ?>>
   <?php if ($site_slogan): ?>
-    <div id="site-slogan" class="uk-width-medium-1-1">
-      <div class="uk-margin-top uk-margin-bottom"><?php print $site_slogan; ?></div>
+    <div id="site-slogan">
+      <div class="uk-margin-bottom"><?php print $site_slogan; ?></div>
     </div><!-- /#site-slogan -->
   <?php endif; ?>
 
@@ -147,13 +126,13 @@
     <?php endif; ?>
 
     <?php if ($breadcrumb): ?>
-      <div id="breadcrumbs" class="uk-width-1-1 uk-margin-top-remove">
+      <div id="breadcrumbs" class="uk-width-1-1">
         <?php print $breadcrumb; ?>
       </div>
     <?php endif; ?>
 
     <?php if ($page['highlighted']): ?>
-      <div id="highlighted" class="uk-width-1-1 uk-margin-top-remove">
+      <div id="highlighted" class="uk-width-1-1">
         <?php print render($page['highlighted']); ?>
       </div>
     <?php endif; ?>
@@ -175,7 +154,7 @@
       <?php endif; ?>
 
       <?php if ($messages): ?>
-        <div id="messages" class="uk-width-1-1 uk-margin-bottom">
+        <div id="messages" class="uk-width-1-1">
           <?php print $messages; ?>
         </div>
       <?php endif; ?>
@@ -208,32 +187,9 @@
 <div id="offcanvas" class="uk-offcanvas">
   <div class="uk-offcanvas-bar">
 
-    <?php if ($main_menu || $secondary_menu || $page['navigation']): ?>
-      <?php print theme('links__system_main_menu', array(
-        'links' => $main_menu,
-        'attributes' => array(
-          'id' => 'main-menu--offcanvas',
-          'class' => array('uk-nav', 'uk-nav-offcanvas'),
-        ),
-        'heading' => array(
-          'text' => t('Main menu'),
-          'level' => 'h2',
-          'class' => 'element-invisible',
-        ),
-      )); ?>
-
-      <?php print theme('links__system_secondary_menu', array(
-        'links' => $secondary_menu,
-        'attributes' => array(
-          'id' => 'secondary-menu--offcanvas',
-          'class' => array('uk-nav', 'uk-nav-offcanvas'),
-        ),
-        'heading' => array(
-          'text' => t('Secondary menu'),
-          'level' => 'h2',
-          'class' => 'element-invisible',
-        ),
-      )); ?>
+    <?php if ($offcanvas_main || $offcanvas_secondary): ?>
+      <?php print $offcanvas_main; ?>
+      <?php print $offcanvas_secondary; ?>
     <?php endif; ?>
   </div> <!-- /.uk-offcanvas-bar -->
 </div> <!-- /#offcanvas -->

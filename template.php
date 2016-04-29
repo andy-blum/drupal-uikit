@@ -1,8 +1,36 @@
 <?php
+
 /**
  * @file
  * Conditional logic and data processing for the UIkit theme.
  */
+
+/**
+ * Implements template_preprocess_html().
+ */
+function uikit_preprocess_html(&$variables) {
+  // Create an attributes array for the html element.
+  $html_attributes_array = array(
+    'xmlns' => 'http://www.w3.org/1999/xhtml',
+    'xml:lang' => $variables['language']->language,
+    'version' => 'XHTML+RDFa 1.0',
+    'dir' => $variables['language']->dir,
+    'class' => array('uk-height-1-1'),
+  );
+  $variables['html_attributes_array'] = $html_attributes_array;
+
+  // Add the uk-height-1-1 class to extend the <html> and <body> elements to the
+  // full height of the page.
+  $variables['classes_array'][] = 'uk-height-1-1';
+}
+
+/**
+ * Implements template_process_html().
+ */
+function uikit_process_html(&$variables) {
+  // Convert attribute arrays to an attribute string.
+  $variables['html_attributes'] = drupal_attributes($variables['html_attributes_array']);
+}
 
 /**
  * Implements template_preprocess_page().
@@ -10,11 +38,24 @@
 function uikit_preprocess_page(&$variables) {
   $sidebar_first = $variables['page']['sidebar_first'];
   $sidebar_second = $variables['page']['sidebar_second'];
+  $page_container_attributes = array();
+
+  // Assign page container attributes.
+  $page_container_attributes['id'] = 'page';
+  if (theme_get_setting('page_container')) {
+    $page_container_attributes['class'][] = 'uk-container';
+  }
+  if (theme_get_setting('page_centering')) {
+    $page_container_attributes['class'][] = 'uk-container-center';
+  }
+  if (theme_get_setting('page_margin')) {
+    $page_container_attributes['class'][] = theme_get_setting('page_margin');
+  }
+  $variables['page_container_attributes_array'] = $page_container_attributes;
 
   // Assign content attributes.
   $variables['content_attributes_array']['id'] = 'page-content';
   $variables['content_attributes_array']['class'][] = 'uk-width-1-1';
-  $variables['content_attributes_array']['class'][] = 'uk-margin-top-remove';
 
   // Assign sidebar_first attributes.
   $variables['sidebar_first_attributes_array'] = array(
@@ -22,7 +63,6 @@ function uikit_preprocess_page(&$variables) {
     'class' => array(
       'uk-width-1-1',
       'uk-width-medium-1-4',
-      'uk-margin-top-remove',
     ),
   );
 
@@ -32,7 +72,6 @@ function uikit_preprocess_page(&$variables) {
     'class' => array(
       'uk-width-1-1',
       'uk-width-medium-1-4',
-      'uk-margin-top-remove',
     ),
   );
 
@@ -43,15 +82,204 @@ function uikit_preprocess_page(&$variables) {
   elseif (!empty($sidebar_first) || !empty($sidebar_second)) {
     $variables['content_attributes_array']['class'][] = 'uk-width-medium-3-4';
   }
+
+  // Define header attributes.
+  $variables['header_attributes_array'] = array(
+    'id' => 'page-header',
+  );
+  if (theme_get_setting('navbar_container')) {
+    $variables['header_attributes_array']['class'][] = 'uk-container';
+  }
+  if (theme_get_setting('navbar_centering')) {
+    $variables['header_attributes_array']['class'][] = 'uk-container-center';
+  }
+
+  // Define navbar attributes.
+  $variables['navbar_attributes_array'] = array(
+    'id' => 'page-navbar',
+    'class' => array('uk-navbar'),
+  );
+
+  if (theme_get_setting('navbar_attached')) {
+    $variables['navbar_attributes_array']['class'][] = 'uk-navbar-attached';
+  }
+
+  if (theme_get_setting('navbar_margin_top')) {
+    switch (theme_get_setting('navbar_margin_top')) {
+      case 1:
+        $variables['navbar_attributes_array']['class'][] = 'uk-margin-top';
+        break;
+
+      case 2:
+        $variables['navbar_attributes_array']['class'][] = 'uk-margin-large-top';
+        break;
+
+      case 3:
+        $variables['navbar_attributes_array']['class'][] = 'uk-margin-small-top';
+        break;
+    }
+  }
+
+  if (theme_get_setting('navbar_margin_bottom')) {
+    switch (theme_get_setting('navbar_margin_bottom')) {
+      case 1:
+        $variables['navbar_attributes_array']['class'][] = 'uk-margin-bottom';
+        break;
+
+      case 2:
+        $variables['navbar_attributes_array']['class'][] = 'uk-margin-large-bottom';
+        break;
+
+      case 3:
+        $variables['navbar_attributes_array']['class'][] = 'uk-margin-small-bottom';
+        break;
+    }
+  }
+
+  // Move the main and secondary menus into variables to set the attributes
+  // accordingly.
+  $navbar_main = '';
+  $navbar_secondary = '';
+  $navbar_menus = '';
+
+  if ($variables['main_menu']) {
+    if (theme_get_setting('main_menu_alignment')) {
+      $navbar_main .= '<div id="navbar-flip--main-menu" class="uk-navbar-flip">';
+    }
+    $navbar_main .= theme('links__system_main_menu', array(
+      'links' => $variables['main_menu'],
+      'attributes' => array(
+        'id' => 'main-menu',
+        'class' => array('uk-navbar-nav', 'uk-hidden-small'),
+      ),
+      'heading' => array(
+        'text' => t('Main menu'),
+        'level' => 'h2',
+        'class' => 'uk-hidden',
+      ),
+    ));
+    if (theme_get_setting('main_menu_alignment')) {
+      $navbar_main .= '</div>';
+    }
+
+    $offcanvas_main = theme('links__system_main_menu', array(
+      'links' => $variables['main_menu'],
+      'attributes' => array(
+        'id' => 'main-menu--offcanvas',
+        'class' => array('uk-nav', 'uk-nav-offcanvas'),
+      ),
+      'heading' => array(
+        'text' => t('Main menu'),
+        'level' => 'h2',
+        'class' => 'uk-hidden',
+      ),
+    ));
+  }
+
+  if ($variables['secondary_menu']) {
+    if (theme_get_setting('secondary_menu_alignment')) {
+      $navbar_secondary .= '<div id="navbar-flip--secondary-menu" class="uk-navbar-flip">';
+    }
+    $navbar_secondary .= theme('links__system_secondary_menu', array(
+      'links' => $variables['secondary_menu'],
+      'attributes' => array(
+        'id' => 'secondary-menu',
+        'class' => array('uk-navbar-nav', 'uk-hidden-small'),
+      ),
+      'heading' => array(
+        'text' => t('Secondary menu'),
+        'level' => 'h2',
+        'class' => 'uk-hidden',
+      ),
+    ));
+    if (theme_get_setting('secondary_menu_alignment')) {
+      $navbar_secondary .= '</div>';
+    }
+    $offcanvas_secondary = theme('links__system_secondary_menu', array(
+      'links' => $variables['secondary_menu'],
+      'attributes' => array(
+        'id' => 'secondary-menu--offcanvas',
+        'class' => array('uk-nav', 'uk-nav-offcanvas'),
+      ),
+      'heading' => array(
+        'text' => t('Secondary menu'),
+        'level' => 'h2',
+        'class' => 'uk-hidden',
+      ),
+    ));
+  }
+
+  // Place additional menus in the navbar from the theme settings.
+  $menus = menu_get_menus();
+  foreach ($menus as $menu_name => $menu_title) {
+    $menu_links = str_replace('-', '_', $menu_name);
+
+    if (theme_get_setting($menu_name . '_in_navbar')) {
+      $navbar_menu = menu_navigation_links($menu_name);
+
+      if (theme_get_setting($menu_links . '_additional_alignment')) {
+        $navbar_menus .= "<div id=\"navbar-flip--$menu_name\" class=\"uk-navbar-flip\">";
+      }
+      $navbar_menus .= theme('links__' . $menu_links, array(
+        'links' => $navbar_menu,
+        'attributes' => array(
+          'id' => $menu_name,
+          'class' => array('uk-navbar-nav', 'uk-hidden-small'),
+        ),
+        'heading' => array(
+          'text' => t('@title', array('@title' => $menu_title)),
+          'level' => 'h2',
+          'class' => 'uk-hidden',
+        ),
+      ));
+      if (theme_get_setting($menu_links . '_alignment')) {
+        $navbar_menus .= '</div>';
+      }
+    }
+  }
+
+  $variables['navbar_main'] = $navbar_main;
+  $variables['navbar_secondary'] = $navbar_secondary;
+  $variables['navbar_menus'] = $navbar_menus;
+  $variables['offcanvas_main'] = $offcanvas_main;
+  $variables['offcanvas_secondary'] = $offcanvas_secondary;
+
+  // Get theme specific jQuery version.
+  $jquery_version = theme_get_setting('jquery_update_jquery_version');
+
+  // Get site wide jQuery version if theme specific one is not set.
+  if (!$jquery_version && module_exists('jquery_update')) {
+    $jquery_version = variable_get('jquery_update_jquery_version', '1.10');
+  }
+
+  // Check if the jquery_update module is both installed and enabled.
+  if (!module_exists('jquery_update')) {
+    $message = t('jQuery Update is not enabled. UIkit requires a minimum jQuery version of 1.10 or higher. Please enable the <a href="!jquery_update_project_url">jQuery Update</a> module and <a href="!jquery_update_configure">configure</a> the default jQuery version.', array(
+      '!jquery_update_project_url' => check_plain('https://www.drupal.org/project/jquery_update'),
+      '!jquery_update_configure' => check_plain(url('admin/config/development/jquery_update')),
+    ));
+    drupal_set_message($message, 'error', FALSE);
+  }
+
+  // Check if the minimum jQuery version is met.
+  if (module_exists('jquery_update') && !version_compare($jquery_version, '1.10', '>=')) {
+    $message = t('UIkit requires a minimum jQuery version of 1.10 or higher. Please <a href="!jquery_update_configure">configure</a> the default jQuery version.', array(
+      '!jquery_update_configure' => check_plain(url('admin/config/development/jquery_update')),
+    ));
+    drupal_set_message($message, 'error', FALSE);
+  }
 }
 
 /**
  * Implements template_process_page().
  */
 function uikit_process_page(&$variables) {
-  // Convert attributes array to an attribute string.
+  // Convert attribute arrays to an attribute string.
+  $variables['page_container_attributes'] = drupal_attributes($variables['page_container_attributes_array']);
   $variables['sidebar_first_attributes'] = drupal_attributes($variables['sidebar_first_attributes_array']);
   $variables['sidebar_second_attributes'] = drupal_attributes($variables['sidebar_second_attributes_array']);
+  $variables['header_attributes'] = drupal_attributes($variables['header_attributes_array']);
+  $variables['navbar_attributes'] = drupal_attributes($variables['navbar_attributes_array']);
 }
 
 /**
@@ -69,10 +297,7 @@ function uikit_preprocess_node(&$variables) {
  * Implements template_preprocess_block().
  */
 function uikit_preprocess_block(&$variables) {
-  $delta = $variables['elements']['#block']->delta;
   $region = $variables['elements']['#block']->region;
-  $subject = $variables['block']->subject;
-  $classes = $variables['classes_array'];
 
   if ($region == 'sidebar_first' || $region == 'sidebar_second') {
     // Add panel and utility classes to all sidebars.
@@ -80,53 +305,6 @@ function uikit_preprocess_block(&$variables) {
     $variables['content_attributes_array']['class'][] = 'uk-panel';
     $variables['content_attributes_array']['class'][] = 'uk-panel-box';
     $variables['title_attributes_array']['class'][] = 'uk-panel-title';
-
-    if (in_array('block-menu', $classes)) {
-      // Create a new variable to contain the block menu.
-      $menu = array();
-      $tree = menu_tree($delta);
-
-      foreach ($tree as $key => $item) {
-        if ($key != '#sorted' && $key != '#theme_wrappers') {
-          $menu['menu-' . $key] = array(
-            'href' => $item['#href'],
-            'title' => $item['#title'],
-            'attributes' => $item['#attributes'],
-          );
-        }
-      }
-
-      // Add a menu item to the menu containing the block subject, if defined.
-      if ($subject) {
-        $menu['uk-nav-header'] = array(
-          'title' => $subject,
-        );
-
-        // Move the menu item to the beginning of the menu array.
-        $menu = array('uk-nav-header' => $menu['uk-nav-header']) + $menu;
-      }
-
-      // Define the options to theme the menu.
-      $options = array(
-        'links' => $menu,
-        'attributes' => array(
-          'class' => array(
-            'uk-nav',
-            'uk-nav-side',
-          ),
-        ),
-      );
-
-      // Create a themed menu variable for the templates.
-      $menu_name = 'links__' . str_replace('-', '_', $delta);
-      $variables['block_menu'] = theme($menu_name, $options);
-
-      // Add two new theme hook suggestions to theme the templates.
-      $suggestion = 'block__' . $region . '__menu';
-      $suggestion_delta = 'block__' . $region . '__menu__' . str_replace('-', '_', $delta);
-      $variables['theme_hook_suggestions'][] = $suggestion;
-      $variables['theme_hook_suggestions'][] = $suggestion_delta;
-    }
   }
 }
 
@@ -316,9 +494,6 @@ function uikit_preprocess_form(&$variables) {
  * Implements hook_preprocess_HOOK() for theme_form_element().
  */
 function uikit_preprocess_form_element(&$variables) {
-  $element = $variables['element'];
-  $type = !empty($element['#type']) ? $element['#type'] : FALSE;
-
   // Add the uk-form-row class.
   $variables['element']['#wrapper_attributes']['class'][] = 'uk-form-row';
 
@@ -356,7 +531,7 @@ function uikit_preprocess_item_list(&$variables) {
  */
 function uikit_preprocess_links(&$variables) {
   $theme_hook_original = isset($variables['theme_hook_original']) ? $variables['theme_hook_original'] : '';
-  $classes = $variables['attributes']['class'];
+  $classes = isset($variables['attributes']['class']) ? $variables['attributes']['class'] : array();
 
   // Add uk-subnav and uk-subnav-line classes to inline links.
   $inline = in_array('inline', $classes);
@@ -370,14 +545,6 @@ function uikit_preprocess_links(&$variables) {
   if ($theme_hook_original == 'links__contextual') {
     $variables['attributes']['class'] = array('uk-nav');
   }
-}
-
-/**
- * Implements hook_preprocess_HOOK() for theme_menu_link().
- */
-function uikit_preprocess_menu_link(&$variables) {
-  $element = $variables['element'];
-  $attributes = $element['#attributes'];
 }
 
 /**
@@ -422,11 +589,15 @@ function uikit_preprocess_table(&$variables) {
  */
 function uikit_css_alter(&$css) {
   $theme = drupal_get_path('theme', 'uikit');
+  $style = theme_get_setting('base_style') ? '.' . theme_get_setting('base_style') : '';
 
   // Stop Drupal core stylesheets from being loaded.
   unset($css[drupal_get_path('module', 'system') . '/system.messages.css']);
   unset($css[drupal_get_path('module', 'system') . '/system.theme.css']);
   unset($css[drupal_get_path('module', 'system') . '/system.menus.css']);
+
+  // Use the UIkit theme style selected in the theme settings.
+  $css[$theme . '/css/uikit.css']['data'] = $theme . '/css/uikit' . $style . '.css';
 
   // Replace the book module's book.css with a custom version.
   $book_css = drupal_get_path('module', 'book') . '/book.css';
