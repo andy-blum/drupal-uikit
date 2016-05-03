@@ -1,0 +1,95 @@
+.uk-admin-demo {
+  float: right;
+}
+.uk-demo-container {
+  height: 100%;
+  width: 100%;
+}
+.uk-demo-content,
+.uk-demo-sidebar {
+  position: relative;
+  float: left;
+  margin: 0 1%;
+}
+.uk-demo-content {
+  background: #ff8800;
+  height: 100%;
+  width: 48%;
+}
+.uk-demo-sidebar {
+  background: #0080ff;
+  height: 100%;
+  width: 23%;
+}
+
+#edit-standard-layout .uk-demo-wrapper {
+  height: 99px;
+  width: 176px;
+}
+#edit-tablet-layout .uk-demo-wrapper {
+  height: 96px;
+  width: 76px;
+}
+#edit-mobile-layout .uk-demo-wrapper {
+  height: 96px;
+  width: 54px;
+}
+
+.uk-layout-holy-grail .uk-demo-content {
+  left: 25%;
+}
+.uk-layout-holy-grail .uk-demo-sidebar-left {
+  left: -50%;
+}
+.uk-layout-sidebars-left .uk-demo-content {
+  left: 50%;
+}
+.uk-layout-sidebars-left .uk-demo-sidebar-left,
+.uk-layout-sidebars-left .uk-demo-sidebar-right {
+  left: -50%;
+}
+.uk-layout-sidebar-left-stacked .uk-demo-content {
+  left: 25%;
+  height: 70%;
+  width: 73%;
+}
+.uk-layout-sidebar-left-stacked .uk-demo-sidebar-left {
+  left: -75%;
+  height: 70%;
+}
+.uk-layout-sidebar-left-stacked .uk-demo-sidebar-right {
+  margin-top: 2%;
+  height: 28%;
+  width: 98%;
+}
+.uk-layout-sidebar-right-stacked .uk-demo-content {
+  height: 70%;
+  width: 73%;
+}
+.uk-layout-sidebar-right-stacked .uk-demo-sidebar-left {
+  margin-top: 2%;
+  height: 28%;
+  width: 98%;
+}
+.uk-layout-sidebar-right-stacked .uk-demo-sidebar-right {
+  float: none;
+  left: 75%;
+  height: 70%;
+}
+.uk-layout-sidebars-stacked .uk-demo-content,
+.uk-layout-sidebars-vertical .uk-demo-content {
+  height: 50%;
+  width: 98%;
+}
+.uk-layout-sidebars-stacked .uk-demo-sidebar-left,
+.uk-layout-sidebars-stacked .uk-demo-sidebar-right {
+  margin-top: 2%;
+  height: 23%;
+  width: 98%;
+}
+.uk-layout-sidebars-vertical .uk-demo-sidebar-left,
+.uk-layout-sidebars-vertical .uk-demo-sidebar-right {
+  margin-top: 2%;
+  height: 48%;
+  width: 48%;
+}

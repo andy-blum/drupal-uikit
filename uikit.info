@@ -7,7 +7,6 @@ stylesheets[all][] = overrides/overrides.css
 
 scripts[] = js/uikit.min.js
 
-regions[navigation]     = 'Navigation'
 regions[header]         = 'Page heading'
 regions[highlighted]    = 'Highlighted'
 regions[help]           = 'Help'
@@ -17,6 +16,9 @@ regions[sidebar_second] = 'Sidebar second'
 regions[footer]         = 'Footer'
 
 settings[basic_style] = 0
+settings[standard_sidebar_positions] = 'holy-grail'
+settings[tablet_sidebar_positions] = 'sidebar-left-stacked'
+settings[mobile_sidebar_positions] = 'sidebars-stacked'
 settings[page_container] = 1
 settings[page_centering] = 1
 settings[page_margin] = 'uk-margin'
@@ -24,6 +26,6 @@ settings[navbar_container] = 1
 settings[navbar_centering] = 1
 settings[navbar_attached] = 0
 settings[navbar_margin_top] = 1
-settings[navbar_margin_bottom] = 1
+settings[navbar_margin_bottom] = 0
 settings[main_menu_alignment] = 0
 settings[secondary_menu_alignment] = 1

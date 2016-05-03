@@ -6,6 +6,11 @@
  */
 
 /**
+ * Include common functions used through out theme.
+ */
+include_once dirname(__FILE__) . '/includes/get.inc';
+
+/**
  * Implements template_preprocess_html().
  */
 function uikit_preprocess_html(&$variables) {
@@ -77,7 +82,14 @@ function uikit_preprocess_page(&$variables) {
 
   // Assign additional content attributes if either sidebar is not empty.
   if (!empty($sidebar_first) && !empty($sidebar_second)) {
-    $variables['content_attributes_array']['class'][] = 'uk-width-medium-2-4';
+    $variables['content_attributes_array']['class'][] = 'uk-width-medium-1-2';
+    $variables['content_attributes_array']['class'][] = 'uk-push-1-4';
+    $variables['sidebar_first_attributes_array']['class'][] = 'uk-pull-1-2';
+  }
+  elseif (!empty($sidebar_first) && empty($sidebar_second)) {
+    $variables['content_attributes_array']['class'][] = 'uk-width-medium-3-4';
+    $variables['content_attributes_array']['class'][] = 'uk-push-1-4';
+    $variables['sidebar_first_attributes_array']['class'][] = 'uk-pull-3-4';
   }
   elseif (!empty($sidebar_first) || !empty($sidebar_second)) {
     $variables['content_attributes_array']['class'][] = 'uk-width-medium-3-4';
@@ -141,6 +153,8 @@ function uikit_preprocess_page(&$variables) {
   $navbar_main = '';
   $navbar_secondary = '';
   $navbar_menus = '';
+  $offcanvas_main = '';
+  $offcanvas_secondary = '';
 
   if ($variables['main_menu']) {
     if (theme_get_setting('main_menu_alignment')) {
@@ -548,29 +562,6 @@ function uikit_preprocess_links(&$variables) {
 }
 
 /**
- * Implements template_preprocess_search_block_form().
- */
-function uikit_preprocess_search_block_form(&$variables) {
-  // Load search component stylsheet.
-  $theme = drupal_get_path('theme', 'uikit');
-  drupal_add_css($theme . '/overrides/search.gradient.css', array(
-    'group' => CSS_THEME,
-  ));
-
-  // The submit button is hidden on all devices, but the actions container will
-  // disrupt the flow of the form. Using the uk-hidden class on the actions
-  // container, the actions will not disrupt the flow of the form.
-  $variables['form']['actions']['#attributes']['class'][] = 'uk-hidden';
-
-  // Re-render the form actions.
-  $variables['search']['actions'] = render($variables['form']['actions']);
-
-  // Collect all form elements in search_form to make it easier to print the
-  // whole form.
-  $variables['search_form'] = implode($variables['search']);
-}
-
-/**
  * Implements hook_preprocess_HOOK() for theme_table().
  */
 function uikit_preprocess_table(&$variables) {
@@ -671,15 +662,6 @@ function uikit_form_system_performance_settings_alter(&$form, &$form_state, $for
 
   $prefix = '<div id="page-compression-wrapper" class="' . $classes . '"">';
   $form['bandwidth_optimization']['page_compression']['#prefix'] = $prefix;
-}
-
-/**
- * Implements hook_form_FORM_ID_alter().
- */
-function uikit_form_search_block_form_alter(&$form, &$form_state, $form_id) {
-  // Add the uk-search class to the form and hide the submit button.
-  $form['#attributes']['class'][] = 'uk-search';
-  $form['actions']['submit']['#attributes']['class'][] = 'uk-hidden';
 }
 
 /**

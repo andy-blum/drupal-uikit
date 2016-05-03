@@ -17,13 +17,30 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
     return;
   }
 
+  // Build the markup for the layout demos.
+  $demo_layout = '<div class="uk-demo-wrapper">';
+  $demo_layout .= '<div class="uk-demo-container">';
+  $demo_layout .= '<div class="uk-demo-content"></div>';
+  $demo_layout .= '<div class="uk-demo-sidebar uk-demo-sidebar-left"></div>';
+  $demo_layout .= '<div class="uk-demo-sidebar uk-demo-sidebar-right"></div>';
+  $demo_layout .= '</div></div>';
+
+  // Get the sidebar positions for each layout.
+  $standard_sidebar_pos = theme_get_setting('standard_sidebar_positions');
+  $tablet_sidebar_pos = theme_get_setting('tablet_sidebar_positions');
+  $mobile_sidebar_pos = theme_get_setting('mobile_sidebar_positions');
+
   // Get the active theme name.
   $theme = $form_state['build_info']['args'][0];
 
-  // Get all menus for use in the navigation settings.
+  // Get all menus.
   $menus = menu_get_menus();
-  $main_menu = variable_get('menu_secondary_links_source');
-  $secondary_menu = variable_get('menu_main_links_source');
+
+  // Get the main and secondary menus.
+  $main_menu = variable_get('menu_main_links_source', 'main-menu');
+  $secondary_menu = variable_get('menu_secondary_links_source', 'user-menu');
+
+  // Set the navbar margin options.
   $navbar_margin_top_options = array(
     'No top margin',
     'Normal top margin',
@@ -66,14 +83,19 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
   $form['uikit'] = array(
     '#type' => 'vertical_tabs',
     '#attached' => array(
+      'css'  => array(
+        drupal_get_path('theme', 'uikit') . '/css/uikit.admin.css',
+      ),
       'js'  => array(drupal_get_path('theme', 'uikit') . '/js/uikit.admin.js'),
     ),
     '#prefix' => '<h3>' . t('UIkit Settings') . '</h3>',
     '#weight' => -10,
   );
+
+  // UIkit theme styles.
   $form['theme'] = array(
     '#type' => 'fieldset',
-    '#title' => t('Theme settings'),
+    '#title' => t('Theme styles'),
     '#description' => t('UIkit comes with a basic theme and two neat themes to get you started. Here you can select which base style to start with.'),
     '#group' => 'uikit',
     '#attributes' => array(
@@ -93,34 +115,109 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
     '#description' => t('Select which base style to use.<ol><li><strong>UIkit default:</strong> No border radius or gradients</li><li><strong>UIkit almost flat:</strong> Small border and border radius</li><li><strong>UIkit gradient:</strong> Almost flat style with gradient backgrounds.</li></ol>'),
     '#default_value' => theme_get_setting('base_style'),
   );
+
+  // Layout settings.
   $form['layout'] = array(
     '#type' => 'fieldset',
     '#title' => t('Layout'),
     '#description' => t('Apply our fully responsive fluid grid system and panels, common layout parts like blog articles and comments and useful utility classes.'),
     '#group' => 'uikit',
   );
-  $form['layout']['page_layout'] = array(
+  $form['layout']['standard_layout'] = array(
     '#type' => 'fieldset',
-    '#title' => t('Page layout'),
-    '#description' => t('Add utility classes to the page layout. This will apply to all pages on the site.'),
+    '#title' => t('Standard Layout'),
+    '#description' => t('Change layout settings for desktops and large screens.'),
     '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
   );
-  $form['layout']['page_layout']['page_container'] = array(
+  $form['layout']['standard_layout']['standard_layout_demo'] = array(
+    '#type' => 'container',
+  );
+  $form['layout']['standard_layout']['standard_layout_demo']['#attributes']['class'][] = 'uk-admin-demo';
+  $form['layout']['standard_layout']['standard_layout_demo']['#attributes']['class'][] = 'uk-layout-' . $standard_sidebar_pos;
+  $form['layout']['standard_layout']['standard_layout_demo']['standard_demo'] = array(
+    '#markup' => '<div id="standard-layout-demo">' . $demo_layout . '</div>',
+  );
+  $form['layout']['standard_layout']['standard_sidebar_positions'] = array(
+    '#type' => 'radios',
+    '#title' => t('Sidebar positions'),
+    '#description' => t('Position the sidebars in the standard layout.'),
+    '#default_value' => theme_get_setting('standard_sidebar_positions'),
+    '#options' => array(
+      'holy-grail' => 'Holy grail',
+      'sidebars-left' => 'Both sidebars left',
+      'sidebars-right' => 'Both sidebars right',
+    ),
+  );
+  $form['layout']['tablet_layout'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Tablet Layout'),
+    '#description' => t('Change layout settings for tablets and medium screens.'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  $form['layout']['tablet_layout']['tablet_layout_demo'] = array(
+    '#type' => 'container',
+  );
+  $form['layout']['tablet_layout']['tablet_layout_demo']['#attributes']['class'][] = 'uk-admin-demo';
+  $form['layout']['tablet_layout']['tablet_layout_demo']['#attributes']['class'][] = 'uk-layout-' . $tablet_sidebar_pos;
+  $form['layout']['tablet_layout']['tablet_layout_demo']['tablet_demo'] = array(
+    '#markup' => '<div id="tablet-layout-demo">' . $demo_layout . '</div>',
+  );
+  $form['layout']['tablet_layout']['tablet_sidebar_positions'] = array(
+    '#type' => 'radios',
+    '#title' => t('Sidebar positions'),
+    '#description' => t('Position the sidebars in the tablet layout.'),
+    '#default_value' => theme_get_setting('tablet_sidebar_positions'),
+    '#options' => array(
+      'holy-grail' => 'Holy grail',
+      'sidebars-left' => 'Both sidebars left',
+      'sidebar-left-stacked' => 'Left sidebar stacked',
+      'sidebars-right' => 'Both sidebars right',
+      'sidebar-right-stacked' => 'Right sidebar stacked',
+    ),
+  );
+  $form['layout']['mobile_layout'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Mobile Layout'),
+    '#description' => t('Change layout settings for mobile devices and small screens.'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  $form['layout']['mobile_layout']['mobile_layout_demo'] = array(
+    '#type' => 'container',
+  );
+  $form['layout']['mobile_layout']['mobile_layout_demo']['#attributes']['class'][] = 'uk-admin-demo';
+  $form['layout']['mobile_layout']['mobile_layout_demo']['#attributes']['class'][] = 'uk-layout-' . $mobile_sidebar_pos;
+  $form['layout']['mobile_layout']['mobile_layout_demo']['mobile_demo'] = array(
+    '#markup' => '<div id="mobile-layout-demo">' . $demo_layout . '</div>',
+  );
+  $form['layout']['mobile_layout']['mobile_sidebar_positions'] = array(
+    '#type' => 'radios',
+    '#title' => t('Sidebar positions'),
+    '#description' => t('Position the sidebars in the mobile layout.'),
+    '#default_value' => theme_get_setting('mobile_sidebar_positions'),
+    '#options' => array(
+      'sidebars-stacked' => 'Sidebars stacked',
+      'sidebars-vertical' => 'Sidebars vertical',
+    ),
+  );
+  $form['layout']['page_container'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Container'),
+    '#title' => t('Page Container'),
     '#description' => t('Add the .uk-container class to the page container to give it a max-width and wrap the main content of your website. For large screens it applies a different max-width.'),
     '#default_value' => theme_get_setting('page_container'),
   );
-  $form['layout']['page_layout']['page_centering'] = array(
+  $form['layout']['page_centering'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Centering'),
+    '#title' => t('Page Centering'),
     '#description' => t('To center the page container, use the .uk-container-center class.'),
     '#default_value' => theme_get_setting('page_centering'),
   );
-  $form['layout']['page_layout']['page_margin'] = array(
+  $form['layout']['page_margin'] = array(
     '#type' => 'select',
     '#title' => t('Page margin'),
-    '#description' => t('Add one of the following classes to add spacing to the top or bottom of the page container. This is useful, for example, when using the gradient style with a centered page container and a navbar. <code>uk-margin</code> will apply both top and bottom margins.'),
+    '#description' => t('Select the margin to add to the top and bottom of the page container. This is useful, for example, when using the gradient style with a centered page container and a navbar.'),
     '#default_value' => theme_get_setting('page_margin'),
     '#options' => array(
       0 => t('No margin'),
@@ -129,6 +226,8 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
       'uk-margin' => t('Top and bottom margin'),
     ),
   );
+
+  // Navigational settings.
   $form['navigations'] = array(
     '#type' => 'fieldset',
     '#title' => t('Navigations'),
@@ -142,9 +241,10 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
   );
   $form['navigations']['main_navbar']['navbar_container_settings'] = array(
     '#type' => 'fieldset',
-    '#title' => t('Navigation container'),
+    '#title' => t('Navbar container'),
     '#description' => t('Configure settings for the navigation bar container.'),
     '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
   );
   $form['navigations']['main_navbar']['navbar_container_settings']['navbar_container'] = array(
     '#type' => 'checkbox',
@@ -169,6 +269,7 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
     '#title' => t('Navbar margin'),
     '#description' => t('Configure the top and bottom margin to apply to the navbar.'),
     '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
   );
   $form['navigations']['main_navbar']['navbar_margin']['navbar_margin_top'] = array(
     '#type' => 'select',
@@ -186,9 +287,10 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
   );
   $form['navigations']['main_navbar']['default_menus'] = array(
     '#type' => 'fieldset',
-    '#title' => 'Default menus',
-    '#description' => t('Adjust settings for the default main and secondary menus in the navbar.'),
+    '#title' => 'Default navbar menus',
+    '#description' => t('Adjust settings for the default main and secondary menus in the navbar. Each system-generated and custom menu is available below, except menus assigned to the main and secondary source links.'),
     '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
   );
   $form['navigations']['main_navbar']['default_menus']['main_menu_alignment'] = array(
     '#type' => 'select',
@@ -211,14 +313,14 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
   );
 
   foreach ($menus as $menu_name => $menu_title) {
+    // Ignore the main and secondary menus, they will not be added dynamically.
     $ignore = array(
       $main_menu,
       $secondary_menu,
-      'devel',
-      'management',
     );
 
     if (!in_array($menu_name, $ignore)) {
+      // Gets the remaining menus not ignored and creates new settings for each.
       $menu_name = str_replace('-', '_', $menu_name);
       $menu_title = str_replace(' menu', '', $menu_title) . ' menu';
 
@@ -241,24 +343,32 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
       );
     }
   }
+
+  // Basic elements.
   $form['elements'] = array(
     '#type' => 'fieldset',
     '#title' => t('Elements'),
     '#description' => t("Style basic HTML elements, like tables and forms. These components use their own classes. They won't interfere with any default element styling."),
     '#group' => 'uikit',
   );
+
+  // Common components.
   $form['common'] = array(
     '#type' => 'fieldset',
     '#title' => t('Common'),
     '#description' => t("Here you'll find components that you often use within your content, like buttons, icons, badges, overlays, animations and much more."),
     '#group' => 'uikit',
   );
+
+  // Javascript components.
   $form['javascript'] = array(
     '#type' => 'fieldset',
     '#title' => t('Javascript'),
     '#description' => t('These components rely mostly on JavaScript to fade in hidden content, like dropdowns, modal dialogs, off-canvas bars and tooltips.'),
     '#group' => 'uikit',
   );
+
+  // Advanced components.
   $form['components'] = array(
     '#type' => 'fieldset',
     '#title' => t('Components'),
@@ -273,6 +383,7 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
     '#weight' => 0,
   );
 
+  // Group Drupal's default theme settings in the basic settings.
   $form['theme_settings']['#group'] = 'basic_settings';
   $form['logo']['#group'] = 'basic_settings';
   $form['logo']['#attributes']['class'] = array();

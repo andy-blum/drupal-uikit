@@ -108,16 +108,16 @@
             <span><?php print $site_name; ?></span>
           </a>
         <?php endif; ?>
-      </div> <!-- /#site-branding -->
+      </div>
     <?php endif; ?>
-  </nav> <!-- /.ui-navbar -->
+  </nav>
 </header>
 
 <div<?php print $page_container_attributes; ?>>
   <?php if ($site_slogan): ?>
     <div id="site-slogan">
       <div class="uk-margin-bottom"><?php print $site_slogan; ?></div>
-    </div><!-- /#site-slogan -->
+    </div>
   <?php endif; ?>
 
   <div class="uk-grid" data-uk-grid-margin>
@@ -135,12 +135,6 @@
       <div id="highlighted" class="uk-width-1-1">
         <?php print render($page['highlighted']); ?>
       </div>
-    <?php endif; ?>
-
-    <?php if ($page['sidebar_first']): ?>
-      <div<?php print $sidebar_first_attributes; ?>>
-        <?php print render($page['sidebar_first']); ?>
-      </div> <!-- /#sidebar-first -->
     <?php endif; ?>
 
     <div<?php print $content_attributes; ?>>
@@ -169,27 +163,35 @@
       <?php print $feed_icons; ?>
     </div>
 
+    <?php if ($page['sidebar_first']): ?>
+      <div<?php print $sidebar_first_attributes; ?>>
+        <?php print render($page['sidebar_first']); ?>
+      </div>
+    <?php endif; ?>
+
     <?php if ($page['sidebar_second']): ?>
       <div<?php print $sidebar_second_attributes; ?>>
         <?php print render($page['sidebar_second']); ?>
-      </div> <!-- /#sidebar-second -->
+      </div>
     <?php endif; ?>
 
+  </div>
+
+  <div class="uk-grid" data-uk-grid-margin>
     <?php if ($page['footer']): ?>
       <div id="footer" class="uk-width-1-1">
         <?php print render($page['footer']); ?>
       </div>
     <?php endif; ?>
+  </div>
 
-  </div> <!-- /.ui-grid -->
-</div> <!-- /.ui-container -->
+</div>
 
-<div id="offcanvas" class="uk-offcanvas">
-  <div class="uk-offcanvas-bar">
-
-    <?php if ($offcanvas_main || $offcanvas_secondary): ?>
+<?php if ($offcanvas_main || $offcanvas_secondary): ?>
+  <div id="offcanvas" class="uk-offcanvas">
+    <div class="uk-offcanvas-bar">
       <?php print $offcanvas_main; ?>
       <?php print $offcanvas_secondary; ?>
-    <?php endif; ?>
-  </div> <!-- /.uk-offcanvas-bar -->
-</div> <!-- /#offcanvas -->
+    </div>
+  </div>
+<?php endif; ?>
