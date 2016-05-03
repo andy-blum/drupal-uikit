@@ -34,7 +34,7 @@ foreach (drupal_get_messages($display) as $type => $messages) {
   $output .= '<a class="uk-alert-close uk-close"></a>';
 
   if (!empty($status_heading[$type])) {
-    $output .= '<h2 class="element-invisible">' . $status_heading[$type] . "</h2>\n";
+    $output .= '<h2 class="uk-hidden">' . $status_heading[$type] . "</h2>\n";
   }
 
   if (count($messages) > 1) {

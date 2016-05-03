@@ -1,4 +1,11 @@
 (function ($) {
+  $(function() {
+    // Do not trigger the default action of links in the demos.
+    $('.uk-admin-demo').on('click', '[href="#"], [href=""]', function (e) {
+      e.preventDefault();
+    });
+  });
+
   Drupal.behaviors.uikitFieldsetSummaries = {
     attach: function (context) {
       // Provide the summary for the base style form.
@@ -59,6 +66,44 @@
 
         // Add a class based on which radio is selected.
         target.addClass(itemClass);
+      });
+    }
+  };
+
+  Drupal.behaviors.uikitLocalTasksDemo = {
+    attach: function (context) {
+      // Provide a graphical demonstration of the primary local tasks style.
+      var primaryValue = $('select[name=primary_tasks_style] option:selected').val();
+      var secondaryValue = $('select[name=secondary_tasks_style] option:selected').val();
+      var primaryMenu = $('#edit-primary-tasks').find('ul');
+      var secondaryMenu = $('#edit-secondary-tasks').find('ul');
+
+      // Add the initial class to the demo menus.
+      $('#edit-primary-tasks', context).once(function () {
+        $(this).find('.uk-subnav').addClass(primaryValue);
+      });
+
+      $('#edit-secondary-tasks', context).once(function () {
+        $(this).find('.uk-subnav').addClass(secondaryValue);
+      });
+
+      // Change the demo menu classes when the setting is changed.
+      $('select[name=primary_tasks_style]').change(function () {
+        primaryMenu.removeClass('uk-subnav-line')
+          .removeClass('uk-subnav-pill');
+
+        if ($(this).val() != '0') {
+          primaryMenu.addClass($(this).val());
+        }
+      });
+
+      $('select[name=secondary_tasks_style]').change(function () {
+        secondaryMenu.removeClass('uk-subnav-line')
+          .removeClass('uk-subnav-pill');
+
+        if ($(this).val() != '0') {
+          secondaryMenu.addClass($(this).val());
+        }
       });
     }
   };

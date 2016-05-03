@@ -42,7 +42,7 @@ if ($checkbox || $radio) {
     $output .= $title;
   }
   elseif ($display === 'none' || $display === 'invisible') {
-    $output .= '<span class="element-invisible">' . $title . '</span>';
+    $output .= '<span class="uk-hidden">' . $title . '</span>';
   }
   // Inject the rendered checkbox or radio element inside the label.
   if (!empty($element['#children'])) {
@@ -56,7 +56,7 @@ if ($checkbox || $radio) {
 else {
   // Show label only to screen readers to avoid disruption in visual flows.
   if ($display === 'invisible') {
-    $attributes['class'][] = 'element-invisible';
+    $attributes['class'][] = 'uk-hidden';
   }
   $output .= $title;
 }

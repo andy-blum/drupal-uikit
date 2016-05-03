@@ -17,21 +17,21 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
     return;
   }
 
+  // Get the active theme name.
+  $theme = $form_state['build_info']['args'][0];
+
   // Build the markup for the layout demos.
-  $demo_layout = '<div class="uk-demo-wrapper">';
-  $demo_layout .= '<div class="uk-demo-container">';
-  $demo_layout .= '<div class="uk-demo-content"></div>';
-  $demo_layout .= '<div class="uk-demo-sidebar uk-demo-sidebar-left"></div>';
-  $demo_layout .= '<div class="uk-demo-sidebar uk-demo-sidebar-right"></div>';
+  $demo_layout = '<div class="uk-layout-wrapper">';
+  $demo_layout .= '<div class="uk-layout-container">';
+  $demo_layout .= '<div class="uk-layout-content"></div>';
+  $demo_layout .= '<div class="uk-layout-sidebar uk-layout-sidebar-left"></div>';
+  $demo_layout .= '<div class="uk-layout-sidebar uk-layout-sidebar-right"></div>';
   $demo_layout .= '</div></div>';
 
   // Get the sidebar positions for each layout.
   $standard_sidebar_pos = theme_get_setting('standard_sidebar_positions');
   $tablet_sidebar_pos = theme_get_setting('tablet_sidebar_positions');
   $mobile_sidebar_pos = theme_get_setting('mobile_sidebar_positions');
-
-  // Get the active theme name.
-  $theme = $form_state['build_info']['args'][0];
 
   // Get all menus.
   $menus = menu_get_menus();
@@ -52,6 +52,25 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
     'Normal bottom margin',
     'Smaller bottom margin',
     'Larger bottom margin',
+  );
+
+  // Build the markup for the local task demos.
+  $demo_local_tasks = '<ul class="uk-subnav">';
+  $demo_local_tasks .= '<li class="uk-active"><a href="#">Item</a></li>';
+  $demo_local_tasks .= '<li><a href="#">Item</a></li>';
+  $demo_local_tasks .= '<li><a href="#">Item</a></li>';
+  $demo_local_tasks .= '<li class="uk-disabled"><a href="#">Disabled</a></li>';
+  $demo_local_tasks .= '</ul>';
+
+  // Get the style for each local task.
+  $primary_style = theme_get_setting('primary_tasks_style');
+  $secondary_style = theme_get_setting('secondary_tasks_style');
+
+  // Set the subnav options.
+  $subnav_options = array(
+    0 => 'Basic subnav',
+    'uk-subnav-line' => 'Subnav line',
+    'uk-subnav-pill' => 'Subnav pill',
   );
 
   // Get theme specific jQuery version.
@@ -343,6 +362,37 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
       );
     }
   }
+  $form['navigations']['local_tasks'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Local tasks'),
+    '#description' => t('Configure settings for the local tasks menus.'),
+  );
+  $form['navigations']['local_tasks']['primary_tasks'] = array(
+    '#type' => 'container',
+  );
+  $form['navigations']['local_tasks']['primary_tasks']['primary_tasks_demo'] = array(
+    '#markup' => '<div id="primary-tasks-demo" class="uk-admin-demo">' . $demo_local_tasks . '</div>',
+  );
+  $form['navigations']['local_tasks']['primary_tasks']['primary_tasks_style'] = array(
+    '#type' => 'select',
+    '#title' => t('Primary tasks style'),
+    '#description' => t('Select the style to apply to the primary local tasks.'),
+    '#default_value' => theme_get_setting('primary_tasks_style'),
+    '#options' => $subnav_options,
+  );
+  $form['navigations']['local_tasks']['secondary_tasks'] = array(
+    '#type' => 'container',
+  );
+  $form['navigations']['local_tasks']['secondary_tasks']['secondary_tasks_demo'] = array(
+    '#markup' => '<div id="secondary-tasks-demo" class="uk-admin-demo">' . $demo_local_tasks . '</div>',
+  );
+  $form['navigations']['local_tasks']['secondary_tasks']['secondary_tasks_style'] = array(
+    '#type' => 'select',
+    '#title' => t('Secondary tasks style'),
+    '#description' => t('Select the style to apply to the secondary local tasks.'),
+    '#default_value' => theme_get_setting('secondary_tasks_style'),
+    '#options' => $subnav_options,
+  );
 
   // Basic elements.
   $form['elements'] = array(

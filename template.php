@@ -43,7 +43,22 @@ function uikit_process_html(&$variables) {
 function uikit_preprocess_page(&$variables) {
   $sidebar_first = $variables['page']['sidebar_first'];
   $sidebar_second = $variables['page']['sidebar_second'];
-  $page_container_attributes = array();
+  $standard_layout = theme_get_setting('standard_sidebar_positions');
+  $tablet_layout = theme_get_setting('tablet_sidebar_positions');
+  $mobile_layout = theme_get_setting('mobile_sidebar_positions');
+
+  $standard_grail = $standard_layout === 'holy-grail';
+  $standard_left = $standard_layout === 'sidebars-left';
+  $standard_right = $standard_layout === 'sidebars-right';
+
+  $tablet_grail = $tablet_layout === 'holy-grail';
+  $tablet_left = $tablet_layout === 'sidebars-left';
+  $tablet_left_stacked = $tablet_layout === 'sidebar-left-stacked';
+  $tablet_right = $tablet_layout === 'sidebars-right';
+  $tablet_right_stacked = $tablet_layout === 'sidebar-right-stacked';
+
+  $mobile_stacked = $mobile_layout === 'sidebars-stacked';
+  $mobile_vertical = $mobile_layout === 'sidebars-vertical';
 
   // Assign page container attributes.
   $page_container_attributes['id'] = 'page';
@@ -60,39 +75,165 @@ function uikit_preprocess_page(&$variables) {
 
   // Assign content attributes.
   $variables['content_attributes_array']['id'] = 'page-content';
-  $variables['content_attributes_array']['class'][] = 'uk-width-1-1';
 
   // Assign sidebar_first attributes.
   $variables['sidebar_first_attributes_array'] = array(
     'id' => 'sidebar-first',
-    'class' => array(
-      'uk-width-1-1',
-      'uk-width-medium-1-4',
-    ),
+    'class' => array('uk-width-large-1-4'),
   );
 
   // Assign sidebar_second attributes.
   $variables['sidebar_second_attributes_array'] = array(
     'id' => 'sidebar-second',
-    'class' => array(
-      'uk-width-1-1',
-      'uk-width-medium-1-4',
-    ),
+    'class' => array('uk-width-large-1-4'),
   );
 
   // Assign additional content attributes if either sidebar is not empty.
   if (!empty($sidebar_first) && !empty($sidebar_second)) {
-    $variables['content_attributes_array']['class'][] = 'uk-width-medium-1-2';
-    $variables['content_attributes_array']['class'][] = 'uk-push-1-4';
-    $variables['sidebar_first_attributes_array']['class'][] = 'uk-pull-1-2';
+    $variables['content_attributes_array']['class'][] = 'uk-width-large-1-2';
+    $variables['sidebar_first_attributes_array']['class'][] = 'uk-width-large-1-4';
+    $variables['sidebar_second_attributes_array']['class'][] = 'uk-width-large-1-4';
+
+    if ($standard_grail) {
+      $variables['content_attributes_array']['class'][] = 'uk-push-large-1-4';
+      $variables['sidebar_first_attributes_array']['class'][] = 'uk-pull-large-1-2';
+      $variables['sidebar_second_attributes_array']['class'][] = 'uk-push-pull-large';
+    }
+    elseif ($standard_left) {
+      $variables['content_attributes_array']['class'][] = 'uk-push-large-1-2';
+      $variables['sidebar_first_attributes_array']['class'][] = 'uk-pull-large-1-2';
+      $variables['sidebar_second_attributes_array']['class'][] = 'uk-pull-large-1-2';
+    }
+    elseif ($standard_right) {
+      $variables['content_attributes_array']['class'][] = 'uk-push-pull-large';
+      $variables['sidebar_first_attributes_array']['class'][] = 'uk-push-pull-large';
+      $variables['sidebar_second_attributes_array']['class'][] = 'uk-push-pull-large';
+    }
+
+    if ($tablet_grail || $tablet_left || $tablet_right) {
+      $variables['content_attributes_array']['class'][] = 'uk-width-medium-1-2';
+      $variables['sidebar_first_attributes_array']['class'][] = 'uk-width-medium-1-4';
+      $variables['sidebar_second_attributes_array']['class'][] = 'uk-width-medium-1-4';
+    }
+    elseif ($tablet_left_stacked || $tablet_right_stacked) {
+      $variables['content_attributes_array']['class'][] = 'uk-width-medium-3-4';
+      $variables['sidebar_first_attributes_array']['class'][] = 'uk-width-medium-1-4';
+      $variables['sidebar_second_attributes_array']['class'][] = 'uk-width-medium-1-1';
+    }
+
+    if ($tablet_grail) {
+      $variables['content_attributes_array']['class'][] = 'uk-push-medium-1-4';
+      $variables['sidebar_first_attributes_array']['class'][] = 'uk-pull-medium-1-2';
+      $variables['sidebar_second_attributes_array']['class'][] = 'uk-push-pull-medium';
+    }
+    elseif ($tablet_left) {
+      $variables['content_attributes_array']['class'][] = 'uk-push-medium-1-2';
+      $variables['sidebar_first_attributes_array']['class'][] = 'uk-pull-medium-1-2';
+      $variables['sidebar_second_attributes_array']['class'][] = 'uk-pull-medium-1-2';
+    }
+    elseif ($tablet_right) {
+      $variables['content_attributes_array']['class'][] = 'uk-push-pull-medium';
+      $variables['sidebar_first_attributes_array']['class'][] = 'uk-push-pull-medium';
+      $variables['sidebar_second_attributes_array']['class'][] = 'uk-push-pull-medium';
+    }
+    elseif ($tablet_left_stacked) {
+      $variables['content_attributes_array']['class'][] = 'uk-push-medium-1-4';
+      $variables['sidebar_first_attributes_array']['class'][] = 'uk-pull-medium-3-4';
+      $variables['sidebar_second_attributes_array']['class'][] = 'uk-push-pull-medium';
+    }
+    elseif ($tablet_right_stacked) {
+      $variables['content_attributes_array']['class'][] = 'uk-push-pull-medium';
+      $variables['sidebar_first_attributes_array']['class'][] = 'uk-push-pull-medium';
+      $variables['sidebar_second_attributes_array']['class'][] = 'uk-push-pull-medium';
+    }
+
+    if ($mobile_stacked || $mobile_vertical) {
+      $variables['content_attributes_array']['class'][] = 'uk-width-small-1-1';
+      $variables['content_attributes_array']['class'][] = 'uk-width-1-1';
+      $variables['content_attributes_array']['class'][] = 'uk-push-pull-small';
+    }
+
+    if ($mobile_stacked) {
+      $variables['sidebar_first_attributes_array']['class'][] = 'uk-width-small-1-1';
+      $variables['sidebar_first_attributes_array']['class'][] = 'uk-width-1-1';
+      $variables['sidebar_first_attributes_array']['class'][] = 'uk-push-pull-small';
+      $variables['sidebar_second_attributes_array']['class'][] = 'uk-width-small-1-1';
+      $variables['sidebar_second_attributes_array']['class'][] = 'uk-width-1-1';
+      $variables['sidebar_second_attributes_array']['class'][] = 'uk-push-pull-small';
+    }
+    elseif ($mobile_vertical) {
+      $variables['sidebar_first_attributes_array']['class'][] = 'uk-width-small-1-2';
+      $variables['sidebar_first_attributes_array']['class'][] = 'uk-width-1-2';
+      $variables['sidebar_first_attributes_array']['class'][] = 'uk-push-pull-small';
+      $variables['sidebar_second_attributes_array']['class'][] = 'uk-width-small-1-2';
+      $variables['sidebar_second_attributes_array']['class'][] = 'uk-width-1-2';
+      $variables['sidebar_second_attributes_array']['class'][] = 'uk-push-pull-small';
+    }
   }
-  elseif (!empty($sidebar_first) && empty($sidebar_second)) {
-    $variables['content_attributes_array']['class'][] = 'uk-width-medium-3-4';
-    $variables['content_attributes_array']['class'][] = 'uk-push-1-4';
-    $variables['sidebar_first_attributes_array']['class'][] = 'uk-pull-3-4';
+  elseif (!empty($sidebar_first)) {
+    $variables['content_attributes_array']['class'][] = 'uk-width-large-3-4';
+    $variables['sidebar_first_attributes_array']['class'][] = 'uk-width-large-1-4';
+
+    if ($standard_grail || $standard_left) {
+      $variables['content_attributes_array']['class'][] = 'uk-push-large-1-4';
+      $variables['sidebar_first_attributes_array']['class'][] = 'uk-pull-large-3-4';
+    }
+    elseif ($standard_right) {
+      $variables['content_attributes_array']['class'][] = 'uk-push-pull-large';
+      $variables['sidebar_first_attributes_array']['class'][] = 'uk-push-pull-large';
+    }
+
+    if ($tablet_layout) {
+      $variables['content_attributes_array']['class'][] = 'uk-width-medium-3-4';
+      $variables['sidebar_first_attributes_array']['class'][] = 'uk-width-medium-1-4';
+    }
+
+    if ($tablet_grail || $tablet_left || $tablet_left_stacked) {
+      $variables['content_attributes_array']['class'][] = 'uk-push-medium-1-4';
+      $variables['sidebar_first_attributes_array']['class'][] = 'uk-pull-medium-3-4';
+    }
+    elseif ($tablet_right || $tablet_right_stacked) {
+      $variables['content_attributes_array']['class'][] = 'uk-push-pull-medium';
+      $variables['sidebar_first_attributes_array']['class'][] = 'uk-push-pull-medium';
+    }
   }
-  elseif (!empty($sidebar_first) || !empty($sidebar_second)) {
-    $variables['content_attributes_array']['class'][] = 'uk-width-medium-3-4';
+  elseif (!empty($sidebar_second)) {
+    $variables['content_attributes_array']['class'][] = 'uk-width-large-3-4';
+    $variables['sidebar_second_attributes_array']['class'][] = 'uk-width-large-1-4';
+
+    if ($standard_grail || $standard_right) {
+      $variables['content_attributes_array']['class'][] = 'uk-push-pull-large';
+      $variables['sidebar_second_attributes_array']['class'][] = 'uk-push-pull-large';
+    }
+    elseif ($standard_left) {
+      $variables['content_attributes_array']['class'][] = 'uk-push-large-1-4';
+      $variables['sidebar_second_attributes_array']['class'][] = 'uk-pull-large-3-4';
+    }
+
+    if ($tablet_grail || $tablet_right || $tablet_left) {
+      $variables['content_attributes_array']['class'][] = 'uk-width-medium-3-4';
+      $variables['sidebar_second_attributes_array']['class'][] = 'uk-width-medium-1-4';
+    }
+    elseif ($tablet_left_stacked || $tablet_right_stacked) {
+      $variables['content_attributes_array']['class'][] = 'uk-width-medium-1-1';
+      $variables['sidebar_second_attributes_array']['class'][] = 'uk-width-medium-1-1';
+    }
+
+    if ($tablet_grail || $tablet_right) {
+      $variables['content_attributes_array']['class'][] = 'uk-push-pull-medium';
+      $variables['sidebar_first_attributes_array']['class'][] = 'uk-push-pull-medium';
+    }
+    elseif ($tablet_left) {
+      $variables['content_attributes_array']['class'][] = 'uk-push-medium-1-4';
+      $variables['sidebar_second_attributes_array']['class'][] = 'uk-pull-medium-3-4';
+    }
+    elseif ($tablet_left_stacked || $tablet_right_stacked) {
+      $variables['content_attributes_array']['class'][] = 'uk-push-pull-medium';
+      $variables['sidebar_second_attributes_array']['class'][] = 'uk-push-pull-medium';
+    }
+  }
+  elseif (empty($sidebar_first) && empty($sidebar_second)) {
+    $variables['content_attributes_array']['class'][] = 'uk-width-1-1';
   }
 
   // Define header attributes.
@@ -315,7 +456,6 @@ function uikit_preprocess_block(&$variables) {
 
   if ($region == 'sidebar_first' || $region == 'sidebar_second') {
     // Add panel and utility classes to all sidebars.
-    $variables['classes_array'][] = 'uk-margin-bottom';
     $variables['content_attributes_array']['class'][] = 'uk-panel';
     $variables['content_attributes_array']['class'][] = 'uk-panel-box';
     $variables['title_attributes_array']['class'][] = 'uk-panel-title';
@@ -328,6 +468,7 @@ function uikit_preprocess_block(&$variables) {
 function uikit_preprocess_button(&$variables) {
   // Add the uk-button class to all buttons.
   $variables['element']['#attributes']['class'][] = 'uk-button';
+  $variables['element']['#attributes']['class'][] = 'uk-margin-small-right';
 }
 
 /**
@@ -389,38 +530,7 @@ function uikit_preprocess_confirm_form(&$variables) {
  * Implements hook_preprocess_HOOK() for theme_container().
  */
 function uikit_preprocess_container(&$variables) {
-  // Remove container-inline classes.
-  $type = !empty($variables['element']['#type']) ? $variables['element']['#type'] : 0;
-  $container = $type && $type === 'container';
-  $classes = isset($variables['element']['#attributes']['class']) ? $variables['element']['#attributes']['class'] : array();
-  $help_block = in_array('uk-form-help-block', $classes);
-  $inline = in_array('container-inline', $classes);
-  $radio = in_array('form-type-radio', $classes);
-  $search_block_form = in_array('form-item-search-block-form', $classes);
-
-  if ($container) {
-    if ($inline) {
-      foreach ($classes as $key => $class) {
-        if ($class == 'container-inline') {
-          unset($variables['element']['#attributes']['class'][$key]);
-          array_values($variables['element']['#attributes']['class']);
-        }
-      }
-    }
-  }
-
-  if (!$help_block && !$radio && !$search_block_form) {
-    $variables['element']['#attributes']['class'][] = 'uk-form-row';
-  }
-
-  // Add the uk-button-group class to actions containers.
-  $actions = $type && $type === 'actions';
-
-  if ($actions) {
-    $variables['element']['#attributes']['class'][] = 'uk-button-group';
-    $variables['element']['#attributes']['class'][] = 'uk-display-block';
-    $variables['element']['#attributes']['class'][] = 'uk-margin-top';
-  }
+  $variables['element']['#attributes']['class'][] = 'uk-form-row';
 }
 
 /**
@@ -461,6 +571,7 @@ function uikit_preprocess_fieldset(&$variables) {
   }
   elseif ($collapsible) {
     $variables['theme_hook_suggestions'][] = 'fieldset__collapsible';
+    $variables['element']['#attributes']['class'][] = 'uk-form-row';
     $variables['element']['#attributes']['class'][] = 'uk-accordion';
     $variables['element']['#attributes']['data-uk-accordion'] = '';
 
@@ -478,9 +589,8 @@ function uikit_preprocess_fieldset(&$variables) {
     $variables['theme_hook_suggestions'][] = 'fieldset__format';
   }
   else {
-    $variables['element']['#attributes']['class'][] = 'uk-margin-top';
-    $variables['element']['#attributes']['class'][] = 'uk-margin-bottom';
     $variables['theme_hook_suggestions'][] = 'fieldset';
+    $variables['element']['#attributes']['class'][] = 'uk-form-row';
   }
 
   // Load accordion component stylesheet and script.
@@ -495,6 +605,13 @@ function uikit_preprocess_fieldset(&$variables) {
  * Implements hook_preprocess_HOOK() for theme_form().
  */
 function uikit_preprocess_form(&$variables) {
+  $element = $variables['element'];
+  $children = $element['#children'];
+
+  $form_build_id = isset($element['form_build_id']['#children']) ? $element['form_build_id']['#children'] : '';
+  $form_token = isset($element['form_token']['#children']) ? $element['form_token']['#children'] : '';
+  $form_id = isset($element['form_id']['#children']) ? $element['form_id']['#children'] : '';
+
   // Add the uk-form class to all forms.
   $variables['element']['#attributes']['class'][] = 'uk-form';
   $variables['element']['#attributes']['class'][] = 'uk-form-stacked';
@@ -502,34 +619,19 @@ function uikit_preprocess_form(&$variables) {
   // Load advanced form component stylesheets.
   $theme = drupal_get_path('theme', 'uikit');
   drupal_add_css($theme . '/css/components/form-advanced.min.css');
-}
 
-/**
- * Implements hook_preprocess_HOOK() for theme_form_element().
- */
-function uikit_preprocess_form_element(&$variables) {
-  // Add the uk-form-row class.
-  $variables['element']['#wrapper_attributes']['class'][] = 'uk-form-row';
-
-  // Load advanced form element component stylsheets.
-  $theme = drupal_get_path('theme', 'uikit');
-
-  switch ($variables['element']['#type']) {
-    case 'managed_file':
-      drupal_add_css($theme . '/css/components/form-file.min.css');
-      break;
-
-    case 'password':
-      drupal_add_css($theme . '/css/components/form-password.min.css');
-      drupal_add_js($theme . '/js/components/form-password.min.js',
-        array('group' => JS_THEME)
-      );
-      break;
-
-    case 'select':
-      drupal_add_css($theme . '/css/components/form-select.min.css');
-      break;
+  if ($form_build_id) {
+    $children = str_replace($form_build_id, '', $children);
   }
+  if ($form_token) {
+    $children = str_replace($form_token, '', $children);
+  }
+  if ($form_id) {
+    $children = str_replace($form_id, '', $children);
+  }
+
+  $children .= $form_build_id . $form_token . $form_id;
+  $variables['element']['#children'] = $children;
 }
 
 /**
@@ -559,6 +661,41 @@ function uikit_preprocess_links(&$variables) {
   if ($theme_hook_original == 'links__contextual') {
     $variables['attributes']['class'] = array('uk-nav');
   }
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for theme_menu_local_tasks().
+ */
+function uikit_preprocess_menu_local_tasks(&$variables) {
+  // Get the local task styles.
+  $primary_style = theme_get_setting('primary_tasks_style');
+  $secondary_style = theme_get_setting('secondary_tasks_style');
+
+  // Set the default attributes.
+  $variables['primary_attributes_array'] = array(
+    'id' => 'primary-local-tasks',
+    'class' => array('uk-subnav'),
+  );
+  $variables['secondary_attributes_array'] = array(
+    'id' => 'secondary-local-tasks',
+    'class' => array('uk-subnav'),
+  );
+
+  // Add additional styling from theme settings.
+  if ($primary_style) {
+    $variables['primary_attributes_array']['class'][] = $primary_style;
+  }
+  if ($secondary_style) {
+    $variables['secondary_attributes_array']['class'][] = $secondary_style;
+  }
+}
+
+/**
+ * Implements hook_process_HOOK() for theme_menu_local_tasks().
+ */
+function uikit_process_menu_local_tasks(&$variables) {
+  $variables['primary_attributes'] = drupal_attributes($variables['primary_attributes_array']);
+  $variables['secondary_attributes'] = drupal_attributes($variables['secondary_attributes_array']);
 }
 
 /**

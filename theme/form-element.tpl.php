@@ -11,7 +11,7 @@ $type = !empty($element['#type']) ? $element['#type'] : FALSE;
 $prefix = isset($element['#field_prefix']) ? $element['#field_prefix'] : '';
 $suffix = isset($element['#field_suffix']) ? $element['#field_suffix'] : '';
 $checkbox = $type && $type === 'checkbox';
-$password = $type && $type === 'password';
+/* $password = $type && $type === 'password'; */
 $radio = $type && $type === 'radio';
 
 // Create an attributes array for the wrapping container.
@@ -50,7 +50,9 @@ if (!empty($element['#attributes']['disabled'])) {
 if (!empty($element['#autocomplete_path']) && drupal_valid_path($element['#autocomplete_path'])) {
   $wrapper_attributes['class'][] = 'form-autocomplete';
 }
-if ($password) {
+
+// TODO: Add advanced password options in theme settings.
+/*if ($password) {
   $pass_one = $name === 'pass[pass1]';
   $pass_two = $name === 'pass[pass2]';
 
@@ -66,12 +68,14 @@ if ($password) {
   $element['#children'] .= $children;
 
   if (!$pass_one && !$pass_two) {
-    $element['#children'] .= '<a href="" class="uk-form-password-toggle" data-uk-form-password>Show</a></div>';
+    $element['#children'] .= '<a href="" class="uk-form-password-toggle"';
+    $element['#children'] .= ' data-uk-form-password>Show</a></div>';
   }
   else {
     $element['#children'] .= '</div><div class="' . $class . '"></div>';
   }
 }
+*/
 
 // Add a space before the labels of checkboxes and radios.
 if (($checkbox || $radio) && isset($element['#title'])) {
