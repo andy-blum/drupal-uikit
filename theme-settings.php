@@ -9,6 +9,8 @@
  * Implements hook_form_system_theme_settings_alter().
  */
 function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id = NULL) {
+  global $theme_key;
+
   // General "alters" use a form id. Settings should not be set here. The only
   // thing useful about this is if you need to alter the form for the running
   // theme and *not* the theme setting.
@@ -18,7 +20,7 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
   }
 
   // Get the active theme name.
-  $theme = $form_state['build_info']['args'][0];
+  $theme_key = $form_state['build_info']['args'][0] === $theme_key ? $form_state['build_info']['args'][0] : $theme_key;
 
   // Build the markup for the layout demos.
   $demo_layout = '<div class="uk-layout-wrapper">';
@@ -62,10 +64,6 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
   $demo_local_tasks .= '<li class="uk-disabled"><a href="#">Disabled</a></li>';
   $demo_local_tasks .= '</ul>';
 
-  // Get the style for each local task.
-  $primary_style = theme_get_setting('primary_tasks_style');
-  $secondary_style = theme_get_setting('secondary_tasks_style');
-
   // Set the subnav options.
   $subnav_options = array(
     0 => 'Basic subnav',
@@ -73,8 +71,18 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
     'uk-subnav-pill' => 'Subnav pill',
   );
 
+  // Set the region style options.
+  $region_style_options = array(
+    0 => 'No style',
+    'panel' => 'Panel',
+    'block' => 'Block',
+  );
+
+  // Fetch a list of regions for the current theme.
+  $all_regions = system_region_list($theme_key);
+
   // Get theme specific jQuery version.
-  $jquery_version = theme_get_setting('jquery_update_jquery_version', $theme);
+  $jquery_version = theme_get_setting('jquery_update_jquery_version', $theme_key);
 
   // Get site wide jQuery version if theme specific one is not set.
   if (!$jquery_version && module_exists('jquery_update')) {
@@ -142,22 +150,27 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
     '#description' => t('Apply our fully responsive fluid grid system and panels, common layout parts like blog articles and comments and useful utility classes.'),
     '#group' => 'uikit',
   );
-  $form['layout']['standard_layout'] = array(
+  $form['layout']['page_layout'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Page Layout'),
+    '#description' => t('Change page layout settings.'),
+  );
+  $form['layout']['page_layout']['standard_layout'] = array(
     '#type' => 'fieldset',
     '#title' => t('Standard Layout'),
     '#description' => t('Change layout settings for desktops and large screens.'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
   );
-  $form['layout']['standard_layout']['standard_layout_demo'] = array(
+  $form['layout']['page_layout']['standard_layout']['standard_layout_demo'] = array(
     '#type' => 'container',
   );
-  $form['layout']['standard_layout']['standard_layout_demo']['#attributes']['class'][] = 'uk-admin-demo';
-  $form['layout']['standard_layout']['standard_layout_demo']['#attributes']['class'][] = 'uk-layout-' . $standard_sidebar_pos;
-  $form['layout']['standard_layout']['standard_layout_demo']['standard_demo'] = array(
+  $form['layout']['page_layout']['standard_layout']['standard_layout_demo']['#attributes']['class'][] = 'uk-admin-demo';
+  $form['layout']['page_layout']['standard_layout']['standard_layout_demo']['#attributes']['class'][] = 'uk-layout-' . $standard_sidebar_pos;
+  $form['layout']['page_layout']['standard_layout']['standard_layout_demo']['standard_demo'] = array(
     '#markup' => '<div id="standard-layout-demo">' . $demo_layout . '</div>',
   );
-  $form['layout']['standard_layout']['standard_sidebar_positions'] = array(
+  $form['layout']['page_layout']['standard_layout']['standard_sidebar_positions'] = array(
     '#type' => 'radios',
     '#title' => t('Sidebar positions'),
     '#description' => t('Position the sidebars in the standard layout.'),
@@ -168,22 +181,22 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
       'sidebars-right' => 'Both sidebars right',
     ),
   );
-  $form['layout']['tablet_layout'] = array(
+  $form['layout']['page_layout']['tablet_layout'] = array(
     '#type' => 'fieldset',
     '#title' => t('Tablet Layout'),
     '#description' => t('Change layout settings for tablets and medium screens.'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
   );
-  $form['layout']['tablet_layout']['tablet_layout_demo'] = array(
+  $form['layout']['page_layout']['tablet_layout']['tablet_layout_demo'] = array(
     '#type' => 'container',
   );
-  $form['layout']['tablet_layout']['tablet_layout_demo']['#attributes']['class'][] = 'uk-admin-demo';
-  $form['layout']['tablet_layout']['tablet_layout_demo']['#attributes']['class'][] = 'uk-layout-' . $tablet_sidebar_pos;
-  $form['layout']['tablet_layout']['tablet_layout_demo']['tablet_demo'] = array(
+  $form['layout']['page_layout']['tablet_layout']['tablet_layout_demo']['#attributes']['class'][] = 'uk-admin-demo';
+  $form['layout']['page_layout']['tablet_layout']['tablet_layout_demo']['#attributes']['class'][] = 'uk-layout-' . $tablet_sidebar_pos;
+  $form['layout']['page_layout']['tablet_layout']['tablet_layout_demo']['tablet_demo'] = array(
     '#markup' => '<div id="tablet-layout-demo">' . $demo_layout . '</div>',
   );
-  $form['layout']['tablet_layout']['tablet_sidebar_positions'] = array(
+  $form['layout']['page_layout']['tablet_layout']['tablet_sidebar_positions'] = array(
     '#type' => 'radios',
     '#title' => t('Sidebar positions'),
     '#description' => t('Position the sidebars in the tablet layout.'),
@@ -196,22 +209,22 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
       'sidebar-right-stacked' => 'Right sidebar stacked',
     ),
   );
-  $form['layout']['mobile_layout'] = array(
+  $form['layout']['page_layout']['mobile_layout'] = array(
     '#type' => 'fieldset',
     '#title' => t('Mobile Layout'),
     '#description' => t('Change layout settings for mobile devices and small screens.'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
   );
-  $form['layout']['mobile_layout']['mobile_layout_demo'] = array(
+  $form['layout']['page_layout']['mobile_layout']['mobile_layout_demo'] = array(
     '#type' => 'container',
   );
-  $form['layout']['mobile_layout']['mobile_layout_demo']['#attributes']['class'][] = 'uk-admin-demo';
-  $form['layout']['mobile_layout']['mobile_layout_demo']['#attributes']['class'][] = 'uk-layout-' . $mobile_sidebar_pos;
-  $form['layout']['mobile_layout']['mobile_layout_demo']['mobile_demo'] = array(
+  $form['layout']['page_layout']['mobile_layout']['mobile_layout_demo']['#attributes']['class'][] = 'uk-admin-demo';
+  $form['layout']['page_layout']['mobile_layout']['mobile_layout_demo']['#attributes']['class'][] = 'uk-layout-' . $mobile_sidebar_pos;
+  $form['layout']['page_layout']['mobile_layout']['mobile_layout_demo']['mobile_demo'] = array(
     '#markup' => '<div id="mobile-layout-demo">' . $demo_layout . '</div>',
   );
-  $form['layout']['mobile_layout']['mobile_sidebar_positions'] = array(
+  $form['layout']['page_layout']['mobile_layout']['mobile_sidebar_positions'] = array(
     '#type' => 'radios',
     '#title' => t('Sidebar positions'),
     '#description' => t('Position the sidebars in the mobile layout.'),
@@ -221,19 +234,19 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
       'sidebars-vertical' => 'Sidebars vertical',
     ),
   );
-  $form['layout']['page_container'] = array(
+  $form['layout']['page_layout']['page_container'] = array(
     '#type' => 'checkbox',
     '#title' => t('Page Container'),
     '#description' => t('Add the .uk-container class to the page container to give it a max-width and wrap the main content of your website. For large screens it applies a different max-width.'),
     '#default_value' => theme_get_setting('page_container'),
   );
-  $form['layout']['page_centering'] = array(
+  $form['layout']['page_layout']['page_centering'] = array(
     '#type' => 'checkbox',
     '#title' => t('Page Centering'),
     '#description' => t('To center the page container, use the .uk-container-center class.'),
     '#default_value' => theme_get_setting('page_centering'),
   );
-  $form['layout']['page_margin'] = array(
+  $form['layout']['page_layout']['page_margin'] = array(
     '#type' => 'select',
     '#title' => t('Page margin'),
     '#description' => t('Select the margin to add to the top and bottom of the page container. This is useful, for example, when using the gradient style with a centered page container and a navbar.'),
@@ -245,6 +258,29 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
       'uk-margin' => t('Top and bottom margin'),
     ),
   );
+  $form['layout']['region_layout'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Region Layout'),
+    '#description' => t('Change region layout settings.<br><br>Use the following links to see an example of each component style.<ul class="links"><li><a href="http://getuikit.com/docs/panel.html" target="_blank">Panel</a></li><li><a href="http://getuikit.com/docs/block.html" target="_blank">Block</a></li><li><a href="http://getuikit.com/docs/article.html" target="_blank">Article</a></li></ul>'),
+  );
+
+  // Load all regions to assign separate settings for each region.
+  foreach ($all_regions as $region_key => $region) {
+    $form['layout']['region_layout'][$region_key] = array(
+      '#type' => 'fieldset',
+      '#title' => t('@region region', array('@region' => $region)),
+      '#description' => t('Change the @region region settings.', array('@region' => $region)),
+      '#collapsible' => TRUE,
+      '#collapsed' => TRUE,
+    );
+    $form['layout']['region_layout'][$region_key][$region_key . '_style'] = array(
+      '#type' => 'select',
+      '#title' => t('@title style', array('@title' => $region)),
+      '#description' => t('Set the style for the @region region. The theme will automatically style the region accordingly.', array('@region' => $region)),
+      '#default_value' => theme_get_setting($region_key . '_style'),
+      '#options' => $region_style_options,
+    );
+  }
 
   // Navigational settings.
   $form['navigations'] = array(
@@ -311,19 +347,45 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
   );
-  $form['navigations']['main_navbar']['default_menus']['main_menu_alignment'] = array(
+  $form['navigations']['main_navbar']['default_menus']['main_menu'] = array(
+    '#type' => 'fieldset',
+    '#title' => 'Main menu',
+    '#description' => t('Adjust settings for the main menu in the navbar.'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  $form['navigations']['main_navbar']['default_menus']['main_menu']['main_menu_alignment'] = array(
     '#type' => 'select',
     '#title' => 'Main menu alignment',
     '#description' => t('Select whether to align the main menu to the left or right in the navbar.'),
     '#default_value' => theme_get_setting('main_menu_alignment'),
     '#options' => array('Left', 'Right'),
   );
-  $form['navigations']['main_navbar']['default_menus']['secondary_menu_alignment'] = array(
+  $form['navigations']['main_navbar']['default_menus']['main_menu']['main_menu_dropdown_support'] = array(
+    '#type' => 'checkbox',
+    '#title' => 'Main menu dropdown support',
+    '#description' => t('Select whether to add dropdown support to the main menu. NOTE: Dropdown functionality is only supported for 2 levels.'),
+    '#default_value' => theme_get_setting('main_menu_dropdown_support'),
+  );
+  $form['navigations']['main_navbar']['default_menus']['secondary_menu'] = array(
+    '#type' => 'fieldset',
+    '#title' => 'Secondary menu',
+    '#description' => t('Adjust settings for the secondary menu in the navbar.'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  $form['navigations']['main_navbar']['default_menus']['secondary_menu']['secondary_menu_alignment'] = array(
     '#type' => 'select',
     '#title' => 'Secondary menu alignment',
     '#description' => t('Select whether to align the secondary menu to the left or right in the navbar.'),
     '#default_value' => theme_get_setting('secondary_menu_alignment'),
     '#options' => array('Left', 'Right'),
+  );
+  $form['navigations']['main_navbar']['default_menus']['secondary_menu']['secondary_menu_dropdown_support'] = array(
+    '#type' => 'checkbox',
+    '#title' => 'Secondary menu dropdown support',
+    '#description' => t('Select whether to add dropdown support to the secondary menu. NOTE: Dropdown functionality is only supported for 2 levels.'),
+    '#default_value' => theme_get_setting('secondary_menu_dropdown_support'),
   );
   $form['navigations']['main_navbar']['additional_navbar_menus'] = array(
     '#type' => 'fieldset',

@@ -449,17 +449,56 @@ function uikit_preprocess_node(&$variables) {
 }
 
 /**
+ * Implements template_preprocess_region().
+ */
+function uikit_preprocess_region(&$variables) {
+  global $theme_key;
+  $region = $variables['region'];
+  $wrapper_id = str_replace('_', '-', $region);
+
+  $variables['wrapper_attributes_array'] = array(
+    'id' => 'region-' . $wrapper_id . '-wrapper',
+    'class' => array('region-wrapper'),
+  );
+
+  // Get all regions for the theme.
+  $regions = system_region_list($theme_key);
+
+  foreach ($regions as $key => $value) {
+    // Get the settings for each region being used.
+    if ($region == $key) {
+      $style_setting = theme_get_setting($key . '_style');
+      $region_style = $style_setting ? $style_setting : 0;
+
+      if ($region_style) {
+        switch ($region_style) {
+          case 'panel':
+            $variables['wrapper_attributes_array']['class'][] = 'uk-panel';
+            $variables['wrapper_attributes_array']['class'][] = 'uk-panel-box';
+            break;
+
+          case 'block':
+            $variables['wrapper_attributes_array']['class'][] = 'uk-block';
+            break;
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements template_process_region().
+ */
+function uikit_process_region(&$variables) {
+  $attributes = $variables['wrapper_attributes_array'];
+  $variables['wrapper_attributes'] = drupal_attributes($attributes);
+}
+
+/**
  * Implements template_preprocess_block().
  */
 function uikit_preprocess_block(&$variables) {
-  $region = $variables['elements']['#block']->region;
-
-  if ($region == 'sidebar_first' || $region == 'sidebar_second') {
-    // Add panel and utility classes to all sidebars.
-    $variables['content_attributes_array']['class'][] = 'uk-panel';
-    $variables['content_attributes_array']['class'][] = 'uk-panel-box';
-    $variables['title_attributes_array']['class'][] = 'uk-panel-title';
-  }
+  $variables['content_attributes_array']['class'][] = 'uk-margin';
 }
 
 /**
@@ -508,7 +547,7 @@ function uikit_preprocess_comment(&$variables) {
 }
 
 /**
- * Implements hook_preprocess_HOOK() for comment-wrapper.tpl.php.
+ * Implements template_preprocess_comment_wrapper().
  */
 function uikit_preprocess_comment_wrapper(&$variables) {
   $variables['classes_array'][] = 'uk-margin-top-remove';
@@ -534,7 +573,7 @@ function uikit_preprocess_container(&$variables) {
 }
 
 /**
- * Implements hook_preprocess_HOOK() for theme_field().
+ * Implements template_preprocess_field().
  */
 function uikit_preprocess_field(&$variables) {
   $type = $variables['element']['#field_type'];
@@ -638,8 +677,8 @@ function uikit_preprocess_form(&$variables) {
  * Implements hook_preprocess_HOOK() for theme_item_list().
  */
 function uikit_preprocess_item_list(&$variables) {
-  // Add the uk-subnav class to all item lists.
-  $variables['attributes']['class'][] = 'uk-subnav';
+  // Add the uk-list class to all item lists.
+  $variables['attributes']['class'][] = 'uk-list';
 }
 
 /**
