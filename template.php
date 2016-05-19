@@ -14,11 +14,12 @@ include_once dirname(__FILE__) . '/includes/get.inc';
  * Implements template_preprocess_html().
  */
 function uikit_preprocess_html(&$variables) {
+  // Create an HTML5 doctype variable.
+  $variables['doctype'] = '<!DOCTYPE html>' . "\n";
+
   // Create an attributes array for the html element.
   $html_attributes_array = array(
-    'xmlns' => 'http://www.w3.org/1999/xhtml',
-    'xml:lang' => $variables['language']->language,
-    'version' => 'XHTML+RDFa 1.0',
+    'lang' => $variables['language']->language,
     'dir' => $variables['language']->dir,
     'class' => array('uk-height-1-1'),
   );
@@ -27,6 +28,18 @@ function uikit_preprocess_html(&$variables) {
   // Add the uk-height-1-1 class to extend the <html> and <body> elements to the
   // full height of the page.
   $variables['classes_array'][] = 'uk-height-1-1';
+
+  // Serialize RDF Namespaces into an RDFa 1.1 prefix attribute.
+  if ($variables['rdf_namespaces']) {
+    $rdf_namespaces = array();
+
+    foreach (explode("\n  ", ltrim($variables['rdf_namespaces'])) as $namespace) {
+      // Remove xlmns: and ending quote and fix prefix formatting.
+      $rdf_namespaces[] = str_replace('="', ': ', substr($namespace, 6, -1));
+    }
+
+    $variables['rdf_namespaces'] = ' prefix="' . implode('  ', $rdf_namespaces) . '"';
+  }
 }
 
 /**
@@ -703,6 +716,28 @@ function uikit_preprocess_links(&$variables) {
 }
 
 /**
+ * Implements template_preprocess_HOOK() for theme_menu_link().
+ */
+function uikit_preprocess_menu_link(&$variables) {
+  global $user;
+  $classes = isset($variables['element']['#attributes']['class']) ? $variables['element']['#attributes']['class'] : array();
+  $leaf = array_keys($classes, 'leaf');
+  $active_trail = array_keys($classes, 'active-trail');
+
+  // Remove leaf classes.
+  foreach ($leaf as $leaf_key) {
+    unset($variables['element']['#attributes']['class'][$leaf_key]);
+  }
+
+  // Add uk-active class to active links.
+  $href = $variables['element']['#href'];
+  $user_profile = $href === 'user' && $_GET['q'] === "user/$user->uid";
+  if ($href == $_GET['q'] || ($href == '<front>' && drupal_is_front_page()) || !empty($active_trail) || $user_profile) {
+    $variables['element']['#attributes']['class'][] = 'uk-active';
+  }
+}
+
+/**
  * Implements hook_preprocess_HOOK() for theme_menu_local_tasks().
  */
 function uikit_preprocess_menu_local_tasks(&$variables) {
@@ -748,6 +783,20 @@ function uikit_preprocess_table(&$variables) {
   if ($filter_tips) {
     $variables['attributes']['class'][] = 'uk-table-striped';
     $variables['attributes']['class'][] = 'table-filter-tips';
+  }
+}
+
+/**
+ * Implements template_preprocess_username().
+ */
+function uikit_preprocess_username(&$variables) {
+  global $language;
+  $user_language = isset($variables['attributes_array']['xml:lang']);
+
+  if ($user_language) {
+    $lang = $variables['attributes_array']['xml:lang'];
+    unset($variables['attributes_array']['xml:lang']);
+    $variables['attributes_array']['lang'] = !empty($lang) ? $lang : $language->language;
   }
 }
 

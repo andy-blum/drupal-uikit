@@ -76,7 +76,7 @@
 <header<?php print $header_attributes; ?>>
   <nav<?php print $navbar_attributes; ?>>
     <?php if ($logo): ?>
-      <a href="<?php print $front_page; ?>" id="logo" class="uk-navbar-brand uk-hidden-small" title="<?php print t('Home'); ?>" rel="home">
+      <a href="<?php print $front_page; ?>" id="logo-large" class="uk-navbar-brand uk-hidden-small" title="<?php print t('Home'); ?>" rel="home">
         <img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>"/>
       </a>
     <?php endif; ?>
@@ -98,7 +98,7 @@
     <?php if ($logo || $site_name): ?>
       <div id="site-branding" class="uk-navbar-center uk-visible-small">
         <?php if ($logo): ?>
-          <a href="<?php print $front_page; ?>" class="uk-navbar-brand" title="<?php print t('Home'); ?>" rel="home" id="logo">
+          <a href="<?php print $front_page; ?>" class="uk-navbar-brand" title="<?php print t('Home'); ?>" rel="home" id="logo-small">
             <img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>"/>
           </a>
         <?php endif; ?>

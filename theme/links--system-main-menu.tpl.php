@@ -24,6 +24,14 @@ foreach ($menu_tree as $key => $value) {
 
     // Create custom theme wrapper to theme the sub-menu.
     $menu_tree[$key]['#below']['#theme_wrappers'] = array('menu_tree__system_main__sub_menu');
+
+    // Remove the expanded class.
+    $classes = isset($menu_tree[$key]['#attributes']['class']) ? $menu_tree[$key]['#attributes']['class'] : array();
+    $expanded = array_keys($classes, 'expanded');
+
+    foreach ($expanded as $expanded_key) {
+      unset($menu_tree[$key]['#attributes']['class'][$expanded_key]);
+    }
   }
   elseif (isset($value['#below']) && !empty($value['#below']) && !$dropdown_support) {
     // Make sure the sub-menus are empty when dropdown support is disabled.
