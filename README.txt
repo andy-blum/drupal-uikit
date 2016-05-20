@@ -26,6 +26,7 @@ for customizing with very little requirements.
 REQUIREMENTS
 ------------
 
+Libraries API
 jQuery Update 2.7+ running jQuery 1.10+
 
 
@@ -44,12 +45,28 @@ INSTALLATION
  * Set the default jQuery version to 1.10 or higher at
    admin/config/development/jquery_update.
 
+ * Install Libraries API module as you would normally install a contributed
+   Drupal module.
+
+ * Download the UIkit framework from
+   http://getuikit.com/docs/documentation_get-started.html.
+
+ * Create a directory named "uikit_library" in your site's libraries directory.
+   Extract all folders from the UIkit framework zip file into the uikit_library
+   directory you created. See: https://www.drupal.org/node/1440066
+   Your libraries directory should look like this:
+     libraries/uikit_library/css/...
+     libraries/uikit_library/fonts/...
+     libraries/uikit_library/js/...
+
 
 CONFIGURATION
 -------------
 
-The theme has no modifiable settings beyond the default theme settings provided
-by Drupal core.
+The theme settings can be found at admin/appearance/settings/uikit. Each UIkit
+component has its own settings, as well as many settings to control the
+behavior of Drupal core components. As the development of this theme continues,
+more settings will be added through updates.
 
 
 MAINTAINERS
@@ -58,7 +75,3 @@ MAINTAINERS
 Current maintainers:
  * Richard C Buchanan, III (Richard Buchanan)
    - https://www.drupal.org/u/richard-buchanan
- * Darryl Norris (darol100)
-   - https://www.drupal.org/u/darol100
- * Devanand Babu (devanandb)
-   - https://www.drupal.org/u/devanandb

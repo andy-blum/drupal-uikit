@@ -11,6 +11,31 @@
 include_once dirname(__FILE__) . '/includes/get.inc';
 
 /**
+ * Implements hook_libraries_info().
+ */
+function uikit_libraries_info() {
+  $libraries = array();
+  $libraries['uikit_library'] = array(
+    'name' => 'UIkit library',
+    'vendor url' => 'http://getuikit.com',
+    'download url' => 'https://github.com/uikit/uikit/releases',
+    'version arguments' => array(
+      'file' => 'css/uikit.css',
+      'pattern' => '@^/\*! UIkit ([\d\.]+)@',
+      'lines' => 5,
+      'cols' => 20,
+    ),
+    'version callback' => '_uikit_get_library_version',
+    'files' => array(
+      'js' => array('js/uikit.js'),
+      'css' => array('css/uikit.css'),
+    ),
+  );
+
+  return $libraries;
+}
+
+/**
  * Implements template_preprocess_html().
  */
 function uikit_preprocess_html(&$variables) {
@@ -54,6 +79,11 @@ function uikit_process_html(&$variables) {
  * Implements template_preprocess_page().
  */
 function uikit_preprocess_page(&$variables) {
+  // Checks if the uikit library can be loaded.
+  if (_uikit_library_load()) {
+    libraries_load('uikit_library');
+  }
+
   $sidebar_first = $variables['page']['sidebar_first'];
   $sidebar_second = $variables['page']['sidebar_second'];
   $standard_layout = theme_get_setting('standard_sidebar_positions');
@@ -422,17 +452,26 @@ function uikit_preprocess_page(&$variables) {
 
   // Check if the jquery_update module is both installed and enabled.
   if (!module_exists('jquery_update')) {
-    $message = t('jQuery Update is not enabled. UIkit requires a minimum jQuery version of 1.10 or higher. Please enable the <a href="!jquery_update_project_url">jQuery Update</a> module and <a href="!jquery_update_configure">configure</a> the default jQuery version.', array(
-      '!jquery_update_project_url' => check_plain('https://www.drupal.org/project/jquery_update'),
-      '!jquery_update_configure' => check_plain(url('admin/config/development/jquery_update')),
+    $message = t('jQuery Update is not enabled. UIkit requires a minimum jQuery version of 1.10 or higher. Please enable the <a href="@jquery_update_project_url">jQuery Update</a> module and <a href="@jquery_update_configure">configure</a> the default jQuery version.', array(
+      '@jquery_update_project_url' => 'https://www.drupal.org/project/jquery_update',
+      '@jquery_update_configure' => url('admin/config/development/jquery_update'),
     ));
     drupal_set_message($message, 'error', FALSE);
   }
 
   // Check if the minimum jQuery version is met.
   if (module_exists('jquery_update') && !version_compare($jquery_version, '1.10', '>=')) {
-    $message = t('UIkit requires a minimum jQuery version of 1.10 or higher. Please <a href="!jquery_update_configure">configure</a> the default jQuery version.', array(
-      '!jquery_update_configure' => check_plain(url('admin/config/development/jquery_update')),
+    $message = t('UIkit requires a minimum jQuery version of 1.10 or higher. Please <a href="@jquery_update_configure">configure</a> the default jQuery version.', array(
+      '@jquery_update_configure' => url('admin/config/development/jquery_update'),
+    ));
+    drupal_set_message($message, 'error', FALSE);
+  }
+
+  // Check if the libraries module is both installed and enabled.
+  if (!module_exists('libraries')) {
+    $message = t('UIkit requires the Libraries module. Please enable the <a href="@libraries_project_url">Libraries</a> module and follow <a href="@uikit_get_started">these instructions</a> to install the UIkit asset files.', array(
+      '@libraries_project_url' => 'https://www.drupal.org/project/libraries',
+      '@uikit_get_started' => check_url('admin/appearance/settings/uikit#edit-get-started'),
     ));
     drupal_set_message($message, 'error', FALSE);
   }
@@ -645,12 +684,14 @@ function uikit_preprocess_fieldset(&$variables) {
     $variables['element']['#attributes']['class'][] = 'uk-form-row';
   }
 
-  // Load accordion component stylesheet and script.
-  $theme = drupal_get_path('theme', 'uikit');
-  drupal_add_css($theme . '/css/components/accordion.gradient.min.css');
-  drupal_add_js($theme . '/js/components/accordion.min.js',
-    array('group' => JS_THEME)
-  );
+  if (_uikit_library_load()) {
+    // Load accordion component stylesheet and script.
+    $library_path = _uikit_get_library_path();
+    drupal_add_css($library_path . '/css/components/accordion.gradient.min.css');
+    drupal_add_js($library_path . '/js/components/accordion.min.js',
+      array('group' => JS_THEME)
+    );
+  }
 }
 
 /**
@@ -668,9 +709,11 @@ function uikit_preprocess_form(&$variables) {
   $variables['element']['#attributes']['class'][] = 'uk-form';
   $variables['element']['#attributes']['class'][] = 'uk-form-stacked';
 
-  // Load advanced form component stylesheets.
-  $theme = drupal_get_path('theme', 'uikit');
-  drupal_add_css($theme . '/css/components/form-advanced.min.css');
+  if (_uikit_library_load()) {
+    // Load advanced form component stylesheets.
+    $library_path = _uikit_get_library_path();
+    drupal_add_css($library_path . '/css/components/form-advanced.min.css');
+  }
 
   if ($form_build_id) {
     $children = str_replace($form_build_id, '', $children);
@@ -806,6 +849,7 @@ function uikit_preprocess_username(&$variables) {
 function uikit_css_alter(&$css) {
   $theme = drupal_get_path('theme', 'uikit');
   $style = theme_get_setting('base_style') ? '.' . theme_get_setting('base_style') : '';
+  $library_path = _uikit_get_library_path();
 
   // Stop Drupal core stylesheets from being loaded.
   unset($css[drupal_get_path('module', 'system') . '/system.messages.css']);
@@ -813,24 +857,24 @@ function uikit_css_alter(&$css) {
   unset($css[drupal_get_path('module', 'system') . '/system.menus.css']);
 
   // Use the UIkit theme style selected in the theme settings.
-  $css[$theme . '/css/uikit.css']['data'] = $theme . '/css/uikit' . $style . '.css';
+  $css[$library_path . '/css/uikit.css']['data'] = $library_path . '/css/uikit' . $style . '.css';
 
   // Replace the book module's book.css with a custom version.
   $book_css = drupal_get_path('module', 'book') . '/book.css';
   if (isset($css[$book_css])) {
-    $css[$book_css]['data'] = $theme . '/overrides/book.css';
+    $css[$book_css]['data'] = $theme . '/css/book.css';
   }
 
   // Replace the user module's user.css with a custom version.
   $user_css = drupal_get_path('module', 'user') . '/user.css';
   if (isset($css[$user_css])) {
-    $css[$user_css]['data'] = $theme . '/overrides/user.css';
+    $css[$user_css]['data'] = $theme . '/css/user.css';
   }
 
   // Replace the field module's field.css with a custom version.
   $field_css = drupal_get_path('module', 'field') . '/theme/field.css';
   if (isset($css[$field_css])) {
-    $css[$field_css]['data'] = $theme . '/overrides/field.css';
+    $css[$field_css]['data'] = $theme . '/css/field.css';
   }
 }
 
@@ -854,23 +898,23 @@ function uikit_js_alter(&$javascript) {
   // Replace the contextual module's contextual.js with a custom version.
   $contextual_js = drupal_get_path('module', 'contextual') . '/contextual.js';
   if (isset($javascript[$contextual_js])) {
-    $javascript[$contextual_js]['data'] = $theme . '/overrides/contextual.js';
+    $javascript[$contextual_js]['data'] = $theme . '/js/contextual.js';
   }
 
   // Replace tabledrag.js and tableheader.js with custom versions.
   $tabledrag_js = 'misc/tabledrag.js';
   $tableheader_js = 'misc/tableheader.js';
   if (isset($javascript[$tabledrag_js])) {
-    $javascript[$tabledrag_js]['data'] = $theme . '/overrides/tabledrag.js';
+    $javascript[$tabledrag_js]['data'] = $theme . '/js/tabledrag.js';
   }
   if (isset($javascript[$tableheader_js])) {
-    $javascript[$tableheader_js]['data'] = $theme . '/overrides/tableheader.js';
+    $javascript[$tableheader_js]['data'] = $theme . '/js/tableheader.js';
   }
 
   // Replace the user module's user.js with a custom version.
   $user_js = drupal_get_path('module', 'user') . '/user.js';
   if (isset($javascript[$user_js])) {
-    $javascript[$user_js]['data'] = $theme . '/overrides/user.js';
+    $javascript[$user_js]['data'] = $theme . '/js/user.js';
   }
 }
 

@@ -91,17 +91,26 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
 
   // Check if the jquery_update module is both installed and enabled.
   if (!module_exists('jquery_update')) {
-    $message = t('jQuery Update is not enabled. UIkit requires a minimum jQuery version of 1.10 or higher. Please enable the <a href="!jquery_update_project_url">jQuery Update</a> module and <a href="!jquery_update_configure">configure</a> the default jQuery version.', array(
-      '!jquery_update_project_url' => check_plain('https://www.drupal.org/project/jquery_update'),
-      '!jquery_update_configure' => check_plain(url('admin/config/development/jquery_update')),
+    $message = t('jQuery Update is not enabled. UIkit requires a minimum jQuery version of 1.10 or higher. Please enable the <a href="@jquery_update_project_url">jQuery Update</a> module and <a href="@jquery_update_configure">configure</a> the default jQuery version.', array(
+      '@jquery_update_project_url' => check_plain('https://www.drupal.org/project/jquery_update'),
+      '@jquery_update_configure' => check_plain(url('admin/config/development/jquery_update')),
     ));
     drupal_set_message($message, 'error', FALSE);
   }
 
   // Check if the minimum jQuery version is met.
   if (module_exists('jquery_update') && !version_compare($jquery_version, '1.10', '>=')) {
-    $message = t('UIkit requires a minimum jQuery version of 1.10 or higher. Please <a href="!jquery_update_configure">configure</a> the default jQuery version.', array(
-      '!jquery_update_configure' => check_plain(url('admin/config/development/jquery_update')),
+    $message = t('UIkit requires a minimum jQuery version of 1.10 or higher. Please <a href="@jquery_update_configure">configure</a> the default jQuery version.', array(
+      '@jquery_update_configure' => check_plain(url('admin/config/development/jquery_update')),
+    ));
+    drupal_set_message($message, 'error', FALSE);
+  }
+
+  // Check if the libraries module is both installed and enabled.
+  if (!module_exists('libraries')) {
+    $message = t('UIkit requires the Libraries module. Please enable the <a href="@libraries_project_url">Libraries</a> module and follow <a href="@uikit_get_started">these instructions</a> to install the UIkit asset files.', array(
+      '@libraries_project_url' => 'https://www.drupal.org/project/libraries',
+      '@uikit_get_started' => check_url('/admin/appearance/settings/uikit#edit-get-started'),
     ));
     drupal_set_message($message, 'error', FALSE);
   }
@@ -261,7 +270,7 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
   $form['layout']['region_layout'] = array(
     '#type' => 'fieldset',
     '#title' => t('Region Layout'),
-    '#description' => t('Change region layout settings.<br><br>Use the following links to see an example of each component style.<ul class="links"><li><a href="http://getuikit.com/docs/panel.html" target="_blank">Panel</a></li><li><a href="http://getuikit.com/docs/block.html" target="_blank">Block</a></li><li><a href="http://getuikit.com/docs/article.html" target="_blank">Article</a></li></ul>'),
+    '#description' => t('Change region layout settings.<br><br>Use the following links to see an example of each component style.<ul class="links"><li><a href="http://getuikit.com/docs/panel.html" target="_blank">Panel</a></li><li><a href="http://getuikit.com/docs/block.html" target="_blank">Block</a></li></ul>'),
   );
 
   // Load all regions to assign separate settings for each region.
@@ -486,6 +495,95 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
     '#title' => t('Components'),
     '#description' => t("UIkit offers some advanced components that are not included in the UIkit core framework. Usually you wouldn't use these components in your everyday website."),
     '#group' => 'uikit',
+  );
+
+  // Theme installation instructions.
+  $form['get_started'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Get started'),
+    '#description' => t('Get familiar with the basic setup and structure of UIkit.'),
+    '#group' => 'uikit',
+  );
+
+  $libraries_enabled = !module_exists('libraries') ? '<span style="color: red">&#x2718;</span> ' : '<span style="color: green">&#x2714;</span> ';
+  $root = DRUPAL_ROOT;
+  $profile = file_exists($root . drupal_get_path('profile', drupal_get_profile())) ? '<span style="color: green">&#x2714;</span>' : '<span style="color: orange">&#x2718;</span>';
+  $all_sites = file_exists($root . '/sites/all/libraries') ? '<span style="color: green">&#x2714;</span>' : '<span style="color: orange">&#x2718;</span>';
+  $single_site = file_exists($root . conf_path() . '/libraries') ? '<span style="color: green">&#x2714;</span>' : '<span style="color: orange">&#x2718;</span>';
+  $uikit_library_dir = FALSE;
+
+  if (file_exists($root . drupal_get_path('profile', drupal_get_profile()) . '/libraries/uikit')) {
+    $uikit_library_dir = $root . drupal_get_path('profile', drupal_get_profile()) . '/libraries/uikit';
+  }
+  elseif (file_exists($root . '/sites/all/libraries/uikit')) {
+    $uikit_library_dir = $root . '/sites/all/libraries/uikit';
+  }
+  elseif (file_exists($root . conf_path() . '/libraries/uikit')) {
+    $uikit_library_dir = $root . conf_path() . '/libraries/uikit';
+  }
+
+  $css_exists = file_exists($uikit_library_dir . '/css') ? '<span style="color: green">&#x2714;</span><code>' . t('@uikit/css/...', array(
+    '@uikit' => $uikit_library_dir,
+  )) . '</code>' : '';
+
+  $fonts_exists = file_exists($uikit_library_dir . '/fonts') ? '<span style="color: green">&#x2714;</span> <code>' . t('@uikit/fonts/...', array(
+    '@uikit' => $uikit_library_dir,
+  )) . '</code>' : '';
+
+  $js_exists = file_exists($uikit_library_dir . '/js') ? '<span style="color: green">&#x2714;</span> <code>' . t('@uikit/js/...', array(
+    '@uikit' => $uikit_library_dir,
+  )) . '</code>' : '';
+
+  $uikit_install_success = $libraries_enabled && $css_exists && $fonts_exists && $js_exists ? ' <span style="color: green">&#x2714; Complete!</span>' : ' <span style="color: red">&#x2718; Incomplete!</span>';
+
+  $output = '<div class="form-item form-type-markup">';
+  $output .= '<label>' . t('UIkit library installation') . $uikit_install_success . '</label>';
+  $output .= '<div class="description">' . t('In general, 3rd party libraries are forbidden in projects hosted on drupal.org. Instead, UIkit uses the Libraries API. Follow the instructions below to install the UIkit library.') . '</div>';
+  $output .= '<ol>';
+
+  $output .= '<li>' . $libraries_enabled . t('Download and install the <a href="@libraries_project_url" target="_blank">Libraries API module</a>', array(
+    '@libraries_project_url' => 'https://www.drupal.org/project/libraries',
+  )) . '</li>';
+
+  $output .= '<li><span style="color: orange">&#x2753;</span> ' . t('Download the <a href="!uikit_library_url" target="_blank">UIkit</a> library', array(
+    '!uikit_library_url' => 'http://getuikit.com/docs/documentation_get-started.html',
+  )) . '</li>';
+
+  $output .= '<li><span style="color: orange">&#x2753;</span> ' . t('Create a directory named <code>uikit</code> on your desktop and extract the UIkit library into this folder.') . '</li>';
+  $output .= '<li>' . t('Check if there is a libraries directory in one of the recommended directories in your Drupal installation. If not, create one:');
+  $output .= '<ul>';
+
+  $output .= '<li>' . $profile . ' <code>' . t('@profile/libraries', array(
+    '@profile' => drupal_get_path('profile', drupal_get_profile()),
+  )) . '</code> OR</li>';
+
+  $output .= '<li>' . $all_sites . ' <code>' . t('sites/all/libraries') . '</code> if you have a mult-site installation and want all sites to have access to the library OR</li>';
+
+  $output .= '<li>' . $single_site . ' <code>' . t('@config/libraries', array(
+    '@config' => conf_path(),
+  )) . '</code> if the UIkit library should only be accessed by the current site configuration</li>';
+
+  $output .= '</ul>';
+  $output .= '</li>';
+  $output .= '<li>' . t('Upload the library from your desktop to the libraries directory you chose above');
+
+  if ($uikit_library_dir) {
+    $output .= '<br>' . t('Your libraries directory should now look like this:');
+    $output .= '<ul>';
+    $output .= '<li>' . $css_exists . '</li>';
+    $output .= '<li>' . $fonts_exists . '</li>';
+    $output .= '<li>' . $js_exists . '</li>';
+    $output .= '</ul>';
+  }
+  else {
+    $output .= '<br><span style="color: red">' . t('The UIkit library cannot be found in any libraries directory!') . '</span>';
+  }
+
+  $output .= '</li>';
+  $output .= '</div>';
+
+  $form['get_started']['basic_setup'] = array(
+    '#markup' => $output,
   );
 
   // Create vertical tabs to place Drupal's default theme settings in.
