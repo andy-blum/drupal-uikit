@@ -125,12 +125,6 @@
       <?php print render($page['header']); ?>
     <?php endif; ?>
 
-    <?php if ($breadcrumb): ?>
-      <div id="breadcrumbs" class="uk-width-1-1">
-        <?php print $breadcrumb; ?>
-      </div>
-    <?php endif; ?>
-
     <?php if ($page['highlighted']): ?>
       <div id="highlighted" class="uk-width-1-1">
         <?php print render($page['highlighted']); ?>
@@ -142,6 +136,12 @@
       <?php if ($title): ?>
         <h1 id="page-title" class="uk-article-title"><?php print $title; ?></h1><?php endif; ?>
       <?php print render($title_suffix); ?>
+
+      <?php if ($breadcrumb): ?>
+        <div id="breadcrumbs">
+          <?php print $breadcrumb; ?>
+        </div>
+      <?php endif; ?>
 
       <?php if ($tabs): ?>
         <?php print render($tabs); ?>
