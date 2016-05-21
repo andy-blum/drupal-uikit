@@ -1,3 +1,7 @@
+/**
+ * @file
+ */
+
 (function ($) {
   $(function() {
     // Do not trigger the default action of links in the demos.
