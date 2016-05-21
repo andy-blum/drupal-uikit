@@ -92,8 +92,8 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
   // Check if the jquery_update module is both installed and enabled.
   if (!module_exists('jquery_update')) {
     $message = t('jQuery Update is not enabled. UIkit requires a minimum jQuery version of 1.10 or higher. Please enable the <a href="@jquery_update_project_url">jQuery Update</a> module and <a href="@jquery_update_configure">configure</a> the default jQuery version.', array(
-      '@jquery_update_project_url' => check_plain('https://www.drupal.org/project/jquery_update'),
-      '@jquery_update_configure' => check_plain(url('admin/config/development/jquery_update')),
+      '@jquery_update_project_url' => 'https://www.drupal.org/project/jquery_update',
+      '@jquery_update_configure' => url('admin/config/development/jquery_update'),
     ));
     drupal_set_message($message, 'error', FALSE);
   }
@@ -101,7 +101,7 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
   // Check if the minimum jQuery version is met.
   if (module_exists('jquery_update') && !version_compare($jquery_version, '1.10', '>=')) {
     $message = t('UIkit requires a minimum jQuery version of 1.10 or higher. Please <a href="@jquery_update_configure">configure</a> the default jQuery version.', array(
-      '@jquery_update_configure' => check_plain(url('admin/config/development/jquery_update')),
+      '@jquery_update_configure' => url('admin/config/development/jquery_update'),
     ));
     drupal_set_message($message, 'error', FALSE);
   }
@@ -185,9 +185,9 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
     '#description' => t('Position the sidebars in the standard layout.'),
     '#default_value' => theme_get_setting('standard_sidebar_positions'),
     '#options' => array(
-      'holy-grail' => 'Holy grail',
-      'sidebars-left' => 'Both sidebars left',
-      'sidebars-right' => 'Both sidebars right',
+      'holy-grail' => t('Holy grail'),
+      'sidebars-left' => t('Both sidebars left'),
+      'sidebars-right' => t('Both sidebars right'),
     ),
   );
   $form['layout']['page_layout']['tablet_layout'] = array(
@@ -211,11 +211,11 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
     '#description' => t('Position the sidebars in the tablet layout.'),
     '#default_value' => theme_get_setting('tablet_sidebar_positions'),
     '#options' => array(
-      'holy-grail' => 'Holy grail',
-      'sidebars-left' => 'Both sidebars left',
-      'sidebar-left-stacked' => 'Left sidebar stacked',
-      'sidebars-right' => 'Both sidebars right',
-      'sidebar-right-stacked' => 'Right sidebar stacked',
+      'holy-grail' => t('Holy grail'),
+      'sidebars-left' => t('Both sidebars left'),
+      'sidebar-left-stacked' => t('Left sidebar stacked'),
+      'sidebars-right' => t('Both sidebars right'),
+      'sidebar-right-stacked' => t('Right sidebar stacked'),
     ),
   );
   $form['layout']['page_layout']['mobile_layout'] = array(
@@ -239,8 +239,8 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
     '#description' => t('Position the sidebars in the mobile layout.'),
     '#default_value' => theme_get_setting('mobile_sidebar_positions'),
     '#options' => array(
-      'sidebars-stacked' => 'Sidebars stacked',
-      'sidebars-vertical' => 'Sidebars vertical',
+      'sidebars-stacked' => t('Sidebars stacked'),
+      'sidebars-vertical' => t('Sidebars vertical'),
     ),
   );
   $form['layout']['page_layout']['page_container'] = array(
