@@ -27,8 +27,20 @@ function uikit_libraries_info() {
     ),
     'version callback' => '_uikit_get_library_version',
     'files' => array(
-      'js' => array('js/uikit.js'),
-      'css' => array('css/uikit.css'),
+      'js' => array(
+        'js/uikit.js' => array(
+          'type' => 'file',
+          'group' => JS_THEME,
+          'weight' => 0,
+        ),
+      ),
+      'css' => array(
+        'css/uikit.css' => array(
+          'type' => 'file',
+          'group' => CSS_THEME,
+          'weight' => 0,
+        ),
+      ),
     ),
   );
 
@@ -687,10 +699,12 @@ function uikit_preprocess_fieldset(&$variables) {
   if (_uikit_library_load()) {
     // Load accordion component stylesheet and script.
     $library_path = _uikit_get_library_path();
-    drupal_add_css($library_path . '/css/components/accordion.gradient.min.css');
-    drupal_add_js($library_path . '/js/components/accordion.min.js',
-      array('group' => JS_THEME)
-    );
+    drupal_add_css($library_path . '/css/components/accordion.gradient.min.css', array(
+      'group' => CSS_THEME,
+    ));
+    drupal_add_js($library_path . '/js/components/accordion.min.js', array(
+      'group' => JS_THEME,
+    ));
   }
 }
 
@@ -712,7 +726,9 @@ function uikit_preprocess_form(&$variables) {
   if (_uikit_library_load()) {
     // Load advanced form component stylesheets.
     $library_path = _uikit_get_library_path();
-    drupal_add_css($library_path . '/css/components/form-advanced.min.css');
+    drupal_add_css($library_path . '/css/components/form-advanced.min.css', array(
+      'group' => CSS_THEME,
+    ));
   }
 
   if ($form_build_id) {

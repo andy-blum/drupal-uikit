@@ -71,6 +71,12 @@ function _uikit_get_library_version($library, $options) {
   fclose($file);
 }
 
+/**
+ * Gets the path to the uikit_library library.
+ *
+ * @return string
+ *   Returns the library path for uikit_library.
+ */
 function _uikit_get_library_path() {
   $library = libraries_detect('uikit_library');
   return $library['library path'];
