@@ -15,7 +15,7 @@ include_once dirname(__FILE__) . '/includes/get.inc';
  */
 function uikit_libraries_info() {
   $libraries = array();
-  $libraries['uikit_library'] = array(
+  $libraries['uikit'] = array(
     'name' => 'UIkit library',
     'vendor url' => 'http://getuikit.com',
     'download url' => 'https://github.com/uikit/uikit/releases',
@@ -93,7 +93,7 @@ function uikit_process_html(&$variables) {
 function uikit_preprocess_page(&$variables) {
   // Checks if the uikit library can be loaded.
   if (_uikit_library_load()) {
-    libraries_load('uikit_library');
+    libraries_load('uikit');
   }
 
   $sidebar_first = $variables['page']['sidebar_first'];

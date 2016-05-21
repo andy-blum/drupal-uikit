@@ -20,7 +20,7 @@
  */
 function _uikit_library_load() {
   $library_load = FALSE;
-  $library_detect = libraries_detect('uikit_library');
+  $library_detect = libraries_detect('uikit');
   $library_version = $library_detect['version'];
   $min_version = version_compare($library_version, '2.0.0') >= 0;
   $max_version = version_compare($library_version, '3.0.0') == -1;
@@ -78,6 +78,6 @@ function _uikit_get_library_version($library, $options) {
  *   Returns the library path for uikit_library.
  */
 function _uikit_get_library_path() {
-  $library = libraries_detect('uikit_library');
+  $library = libraries_detect('uikit');
   return $library['library path'];
 }
