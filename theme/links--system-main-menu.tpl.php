@@ -8,6 +8,12 @@
 $menu_name = variable_get('menu_main_links_source', 'main-menu');
 $menu_tree = menu_tree($menu_name);
 $menu_tree['#theme_wrappers'] = array('menu_tree__system_main');
+
+// Create custom theme wrapper to theme the offcanvas menu.
+if (in_array('uk-nav-offcanvas', $variables['attributes']['class'])) {
+  $menu_tree['#theme_wrappers'] = array('menu_tree__system_main__offcanvas');
+}
+
 $dropdown_support = theme_get_setting('main_menu_dropdown_support');
 
 foreach ($menu_tree as $key => $value) {

@@ -31,14 +31,16 @@ function uikit_libraries_info() {
         'js/uikit.js' => array(
           'type' => 'file',
           'group' => JS_THEME,
-          'weight' => 0,
+          'weight' => -10,
+          'every_page' => TRUE,
         ),
       ),
       'css' => array(
         'css/uikit.css' => array(
           'type' => 'file',
           'group' => CSS_THEME,
-          'weight' => 0,
+          'weight' => -10,
+          'every_page' => TRUE,
         ),
       ),
     ),
@@ -372,7 +374,7 @@ function uikit_preprocess_page(&$variables) {
       $navbar_main .= '</div>';
     }
 
-    $offcanvas_main = theme('links__system_main_menu', array(
+    $offcanvas_main = theme('links__system_main_menu__offcanvas', array(
       'links' => $variables['main_menu'],
       'attributes' => array(
         'id' => 'main-menu--offcanvas',
@@ -405,7 +407,7 @@ function uikit_preprocess_page(&$variables) {
     if (theme_get_setting('secondary_menu_alignment')) {
       $navbar_secondary .= '</div>';
     }
-    $offcanvas_secondary = theme('links__system_secondary_menu', array(
+    $offcanvas_secondary = theme('links__system_secondary_menu__offcanvas', array(
       'links' => $variables['secondary_menu'],
       'attributes' => array(
         'id' => 'secondary-menu--offcanvas',
@@ -728,6 +730,8 @@ function uikit_preprocess_form(&$variables) {
     $library_path = _uikit_get_library_path();
     drupal_add_css($library_path . '/css/components/form-advanced.min.css', array(
       'group' => CSS_THEME,
+      'weight' => -10,
+      'every_page' => TRUE,
     ));
   }
 
