@@ -60,7 +60,9 @@ function _uikit_get_library_version($library, $options) {
   if (empty($options['file']) || !file_exists($file)) {
     return;
   }
+
   $file = fopen($file, 'r');
+
   while ($options['lines'] && $line = fgets($file, $options['cols'])) {
     if (preg_match($options['pattern'], $line, $version)) {
       fclose($file);
