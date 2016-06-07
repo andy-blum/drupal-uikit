@@ -13,6 +13,8 @@ regions[sidebar_second] = 'Sidebar second'
 regions[footer]         = 'Footer'
 
 settings[basic_style] = 0
+settings[meta_charset] = 'utf-8'
+settings[x_ua_compatible] = 0
 settings[standard_sidebar_positions] = 'holy-grail'
 settings[tablet_sidebar_positions] = 'sidebar-left-stacked'
 settings[mobile_sidebar_positions] = 'sidebars-stacked'

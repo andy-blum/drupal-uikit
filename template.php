@@ -79,6 +79,32 @@ function uikit_preprocess_html(&$variables) {
 
     $variables['rdf_namespaces'] = ' prefix="' . implode('  ', $rdf_namespaces) . '"';
   }
+
+  if (theme_get_setting('x_ua_compatible')) {
+    $meta_x_ua_compatible = array(
+      '#type' => 'html_tag',
+      '#tag' => 'meta',
+      '#attributes' => array(
+        'http-equiv' => 'x-ua-compatible',
+        'content' => 'IE=' . theme_get_setting('x_ua_compatible'),
+      ),
+      '#weight' => -9998,
+    );
+
+    drupal_add_html_head($meta_x_ua_compatible, 'uikit_x_ua_compatible');
+  }
+
+  $meta_viewport = array(
+    '#type' => 'html_tag',
+    '#tag' => 'meta',
+    '#attributes' => array(
+      'name' => 'viewport',
+      'content' => 'width=device-width, initial-scale=1',
+    ),
+    '#weight' => -9997,
+  );
+
+  drupal_add_html_head($meta_viewport, 'uikit_viewport');
 }
 
 /**
@@ -87,6 +113,24 @@ function uikit_preprocess_html(&$variables) {
 function uikit_process_html(&$variables) {
   // Convert attribute arrays to an attribute string.
   $variables['html_attributes'] = drupal_attributes($variables['html_attributes_array']);
+}
+
+/**
+ * Implements hook_html_head_alter().
+ */
+function uikit_html_head_alter(&$head_elements) {
+  if (isset($head_elements['system_meta_content_type'])) {
+    $head_elements['system_meta_content_type']['#attributes'] = array(
+      'charset' => theme_get_setting('meta_charset'),
+    );
+    $head_elements['system_meta_content_type']['#weight'] = -9999;
+  }
+
+  // Some modules, such as the Adminimal Admin menu, add a viewport meta tag.
+  // Remove this so the theme can define the tag.
+  if (isset($head_elements['viewport'])) {
+    unset($head_elements['viewport']);
+  }
 }
 
 /**

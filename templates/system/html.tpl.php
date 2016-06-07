@@ -46,13 +46,9 @@
 <!DOCTYPE html>
 <html<?php print $html_attributes; ?><?php print $rdf_namespaces; ?>>
 <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="x-ua-compatible" content="ie=edge, chrome=1" />
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   <?php print $head; ?>
   <title><?php print $head_title; ?></title>
   <?php print $styles; ?>
-  <?php print $scripts; ?>
 </head>
 <body class="<?php print $classes; ?>" <?php print $attributes;?>>
   <div id="skip-link">
@@ -61,5 +57,6 @@
   <?php print $page_top; ?>
   <?php print $page; ?>
   <?php print $page_bottom; ?>
+  <?php print $scripts; ?>
 </body>
 </html>
