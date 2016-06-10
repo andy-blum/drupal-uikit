@@ -109,6 +109,21 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
     'block' => 'Block',
   );
 
+  $viewport_scale = array(
+    0 => t('-- Select --'),
+    '0.0' => '0.0',
+    '1.0' => '1.0',
+    '2.0' => '2.0',
+    '3.0' => '3.0',
+    '4.0' => '4.0',
+    '5.0' => '5.0',
+    '6.0' => '6.0',
+    '7.0' => '7.0',
+    '8.0' => '8.0',
+    '9.0' => '9.0',
+    '10.0' => '10.0',
+  );
+
   // Fetch a list of regions for the current theme.
   $all_regions = system_region_list($theme_key);
 
@@ -278,16 +293,16 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
     '#title' => t('Mobile settings'),
     '#description' => t("Adjust the mobile layout settings to enhance your users' experience on smaller devices."),
     '#group' => 'uikit',
+    '#attributes' => array(
+      'class' => array(
+        'uikit-mobile-settings-form',
+      ),
+    ),
   );
   $form['mobile_settings']['mobile_metadata'] = array(
     '#type' => 'fieldset',
     '#title' => t('Mobile metadata'),
-    '#description' => t('HTML5 has five valid attributes that can be defined in meta elements: <code>content</code>, <code>http-equiv</code>, <code>name</code>, <code>scheme</code> and <code>charset</code>. Here you can control these attributes.'),
-  );
-  $form['mobile_settings']['mobile_metadata']['content'] = array(
-    '#type' => 'select',
-    '#title' => t('<code>content</code>'),
-    '#options' => array(),
+    '#description' => t('HTML5 has attributes that can be defined in meta elements. Here you can control some of these attributes.'),
   );
   $form['mobile_settings']['mobile_metadata']['x_ua_compatible'] = array(
     '#type' => 'select',
@@ -298,22 +313,49 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
       '!legacy' => '<a href="https://msdn.microsoft.com/en-us/library/jj676915(v=vs.85).aspx" target="_blank">' . t('Specifying legacy document modes') . '</a>',
     )),
   );
-  $form['mobile_settings']['mobile_metadata']['meta_name'] = array(
-    '#type' => 'select',
-    '#title' => t('<code>name</code>'),
-    '#options' => array(),
-  );
-  $form['mobile_settings']['mobile_metadata']['meta_scheme'] = array(
-    '#type' => 'select',
-    '#title' => t('<code>scheme</code>'),
-    '#options' => array(),
-  );
   $form['mobile_settings']['mobile_metadata']['meta_charset'] = array(
     '#type' => 'select',
     '#title' => t('<code>charset</code>'),
     '#options' => $charsets,
     '#description' => t('Specify the character encoding for the HTML document.'),
     '#default_option' => theme_get_setting('meta_charset'),
+  );
+  $form['mobile_settings']['mobile_metadata']['meta_viewport'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Viewport metadata'),
+    '#description' => t('Gives hints about the size of the initial size of the viewport. This pragma is used by several mobile devices only.'),
+  );
+  $form['mobile_settings']['mobile_metadata']['meta_viewport']['viewport_initial_scale'] = array(
+    '#type' => 'select',
+    '#title' => t('initial-scale'),
+    '#description' => t('Defines the ratio between the device width (device-width in portrait mode or device-height in landscape mode) and the viewport size.'),
+    '#default_value' => theme_get_setting('viewport_initial_scale'),
+    '#options' => $viewport_scale,
+  );
+  $form['mobile_settings']['mobile_metadata']['meta_viewport']['viewport_maximum_scale'] = array(
+    '#type' => 'select',
+    '#title' => t('maximum-scale'),
+    '#description' => t('Defines the maximum value of the zoom; it must be greater or equal to the minimum-scale or the behavior is indeterminate.'),
+    '#default_value' => theme_get_setting('viewport_maximum_scale'),
+    '#options' => $viewport_scale,
+  );
+  $form['mobile_settings']['mobile_metadata']['meta_viewport']['viewport_minimum_scale'] = array(
+    '#type' => 'select',
+    '#title' => t('minimum-scale'),
+    '#description' => t('Defines the minimum value of the zoom; it must be smaller or equal to the maximum-scale or the behavior is indeterminate.'),
+    '#default_value' => theme_get_setting('viewport_minimum_scale'),
+    '#options' => $viewport_scale,
+  );
+  $form['mobile_settings']['mobile_metadata']['meta_viewport']['viewport_user_scalable'] = array(
+    '#type' => 'select',
+    '#title' => t('user-scalable'),
+    '#description' => t('If set to no, the user is not able to zoom in the webpage. Default value is yes.'),
+    '#default_value' => theme_get_setting('viewport_user_scalable'),
+    '#options' => array(
+      -1 => '-- Select --',
+      1 => 'Yes',
+      0 => 'No',
+    ),
   );
 
   // Layout settings.

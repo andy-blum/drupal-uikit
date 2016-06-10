@@ -21,6 +21,23 @@
 
         return Drupal.checkPlain(vals.join(', '));
       });
+
+      // Provide the summary for the mobile settings form.
+      $('fieldset.uikit-mobile-settings-form', context).drupalSetSummary(function (context) {
+        var vals = [];
+
+        // IE compatibilty mode setting.
+        if ($(".form-item-x-ua-compatible select option:selected").val() != 0) {
+          var ieMode = $(".form-item-x-ua-compatible select option:selected", context).text();
+          vals.push(ieMode);
+        }
+
+        // Character set setting.
+        var charset = $(".form-item-meta-charset select option:selected", context).text().split(':');
+        vals.push(charset[0]);
+
+        return Drupal.checkPlain(vals.join(', '));
+      });
     }
   };
 
