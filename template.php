@@ -6,7 +6,7 @@
  */
 
 /**
- * Include common functions used through out theme.
+ * Include common functions used throughout theme.
  */
 include_once dirname(__FILE__) . '/includes/get.inc';
 
@@ -94,17 +94,52 @@ function uikit_preprocess_html(&$variables) {
     drupal_add_html_head($meta_x_ua_compatible, 'uikit_x_ua_compatible');
   }
 
-  $meta_viewport = array(
-    '#type' => 'html_tag',
-    '#tag' => 'meta',
-    '#attributes' => array(
-      'name' => 'viewport',
-      'content' => 'width=device-width, initial-scale=1',
-    ),
-    '#weight' => -9997,
-  );
+  // Get viewport metadata settings for mobile devices.
+  $device_width_ratio = theme_get_setting('viewport_device_width_ratio');
+  $custom_device_width = theme_get_setting('viewport_custom_width');
+  $initial_scale = theme_get_setting('viewport_initial_scale');
+  $maximum_scale = theme_get_setting('viewport_maximum_scale');
+  $minimum_scale = theme_get_setting('viewport_minimum_scale');
+  $user_scalable = theme_get_setting('viewport_user_scalable');
+  $viewport_array = array();
 
-  drupal_add_html_head($meta_viewport, 'uikit_viewport');
+  if ($device_width_ratio == 'device-width') {
+    $viewport_array['width'] = 'width=device-width';
+  }
+  elseif ($device_width_ratio) {
+    $viewport_array['width'] = 'width=' . $custom_device_width;
+  }
+  if ($initial_scale) {
+    $viewport_array['initial-scale'] = 'initial-scale=' . $initial_scale;
+  }
+  if ($maximum_scale) {
+    $viewport_array['maximum-scale'] = 'maximum-scale=' . $maximum_scale;
+  }
+  if ($minimum_scale) {
+    $viewport_array['minimum-scale'] = 'minimum-scale=' . $minimum_scale;
+  }
+  if ($viewport_array && $user_scalable) {
+    $viewport_array['user-scalable'] = 'user-scalable=yes';
+  }
+  elseif ($viewport_array && !$user_scalable) {
+    $viewport_array['user-scalable'] = 'user-scalable=no';
+  }
+
+  if ($viewport_array) {
+    $viewport_content = implode(', ', $viewport_array);
+
+    $meta_viewport = array(
+      '#type' => 'html_tag',
+      '#tag' => 'meta',
+      '#attributes' => array(
+        'name' => 'viewport',
+        'content' => $viewport_content,
+      ),
+      '#weight' => -9997,
+    );
+
+    drupal_add_html_head($meta_viewport, 'uikit_viewport');
+  }
 }
 
 /**
@@ -113,24 +148,6 @@ function uikit_preprocess_html(&$variables) {
 function uikit_process_html(&$variables) {
   // Convert attribute arrays to an attribute string.
   $variables['html_attributes'] = drupal_attributes($variables['html_attributes_array']);
-}
-
-/**
- * Implements hook_html_head_alter().
- */
-function uikit_html_head_alter(&$head_elements) {
-  if (isset($head_elements['system_meta_content_type'])) {
-    $head_elements['system_meta_content_type']['#attributes'] = array(
-      'charset' => theme_get_setting('meta_charset'),
-    );
-    $head_elements['system_meta_content_type']['#weight'] = -9999;
-  }
-
-  // Some modules, such as the Adminimal Admin menu, add a viewport meta tag.
-  // Remove this so the theme can define the tag.
-  if (isset($head_elements['viewport'])) {
-    unset($head_elements['viewport']);
-  }
 }
 
 /**
@@ -954,6 +971,24 @@ function uikit_element_info_alter(&$type) {
 }
 
 /**
+ * Implements hook_html_head_alter().
+ */
+function uikit_html_head_alter(&$head_elements) {
+  if (isset($head_elements['system_meta_content_type'])) {
+    $head_elements['system_meta_content_type']['#attributes'] = array(
+      'charset' => theme_get_setting('meta_charset'),
+    );
+    $head_elements['system_meta_content_type']['#weight'] = -9999;
+  }
+
+  // Some modules, such as the Adminimal Admin menu, add a viewport meta tag.
+  // Remove this so the theme can define the tag.
+  if (isset($head_elements['viewport'])) {
+    unset($head_elements['viewport']);
+  }
+}
+
+/**
  * Implements hook_js_alter().
  */
 function uikit_js_alter(&$javascript) {
@@ -985,22 +1020,8 @@ function uikit_js_alter(&$javascript) {
 /**
  * Implements hook_form_FORM_ID_alter().
  */
-function uikit_form_system_performance_settings_alter(&$form, &$form_state, $form_id) {
-  $classes = 'uk-form-row';
-  $cache = variable_get('cache', 0);
-
-  if (!$cache) {
-    $classes .= ' js-hide';
-  }
-
-  $prefix = '<div id="page-compression-wrapper" class="' . $classes . '"">';
-  $form['bandwidth_optimization']['page_compression']['#prefix'] = $prefix;
-}
-
-/**
- * Implements hook_form_FORM_ID_alter().
- */
 function uikit_form_user_login_block_alter(&$form, &$form_state, $form_id) {
+  // Add utility classes to the login block links.
   $form['links']['#prefix'] = '<div class="uk-form-row form-item-list">';
   $form['links']['#suffix'] = '</div>';
 }

@@ -325,6 +325,41 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
     '#title' => t('Viewport metadata'),
     '#description' => t('Gives hints about the size of the initial size of the viewport. This pragma is used by several mobile devices only.'),
   );
+  $form['mobile_settings']['mobile_metadata']['meta_viewport']['initial_scale'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Initial scale'),
+    '#description' => t('Gives hints about the size of the initial size of the viewport. This pragma is used by several mobile devices only.'),
+    '#collapsible' => TRUE,
+  );
+  $form['mobile_settings']['mobile_metadata']['meta_viewport']['initial_scale']['viewport_device_width_ratio'] = array(
+    '#type' => 'select',
+    '#title' => t('Device width ratio'),
+    '#description' => t('Defines the ratio between the device width (device-width in portrait mode or device-height in landscape mode) and the viewport size. Literal device width is defined as <code>device-width</code> and is the recommended value. You can also specify a pixel width by selecting <b>Other</b>, such as <code>300</code>.'),
+    '#default_value' => theme_get_setting('viewport_device_width_ratio'),
+    '#options' => array(
+      0 => t('-- Select --'),
+      'device-width' => t('Literal device width (Recommended)'),
+      '1' => t('Other'),
+    ),
+  );
+  $form['mobile_settings']['mobile_metadata']['meta_viewport']['initial_scale']['viewport_custom_width'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Custom device width'),
+    '#description' => t('Defines the width, in pixels, of the viewport. Do not add <b>px</b>, the value must be a non-decimal integer number.'),
+    '#default_value' => theme_get_setting('viewport_custom_width'),
+    '#attributes' => array(
+      'size' => 15,
+    ),
+    '#states' => array(
+      'visible' => array(
+        ':input[name="viewport_device_width_ratio"]' => array('value' => '1'),
+      ),
+      'required' => array(
+        ':input[name="viewport_device_width_ratio"]' => array('value' => '1'),
+      ),
+    ),
+    '#element_validate' => array('_uikit_viewport_custom_width_validate'),
+  );
   $form['mobile_settings']['mobile_metadata']['meta_viewport']['viewport_initial_scale'] = array(
     '#type' => 'select',
     '#title' => t('initial-scale'),
@@ -349,12 +384,11 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
   $form['mobile_settings']['mobile_metadata']['meta_viewport']['viewport_user_scalable'] = array(
     '#type' => 'select',
     '#title' => t('user-scalable'),
-    '#description' => t('If set to no, the user is not able to zoom in the webpage. Default value is yes.'),
+    '#description' => t('If set to no, the user is not able to zoom in the webpage. Default value is <b>Yes</b>.'),
     '#default_value' => theme_get_setting('viewport_user_scalable'),
     '#options' => array(
-      -1 => '-- Select --',
-      1 => 'Yes',
-      0 => 'No',
+      1 => t('Yes'),
+      0 => t('No'),
     ),
   );
 
@@ -721,4 +755,23 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
   $form['logo']['#group'] = 'basic_settings';
   $form['logo']['#attributes']['class'] = array();
   $form['favicon']['#group'] = 'basic_settings';
+}
+
+/**
+ * Callback function to validate the viewport initial scale element.
+ *
+ * The default value for the initial scale is turned off, but it is recommended
+ * to use the literal device width. If the user chooses to define a pixel width,
+ * the value for the initial scale needs to be validated to ensure only an
+ * integer is entered.
+ */
+function _uikit_viewport_custom_width_validate($element, &$form_state) {
+  $device_width_ratio = $form_state['values']['viewport_device_width_ratio'] == 1;
+
+  if ($device_width_ratio && empty($element['#value'])) {
+    form_set_error($element['#name'], t('<b>Other</b> was selected for <b>Device width ratio</b>, but no value was given for <b>Custom device width</b>. Please enter an integer value in <b>Custom device width</b> under <b>Mobile settings</b> and save the configuration.'));
+  }
+  elseif ($device_width_ratio && !empty($element['#value']) && !ctype_digit($element['#value'])) {
+    form_set_error($element['#name'], t('<b>Custom device width</b> can only contain an integer number, without a decimal point. Please check the value for <b>Custom device width</b> under <b>Mobile settings</b> and save the configuration.'));
+  }
 }
