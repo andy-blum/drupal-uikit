@@ -97,6 +97,8 @@ function uikit_preprocess_html(&$variables) {
   // Get viewport metadata settings for mobile devices.
   $device_width_ratio = theme_get_setting('viewport_device_width_ratio');
   $custom_device_width = theme_get_setting('viewport_custom_width');
+  $device_height_ratio = theme_get_setting('viewport_device_height_ratio');
+  $custom_device_height = theme_get_setting('viewport_custom_height');
   $initial_scale = theme_get_setting('viewport_initial_scale');
   $maximum_scale = theme_get_setting('viewport_maximum_scale');
   $minimum_scale = theme_get_setting('viewport_minimum_scale');
@@ -109,6 +111,9 @@ function uikit_preprocess_html(&$variables) {
   elseif ($device_width_ratio) {
     $viewport_array['width'] = 'width=' . $custom_device_width;
   }
+  if ($device_height_ratio == 1) {
+    $viewport_array['height'] = 'height=' . $custom_device_height;
+  }
   if ($initial_scale) {
     $viewport_array['initial-scale'] = 'initial-scale=' . $initial_scale;
   }
@@ -118,10 +123,7 @@ function uikit_preprocess_html(&$variables) {
   if ($minimum_scale) {
     $viewport_array['minimum-scale'] = 'minimum-scale=' . $minimum_scale;
   }
-  if ($viewport_array && $user_scalable) {
-    $viewport_array['user-scalable'] = 'user-scalable=yes';
-  }
-  elseif ($viewport_array && !$user_scalable) {
+  if ($viewport_array && !$user_scalable) {
     $viewport_array['user-scalable'] = 'user-scalable=no';
   }
 

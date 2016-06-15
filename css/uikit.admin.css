@@ -156,6 +156,10 @@
 #edit-mobile-layout .uk-layout-sidebars-vertical .uk-layout-sidebar-right {
   left: 2px;
 }
+#edit-device-width .form-type-textfield input[type=text],
+#edit-device-height .form-type-textfield input[type=text] {
+  max-width: 150px;
+}
 /**
  * UIkit subnav styles.
  */
