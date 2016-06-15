@@ -743,6 +743,17 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
     '#default_value' => theme_get_setting('secondary_tasks_style'),
     '#options' => $subnav_options,
   );
+  $form['navigations']['breadcrumb'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Breadcrumbs'),
+    '#description' => t('Configure settings for breadcrumb navigation.'),
+  );
+  $form['navigations']['breadcrumb']['display_breadcrumbs'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Display breadcrumbs'),
+    '#description' => t('Check this box to display the breadcrumb.'),
+    '#default_value' => theme_get_setting('display_breadcrumbs'),
+  );
 
   // Basic elements.
   $form['elements'] = array(

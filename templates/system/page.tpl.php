@@ -137,7 +137,7 @@
         <h1 id="page-title" class="uk-article-title"><?php print $title; ?></h1><?php endif; ?>
       <?php print render($title_suffix); ?>
 
-      <?php if ($breadcrumb): ?>
+      <?php if ($breadcrumb && $display_breadcrumb): ?>
         <div id="breadcrumbs">
           <?php print $breadcrumb; ?>
         </div>

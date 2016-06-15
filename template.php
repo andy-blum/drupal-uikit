@@ -519,6 +519,9 @@ function uikit_preprocess_page(&$variables) {
   $variables['offcanvas_main'] = $offcanvas_main;
   $variables['offcanvas_secondary'] = $offcanvas_secondary;
 
+  // Create variable for breadcrumb display setting.
+  $variables['display_breadcrumb'] = theme_get_setting('display_breadcrumbs');
+
   // Get theme specific jQuery version.
   $jquery_version = theme_get_setting('jquery_update_jquery_version');
 
@@ -552,6 +555,7 @@ function uikit_preprocess_page(&$variables) {
     ));
     drupal_set_message($message, 'error', FALSE);
   }
+
 }
 
 /**
