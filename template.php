@@ -620,7 +620,7 @@ function uikit_preprocess_region(&$variables) {
 }
 
 /**
- * Implements template_process_region().
+ * Implements hook_process_HOOK() for region.tpl.php.
  */
 function uikit_process_region(&$variables) {
   $attributes = $variables['wrapper_attributes_array'];

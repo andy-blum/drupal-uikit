@@ -13,7 +13,8 @@ $tags = $variables['tags'];
 $element = $variables['element'];
 $parameters = $variables['parameters'];
 $quantity = $variables['quantity'];
-global $pager_page_array, $pager_total;
+global $pager_page_array;
+global $pager_total;
 
 // Middle is used to "center" pages around the current page.
 $pager_middle = ceil($quantity / 2);
