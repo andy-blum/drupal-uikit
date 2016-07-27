@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Default theme implementation to display a block.
+ * UIkit's theme implementation to display the sidebar_first block.
  *
  * Available variables:
  * - $block->subject: Block title.
@@ -40,8 +40,9 @@
  * @see template_preprocess()
  * @see template_preprocess_block()
  * @see template_process()
+ * @see uikit_preprocess_block()
  *
- * @ingroup themeable
+ * @ingroup uikit_themeable
  */
 ?>
 <?php if ($content): ?>

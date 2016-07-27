@@ -3,6 +3,85 @@
 /**
  * @file
  * Returns HTML for a table.
+ *
+ * Available variables:
+ * - $variables['header']: An array containing the table headers. Each element
+ *   of the array can be either a localized string or an associative array with
+ *   the following keys:
+ *   - "data": The localized title of the table column.
+ *   - "field": The database field represented in the table column (required if
+ *     user is to be able to sort on this column).
+ *   - "sort": A default sort order for this column ("asc" or "desc"). Only one
+ *     column should be given a default sort order because table sorting only
+ *     applies to one column at a time.
+ *   - Any HTML attributes, such as "colspan", to apply to the column header
+ *     cell.
+ * - $variables['rows']: An array of table rows. Every row is an array of cells,
+ *   or an associative array with the following keys:
+ *   - "data": an array of cells
+ *   - Any HTML attributes, such as "class", to apply to the table row.
+ *   - "no_striping": a boolean indicating that the row should receive no 'even
+ *     / odd' styling. Defaults to FALSE.
+ *   Each cell can be either a string or an associative array with the following
+ *   keys:
+ *   - "data": The string to display in the table cell.
+ *   - "header": Indicates this cell is a header.
+ *   - Any HTML attributes, such as "colspan", to apply to the table cell.
+ *   Here's an example for $rows:
+ *   @code
+ *   $rows = array(
+ *     // Simple row
+ *     array(
+ *       'Cell 1', 'Cell 2', 'Cell 3'
+ *     ),
+ *     // Row with attributes on the row and some of its cells.
+ *     array(
+ *       'data' => array('Cell 1', array('data' => 'Cell 2', 'colspan' => 2)), 'class' => array('funky')
+ *     )
+ *   );
+ *   @endcode
+ * - $variables['attributes']: An array of HTML attributes to apply to the table
+ *   tag.
+ * - $variables['caption']: A localized string to use for the <caption> tag.
+ * - $variables['colgroups']: An array of column groups. Each element of the
+ *   array can be either:
+ *   - An array of columns, each of which is an associative array of HTML
+ *     attributes applied to the COL element.
+ *   - An array of attributes applied to the COLGROUP element, which must
+ *     include a "data" attribute. To add attributes to COL elements, set the
+ *     "data" attribute with an array of columns, each of which is an
+ *     associative array of HTML attributes.
+ *   Here's an example for $colgroup:
+ *   @code
+ *   $colgroup = array(
+ *     // COLGROUP with one COL element.
+ *     array(
+ *       array(
+ *         'class' => array('funky'), // Attribute for the COL element.
+ *       ),
+ *     ),
+ *     // Colgroup with attributes and inner COL elements.
+ *     array(
+ *       'data' => array(
+ *         array(
+ *           'class' => array('funky'), // Attribute for the COL element.
+ *         ),
+ *       ),
+ *       'class' => array('jazzy'), // Attribute for the COLGROUP element.
+ *     ),
+ *   );
+ *   @endcode
+ *   These optional tags are used to group and set properties on columns within
+ *   a table. For example, one may easily group three columns and apply same
+ *   background style to all.
+ * - $variables['sticky']: Use a "sticky" table header.
+ * - $variables['empty']: The message to display in an extra row if table does
+ *   not have any rows.
+ *
+ * @see theme_table()
+ * @see uikit_preprocess_table()
+ *
+ * @ingroup uikit_themeable
  */
 
 $header = $variables['header'];

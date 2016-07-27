@@ -2,7 +2,18 @@
 
 /**
  * @file
- * Returns HTML for a fieldset form element and its children.
+ * Returns HTML for a grouped fieldset form element and its children.
+ *
+ * Available variables:
+ * - $variables['element']: An associative array containing the properties of
+ *   the element. Properties used: #attributes, #children, #collapsed,
+ *   #collapsible, #description, #id, #title, #value.
+ *
+ * @see uikit_preprocess_fieldset()
+ * @see theme_fieldset()
+ * @see fieldset.tpl.php
+ *
+ * @ingroup uikit_themeable
  */
 
 $element = $variables['element'];

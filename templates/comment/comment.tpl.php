@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Default theme implementation for comments.
+ * UIkit's theme implementation for comments.
  *
  * Available variables:
  * - $author: Comment author. Can be link or plain text.
@@ -57,8 +57,9 @@
  * @see template_preprocess_comment()
  * @see template_process()
  * @see theme_comment()
+ * @see uikit_preprocess_comment()
  *
- * @ingroup themeable
+ * @ingroup uikit_themeable
  */
 ?>
 <article class="<?php print $classes; ?>"<?php print $attributes; ?>>

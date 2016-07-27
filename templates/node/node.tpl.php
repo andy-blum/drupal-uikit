@@ -76,8 +76,9 @@
  * @see template_preprocess()
  * @see template_preprocess_node()
  * @see template_process()
+ * @see uikit_preprocess_node()
  *
- * @ingroup themeable
+ * @ingroup uikit_themeable
  */
 ?>
 <article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?>"<?php print $attributes; ?>>

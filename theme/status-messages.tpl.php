@@ -3,6 +3,14 @@
 /**
  * @file
  * Returns HTML for status and/or error messages, grouped by type.
+ *
+ * Available variables:
+ * - $variables['display']: (optional) Set to 'status' or 'error' to display
+ *   only messages of that type.
+ *
+ * @see theme_status_messages()
+ *
+ * @ingroup uikit_themeable
  */
 
 $display = $variables['display'];

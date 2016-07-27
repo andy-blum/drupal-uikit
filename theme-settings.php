@@ -184,13 +184,13 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
 
   $libraries_enabled = !module_exists('libraries') ? '<span style="color: red">&#x2718;</span> ' : '<span style="color: green">&#x2714;</span> ';
   $root = DRUPAL_ROOT;
-  $profile = file_exists($root . drupal_get_path('profile', drupal_get_profile())) ? '<span style="color: green">&#x2714;</span>' : '<span style="color: orange">&#x2718;</span>';
+  $profile = file_exists($root . '/' . drupal_get_path('profile', drupal_get_profile())) ? '<span style="color: green">&#x2714;</span>' : '<span style="color: orange">&#x2718;</span>';
   $all_sites = file_exists($root . '/sites/all/libraries') ? '<span style="color: green">&#x2714;</span>' : '<span style="color: orange">&#x2718;</span>';
   $single_site = file_exists($root . conf_path() . '/libraries') ? '<span style="color: green">&#x2714;</span>' : '<span style="color: orange">&#x2718;</span>';
   $uikit_library_dir = FALSE;
 
-  if (file_exists($root . drupal_get_path('profile', drupal_get_profile()) . '/libraries/uikit')) {
-    $uikit_library_dir = $root . drupal_get_path('profile', drupal_get_profile()) . '/libraries/uikit';
+  if (file_exists($root . '/' . drupal_get_path('profile', drupal_get_profile()) . '/libraries/uikit')) {
+    $uikit_library_dir = $root . '/' . drupal_get_path('profile', drupal_get_profile()) . '/libraries/uikit';
   }
   elseif (file_exists($root . '/sites/all/libraries/uikit')) {
     $uikit_library_dir = $root . '/sites/all/libraries/uikit';

@@ -39,8 +39,10 @@
  * @see template_preprocess()
  * @see template_preprocess_html()
  * @see template_process()
+ * @see uikit_preprocess_html()
+ * @see uikit_process_html()
  *
- * @ingroup themeable
+ * @ingroup uikit_themeable
  */
 ?>
 <!DOCTYPE html>

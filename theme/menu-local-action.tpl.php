@@ -3,6 +3,15 @@
 /**
  * @file
  * Returns HTML for a single local action link.
+ *
+ * Available variables:
+ * $variables['element']: A render element containing:
+ *   - #link: A menu link array with 'title', 'href', and 'localized_options'
+ *     keys.
+ *
+ * @see theme_menu_local_action()
+ *
+ * @ingroup uikit_themeable
  */
 
 $link = $variables['element']['#link'];

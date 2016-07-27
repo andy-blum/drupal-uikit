@@ -3,6 +3,16 @@
 /**
  * @file
  * Returns HTML for a single local task link.
+ *
+ * Available variables:
+ * $variables['element']: A render element containing:
+ *   - #link: A menu link array with 'title', 'href', and 'localized_options'
+ *     keys.
+ *   - #active: A boolean indicating whether the local task is active.
+ *
+ * @see theme_menu_local_task()
+ *
+ * @ingroup uikit_themeable
  */
 
 $link = $variables['element']['#link'];

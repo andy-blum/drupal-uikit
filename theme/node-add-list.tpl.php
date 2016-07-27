@@ -3,6 +3,13 @@
 /**
  * @file
  * Returns HTML for a list of available node types for node creation.
+ *
+ * Available variables:
+ * - $variables['content']: An array of content types.
+ *
+ * @see theme_node_add_list()
+ *
+ * @ingroup uikit_themeable
  */
 
 $content = $variables['content'];

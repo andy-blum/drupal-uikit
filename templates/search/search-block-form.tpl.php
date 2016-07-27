@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Displays the search form block.
+ * UIkit's implementation to display the search form block.
  *
  * Available variables:
  * - $search_form: The complete search form ready for print.
@@ -27,6 +27,8 @@
  * @endcode
  *
  * @see template_preprocess_search_block_form()
+ *
+ * @ingroup uikit_themeable
  */
 ?>
 <fieldset>

@@ -3,6 +3,17 @@
 /**
  * @file
  * Returns HTML for primary and secondary local tasks.
+ *
+ * Available variables:
+ * - $variables['primary']: (optional) An array of local tasks (tabs).
+ * - $variables['secondary']: (optional) An array of local tasks (tabs).
+ *
+ * @see menu_local_tasks()
+ * @see uikit_preprocess_menu_local_tasks()
+ * @see uikit_process_menu_local_tasks()
+ * @see theme_menu_local_tasks()
+ *
+ * @ingroup uikit_themeable
  */
 
 $output = '';

@@ -4,9 +4,17 @@
  * @file
  * Returns HTML for a query pager.
  *
- * Menu callbacks that display paged query results should call theme('pager') to
- * retrieve a pager control so that users can view other results. Format a list
- * of nearby pages with additional query results.
+ * Available variables:
+ * - $variables['tags']: An array of labels for the controls in the pager.
+ * - $variables['element']: An optional integer to distinguish between multiple
+ *   pagers on one page.
+ * - $variables['parameters']: An associative array of query string parameters
+ *   to append to the pager links.
+ * - $variables['quantity']: The number of pages in the list.
+ *
+ * @see theme_pager()
+ *
+ * @ingroup uikit_themeable
  */
 
 $tags = $variables['tags'];

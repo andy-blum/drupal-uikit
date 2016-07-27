@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Default theme implementation to provide an HTML container for comments.
+ * UIkit's theme implementation to provide an HTML container for comments.
  *
  * Available variables:
  * - $content: The array of content-related elements for the node. Use
@@ -33,7 +33,7 @@
  *
  * @see template_preprocess_comment_wrapper()
  *
- * @ingroup themeable
+ * @ingroup uikit_themeable
  */
 ?>
 <div id="comments" class="<?php print $classes; ?>"<?php print $attributes; ?>>

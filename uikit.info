@@ -4,15 +4,15 @@ core = 7.x
 
 stylesheets[all][] = css/overrides.css
 
-regions[header]         = 'Page heading'
-regions[highlighted]    = 'Highlighted'
-regions[help]           = 'Help'
-regions[content]        = 'Content'
-regions[sidebar_first]  = 'Sidebar first'
+regions[header] = 'Page heading'
+regions[highlighted] = 'Highlighted'
+regions[help] = 'Help'
+regions[content] = 'Content'
+regions[sidebar_first] = 'Sidebar first'
 regions[sidebar_second] = 'Sidebar second'
-regions[footer]         = 'Footer'
+regions[footer] = 'Footer'
 
-settings[basic_style] = 0
+settings[base_style] = 0
 settings[meta_charset] = 'utf-8'
 settings[x_ua_compatible] = 0
 settings[viewport_device_width_ratio] = 'device-width'

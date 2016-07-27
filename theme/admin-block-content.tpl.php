@@ -3,6 +3,16 @@
 /**
  * @file
  * Returns HTML for the content of an administrative block.
+ *
+ * Available variables:
+ * - $variables['content']: An array containing information about the block.
+ *   Each element of the array represents an administrative menu item, and must
+ *   at least contain the keys 'title', 'href', and 'localized_options', which
+ *   are passed to l(). A 'description' key may also be provided.
+ *
+ * @see theme_admin_block_content()
+ *
+ * @ingroup uikit_themeable
  */
 
 $content = $variables['content'];

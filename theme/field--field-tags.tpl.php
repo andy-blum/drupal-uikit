@@ -3,6 +3,28 @@
 /**
  * @file
  * Returns HTML for a tags field.
+ *
+ * Available variables:
+ * - $variables['label_hidden']: A boolean indicating to show or hide the field
+ *   label.
+ * - $variables['title_attributes']: A string containing the attributes for the
+ *   title.
+ * - $variables['label']: The label for the field.
+ * - $variables['content_attributes']: A string containing the attributes for
+ *   the content's div.
+ * - $variables['items']: An array of field items.
+ * - $variables['item_attributes']: An array of attributes for each item.
+ * - $variables['classes']: A string containing the classes for the wrapping
+ *   div.
+ * - $variables['attributes']: A string containing the attributes for the
+ *   wrapping div.
+ *
+ * @see template_preprocess_field()
+ * @see template_process_field()
+ * @see uikit_preprocess_field()
+ * @see field.tpl.php
+ *
+ * @ingroup uikit_themeable
  */
 
 $output = '';

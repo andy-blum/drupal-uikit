@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Default theme implementation to navigate books.
+ * UIkit's theme implementation to navigate books.
  *
  * Presented under nodes that are a part of book outlines.
  *
@@ -29,7 +29,7 @@
  *
  * @see template_preprocess_book_navigation()
  *
- * @ingroup themeable
+ * @ingroup uikit_themeable
  */
 ?>
 <?php if ($tree || $has_links): ?>

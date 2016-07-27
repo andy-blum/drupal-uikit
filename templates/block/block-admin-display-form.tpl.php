@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Default theme implementation to configure blocks.
+ * UIkit's theme implementation to display the configure blocks form.
  *
  * Available variables:
  * - $block_regions: An array of regions. Keyed by name with the title as value.
@@ -22,7 +22,7 @@
  * @see template_preprocess_block_admin_display_form()
  * @see theme_block_admin_display()
  *
- * @ingroup themeable
+ * @ingroup uikit_themeable
  */
 ?>
 <?php

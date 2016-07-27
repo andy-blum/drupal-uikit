@@ -68,9 +68,11 @@
  * @see template_preprocess()
  * @see template_preprocess_page()
  * @see template_process()
+ * @see uikit_preprocess_page()
+ * @see uikit_process_page()
  * @see html.tpl.php
  *
- * @ingroup themeable
+ * @ingroup uikit_themeable
  */
 ?>
 <header<?php print $header_attributes; ?>>

@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Default theme implementation to display a region.
+ * UIkit's theme implementation to display a region.
  *
  * Available variables:
  * - $content: The content for this region, typically blocks.
@@ -27,8 +27,10 @@
  * @see template_preprocess()
  * @see template_preprocess_region()
  * @see template_process()
+ * @see uikit_preprocess_region()
+ * @see uikit_process_region()
  *
- * @ingroup themeable
+ * @ingroup uikit_themeable
  */
 ?>
 <?php if ($content): ?>

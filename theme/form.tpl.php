@@ -3,6 +3,15 @@
 /**
  * @file
  * Returns HTML for a form.
+ *
+ * Available variables:
+ * - $variables['element']: An associative array containing the properties of
+ *   the element. Properties used: #action, #method, #attributes, #children.
+ *
+ * @see uikit_preprocess_form()
+ * @see theme_form()
+ *
+ * @ingroup uikit_themeable
  */
 
 $element = $variables['element'];

@@ -3,6 +3,30 @@
 /**
  * @file
  * Returns HTML for a set of filter tips.
+ *
+ * Available variables:
+ * - $variables['tips']: An array containing descriptions and a CSS ID in the
+ *   form of 'module-name/filter-id' (only used when $long is TRUE) for each
+ *   filter in one or more text formats. Example:
+ *   @code
+ *     array(
+ *       'Full HTML' => array(
+ *         0 => array(
+ *           'tip' => 'Web page addresses and e-mail addresses turn into links automatically.',
+ *           'id' => 'filter/2',
+ *         ),
+ *       ),
+ *     );
+ *   @endcode
+ * - $variables['long']: (optional) Whether the passed-in filter tips contain
+ *   extended explanations, i.e. intended to be output on the path 'filter/tips'
+ *   (TRUE), or are in a short format, i.e. suitable to be displayed below a
+ *   form element. Defaults to FALSE.
+ *
+ * @see _filter_tips()
+ * @see theme_filter_tips()
+ *
+ * @ingroup uikit_themeable
  */
 
 $tips = $variables['tips'];

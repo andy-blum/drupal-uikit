@@ -3,6 +3,15 @@
 /**
  * @file
  * Returns HTML for a textfield form element.
+ *
+ * Available variables:
+ * - $variables['element']: An associative array containing the properties of
+ *   the element. Properties used: #title, #value, #description, #size,
+ *   #maxlength, #required, #attributes, #autocomplete_path.
+ *
+ * @see theme_textfield()
+ *
+ * @ingroup uikit_themeable
  */
 
 $element = $variables['element'];

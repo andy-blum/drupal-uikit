@@ -3,6 +3,13 @@
 /**
  * @file
  * Returns HTML for a breadcrumb trail.
+ *
+ * Available variables:
+ * - $variables['breadcrumb']: An array containing the breadcrumb links.
+ *
+ * @see theme_breadcrumb()
+ *
+ * @ingroup uikit_themeable
  */
 
 $breadcrumb = $variables['breadcrumb'];

@@ -3,6 +3,14 @@
 /**
  * @file
  * Returns HTML for a form element label and required marker.
+ *
+ * Available variables:
+ * - $variables['element']: An associative array containing the properties of
+ *   the element. Properties used: #required, #title, #id, #value, #description.
+ *
+ * @see theme_form_element_label()
+ *
+ * @ingroup uikit_themeable
  */
 
 $element = $variables['element'];
