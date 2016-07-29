@@ -29,7 +29,7 @@
  * Here are some topics to help you get started developing with UIkit for
  * Drupal.
  * - @link getting_started Getting started with UIkit @endlink
- * - @link uikit_themeable UIkit's theme implementations @endlink
  * - @link theme_settings UIkit's theme settings @endlink
  * - @link sub_theme Creating a UIkit sub-theme @endlink
+ * - @link uikit_themeable UIkit's theme implementations @endlink
  */

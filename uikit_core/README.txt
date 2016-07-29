@@ -49,15 +49,17 @@ INSTALLATION
    Drupal module.
 
  * Download the UIkit framework from
-   http://getuikit.com/docs/documentation_get-started.html.
+   https://github.com/uikit/uikit/releases/tag/v2.26.4. We current support
+   version 2.26.4 and lower. Future updates will include changes from the
+   latest version of the UIkit framework.
 
- * Create a directory named "uikit_library" in your site's libraries directory.
-   Extract all folders from the UIkit framework zip file into the uikit_library
+ * Create a directory named "uikit" in your site's libraries directory.
+   Extract all folders from the UIkit framework zip file into the uikit
    directory you created. See: https://www.drupal.org/node/1440066
    Your libraries directory should look like this:
-     libraries/uikit_library/css/...
-     libraries/uikit_library/fonts/...
-     libraries/uikit_library/js/...
+     libraries/uikit/css/...
+     libraries/uikit/fonts/...
+     libraries/uikit/js/...
 
 
 CONFIGURATION

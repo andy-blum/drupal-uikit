@@ -143,8 +143,44 @@
  * [yourthemename].info file.
  *
  * Once you have finished implementing UIkit into your Drupal site, take a look
- * at the @link uikit_core UIkit core @endlink and get an overview of what UIkit
- * offers.
+ * at the @link theme_settings UIkit theme settings @endlink to configure UIkit.
+ * @}
+ */
+
+/**
+ * @defgroup theme_settings UIkit theme settings
+ * @{
+ * @lead settings Customizing UIkit from the Drupal administration back-end.
+ * UIkit comes with an extensive variety of theme settings to configure almost
+ * all themeable aspects of your Drupal site. This topic provides a brief
+ * overview of these theme settings.
+ *
+ * @section theme_styles Theme styles
+ *
+ * @section mobile_settings Mobile settings
+ *
+ * @section layout Layout
+ *
+ * @section navigations Navigations
+ *
+ * @section elements Elements
+ *
+ * @section common Common
+ *
+ * @section javascript Javascript
+ *
+ * @section components Components
+ * @}
+ */
+
+/**
+ * @defgroup sub_theme Creating a UIkit sub-theme
+ * @{
+ * @lead subtheme Create a custom theme by inheriting the UIkit base theme.
+ * Creating a custom theme utilizing UIkit is just like creating any other
+ * theme. The only difference with creating a UIkit sub-theme is your custom
+ * theme will automatically inherit all UIkit offers without having to reinvent
+ * the wheel.
  * @}
  */
 
@@ -170,26 +206,5 @@
  * The templates folder is further divided into the modules which provided the
  * default template. This structure will make it easier to find a template file
  * during development of a sub-theme.
- * @}
- */
-
-/**
- * @defgroup theme_settings UIkit theme settings
- * @{
- * @lead settings Customizing UIkit from the Drupal administration back-end.
- * UIkit comes with an extensive variety of theme settings to configure almost
- * all themeable aspects of your Drupal site. This topic provides a brief
- * overview of these theme settings.
- * @}
- */
-
-/**
- * @defgroup sub_theme Creating a UIkit sub-theme
- * @{
- * @lead subtheme Create a custom theme by inheriting the UIkit base theme.
- * Creating a custom theme utilizing UIkit is just like creating any other
- * theme. The only difference with creating a UIkit sub-theme is your custom
- * theme will automatically inherit all UIkit offers without having to reinvent
- * the wheel.
  * @}
  */
