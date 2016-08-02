@@ -53,6 +53,7 @@ function uikit_libraries_info() {
  * Implements template_preprocess_html().
  */
 function uikit_preprocess_html(&$variables) {
+  global $theme_key;
   // Create an HTML5 doctype variable.
   $variables['doctype'] = '<!DOCTYPE html>' . "\n";
 
@@ -80,13 +81,13 @@ function uikit_preprocess_html(&$variables) {
     $variables['rdf_namespaces'] = ' prefix="' . implode('  ', $rdf_namespaces) . '"';
   }
 
-  if (theme_get_setting('x_ua_compatible')) {
+  if (theme_get_setting('x_ua_compatible', $theme_key)) {
     $meta_x_ua_compatible = array(
       '#type' => 'html_tag',
       '#tag' => 'meta',
       '#attributes' => array(
         'http-equiv' => 'x-ua-compatible',
-        'content' => 'IE=' . theme_get_setting('x_ua_compatible'),
+        'content' => 'IE=' . theme_get_setting('x_ua_compatible', $theme_key),
       ),
       '#weight' => -9998,
     );
@@ -95,14 +96,14 @@ function uikit_preprocess_html(&$variables) {
   }
 
   // Get viewport metadata settings for mobile devices.
-  $device_width_ratio = theme_get_setting('viewport_device_width_ratio');
-  $custom_device_width = theme_get_setting('viewport_custom_width');
-  $device_height_ratio = theme_get_setting('viewport_device_height_ratio');
-  $custom_device_height = theme_get_setting('viewport_custom_height');
-  $initial_scale = theme_get_setting('viewport_initial_scale');
-  $maximum_scale = theme_get_setting('viewport_maximum_scale');
-  $minimum_scale = theme_get_setting('viewport_minimum_scale');
-  $user_scalable = theme_get_setting('viewport_user_scalable');
+  $device_width_ratio = theme_get_setting('viewport_device_width_ratio', $theme_key);
+  $custom_device_width = theme_get_setting('viewport_custom_width', $theme_key);
+  $device_height_ratio = theme_get_setting('viewport_device_height_ratio', $theme_key);
+  $custom_device_height = theme_get_setting('viewport_custom_height', $theme_key);
+  $initial_scale = theme_get_setting('viewport_initial_scale', $theme_key);
+  $maximum_scale = theme_get_setting('viewport_maximum_scale', $theme_key);
+  $minimum_scale = theme_get_setting('viewport_minimum_scale', $theme_key);
+  $user_scalable = theme_get_setting('viewport_user_scalable', $theme_key);
   $viewport_array = array();
 
   if ($device_width_ratio == 'device-width') {
@@ -156,6 +157,7 @@ function uikit_process_html(&$variables) {
  * Implements template_preprocess_page().
  */
 function uikit_preprocess_page(&$variables) {
+  global $theme_key;
   // Checks if the uikit library can be loaded.
   if (_uikit_library_load()) {
     libraries_load('uikit');
@@ -163,9 +165,9 @@ function uikit_preprocess_page(&$variables) {
 
   $sidebar_first = $variables['page']['sidebar_first'];
   $sidebar_second = $variables['page']['sidebar_second'];
-  $standard_layout = theme_get_setting('standard_sidebar_positions');
-  $tablet_layout = theme_get_setting('tablet_sidebar_positions');
-  $mobile_layout = theme_get_setting('mobile_sidebar_positions');
+  $standard_layout = theme_get_setting('standard_sidebar_positions', $theme_key);
+  $tablet_layout = theme_get_setting('tablet_sidebar_positions', $theme_key);
+  $mobile_layout = theme_get_setting('mobile_sidebar_positions', $theme_key);
 
   $standard_grail = $standard_layout === 'holy-grail';
   $standard_left = $standard_layout === 'sidebars-left';
@@ -182,14 +184,14 @@ function uikit_preprocess_page(&$variables) {
 
   // Assign page container attributes.
   $page_container_attributes['id'] = 'page';
-  if (theme_get_setting('page_container')) {
+  if (theme_get_setting('page_container', $theme_key)) {
     $page_container_attributes['class'][] = 'uk-container';
   }
-  if (theme_get_setting('page_centering')) {
+  if (theme_get_setting('page_centering', $theme_key)) {
     $page_container_attributes['class'][] = 'uk-container-center';
   }
-  if (theme_get_setting('page_margin')) {
-    $page_container_attributes['class'][] = theme_get_setting('page_margin');
+  if (theme_get_setting('page_margin', $theme_key)) {
+    $page_container_attributes['class'][] = theme_get_setting('page_margin', $theme_key);
   }
   $variables['page_container_attributes_array'] = $page_container_attributes;
 
@@ -360,10 +362,10 @@ function uikit_preprocess_page(&$variables) {
   $variables['header_attributes_array'] = array(
     'id' => 'page-header',
   );
-  if (theme_get_setting('navbar_container')) {
+  if (theme_get_setting('navbar_container', $theme_key)) {
     $variables['header_attributes_array']['class'][] = 'uk-container';
   }
-  if (theme_get_setting('navbar_centering')) {
+  if (theme_get_setting('navbar_centering', $theme_key)) {
     $variables['header_attributes_array']['class'][] = 'uk-container-center';
   }
 
@@ -373,12 +375,12 @@ function uikit_preprocess_page(&$variables) {
     'class' => array('uk-navbar'),
   );
 
-  if (theme_get_setting('navbar_attached')) {
+  if (theme_get_setting('navbar_attached', $theme_key)) {
     $variables['navbar_attributes_array']['class'][] = 'uk-navbar-attached';
   }
 
-  if (theme_get_setting('navbar_margin_top')) {
-    switch (theme_get_setting('navbar_margin_top')) {
+  if (theme_get_setting('navbar_margin_top', $theme_key)) {
+    switch (theme_get_setting('navbar_margin_top', $theme_key)) {
       case 1:
         $variables['navbar_attributes_array']['class'][] = 'uk-margin-top';
         break;
@@ -393,8 +395,8 @@ function uikit_preprocess_page(&$variables) {
     }
   }
 
-  if (theme_get_setting('navbar_margin_bottom')) {
-    switch (theme_get_setting('navbar_margin_bottom')) {
+  if (theme_get_setting('navbar_margin_bottom', $theme_key)) {
+    switch (theme_get_setting('navbar_margin_bottom', $theme_key)) {
       case 1:
         $variables['navbar_attributes_array']['class'][] = 'uk-margin-bottom';
         break;
@@ -418,7 +420,7 @@ function uikit_preprocess_page(&$variables) {
   $offcanvas_secondary = '';
 
   if ($variables['main_menu']) {
-    if (theme_get_setting('main_menu_alignment')) {
+    if (theme_get_setting('main_menu_alignment', $theme_key)) {
       $navbar_main .= '<div id="navbar-flip--main-menu" class="uk-navbar-flip">';
     }
     $navbar_main .= theme('links__system_main_menu', array(
@@ -433,7 +435,7 @@ function uikit_preprocess_page(&$variables) {
         'class' => 'uk-hidden',
       ),
     ));
-    if (theme_get_setting('main_menu_alignment')) {
+    if (theme_get_setting('main_menu_alignment', $theme_key)) {
       $navbar_main .= '</div>';
     }
 
@@ -452,7 +454,7 @@ function uikit_preprocess_page(&$variables) {
   }
 
   if ($variables['secondary_menu']) {
-    if (theme_get_setting('secondary_menu_alignment')) {
+    if (theme_get_setting('secondary_menu_alignment', $theme_key)) {
       $navbar_secondary .= '<div id="navbar-flip--secondary-menu" class="uk-navbar-flip">';
     }
     $navbar_secondary .= theme('links__system_secondary_menu', array(
@@ -467,7 +469,7 @@ function uikit_preprocess_page(&$variables) {
         'class' => 'uk-hidden',
       ),
     ));
-    if (theme_get_setting('secondary_menu_alignment')) {
+    if (theme_get_setting('secondary_menu_alignment', $theme_key)) {
       $navbar_secondary .= '</div>';
     }
     $offcanvas_secondary = theme('links__system_secondary_menu__offcanvas', array(
@@ -489,10 +491,10 @@ function uikit_preprocess_page(&$variables) {
   foreach ($menus as $menu_name => $menu_title) {
     $menu_links = str_replace('-', '_', $menu_name);
 
-    if (theme_get_setting($menu_name . '_in_navbar')) {
+    if (theme_get_setting($menu_name . '_in_navbar', $theme_key)) {
       $navbar_menu = menu_navigation_links($menu_name);
 
-      if (theme_get_setting($menu_links . '_additional_alignment')) {
+      if (theme_get_setting($menu_links . '_additional_alignment', $theme_key)) {
         $navbar_menus .= "<div id=\"navbar-flip--$menu_name\" class=\"uk-navbar-flip\">";
       }
       $navbar_menus .= theme('links__' . $menu_links, array(
@@ -507,7 +509,7 @@ function uikit_preprocess_page(&$variables) {
           'class' => 'uk-hidden',
         ),
       ));
-      if (theme_get_setting($menu_links . '_alignment')) {
+      if (theme_get_setting($menu_links . '_alignment', $theme_key)) {
         $navbar_menus .= '</div>';
       }
     }
@@ -520,10 +522,10 @@ function uikit_preprocess_page(&$variables) {
   $variables['offcanvas_secondary'] = $offcanvas_secondary;
 
   // Create variable for breadcrumb display setting.
-  $variables['display_breadcrumb'] = theme_get_setting('display_breadcrumbs');
+  $variables['display_breadcrumb'] = theme_get_setting('display_breadcrumbs', $theme_key);
 
   // Get theme specific jQuery version.
-  $jquery_version = theme_get_setting('jquery_update_jquery_version');
+  $jquery_version = theme_get_setting('jquery_update_jquery_version', $theme_key);
 
   // Get site wide jQuery version if theme specific one is not set.
   if (!$jquery_version && module_exists('jquery_update')) {
@@ -600,7 +602,7 @@ function uikit_preprocess_region(&$variables) {
   foreach ($regions as $key => $value) {
     // Get the settings for each region being used.
     if ($region == $key) {
-      $style_setting = theme_get_setting($key . '_style');
+      $style_setting = theme_get_setting($key . '_style', $theme_key);
       $region_style = $style_setting ? $style_setting : 0;
 
       if ($region_style) {
@@ -632,6 +634,18 @@ function uikit_process_region(&$variables) {
  */
 function uikit_preprocess_block(&$variables) {
   $variables['content_attributes_array']['class'][] = 'uk-margin';
+}
+
+/**
+ * Implements template_preprocess_HOOK().
+ */
+function uikit_preprocess_breadcrumb(&$variables) {
+  global $theme_key;
+
+  // Remove home link from breadcrumb if disabled in theme settings.
+  if (!theme_get_setting('breakcrumbs_home_link', $theme_key)) {
+    array_shift($variables['breadcrumb']);
+  }
 }
 
 /**
@@ -871,9 +885,10 @@ function uikit_preprocess_menu_link(&$variables) {
  * Implements hook_preprocess_HOOK() for theme_menu_local_tasks().
  */
 function uikit_preprocess_menu_local_tasks(&$variables) {
+  global $theme_key;
   // Get the local task styles.
-  $primary_style = theme_get_setting('primary_tasks_style');
-  $secondary_style = theme_get_setting('secondary_tasks_style');
+  $primary_style = theme_get_setting('primary_tasks_style', $theme_key);
+  $secondary_style = theme_get_setting('secondary_tasks_style', $theme_key);
 
   // Set the default attributes.
   $variables['primary_attributes_array'] = array(
@@ -934,8 +949,9 @@ function uikit_preprocess_username(&$variables) {
  * Implements hook_css_alter().
  */
 function uikit_css_alter(&$css) {
+  global $theme_key;
   $theme = drupal_get_path('theme', 'uikit');
-  $style = theme_get_setting('base_style') ? '.' . theme_get_setting('base_style') : '';
+  $style = theme_get_setting('base_style') ? '.' . theme_get_setting('base_style', $theme_key) : '';
   $library_path = _uikit_get_library_path();
 
   // Stop Drupal core stylesheets from being loaded.
@@ -980,9 +996,10 @@ function uikit_element_info_alter(&$type) {
  * Implements hook_html_head_alter().
  */
 function uikit_html_head_alter(&$head_elements) {
+  global $theme_key;
   if (isset($head_elements['system_meta_content_type'])) {
     $head_elements['system_meta_content_type']['#attributes'] = array(
-      'charset' => theme_get_setting('meta_charset'),
+      'charset' => theme_get_setting('meta_charset', $theme_key),
     );
     $head_elements['system_meta_content_type']['#weight'] = -9999;
   }

@@ -754,6 +754,12 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
     '#description' => t('Check this box to display the breadcrumb.'),
     '#default_value' => theme_get_setting('display_breadcrumbs', $theme_key),
   );
+  $form['navigations']['breadcrumb']['breakcrumbs_home_link'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Display home link in breadcrumbs'),
+    '#description' => t('Check this box to display the home link in breadcrumb trail.'),
+    '#default_value' => theme_get_setting('breakcrumbs_home_link', $theme_key),
+  );
 
   // Basic elements.
   $form['elements'] = array(
