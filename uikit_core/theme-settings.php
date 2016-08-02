@@ -31,9 +31,9 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
   $demo_layout .= '</div></div>';
 
   // Get the sidebar positions for each layout.
-  $standard_sidebar_pos = theme_get_setting('standard_sidebar_positions');
-  $tablet_sidebar_pos = theme_get_setting('tablet_sidebar_positions');
-  $mobile_sidebar_pos = theme_get_setting('mobile_sidebar_positions');
+  $standard_sidebar_pos = theme_get_setting('standard_sidebar_positions', $theme_key);
+  $tablet_sidebar_pos = theme_get_setting('tablet_sidebar_positions', $theme_key);
+  $mobile_sidebar_pos = theme_get_setting('mobile_sidebar_positions', $theme_key);
 
   // Get all menus.
   $menus = menu_get_menus();
@@ -284,7 +284,7 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
       'gradient' => t('UIkit gradient'),
     ),
     '#description' => t('Select which base style to use.<ol><li><strong>UIkit default:</strong> No border radius or gradients</li><li><strong>UIkit almost flat:</strong> Small border and border radius</li><li><strong>UIkit gradient:</strong> Almost flat style with gradient backgrounds.</li></ol>'),
-    '#default_value' => theme_get_setting('base_style'),
+    '#default_value' => theme_get_setting('base_style', $theme_key),
   );
 
   // Mobile settings.
@@ -308,7 +308,7 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
     '#type' => 'select',
     '#title' => t('<code>x_ua_compatible</code> IE Mode'),
     '#options' => $x_ua_compatible_ie_options,
-    '#default_value' => theme_get_setting('x_ua_compatible'),
+    '#default_value' => theme_get_setting('x_ua_compatible', $theme_key),
     '#description' => t('In some cases, it might be necessary to restrict a webpage to a document mode supported by an older version of Windows Internet Explorer. Here we look at the x-ua-compatible header, which allows a webpage to be displayed as if it were viewed by an earlier version of the browser. @see !legacy', array(
       '!legacy' => '<a href="https://msdn.microsoft.com/en-us/library/jj676915(v=vs.85).aspx" target="_blank">' . t('Specifying legacy document modes') . '</a>',
     )),
@@ -318,7 +318,7 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
     '#title' => t('<code>charset</code>'),
     '#options' => $charsets,
     '#description' => t('Specify the character encoding for the HTML document.'),
-    '#default_option' => theme_get_setting('meta_charset'),
+    '#default_option' => theme_get_setting('meta_charset', $theme_key),
   );
   $form['mobile_settings']['mobile_metadata']['meta_viewport'] = array(
     '#type' => 'fieldset',
@@ -334,7 +334,7 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
     '#type' => 'select',
     '#title' => t('Device width ratio'),
     '#description' => t('Defines the ratio between the device width (device-width in portrait mode or device-height in landscape mode) and the viewport size. Literal device width is defined as <code>device-width</code> and is the recommended value. You can also specify a pixel width by selecting <b>Other</b>, such as <code>300</code>.'),
-    '#default_value' => theme_get_setting('viewport_device_width_ratio'),
+    '#default_value' => theme_get_setting('viewport_device_width_ratio', $theme_key),
     '#options' => array(
       0 => t('-- Select --'),
       'device-width' => t('Literal device width (Recommended)'),
@@ -345,7 +345,7 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
     '#type' => 'textfield',
     '#title' => t('Custom device width'),
     '#description' => t('Defines the width, in pixels, of the viewport. Do not add <b>px</b>, the value must be a non-decimal integer number.'),
-    '#default_value' => theme_get_setting('viewport_custom_width'),
+    '#default_value' => theme_get_setting('viewport_custom_width', $theme_key),
     '#attributes' => array(
       'size' => 15,
     ),
@@ -368,7 +368,7 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
     '#type' => 'select',
     '#title' => t('Device height ratio'),
     '#description' => t('Defines the ratio between the device height (device-height in portrait mode or device-width in landscape mode) and the viewport size. Literal device height is defined as <code>device-height</code> and is the recommended value. You can also specify a pixel height by selecting <b>Other</b>, such as <code>300</code>.'),
-    '#default_value' => theme_get_setting('viewport_device_height_ratio'),
+    '#default_value' => theme_get_setting('viewport_device_height_ratio', $theme_key),
     '#options' => array(
       0 => t('-- Select --'),
       'device-height' => t('Literal device height (Recommended)'),
@@ -379,7 +379,7 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
     '#type' => 'textfield',
     '#title' => t('Custom device height'),
     '#description' => t('Defines the height, in pixels, of the viewport. Do not add <b>px</b>, the value must be a non-decimal integer number.'),
-    '#default_value' => theme_get_setting('viewport_custom_height'),
+    '#default_value' => theme_get_setting('viewport_custom_height', $theme_key),
     '#attributes' => array(
       'size' => 15,
     ),
@@ -397,28 +397,28 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
     '#type' => 'select',
     '#title' => t('initial-scale'),
     '#description' => t('Defines the ratio between the device width (device-width in portrait mode or device-height in landscape mode) and the viewport size.'),
-    '#default_value' => theme_get_setting('viewport_initial_scale'),
+    '#default_value' => theme_get_setting('viewport_initial_scale', $theme_key),
     '#options' => $viewport_scale,
   );
   $form['mobile_settings']['mobile_metadata']['meta_viewport']['viewport_maximum_scale'] = array(
     '#type' => 'select',
     '#title' => t('maximum-scale'),
     '#description' => t('Defines the maximum value of the zoom; it must be greater or equal to the minimum-scale or the behavior is indeterminate.'),
-    '#default_value' => theme_get_setting('viewport_maximum_scale'),
+    '#default_value' => theme_get_setting('viewport_maximum_scale', $theme_key),
     '#options' => $viewport_scale,
   );
   $form['mobile_settings']['mobile_metadata']['meta_viewport']['viewport_minimum_scale'] = array(
     '#type' => 'select',
     '#title' => t('minimum-scale'),
     '#description' => t('Defines the minimum value of the zoom; it must be smaller or equal to the maximum-scale or the behavior is indeterminate.'),
-    '#default_value' => theme_get_setting('viewport_minimum_scale'),
+    '#default_value' => theme_get_setting('viewport_minimum_scale', $theme_key),
     '#options' => $viewport_scale,
   );
   $form['mobile_settings']['mobile_metadata']['meta_viewport']['viewport_user_scalable'] = array(
     '#type' => 'select',
     '#title' => t('user-scalable'),
     '#description' => t('If set to no, the user is not able to zoom in the webpage. Default value is <b>Yes</b>.'),
-    '#default_value' => theme_get_setting('viewport_user_scalable'),
+    '#default_value' => theme_get_setting('viewport_user_scalable', $theme_key),
     '#options' => array(
       1 => t('Yes'),
       0 => t('No'),
@@ -456,7 +456,7 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
     '#type' => 'radios',
     '#title' => t('Sidebar positions'),
     '#description' => t('Position the sidebars in the standard layout.'),
-    '#default_value' => theme_get_setting('standard_sidebar_positions'),
+    '#default_value' => theme_get_setting('standard_sidebar_positions', $theme_key),
     '#options' => array(
       'holy-grail' => t('Holy grail'),
       'sidebars-left' => t('Both sidebars left'),
@@ -482,7 +482,7 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
     '#type' => 'radios',
     '#title' => t('Sidebar positions'),
     '#description' => t('Position the sidebars in the tablet layout.'),
-    '#default_value' => theme_get_setting('tablet_sidebar_positions'),
+    '#default_value' => theme_get_setting('tablet_sidebar_positions', $theme_key),
     '#options' => array(
       'holy-grail' => t('Holy grail'),
       'sidebars-left' => t('Both sidebars left'),
@@ -510,7 +510,7 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
     '#type' => 'radios',
     '#title' => t('Sidebar positions'),
     '#description' => t('Position the sidebars in the mobile layout.'),
-    '#default_value' => theme_get_setting('mobile_sidebar_positions'),
+    '#default_value' => theme_get_setting('mobile_sidebar_positions', $theme_key),
     '#options' => array(
       'sidebars-stacked' => t('Sidebars stacked'),
       'sidebars-vertical' => t('Sidebars vertical'),
@@ -520,19 +520,19 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
     '#type' => 'checkbox',
     '#title' => t('Page Container'),
     '#description' => t('Add the .uk-container class to the page container to give it a max-width and wrap the main content of your website. For large screens it applies a different max-width.'),
-    '#default_value' => theme_get_setting('page_container'),
+    '#default_value' => theme_get_setting('page_container', $theme_key),
   );
   $form['layout']['page_layout']['page_centering'] = array(
     '#type' => 'checkbox',
     '#title' => t('Page Centering'),
     '#description' => t('To center the page container, use the .uk-container-center class.'),
-    '#default_value' => theme_get_setting('page_centering'),
+    '#default_value' => theme_get_setting('page_centering', $theme_key),
   );
   $form['layout']['page_layout']['page_margin'] = array(
     '#type' => 'select',
     '#title' => t('Page margin'),
     '#description' => t('Select the margin to add to the top and bottom of the page container. This is useful, for example, when using the gradient style with a centered page container and a navbar.'),
-    '#default_value' => theme_get_setting('page_margin'),
+    '#default_value' => theme_get_setting('page_margin', $theme_key),
     '#options' => array(
       0 => t('No margin'),
       'uk-margin-top' => t('Top margin'),
@@ -559,7 +559,7 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
       '#type' => 'select',
       '#title' => t('@title style', array('@title' => $region)),
       '#description' => t('Set the style for the @region region. The theme will automatically style the region accordingly.', array('@region' => $region)),
-      '#default_value' => theme_get_setting($region_key . '_style'),
+      '#default_value' => theme_get_setting($region_key . '_style', $theme_key),
       '#options' => $region_style_options,
     );
   }
@@ -587,19 +587,19 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
     '#type' => 'checkbox',
     '#title' => t('Container'),
     '#description' => t('Add the .uk-container class to the navbar container to give it a max-width and wrap the navbar of your website. For large screens it applies a different max-width.'),
-    '#default_value' => theme_get_setting('navbar_container'),
+    '#default_value' => theme_get_setting('navbar_container', $theme_key),
   );
   $form['navigations']['main_navbar']['navbar_container_settings']['navbar_centering'] = array(
     '#type' => 'checkbox',
     '#title' => t('Centering'),
     '#description' => t('To center the navbar container, use the .uk-container-center class.'),
-    '#default_value' => theme_get_setting('navbar_centering'),
+    '#default_value' => theme_get_setting('navbar_centering', $theme_key),
   );
   $form['navigations']['main_navbar']['navbar_container_settings']['navbar_attached'] = array(
     '#type' => 'checkbox',
     '#title' => t('Navbar attached'),
     '#description' => t("Adds the <code>.uk-navbar-attached</code> class to optimize the navbar's styling to be attached to the top of the viewport. For example, rounded corners will be removed."),
-    '#default_value' => theme_get_setting('navbar_attached'),
+    '#default_value' => theme_get_setting('navbar_attached', $theme_key),
   );
   $form['navigations']['main_navbar']['navbar_margin'] = array(
     '#type' => 'fieldset',
@@ -612,14 +612,14 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
     '#type' => 'select',
     '#title' => t('Navbar top margin'),
     '#description' => t('Select the amount of top margin to apply to the navbar.'),
-    '#default_value' => theme_get_setting('navbar_margin_top'),
+    '#default_value' => theme_get_setting('navbar_margin_top', $theme_key),
     '#options' => $navbar_margin_top_options,
   );
   $form['navigations']['main_navbar']['navbar_margin']['navbar_margin_bottom'] = array(
     '#type' => 'select',
     '#title' => t('Navbar bottom margin'),
     '#description' => t('Select the amount of bottom margin to apply to the navbar.'),
-    '#default_value' => theme_get_setting('navbar_margin_bottom'),
+    '#default_value' => theme_get_setting('navbar_margin_bottom', $theme_key),
     '#options' => $navbar_margin_bottom_options,
   );
   $form['navigations']['main_navbar']['default_menus'] = array(
@@ -640,14 +640,14 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
     '#type' => 'select',
     '#title' => 'Main menu alignment',
     '#description' => t('Select whether to align the main menu to the left or right in the navbar.'),
-    '#default_value' => theme_get_setting('main_menu_alignment'),
+    '#default_value' => theme_get_setting('main_menu_alignment', $theme_key),
     '#options' => array('Left', 'Right'),
   );
   $form['navigations']['main_navbar']['default_menus']['main_menu']['main_menu_dropdown_support'] = array(
     '#type' => 'checkbox',
     '#title' => 'Main menu dropdown support',
     '#description' => t('Select whether to add dropdown support to the main menu. NOTE: Dropdown functionality is only supported for 2 levels.<br /><span style="color: red;">NOTE:</span> Setting disabled. See <a href="https://www.drupal.org/node/2746097" target="_blank" style="background-color: #ddf; border-radius: 4px; padding: 2px 4px;">#2746097: Offcanvas menus display dropdown menus incorrectly</a>'),
-    '#default_value' => theme_get_setting('main_menu_dropdown_support'),
+    '#default_value' => theme_get_setting('main_menu_dropdown_support', $theme_key),
     '#attributes' => array(
       'disabled' => 'disabled',
     ),
@@ -663,14 +663,14 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
     '#type' => 'select',
     '#title' => 'Secondary menu alignment',
     '#description' => t('Select whether to align the secondary menu to the left or right in the navbar.'),
-    '#default_value' => theme_get_setting('secondary_menu_alignment'),
+    '#default_value' => theme_get_setting('secondary_menu_alignment', $theme_key),
     '#options' => array('Left', 'Right'),
   );
   $form['navigations']['main_navbar']['default_menus']['secondary_menu']['secondary_menu_dropdown_support'] = array(
     '#type' => 'checkbox',
     '#title' => 'Secondary menu dropdown support',
     '#description' => t('Select whether to add dropdown support to the secondary menu. NOTE: Dropdown functionality is only supported for 2 levels.<br /><span style="color: red;">NOTE:</span> Setting disabled. See <a href="https://www.drupal.org/node/2746097" target="_blank" style="background-color: #ddf; border-radius: 4px; padding: 2px 4px;">#2746097: Offcanvas menus display dropdown menus incorrectly</a>'),
-    '#default_value' => theme_get_setting('secondary_menu_dropdown_support'),
+    '#default_value' => theme_get_setting('secondary_menu_dropdown_support', $theme_key),
     '#attributes' => array(
       'disabled' => 'disabled',
     ),
@@ -702,12 +702,12 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
       $form['navigations']['main_navbar']['additional_navbar_menus'][$menu_name][$menu_name . '_in_navbar'] = array(
         '#type' => 'checkbox',
         '#title' => t('Include the @title in the navbar', array('@title' => $menu_title)),
-        '#default_value' => theme_get_setting($menu_name . '_in_navbar'),
+        '#default_value' => theme_get_setting($menu_name . '_in_navbar', $theme_key),
       );
       $form['navigations']['main_navbar']['additional_navbar_menus'][$menu_name][$menu_name . '_additional_alignment'] = array(
         '#type' => 'select',
         '#description' => t('Select whether to align the @menu to the left or right in the navbar.', array('@menu' => $menu_title)),
-        '#default_value' => theme_get_setting($menu_name . '_alignment'),
+        '#default_value' => theme_get_setting($menu_name . '_alignment', $theme_key),
         '#options' => array('Left', 'Right'),
       );
     }
@@ -727,7 +727,7 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
     '#type' => 'select',
     '#title' => t('Primary tasks style'),
     '#description' => t('Select the style to apply to the primary local tasks.'),
-    '#default_value' => theme_get_setting('primary_tasks_style'),
+    '#default_value' => theme_get_setting('primary_tasks_style', $theme_key),
     '#options' => $subnav_options,
   );
   $form['navigations']['local_tasks']['secondary_tasks'] = array(
@@ -740,7 +740,7 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
     '#type' => 'select',
     '#title' => t('Secondary tasks style'),
     '#description' => t('Select the style to apply to the secondary local tasks.'),
-    '#default_value' => theme_get_setting('secondary_tasks_style'),
+    '#default_value' => theme_get_setting('secondary_tasks_style', $theme_key),
     '#options' => $subnav_options,
   );
   $form['navigations']['breadcrumb'] = array(
@@ -752,7 +752,7 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
     '#type' => 'checkbox',
     '#title' => t('Display breadcrumbs'),
     '#description' => t('Check this box to display the breadcrumb.'),
-    '#default_value' => theme_get_setting('display_breadcrumbs'),
+    '#default_value' => theme_get_setting('display_breadcrumbs', $theme_key),
   );
 
   // Basic elements.
