@@ -15,13 +15,8 @@ include_once dirname(__FILE__) . '/includes/get.inc';
  */
 function uikit_preprocess_html(&$variables) {
   global $theme_key;
-<<<<<<< HEAD
-=======
-
-  // Get UIkit framework assets.
   uikit_get_cdn_assets();
 
->>>>>>> Removed libraries and jquery_update module requirements.
   // Create an HTML5 doctype variable.
   $variables['doctype'] = '<!DOCTYPE html>' . "\n";
 
@@ -126,13 +121,6 @@ function uikit_process_html(&$variables) {
  */
 function uikit_preprocess_page(&$variables) {
   global $theme_key;
-<<<<<<< HEAD
-  // Checks if the uikit library can be loaded.
-  if (_uikit_library_load()) {
-    libraries_load('uikit');
-  }
-=======
->>>>>>> Removed libraries and jquery_update module requirements.
 
   $sidebar_first = $variables['page']['sidebar_first'];
   $sidebar_second = $variables['page']['sidebar_second'];
@@ -494,44 +482,6 @@ function uikit_preprocess_page(&$variables) {
 
   // Create variable for breadcrumb display setting.
   $variables['display_breadcrumb'] = theme_get_setting('display_breadcrumbs', $theme_key);
-<<<<<<< HEAD
-
-  // Get theme specific jQuery version.
-  $jquery_version = theme_get_setting('jquery_update_jquery_version', $theme_key);
-
-  // Get site wide jQuery version if theme specific one is not set.
-  if (!$jquery_version && module_exists('jquery_update')) {
-    $jquery_version = variable_get('jquery_update_jquery_version', '1.10');
-  }
-
-  // Check if the jquery_update module is both installed and enabled.
-  if (!module_exists('jquery_update')) {
-    $message = t('jQuery Update is not enabled. UIkit requires a minimum jQuery version of 1.10 or higher. Please enable the <a href="@jquery_update_project_url">jQuery Update</a> module and <a href="@jquery_update_configure">configure</a> the default jQuery version.', array(
-      '@jquery_update_project_url' => 'https://www.drupal.org/project/jquery_update',
-      '@jquery_update_configure' => url('admin/config/development/jquery_update'),
-    ));
-    drupal_set_message($message, 'error', FALSE);
-  }
-
-  // Check if the minimum jQuery version is met.
-  if (module_exists('jquery_update') && !version_compare($jquery_version, '1.10', '>=')) {
-    $message = t('UIkit requires a minimum jQuery version of 1.10 or higher. Please <a href="@jquery_update_configure">configure</a> the default jQuery version.', array(
-      '@jquery_update_configure' => url('admin/config/development/jquery_update'),
-    ));
-    drupal_set_message($message, 'error', FALSE);
-  }
-
-  // Check if the libraries module is both installed and enabled.
-  if (!module_exists('libraries')) {
-    $message = t('UIkit requires the Libraries module. Please enable the <a href="@libraries_project_url">Libraries</a> module and follow <a href="@uikit_get_started">these instructions</a> to install the UIkit asset files.', array(
-      '@libraries_project_url' => 'https://www.drupal.org/project/libraries',
-      '@uikit_get_started' => check_url('admin/appearance/settings/uikit#edit-get-started'),
-    ));
-    drupal_set_message($message, 'error', FALSE);
-  }
-
-=======
->>>>>>> Removed libraries and jquery_update module requirements.
 }
 
 /**
@@ -903,13 +853,7 @@ function uikit_preprocess_username(&$variables) {
  * Implements hook_css_alter().
  */
 function uikit_css_alter(&$css) {
-  global $theme_key;
   $theme = drupal_get_path('theme', 'uikit');
-<<<<<<< HEAD
-  $style = theme_get_setting('base_style') ? '.' . theme_get_setting('base_style', $theme_key) : '';
-  $library_path = _uikit_get_library_path();
-=======
->>>>>>> Removed libraries and jquery_update module requirements.
 
   // Stop Drupal core stylesheets from being loaded.
   unset($css[drupal_get_path('module', 'system') . '/system.messages.css']);
