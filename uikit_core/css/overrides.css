@@ -441,3 +441,18 @@ div.contextual-links-active a.contextual-links-trigger-active {
 .node-links .uk-subnav > * > * {
   color: #07D;
 }
+
+/**
+ * Alerts
+ */
+.uk-alert > ul {
+  margin-top: 0;
+}
+
+/**
+ * Search form
+ */
+#search-form #edit-basic #edit-submit,
+#search-form #edit-advanced #edit-submit--2 {
+  margin-top: 15px;
+}

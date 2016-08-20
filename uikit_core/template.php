@@ -733,7 +733,7 @@ function uikit_preprocess_fieldset(&$variables) {
       'type' => 'external',
       'group' => CSS_THEME,
       'every_page' => TRUE,
-      'weight' => 0,
+      'weight' => -10,
       'version' => '2.26.4',
     ));
 
@@ -741,7 +741,7 @@ function uikit_preprocess_fieldset(&$variables) {
       'type' => 'external',
       'group' => JS_THEME,
       'every_page' => TRUE,
-      'weight' => 0,
+      'weight' => -10,
       'version' => '2.26.4',
     ));
   }
@@ -801,7 +801,7 @@ function uikit_preprocess_form(&$variables) {
     'type' => 'external',
     'group' => CSS_THEME,
     'every_page' => TRUE,
-    'weight' => 0,
+    'weight' => -10,
     'version' => '2.26.4',
   ));
 }
