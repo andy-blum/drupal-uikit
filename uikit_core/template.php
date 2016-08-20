@@ -11,49 +11,17 @@
 include_once dirname(__FILE__) . '/includes/get.inc';
 
 /**
- * Implements hook_libraries_info().
- */
-function uikit_libraries_info() {
-  $libraries = array();
-  $libraries['uikit'] = array(
-    'name' => 'UIkit library',
-    'vendor url' => 'http://getuikit.com',
-    'download url' => 'https://github.com/uikit/uikit/releases',
-    'version arguments' => array(
-      'file' => 'css/uikit.css',
-      'pattern' => '@^/\*! UIkit ([\d\.]+)@',
-      'lines' => 5,
-      'cols' => 20,
-    ),
-    'version callback' => '_uikit_get_library_version',
-    'files' => array(
-      'js' => array(
-        'js/uikit.js' => array(
-          'type' => 'file',
-          'group' => JS_THEME,
-          'weight' => -10,
-          'every_page' => TRUE,
-        ),
-      ),
-      'css' => array(
-        'css/uikit.css' => array(
-          'type' => 'file',
-          'group' => CSS_THEME,
-          'weight' => -10,
-          'every_page' => TRUE,
-        ),
-      ),
-    ),
-  );
-
-  return $libraries;
-}
-
-/**
  * Implements template_preprocess_html().
  */
 function uikit_preprocess_html(&$variables) {
   global $theme_key;
+<<<<<<< HEAD
+=======
+
+  // Get UIkit framework assets.
+  uikit_get_cdn_assets();
+
+>>>>>>> Removed libraries and jquery_update module requirements.
   // Create an HTML5 doctype variable.
   $variables['doctype'] = '<!DOCTYPE html>' . "\n";
 
@@ -158,10 +126,13 @@ function uikit_process_html(&$variables) {
  */
 function uikit_preprocess_page(&$variables) {
   global $theme_key;
+<<<<<<< HEAD
   // Checks if the uikit library can be loaded.
   if (_uikit_library_load()) {
     libraries_load('uikit');
   }
+=======
+>>>>>>> Removed libraries and jquery_update module requirements.
 
   $sidebar_first = $variables['page']['sidebar_first'];
   $sidebar_second = $variables['page']['sidebar_second'];
@@ -523,6 +494,7 @@ function uikit_preprocess_page(&$variables) {
 
   // Create variable for breadcrumb display setting.
   $variables['display_breadcrumb'] = theme_get_setting('display_breadcrumbs', $theme_key);
+<<<<<<< HEAD
 
   // Get theme specific jQuery version.
   $jquery_version = theme_get_setting('jquery_update_jquery_version', $theme_key);
@@ -558,6 +530,8 @@ function uikit_preprocess_page(&$variables) {
     drupal_set_message($message, 'error', FALSE);
   }
 
+=======
+>>>>>>> Removed libraries and jquery_update module requirements.
 }
 
 /**
@@ -698,6 +672,7 @@ function uikit_preprocess_comment(&$variables) {
  */
 function uikit_preprocess_comment_wrapper(&$variables) {
   $variables['classes_array'][] = 'uk-margin-top-remove';
+  dpm($variables['content']['#node']);
 }
 
 /**
@@ -778,17 +753,6 @@ function uikit_preprocess_fieldset(&$variables) {
     $variables['theme_hook_suggestions'][] = 'fieldset';
     $variables['element']['#attributes']['class'][] = 'uk-form-row';
   }
-
-  if (_uikit_library_load()) {
-    // Load accordion component stylesheet and script.
-    $library_path = _uikit_get_library_path();
-    drupal_add_css($library_path . '/css/components/accordion.gradient.min.css', array(
-      'group' => CSS_THEME,
-    ));
-    drupal_add_js($library_path . '/js/components/accordion.min.js', array(
-      'group' => JS_THEME,
-    ));
-  }
 }
 
 /**
@@ -805,16 +769,6 @@ function uikit_preprocess_form(&$variables) {
   // Add the uk-form class to all forms.
   $variables['element']['#attributes']['class'] = array('uk-form');
   $variables['element']['#attributes']['class'][] = 'uk-form-stacked';
-
-  if (_uikit_library_load()) {
-    // Load advanced form component stylesheets.
-    $library_path = _uikit_get_library_path();
-    drupal_add_css($library_path . '/css/components/form-advanced.min.css', array(
-      'group' => CSS_THEME,
-      'weight' => -10,
-      'every_page' => TRUE,
-    ));
-  }
 
   if ($form_build_id) {
     $children = str_replace($form_build_id, '', $children);
@@ -951,16 +905,16 @@ function uikit_preprocess_username(&$variables) {
 function uikit_css_alter(&$css) {
   global $theme_key;
   $theme = drupal_get_path('theme', 'uikit');
+<<<<<<< HEAD
   $style = theme_get_setting('base_style') ? '.' . theme_get_setting('base_style', $theme_key) : '';
   $library_path = _uikit_get_library_path();
+=======
+>>>>>>> Removed libraries and jquery_update module requirements.
 
   // Stop Drupal core stylesheets from being loaded.
   unset($css[drupal_get_path('module', 'system') . '/system.messages.css']);
   unset($css[drupal_get_path('module', 'system') . '/system.theme.css']);
   unset($css[drupal_get_path('module', 'system') . '/system.menus.css']);
-
-  // Use the UIkit theme style selected in the theme settings.
-  $css[$library_path . '/css/uikit.css']['data'] = $library_path . '/css/uikit' . $style . '.css';
 
   // Replace the book module's book.css with a custom version.
   $book_css = drupal_get_path('module', 'book') . '/book.css';
