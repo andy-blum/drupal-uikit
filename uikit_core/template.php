@@ -758,6 +758,7 @@ function uikit_preprocess_fieldset(&$variables) {
  * Implements hook_preprocess_HOOK() for theme_form().
  */
 function uikit_preprocess_form(&$variables) {
+  global $theme_key;
   $element = $variables['element'];
   $children = $element['#children'];
 
@@ -781,6 +782,28 @@ function uikit_preprocess_form(&$variables) {
 
   $children .= $form_build_id . $form_token . $form_id;
   $variables['element']['#children'] = $children;
+
+  // Retrieve the advanced form component CDN assets.
+  $uikit_style = theme_get_setting('base_style', $theme_key);
+  $form_advanced_css = 'form-advanced.min.css';
+
+  switch ($uikit_style) {
+    case 'almost-flat':
+      $form_advanced_css = 'form-advanced.almost-flat.min.css';
+      break;
+
+    case 'gradient':
+      $form_advanced_css = 'form-advanced.gradient.min.css';
+      break;
+  }
+
+  drupal_add_css("//cdnjs.cloudflare.com/ajax/libs/uikit/2.26.4/css/components/$form_advanced_css", array(
+    'type' => 'external',
+    'group' => CSS_THEME,
+    'every_page' => TRUE,
+    'weight' => 0,
+    'version' => '2.26.4',
+  ));
 }
 
 /**
