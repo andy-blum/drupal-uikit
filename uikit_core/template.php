@@ -894,6 +894,13 @@ function uikit_process_menu_local_tasks(&$variables) {
 }
 
 /**
+ * Implements hook_preprocess_HOOK() for theme_password().
+ */
+function uikit_preprocess_password(&$variables) {
+  $variables['element']['#attributes']['size'] = 25;
+}
+
+/**
  * Implements hook_preprocess_HOOK() for theme_table().
  */
 function uikit_preprocess_table(&$variables) {
