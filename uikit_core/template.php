@@ -500,11 +500,16 @@ function uikit_process_page(&$variables) {
  * Implements template_preprocess_node().
  */
 function uikit_preprocess_node(&$variables) {
+  $node = $variables['node'];
+
   // Add the uk-article-title class to all node titles.
   $variables['title_attributes_array']['class'][] = 'uk-article-title';
 
-  // Add the uk-flex-right class to node links to align them.
-  $variables['content']['links']['#attributes']['class'][] = 'uk-flex-right';
+  // Theme the submitted meta data.
+  $datetime = date( 'F j, Y', $node->created);
+  if (variable_get('node_submitted_' . $node->type, TRUE)) {
+    $variables['submitted'] = t('Written by !username on !datetime', array('!username' => $variables['name'], '!datetime' => $datetime));
+  }
 }
 
 /**
@@ -676,14 +681,8 @@ function uikit_preprocess_field(&$variables) {
   // Add utility classes based on field type.
   switch ($type) {
     case 'image':
-      $classes[] = 'uk-float-left';
-      $classes[] = 'uk-margin-right';
-      $classes[] = 'uk-margin-bottom';
-      break;
-
-    case 'text':
-    case 'text_with_summary':
-      $classes[] = 'uk-clearfix';
+      $classes[] = 'uk-display-inline-block';
+      $classes[] = 'uk-margin';
       break;
   }
 

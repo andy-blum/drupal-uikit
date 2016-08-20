@@ -434,3 +434,10 @@ div.contextual-links-active a.contextual-links-trigger-active {
     padding-left: 100px;
   }
 }
+
+/**
+ * Node links
+ */
+.node-links .uk-subnav > * > * {
+  color: #07D;
+}
