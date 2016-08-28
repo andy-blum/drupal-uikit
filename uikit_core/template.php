@@ -831,7 +831,7 @@ function uikit_preprocess_links(&$variables) {
 
   // Add uk-nav class to contextual links.
   if ($theme_hook_original == 'links__contextual') {
-    $variables['attributes']['class'] = array('uk-nav');
+    $variables['attributes']['class'] = array('uk-nav', 'uk-nav-dropdown');
   }
 }
 

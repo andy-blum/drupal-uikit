@@ -376,17 +376,12 @@
 /**
  * Contextual links
  */
-a.contextual-links-trigger {
-  background-image: none;
-  border: 0;
-  overflow: visible;
-  text-indent: 4px;
-  position: relative;
-  top: 2px;
-}
 div.contextual-links-wrapper {
-  top: 0;
-  right: 0;
+  font-size: 1em;
+}
+.contextual-links-region-active {
+  background-color: #fff;
+  outline: #059 dashed 2px;
 }
 .contextual-links-region .uk-dropdown,
 .contextual-links-region .uk-dropdown-blank {
@@ -394,11 +389,20 @@ div.contextual-links-wrapper {
   right: 0;
   top: 24px;
 }
-div.contextual-links-active a.contextual-links-trigger {
-  background-color: transparent;
+a.contextual-links-trigger {
+  background: transparent none;
   border: 0;
+  overflow: visible;
+  text-indent: 4px;
+  position: relative;
+  top: 2px;
 }
-div.contextual-links-active a.contextual-links-trigger-active {
+a.contextual-links-trigger-active {
+  color: #07d;
+}
+a.contextual-links-trigger-active:active,
+a.contextual-links-trigger-active:focus,
+a.contextual-links-trigger-active:hover {
   color: #059;
 }
 
@@ -439,7 +443,7 @@ div.contextual-links-active a.contextual-links-trigger-active {
  * Node links
  */
 .node-links .uk-subnav > * > * {
-  color: #07D;
+  color: #07d;
 }
 
 /**
