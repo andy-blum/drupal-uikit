@@ -1,0 +1,148 @@
+<?php
+
+/**
+ * @file
+ * Process alter functions.
+ */
+
+/**
+ * Implements hook_css_alter().
+ */
+function uikit_css_alter(&$css) {
+  $theme = drupal_get_path('theme', 'uikit');
+
+  // Stop Drupal core stylesheets from being loaded.
+  unset($css[drupal_get_path('module', 'system') . '/system.messages.css']);
+  unset($css[drupal_get_path('module', 'system') . '/system.theme.css']);
+  unset($css[drupal_get_path('module', 'system') . '/system.menus.css']);
+
+  // Replace the book module's book.css with a custom version.
+  $book_css = drupal_get_path('module', 'book') . '/book.css';
+  if (isset($css[$book_css])) {
+    $css[$book_css]['data'] = $theme . '/css/book.css';
+  }
+
+  // Replace the user module's user.css with a custom version.
+  $user_css = drupal_get_path('module', 'user') . '/user.css';
+  if (isset($css[$user_css])) {
+    $css[$user_css]['data'] = $theme . '/css/user.css';
+  }
+
+  // Replace the field module's field.css with a custom version.
+  $field_css = drupal_get_path('module', 'field') . '/theme/field.css';
+  if (isset($css[$field_css])) {
+    $css[$field_css]['data'] = $theme . '/css/field.css';
+  }
+}
+
+/**
+ * Implements hook_element_info_alter().
+ */
+function uikit_element_info_alter(&$type) {
+  // Remove prefix and suffix from contextual links.
+  $contextual_links = isset($type['contextual_links']);
+  if ($contextual_links) {
+    $type['contextual_links']['#prefix'] = '<div class="contextual-links-wrapper">';
+  }
+}
+
+/**
+ * Implements hook_html_head_alter().
+ */
+function uikit_html_head_alter(&$head_elements) {
+  global $theme_key;
+  if (isset($head_elements['system_meta_content_type'])) {
+    $head_elements['system_meta_content_type']['#attributes'] = array(
+      'charset' => theme_get_setting('meta_charset', $theme_key),
+    );
+    $head_elements['system_meta_content_type']['#weight'] = -9999;
+  }
+
+  // Some modules, such as the Adminimal Admin menu, add a viewport meta tag.
+  // Remove this so the theme can define the tag.
+  if (isset($head_elements['viewport'])) {
+    unset($head_elements['viewport']);
+  }
+}
+
+/**
+ * Implements hook_js_alter().
+ */
+function uikit_js_alter(&$javascript) {
+  $theme = drupal_get_path('theme', 'uikit');
+
+  // Replace the contextual module's contextual.js with a custom version.
+  $contextual_js = drupal_get_path('module', 'contextual') . '/contextual.js';
+  if (isset($javascript[$contextual_js])) {
+    $javascript[$contextual_js]['data'] = $theme . '/js/contextual.js';
+  }
+
+  // Replace tabledrag.js and tableheader.js with custom versions.
+  $tabledrag_js = 'misc/tabledrag.js';
+  $tableheader_js = 'misc/tableheader.js';
+  if (isset($javascript[$tabledrag_js])) {
+    $javascript[$tabledrag_js]['data'] = $theme . '/js/tabledrag.js';
+  }
+  if (isset($javascript[$tableheader_js])) {
+    $javascript[$tableheader_js]['data'] = $theme . '/js/tableheader.js';
+  }
+
+  // Replace the user module's user.js with a custom version.
+  $user_js = drupal_get_path('module', 'user') . '/user.js';
+  if (isset($javascript[$user_js])) {
+    $javascript[$user_js]['data'] = $theme . '/js/user.js';
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function uikit_form_user_login_block_alter(&$form, &$form_state, $form_id) {
+  // Add utility classes to the login block links.
+  $form['links']['#prefix'] = '<div class="uk-form-row form-item-list">';
+  $form['links']['#suffix'] = '</div>';
+}
+
+/**
+ * Implements hook_menu_local_tasks_alter().
+ */
+function uikit_menu_local_tasks_alter(&$data, $router_item, $root_path) {
+  // Define various icons.
+  $plus = '<i class="uk-icon-plus"></i> ';
+
+  foreach ($data['actions']['output'] as $key => $action) {
+    // Add icon based on link path.
+    if (isset($action['#link']['path'])) {
+      switch ($action['#link']['path']) {
+        case 'node/add':
+        case 'admin/structure/block/add':
+        case 'admin/structure/types/add':
+        case 'admin/structure/menu/add':
+        case 'admin/structure/taxonomy/add':
+        case 'admin/structure/taxonomy/%/add':
+        case 'admin/appearance/install':
+        case 'admin/people/create':
+        case 'admin/modules/install':
+        case 'admin/config/content/formats/add':
+        case 'admin/config/media/image-styles/add':
+        case 'admin/config/search/path/add':
+        case 'admin/config/regional/date-time/types/add':
+        case 'admin/config/user-interface/shortcut/add-set':
+          $title = $plus . $data['actions']['output'][$key]['#link']['title'];
+          $data['actions']['output'][$key]['#link']['title'] = $title;
+          $data['actions']['output'][$key]['#link']['localized_options']['html'] = TRUE;
+          break;
+      }
+    }
+    // Some actions use the href key instead of the path key.
+    elseif (isset($action['#link']['href'])) {
+      switch ($action['#link']['href']) {
+        case 'node/add/blog':
+          $title = $plus . $data['actions']['output'][$key]['#link']['title'];
+          $data['actions']['output'][$key]['#link']['title'] = $title;
+          $data['actions']['output'][$key]['#link']['localized_options']['html'] = TRUE;
+          break;
+      }
+    }
+  }
+}
