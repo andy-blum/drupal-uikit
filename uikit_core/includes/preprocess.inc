@@ -803,6 +803,20 @@ function uikit_preprocess_item_list(&$variables) {
 }
 
 /**
+ * Implements hook_preprocess_HOOK().
+ */
+function uikit_preprocess_link(&$variables) {
+  $path = isset($variables['path']) ? $variables['path'] : 0;
+  $path_alias = $path ? drupal_get_path_alias($path) : 0;
+
+  if ($path && $path_alias == '<empty>') {
+    $variables['path'] = '';
+    $variables['options']['fragment'] = ' ';
+    $variables['options']['external'] = TRUE;
+  }
+}
+
+/**
  * Implements hook_preprocess_HOOK() for theme_links().
  */
 function uikit_preprocess_links(&$variables) {
