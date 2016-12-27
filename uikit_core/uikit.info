@@ -3,6 +3,7 @@ description = A lightweight frontend framework with a comprehensive collection o
 core = 7.x
 
 stylesheets[all][] = css/overrides.css
+scripts[] = js/overrides.js
 
 regions[header] = 'Page heading'
 regions[highlighted] = 'Highlighted'

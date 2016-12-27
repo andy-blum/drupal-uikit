@@ -191,7 +191,7 @@
 
 <?php if ($offcanvas_main || $offcanvas_secondary): ?>
   <div id="offcanvas" class="uk-offcanvas">
-    <div class="uk-offcanvas-bar">
+    <div class="uk-offcanvas-bar" mode="push">
       <?php print $offcanvas_main; ?>
       <?php print $offcanvas_secondary; ?>
     </div>

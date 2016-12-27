@@ -372,70 +372,85 @@ function uikit_preprocess_page(&$variables) {
   $offcanvas_secondary = '';
 
   if ($variables['main_menu']) {
+    $main_menu_name = variable_get('menu_main_links_source', 'main-menu');
+    $main_menu_tree = menu_tree($main_menu_name);
+    $main_menu_tree['#theme_wrappers'] = array('menu_tree__main_menu');
+    $main_menu_tree__offcanvas = $main_menu_tree;
+    $main_menu_tree__offcanvas['#theme_wrappers'] = array('menu_tree__main_menu__offcanvas');
+
+    foreach ($main_menu_tree as $key => $value) {
+      $below = is_array($value) && (isset($value['#below']) && !empty($value['#below'])) ? $value['#below'] : 0;
+
+      if ($below) {
+        $main_menu_tree[$key]['#below']['#theme_wrappers'] = array('menu_tree__main_menu__dropdown');
+      }
+    }
+
+    foreach ($main_menu_tree__offcanvas as $key => $value) {
+      $theme_menu_link = is_array($value) && isset($value['#theme']) ? $value['#theme'] : 0;
+      $below = is_array($value) && (isset($value['#below']) && !empty($value['#below'])) ? $value['#below'] : 0;
+
+      if ($theme_menu_link) {
+        $main_menu_tree__offcanvas[$key]['#theme'] = 'menu_link__offcanvas';
+      }
+
+      if ($below) {
+        $main_menu_tree__offcanvas[$key]['#below']['#theme_wrappers'] = array('menu_tree__main_menu__offcanvas__dropdown');
+      }
+    }
+
     if (theme_get_setting('main_menu_alignment', $theme_key)) {
       $navbar_main .= '<div id="navbar-flip--main-menu" class="uk-navbar-flip">';
     }
-    $navbar_main .= theme('links__system_main_menu', array(
-      'links' => $variables['main_menu'],
-      'attributes' => array(
-        'id' => 'main-menu',
-        'class' => array('uk-navbar-nav', 'uk-hidden-small'),
-      ),
-      'heading' => array(
-        'text' => t('Main menu'),
-        'level' => 'h2',
-        'class' => 'uk-hidden',
-      ),
-    ));
+
+    $navbar_main .= drupal_render($main_menu_tree);
+
     if (theme_get_setting('main_menu_alignment', $theme_key)) {
       $navbar_main .= '</div>';
     }
 
-    $offcanvas_main = theme('links__system_main_menu__offcanvas', array(
-      'links' => $variables['main_menu'],
-      'attributes' => array(
-        'id' => 'main-menu--offcanvas',
-        'class' => array('uk-nav', 'uk-nav-offcanvas'),
-      ),
-      'heading' => array(
-        'text' => t('Main menu'),
-        'level' => 'h2',
-        'class' => 'uk-hidden',
-      ),
-    ));
+    $offcanvas_main = drupal_render($main_menu_tree__offcanvas);
   }
 
   if ($variables['secondary_menu']) {
+    $secondary_menu_name = variable_get('menu_secondary_links_source', 'user-menu');
+    $secondary_menu_tree = menu_tree($secondary_menu_name);
+    $secondary_menu_tree['#theme_wrappers'] = array('menu_tree__secondary_menu');
+    $secondary_menu_tree__offcanvas = $secondary_menu_tree;
+    $secondary_menu_tree__offcanvas['#theme_wrappers'] = array('menu_tree__secondary_menu__offcanvas');
+
+    foreach ($secondary_menu_tree as $key => $value) {
+      $below = is_array($value) && (isset($value['#below']) && !empty($value['#below'])) ? $value['#below'] : 0;
+
+      if ($below) {
+        $secondary_menu_tree[$key]['#below']['#theme_wrappers'] = array('menu_tree__secondary_menu__dropdown');
+      }
+    }
+
+    foreach ($secondary_menu_tree__offcanvas as $key => $value) {
+      $theme_menu_link = is_array($value) && isset($value['#theme']) ? $value['#theme'] : 0;
+      $below = is_array($value) && (isset($value['#below']) && !empty($value['#below'])) ? $value['#below'] : 0;
+
+      if ($theme_menu_link) {
+        $main_menu_tree__offcanvas[$key]['#theme'] = 'menu_link__offcanvas';
+      }
+
+      if ($below) {
+        $main_menu_tree__offcanvas[$key]['#below']['#theme_wrappers'] = array('menu_tree__secondary_menu__offcanvas__dropdown');
+      }
+    }
+
     if (theme_get_setting('secondary_menu_alignment', $theme_key)) {
       $navbar_secondary .= '<div id="navbar-flip--secondary-menu" class="uk-navbar-flip">';
     }
-    $navbar_secondary .= theme('links__system_secondary_menu', array(
-      'links' => $variables['secondary_menu'],
-      'attributes' => array(
-        'id' => 'secondary-menu',
-        'class' => array('uk-navbar-nav', 'uk-hidden-small'),
-      ),
-      'heading' => array(
-        'text' => t('Secondary menu'),
-        'level' => 'h2',
-        'class' => 'uk-hidden',
-      ),
-    ));
+
+    $navbar_secondary .= drupal_render($secondary_menu_tree);
+
     if (theme_get_setting('secondary_menu_alignment', $theme_key)) {
       $navbar_secondary .= '</div>';
     }
-    $offcanvas_secondary = theme('links__system_secondary_menu__offcanvas', array(
-      'links' => $variables['secondary_menu'],
-      'attributes' => array(
-        'id' => 'secondary-menu--offcanvas',
-        'class' => array('uk-nav', 'uk-nav-offcanvas'),
-      ),
-      'heading' => array(
-        'text' => t('Secondary menu'),
-        'level' => 'h2',
-        'class' => 'uk-hidden',
-      ),
-    ));
+
+    $offcanvas_secondary = drupal_render($secondary_menu_tree__offcanvas);
   }
 
   // Place additional menus in the navbar from the theme settings.
@@ -813,9 +828,34 @@ function uikit_preprocess_links(&$variables) {
  */
 function uikit_preprocess_menu_link(&$variables) {
   global $user;
+
   $classes = isset($variables['element']['#attributes']['class']) ? $variables['element']['#attributes']['class'] : array();
+  $expanded = array_keys($classes, 'expanded');
   $leaf = array_keys($classes, 'leaf');
   $active_trail = array_keys($classes, 'active-trail');
+  $theme_hook = isset($variables['theme_hook_suggestion']) ? $variables['theme_hook_suggestion'] : 0;
+
+  if ($theme_hook) {
+    unset($variables['theme_hook_suggestion']);
+    $variables['theme_hook_suggestions'] = array(
+      'menu_link',
+      $theme_hook,
+    );
+  }
+
+  // Remove expanded classes.
+  foreach ($expanded as $expanded_key) {
+    unset($variables['element']['#attributes']['class'][$expanded_key]);
+    $variables['element']['#attributes']['class'][] = 'uk-parent';
+
+    if ($theme_hook == 'menu_link__main_menu') {
+      $variables['element']['#attributes']['data-uk-dropdown'] = '';
+    }
+
+    if ($theme_hook == 'menu_link__offcanvas') {
+      $variables['element']['#attributes']['aria-expanded'] = 'false';
+    }
+  }
 
   // Remove leaf classes.
   foreach ($leaf as $leaf_key) {
@@ -855,6 +895,19 @@ function uikit_preprocess_menu_local_tasks(&$variables) {
   }
   if ($secondary_style) {
     $variables['secondary_attributes_array']['class'][] = $secondary_style;
+  }
+}
+
+/**
+ * Implements tempalte_preprocess_menu_tree().
+ */
+function uikit_preprocess_menu_tree(&$variables) {
+  $theme_hook = isset($variables['theme_hook_suggestion']) ? $variables['theme_hook_suggestion'] : 0;
+  $variables['theme_hook_suggestions'] = array('menu_tree');
+
+  if ($theme_hook) {
+    unset($variables['theme_hook_suggestion']);
+    $variables['theme_hook_suggestions'][] = $theme_hook;
   }
 }
 

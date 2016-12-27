@@ -14,4 +14,4 @@
  * @ingroup uikit_themeable
  */
 
-print '<div class="uk-dropdown uk-dropdown-navbar uk-dropdown-bottom"><ul class="uk-nav uk-nav-navbar uk-nav-side">' . $variables['tree'] . '</ul></div>';
+print '<ul class="uk-nav uk-nav-offcanvas uk-nav-parent-icon" data-uk-nav="{multiple:true}">' . $variables['tree'] . '</ul>';

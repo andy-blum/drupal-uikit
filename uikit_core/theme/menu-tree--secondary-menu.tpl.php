@@ -14,4 +14,4 @@
  * @ingroup uikit_themeable
  */
 
-print '<div class="uk-navbar-flip"><ul class="uk-navbar-nav uk-hidden-small">' . $variables['tree'] . '</ul></div>';
+print '<ul class="uk-navbar-nav uk-hidden-small">' . $variables['tree'] . '</ul>';
