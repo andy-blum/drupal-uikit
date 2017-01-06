@@ -10,7 +10,9 @@
       $(this).attr('href', '#');
 
       if ($(this).parent('[data-uk-dropdown]').length) {
-        $(this).attr('href', '');
+        $(this).attr('href', '').on('click', function(e) {
+          e.preventDefault();
+        });
       }
     }
   });
