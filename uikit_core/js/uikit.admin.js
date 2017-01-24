@@ -38,6 +38,29 @@
 
         return Drupal.checkPlain(vals.join(', '));
       });
+
+      // Provide the summary for the page layouts form.
+      $('fieldset.uikit-layout-settings-form', context).drupalSetSummary(function (context) {
+        var vals = [];
+        var standardLayout = $("input[name=standard_sidebar_positions]:checked", context)["0"].labels["0"].innerText.trim();
+        var tabletLayout = $("input[name=tablet_sidebar_positions]:checked", context)["0"].labels["0"].innerText.trim();
+        var mobileLayout = $("input[name=mobile_sidebar_positions]:checked", context)["0"].labels["0"].innerText.trim();
+
+        // Standard layout setting.
+        vals.push('<strong>Standard layout: </strong>' + standardLayout + '</br>');
+
+        // Tablet layout setting.
+        vals.push('<strong>Tablet layout: </strong>' + tabletLayout + '</br>');
+
+        // Mobile layout setting.
+        vals.push('<strong>Mobile layout: </strong>' + mobileLayout + '</br>');
+
+        $.fn.toString = function() {
+          return this[0].outerHTML
+        };
+
+        return vals.join("");
+      });
     }
   };
 
