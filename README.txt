@@ -39,7 +39,7 @@ INSTALLATION
  * Install jQuery Update 7.x-2.7 or higher as you would normally install a
    contributed Drupal module. See:
    https://www.drupal.org/documentation/install/modules-themes/modules-7
-   for futher information.
+   for further information.
 
  * Set the default jQuery version to 1.10 or higher at
    admin/config/development/jquery_update.

@@ -1,6 +1,7 @@
 <?php
 
 /**
+ * @file
  * @defgroup getting_started Getting started with UIkit
  * @{
  * @lead get_familiar Get familiar with the basic setup and structure of UIkit.

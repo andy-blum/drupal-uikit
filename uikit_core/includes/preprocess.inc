@@ -115,7 +115,7 @@ function uikit_preprocess_html(&$variables) {
 function uikit_preprocess_page(&$variables) {
   global $theme_key;
 
-  $sidebar_first = isset($variables['page']['sidebar_first']) ? $variables['page']['sidebar_first']: '';
+  $sidebar_first = isset($variables['page']['sidebar_first']) ? $variables['page']['sidebar_first'] : '';
   $sidebar_second = isset($variables['page']['sidebar_second']) ? $variables['page']['sidebar_second'] : '';
   $standard_layout = theme_get_setting('standard_sidebar_positions', $theme_key);
   $tablet_layout = theme_get_setting('tablet_sidebar_positions', $theme_key);
@@ -502,7 +502,7 @@ function uikit_preprocess_node(&$variables) {
   $variables['title_attributes_array']['class'][] = 'uk-article-title';
 
   // Theme the submitted meta data.
-  $datetime = date( 'F j, Y', $node->created);
+  $datetime = date('F j, Y', $node->created);
   if (variable_get('node_submitted_' . $node->type, TRUE)) {
     $variables['submitted'] = t('Written by !username on !datetime', array('!username' => $variables['name'], '!datetime' => $datetime));
   }

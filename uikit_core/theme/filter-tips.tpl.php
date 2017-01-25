@@ -8,7 +8,7 @@
  * - $variables['tips']: An array containing descriptions and a CSS ID in the
  *   form of 'module-name/filter-id' (only used when $long is TRUE) for each
  *   filter in one or more text formats. Example:
- *   @code
+ * @code
  *     array(
  *       'Full HTML' => array(
  *         0 => array(
@@ -17,7 +17,7 @@
  *         ),
  *       ),
  *     );
- *   @endcode
+ * @endcode
  * - $variables['long']: (optional) Whether the passed-in filter tips contain
  *   extended explanations, i.e. intended to be output on the path 'filter/tips'
  *   (TRUE), or are in a short format, i.e. suitable to be displayed below a

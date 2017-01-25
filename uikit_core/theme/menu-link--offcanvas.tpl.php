@@ -1,4 +1,11 @@
 <?php
+
+/**
+ * @file
+ * Returns HTML for a menu link and submenu in an offcanvas menu.
+ *
+ * @ingroup themeable
+ */
 $element = $variables['element'];
 $sub_menu = '';
 

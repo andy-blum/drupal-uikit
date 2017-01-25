@@ -24,17 +24,17 @@
  * Do not use this function in a global context since it requires Drupal to be
  * fully bootstrapped, use require_once DRUPAL_ROOT . '/path/file' instead.
  *
- * @param $type
+ * @param string $type
  *   The include file's type (file extension).
- * @param $theme
+ * @param string $theme
  *   The theme to which the include file belongs.
- * @param $name
+ * @param string $name
  *   (optional) The base file name (without the $type extension). If omitted,
  *   $theme is used; i.e., resulting in "$theme.$type" by default.
- * @param $sub_directory
+ * @param string $sub_directory
  *   (optional) The sub-directory to which the include file resides.
  *
- * @return
+ * @return string
  *   The name of the included file, if successful; FALSE otherwise.
  */
 function uikit_load_include($type, $theme, $name = NULL, $sub_directory = '') {

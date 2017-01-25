@@ -5,6 +5,14 @@
  * Common get functions.
  */
 
+/**
+ * Retrieves UIkit CDN assets.
+ *
+ * @param string $jquery_version
+ *   The version of jQuery to retrieve.
+ * @param string $uikit_version
+ *   The version of UIkit to retrieve.
+ */
 function uikit_get_cdn_assets($jquery_version = '2.1.4', $uikit_version = '2.26.4') {
   global $theme_key;
   $uikit_style = theme_get_setting('base_style', $theme_key);
