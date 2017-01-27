@@ -679,7 +679,7 @@ function uikit_preprocess_field(&$variables) {
  */
 function uikit_preprocess_fieldset(&$variables) {
   global $theme_key;
-  $collapsible = $variables['element']['#collapsible'];
+  $collapsible = isset($variables['element']['#collapsible']) && $variables['element']['#collapsible'];
   $group_fieldset = isset($variables['element']['#group_fieldset']) && $variables['element']['#group_fieldset'];
   $format_fieldset = isset($variables['element']['format']);
 
