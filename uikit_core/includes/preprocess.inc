@@ -809,6 +809,8 @@ function uikit_preprocess_link(&$variables) {
   $path = isset($variables['path']) ? $variables['path'] : 0;
   $path_alias = $path ? drupal_get_path_alias($path) : 0;
 
+  // Remove the path and add some options to <empty> paths for dropdown menu
+  // support.
   if ($path && $path_alias == '<empty>') {
     $variables['path'] = '';
     $variables['options']['fragment'] = ' ';
