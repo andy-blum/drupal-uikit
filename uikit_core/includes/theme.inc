@@ -54,7 +54,7 @@ function uikit_theme() {
 /**
  * Returns HTML for a list or nested list of items.
  *
- * @param $variables
+ * @param array $variables
  *   An associative array containing:
  *   - items: An array of items to be displayed in the list. If an item is a
  *     string, then it is used as is. If an item is an array, then the "data"
@@ -113,7 +113,7 @@ function theme_uikit_list($variables) {
 /**
  * Returns HTML for a panel component.
  *
- * @param $variables
+ * @param array $variables
  *   An associative array containing:
  *   - content: The content to add to the panel.
  *   - title: The title to add to the panel.
