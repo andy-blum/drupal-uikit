@@ -922,6 +922,32 @@ function uikit_preprocess_menu_tree(&$variables) {
 }
 
 /**
+ * Preprocess function for theme_uikit_navbar().
+ */
+function uikit_preprocess_uikit_navbar(&$variables) {
+  $items = $variables['items'];
+
+  foreach ($items as $id => $item) {
+    foreach ($item as $key => $value) {
+      $path = drupal_get_path_alias($variables['items'][$id][$key]['href']);
+      $has_attributes = isset($variables['items'][$id][$key]['attributes']);
+      $attributes = $has_attributes ? $variables['items'][$id][$key]['attributes'] : array();
+
+      // Append active class.
+      if (uikit_get_active_path($path)) {
+        $attributes['class'][] = 'uk-active';
+      }
+
+      if ($path == '<parent>') {
+        $attributes['class'][] = 'uk-parent';
+      }
+
+      $variables['items'][$id][$key]['attributes'] = $attributes;
+    }
+  }
+}
+
+/**
  * Implements hook_preprocess_HOOK() for theme_password().
  */
 function uikit_preprocess_password(&$variables) {

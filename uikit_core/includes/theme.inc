@@ -48,6 +48,18 @@ function uikit_theme() {
         ),
       ),
     ),
+    'uikit_navbar' => array(
+      'function' => 'theme_uikit_navbar',
+      'variables' => array(
+        'items' => array(
+          'left' => array(),
+          'right' => array(),
+        ),
+        'attributes' => array(
+          'class' => array('uk-navbar'),
+        ),
+      ),
+    ),
   );
 }
 
@@ -72,11 +84,14 @@ function uikit_theme() {
  *
  * @return string
  *   Returns formatted HTML for a list.
+ *
+ * @ingroup uikit_themeable
  */
 function theme_uikit_list($variables) {
   $items = $variables['items'];
   $modifier = $variables['modifier'];
   $attributes = $variables['attributes'];
+  $output = '';
 
   if (!empty($items)) {
     // Add the modifier class.
@@ -84,7 +99,7 @@ function theme_uikit_list($variables) {
       $attributes['class'][] = $modifier;
     }
 
-    $output = '<ul' . drupal_attributes($attributes) . '>';
+    $output .= '<ul' . drupal_attributes($attributes) . '>';
     $num_items = count($items);
     $i = 0;
 
@@ -111,6 +126,98 @@ function theme_uikit_list($variables) {
 }
 
 /**
+ * Returns HTML for a navbar component.
+ *
+ * @param array $variables
+ *   An associative array containing:
+ *   - items: An array containing:
+ *     - left: The tree's items to display on the left.
+ *     - right: The tree's items to display on the right.
+ *   - attributes: The attributes applied to the list element.
+ *
+ * @return string
+ *   Returns formatted HTML for a navbar.
+ *
+ * @ingroup uikit_themeable
+ */
+function theme_uikit_navbar($variables) {
+  $items = $variables['items'];
+  $attributes = $variables['attributes'];
+  $output = '<nav' . drupal_attributes($attributes) . '>';
+
+  foreach ($items as $id => $item) {
+
+    if ($id == 'right') {
+      // Output div to group and align navigations and items to the right.
+      $output .= '<div class="uk-navbar-flip">';
+    }
+
+    // Output the element to create a navigation.
+    $output .= '<ul class="uk-navbar-nav">';
+
+    foreach ($item as $key => $value) {
+      $text = $value['title'];
+      $attributes = $value['attributes'];
+      $options = isset($value['options']) ? $value['options'] : array();
+      $path = drupal_get_path_alias($value['href']);
+      $parent = $path == '<parent>';
+
+      if ($parent) {
+        $attributes['data-uk-dropdown'] = '';
+      }
+
+      // Output the list item.
+      $output .= '<li' . drupal_attributes($attributes) . '>';
+
+      if ($parent && !empty($value['below'])) {
+        $below = $value['below'];
+
+        // Output the parent item's link without an href attribute.
+        $output .= '<a>' . $text . '</a>';
+
+        $output .= '<div class="uk-dropdown uk-dropdown-navbar">';
+        $output .= '<ul class="uk-nav uk-nav-navbar">';
+
+        foreach ($below as $below_item) {
+          if ($below_item['href'] == '<nav-header>') {
+            $output .= '<li class="uk-nav-header">' . $below_item['title'] . '</li>';
+          }
+          elseif ($below_item['href'] == '<nav-divider>') {
+            $output .= '<li class="uk-nav-divider"></li>';
+            $output .= '<li>';
+            $output .= l($below_item['title'], $below_item['href']);
+            $output .= '</li>';
+          }
+          else {
+            $output .= '<li>';
+            $output .= l($below_item['title'], $below_item['href']);
+            $output .= '</li>';
+          }
+        }
+
+        $output .= '</ul>';
+        $output .= '</div>';
+      }
+      else {
+        $output .= l($text, $path, $options);
+      }
+
+      $output .= '</li>';
+    }
+
+    if ($id == 'right') {
+      $output .= '</div>';
+    }
+
+    $output .= '</ul>';
+  }
+
+  $output .= '</nav>';
+
+  return $output;
+}
+
+/**
  * Returns HTML for a panel component.
  *
  * @param array $variables
@@ -127,6 +234,8 @@ function theme_uikit_list($variables) {
  *
  * @return string
  *   Returns formatted HTML for a panel.
+ *
+ * @ingroup uikit_themeable
  */
 function theme_uikit_panel($variables) {
   $content = $variables['content'];
