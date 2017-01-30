@@ -698,7 +698,6 @@ function uikit_links($variables) {
   $attributes = $variables['attributes'];
   $heading = $variables['heading'];
   $theme_hook_original = isset($variables['theme_hook_original']) ? $variables['theme_hook_original'] : '';
-  $contextual_links = $theme_hook_original === 'links__contextual';
   $output = '';
 
   if (count($links) > 0) {
@@ -722,10 +721,6 @@ function uikit_links($variables) {
       }
 
       $output .= '>' . check_plain($heading['text']) . '</' . $heading['level'] . '>';
-    }
-
-    if ($contextual_links) {
-      $output .= '<div class="uk-dropdown">';
     }
 
     $output .= '<ul' . drupal_attributes($attributes) . '>';
@@ -778,10 +773,6 @@ function uikit_links($variables) {
     }
 
     $output .= '</ul>';
-
-    if ($contextual_links) {
-      $output .= '</div>';
-    }
   }
 
   return $output;

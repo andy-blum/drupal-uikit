@@ -47,17 +47,6 @@ function uikit_css_alter(&$css) {
 }
 
 /**
- * Implements hook_element_info_alter().
- */
-function uikit_element_info_alter(&$type) {
-  // Remove prefix and suffix from contextual links.
-  $contextual_links = isset($type['contextual_links']);
-  if ($contextual_links) {
-    $type['contextual_links']['#prefix'] = '<div class="contextual-links-wrapper">';
-  }
-}
-
-/**
  * Implements hook_html_head_alter().
  */
 function uikit_html_head_alter(&$head_elements) {
