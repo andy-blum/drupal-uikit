@@ -697,7 +697,6 @@ function uikit_links($variables) {
   $links = $variables['links'];
   $attributes = $variables['attributes'];
   $heading = $variables['heading'];
-  $theme_hook_original = isset($variables['theme_hook_original']) ? $variables['theme_hook_original'] : '';
   $output = '';
 
   if (count($links) > 0) {
@@ -1341,7 +1340,7 @@ function uikit_table($variables) {
 
   // Format the table columns:
   if (count($colgroups)) {
-    foreach ($colgroups as $number => $colgroup) {
+    foreach ($colgroups as $colgroup) {
       $attributes = array();
 
       // Check if we're dealing with a simple or complex column.
@@ -1423,7 +1422,7 @@ function uikit_table($variables) {
     $flip = array('even' => 'odd', 'odd' => 'even');
     $class = 'even';
 
-    foreach ($rows as $number => $row) {
+    foreach ($rows as $row) {
       // Check if we're dealing with a simple or complex row.
       if (isset($row['data'])) {
         $cells = $row['data'];
@@ -1502,5 +1501,5 @@ function uikit_textfield($variables) {
 
   $output = '<input' . drupal_attributes($element['#attributes']) . ' />';
 
-  print $output . $extra;
+  return $output . $extra;
 }

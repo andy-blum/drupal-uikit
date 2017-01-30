@@ -1,13 +1,10 @@
 (function ($) {
-  // Here we immediately call the function with jQuery as the parameter.
+  'use strict';
+
+  Drupal.behaviors.uikitSubtheme = {
+    attach: function (context, settings) {
+      // Code to be run on page load, and
+      // on ajax load added here
+    }
+  };
 }(jQuery));
-
-jQuery(document).ready(function($) {
-  // Here we will call the function with jQuery as the parameter once the page
-  // Document Object Model (DOM) is ready for JavaScript code to execute.
-});
-
-jQuery(document).load(function($) {
-  // Here we will call the function with jQuery as the parameter once the entire
-  // page (images or iframes), not just the DOM, is ready.
-});

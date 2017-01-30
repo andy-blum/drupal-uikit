@@ -32,7 +32,7 @@
  *
  * @subtitle via git.drupal.org
  * Use the following Git command to download the latest release from the 7.x-2.x
- * branch. This will ensure you get the latest commited branch. All other
+ * branch. This will ensure you get the latest committed branch. All other
  * methods below will only give you the most recent release, which may not
  * contain changes made in the Git repository.
  *
@@ -62,7 +62,7 @@
  * @divider
  *
  * @section requirements Requirements
- * There were originall two requirements in order for UIkit for Drupal to work
+ * There were originally two requirements in order for UIkit for Drupal to work
  * properly,
  * @del @link https://www.drupal.org/project/jquery_update jQuery Update 2.7+ running jQuery 1.10+ @endlink @enddel
  * and

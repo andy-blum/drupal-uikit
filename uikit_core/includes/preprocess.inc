@@ -703,21 +703,21 @@ function uikit_preprocess_fieldset(&$variables) {
       }
     }
 
-    // Retrieve the accordian component CDN assets.
+    // Retrieve the accordion component CDN assets.
     $uikit_style = theme_get_setting('base_style', $theme_key);
-    $accordian_css = 'accordion.min.css';
+    $accordion_css = 'accordion.min.css';
 
     switch ($uikit_style) {
       case 'almost-flat':
-        $accordian_css = 'accordion.almost-flat.min.css';
+        $accordion_css = 'accordion.almost-flat.min.css';
         break;
 
       case 'gradient':
-        $accordian_css = 'accordion.gradient.min.css';
+        $accordion_css = 'accordion.gradient.min.css';
         break;
     }
 
-    drupal_add_css("//cdnjs.cloudflare.com/ajax/libs/uikit/2.26.4/css/components/$accordian_css", array(
+    drupal_add_css("//cdnjs.cloudflare.com/ajax/libs/uikit/2.26.4/css/components/$accordion_css", array(
       'type' => 'external',
       'group' => CSS_THEME,
       'every_page' => TRUE,

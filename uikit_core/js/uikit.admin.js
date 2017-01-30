@@ -3,7 +3,9 @@
  */
 
 (function ($) {
-  $(function() {
+  'use strict';
+
+  $(function () {
     // Do not trigger the default action of links in the demos.
     $('.uk-admin-demo').on('click', '[href="#"], [href=""]', function (e) {
       e.preventDefault();
@@ -17,7 +19,7 @@
         var vals = [];
 
         // Base style setting.
-        vals.push($(".form-item-base-style select option:selected", context).text());
+        vals.push($('.form-item-base-style select option:selected', context).text());
 
         return Drupal.checkPlain(vals.join(', '));
       });
@@ -26,14 +28,14 @@
       $('fieldset.uikit-mobile-settings-form', context).drupalSetSummary(function (context) {
         var vals = [];
 
-        // IE compatibilty mode setting.
-        if ($(".form-item-x-ua-compatible select option:selected").val() != 0) {
-          var ieMode = $(".form-item-x-ua-compatible select option:selected", context).text();
+        // IE compatibility mode setting.
+        if ($('.form-item-x-ua-compatible select option:selected').val() !== 0) {
+          var ieMode = $('.form-item-x-ua-compatible select option:selected', context).text();
           vals.push(ieMode);
         }
 
         // Character set setting.
-        var charset = $(".form-item-meta-charset select option:selected", context).text().split(':');
+        var charset = $('.form-item-meta-charset select option:selected', context).text().split(':');
         vals.push(charset[0]);
 
         return Drupal.checkPlain(vals.join(', '));
@@ -42,9 +44,9 @@
       // Provide the summary for the page layouts form.
       $('fieldset.uikit-layout-settings-form', context).drupalSetSummary(function (context) {
         var vals = [];
-        var standardLayout = $("input[name=standard_sidebar_positions]:checked", context)["0"].labels["0"].innerText.trim();
-        var tabletLayout = $("input[name=tablet_sidebar_positions]:checked", context)["0"].labels["0"].innerText.trim();
-        var mobileLayout = $("input[name=mobile_sidebar_positions]:checked", context)["0"].labels["0"].innerText.trim();
+        var standardLayout = $('input[name=standard_sidebar_positions]:checked', context)['0'].labels['0'].innerText.trim();
+        var tabletLayout = $('input[name=tablet_sidebar_positions]:checked', context)['0'].labels['0'].innerText.trim();
+        var mobileLayout = $('input[name=mobile_sidebar_positions]:checked', context)['0'].labels['0'].innerText.trim();
 
         // Standard layout setting.
         vals.push('<strong>Standard layout: </strong>' + standardLayout + '</br>');
@@ -55,11 +57,11 @@
         // Mobile layout setting.
         vals.push('<strong>Mobile layout: </strong>' + mobileLayout + '</br>');
 
-        $.fn.toString = function() {
-          return this[0].outerHTML
+        $.fn.toString = function () {
+          return this[0].outerHTML;
         };
 
-        return vals.join("");
+        return vals.join('');
       });
     }
   };
@@ -136,7 +138,7 @@
         primaryMenu.removeClass('uk-subnav-line')
           .removeClass('uk-subnav-pill');
 
-        if ($(this).val() != '0') {
+        if ($(this).val() !== '0') {
           primaryMenu.addClass($(this).val());
         }
       });
@@ -145,7 +147,7 @@
         secondaryMenu.removeClass('uk-subnav-line')
           .removeClass('uk-subnav-pill');
 
-        if ($(this).val() != '0') {
+        if ($(this).val() !== '0') {
           secondaryMenu.addClass($(this).val());
         }
       });
