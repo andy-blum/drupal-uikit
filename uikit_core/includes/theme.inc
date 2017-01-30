@@ -155,7 +155,7 @@ function theme_uikit_navbar($variables) {
     // Output the element to create a navigation.
     $output .= '<ul class="uk-navbar-nav">';
 
-    foreach ($item as $key => $value) {
+    foreach ($item as $value) {
       $text = $value['title'];
       $attributes = $value['attributes'];
       $options = isset($value['options']) ? $value['options'] : array();
