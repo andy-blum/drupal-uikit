@@ -80,29 +80,6 @@ function uikit_html_head_alter(&$head_elements) {
  * Implements hook_js_alter().
  */
 function uikit_js_alter(&$javascript) {
-  $theme = drupal_get_path('theme', 'uikit');
-
-  // Replace the contextual module's contextual.js with a custom version.
-  $contextual_js = drupal_get_path('module', 'contextual') . '/contextual.js';
-  if (isset($javascript[$contextual_js])) {
-    $javascript[$contextual_js]['data'] = $theme . '/js/contextual.js';
-  }
-
-  // Replace tabledrag.js and tableheader.js with custom versions.
-  $tabledrag_js = 'misc/tabledrag.js';
-  $tableheader_js = 'misc/tableheader.js';
-  if (isset($javascript[$tabledrag_js])) {
-    $javascript[$tabledrag_js]['data'] = $theme . '/js/tabledrag.js';
-  }
-  if (isset($javascript[$tableheader_js])) {
-    $javascript[$tableheader_js]['data'] = $theme . '/js/tableheader.js';
-  }
-
-  // Replace the user module's user.js with a custom version.
-  $user_js = drupal_get_path('module', 'user') . '/user.js';
-  if (isset($javascript[$user_js])) {
-    $javascript[$user_js]['data'] = $theme . '/js/user.js';
-  }
 }
 
 /**

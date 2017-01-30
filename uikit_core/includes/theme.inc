@@ -948,6 +948,8 @@ function uikit_menu_local_task($variables) {
  */
 function uikit_menu_local_tasks($variables) {
   $output = '';
+  $primary_attributes = $variables['primary_attributes'];
+  $secondary_attributes = $variables['secondary_attributes'];
 
   if (!empty($variables['primary'])) {
     $variables['primary']['#prefix'] = '<h2 class="uk-hidden">' . t('Primary tabs') . '</h2>';
