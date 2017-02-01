@@ -5,5 +5,15 @@
   "dependencies": {},
   "devDependencies": {
     "eslint": "^3.14.1"
+  },
+  "homepage": "https://www.drupal.org/project/uikit",
+  "bugs": {
+    "url" : "https://www.drupal.org/project/issues/uikit"
+  },
+  "license": "GPL-2.0+",
+  "author": "Richard Buchanan <richardbuchanan@richardbuchanan.com> (https://www.drupal.org/u/richard-buchanan)",
+  "repository" : {
+    "type" : "git",
+    "url" : "git.drupal.org:project/uikit.git"
   }
 }
