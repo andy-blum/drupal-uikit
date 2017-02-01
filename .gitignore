@@ -1,7 +1,5 @@
-# Ignore nodejs development files and directories.
-.eslintrc.json
-package.json
+# Ignore development files.
 /node_modules
 
 # Ignore API documentation, which is only used on http://uikit-drupal.com/.
-/docs
+/uikit_core/docs

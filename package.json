@@ -1,0 +1,9 @@
+{
+  "name": "uikit",
+  "version": "7.1.0-dev",
+  "description": "A lightweight frontend framework with a comprehensive collection of HTML, CSS, and JS components.",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^3.14.1"
+  }
+}
