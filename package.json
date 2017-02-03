@@ -11,7 +11,7 @@
     "url" : "https://www.drupal.org/project/issues/uikit"
   },
   "license": "GPL-2.0+",
-  "author": "Richard Buchanan <richardbuchanan@richardbuchanan.com> (https://www.drupal.org/u/richard-buchanan)",
+  "author": "Richard Buchanan <richard_buchanan@buchanandesigngroup.com> (https://www.drupal.org/u/richard-buchanan)",
   "repository" : {
     "type" : "git",
     "url" : "git.drupal.org:project/uikit.git"
