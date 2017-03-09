@@ -663,6 +663,15 @@ function uikit_preprocess_fieldset(&$variables) {
  */
 function uikit_preprocess_form(&$variables) {
   global $theme_key;
+  $attributes = $variables['element']['#attributes'];
+
+  // Make sure the class attribute is an array. If not we take the class set
+  // and add it to an array. This is a special case issue caused by the
+  // api_search module, and should not be a common problem.
+  if (isset($attributes['class']) && !is_array($attributes['class'])) {
+    $class = $attributes['class'];
+    $variables['element']['#attributes']['class'] = array($class);
+  }
 
   // Add the uk-form class to all forms.
   $variables['element']['#attributes']['class'][] = 'uk-form';
@@ -697,26 +706,6 @@ function uikit_preprocess_form(&$variables) {
 function uikit_preprocess_item_list(&$variables) {
   // Add the uk-list class to all item lists.
   $variables['attributes']['class'][] = 'uk-list';
-}
-
-/**
- * Implements hook_preprocess_HOOK() for theme_link().
- */
-function uikit_preprocess_link(&$variables) {
-  $attributes = $variables['options']['attributes'];
-
-  if (!isset($attributes['class'])) {
-    $attributes['class'] = array();
-  }
-
-  if (isset($attributes['class']) && ($key = array_search('active', $attributes['class'])) !== FALSE) {
-    if (count($attributes['class']) == 1) {
-      unset($variables['options']['attributes']['class']);
-    }
-    else {
-      unset($variables['options']['attributes']['class'][$key]);
-    }
-  }
 }
 
 /**
