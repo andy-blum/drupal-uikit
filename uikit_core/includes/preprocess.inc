@@ -705,6 +705,10 @@ function uikit_preprocess_item_list(&$variables) {
 function uikit_preprocess_link(&$variables) {
   $attributes = $variables['options']['attributes'];
 
+  if (!isset($attributes['class'])) {
+    $attributes['class'] = array();
+  }
+
   if (isset($attributes['class']) && ($key = array_search('active', $attributes['class'])) !== FALSE) {
     if (count($attributes['class']) == 1) {
       unset($variables['options']['attributes']['class']);
