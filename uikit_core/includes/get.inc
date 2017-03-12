@@ -15,7 +15,7 @@
  * @param string $uikit_version
  *   The version of UIkit to retrieve.
  */
-function uikit_get_cdn_assets($font_awesome_version = '4.7.0', $jquery_version = '2.1.4', $uikit_version = '2.26.4') {
+function uikit_get_cdn_assets($font_awesome_version = '4.6.3', $jquery_version = '2.1.4', $uikit_version = '2.27.2') {
   global $theme_key;
   $uikit_style = theme_get_setting('base_style', $theme_key);
   $uikit_css = 'uikit.min.css';

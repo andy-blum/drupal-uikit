@@ -633,20 +633,20 @@ function uikit_preprocess_fieldset(&$variables) {
         break;
     }
 
-    drupal_add_css("//cdnjs.cloudflare.com/ajax/libs/uikit/2.26.4/css/components/$accordion_css", array(
+    drupal_add_css("//cdnjs.cloudflare.com/ajax/libs/uikit/2.27.2/css/components/$accordion_css", array(
       'type' => 'external',
       'group' => CSS_THEME,
       'every_page' => TRUE,
       'weight' => -10,
-      'version' => '2.26.4',
+      'version' => '2.27.2',
     ));
 
-    drupal_add_js('//cdnjs.cloudflare.com/ajax/libs/uikit/2.26.4/js/components/accordion.min.js', array(
+    drupal_add_js('//cdnjs.cloudflare.com/ajax/libs/uikit/2.27.2/js/components/accordion.min.js', array(
       'type' => 'external',
       'group' => JS_THEME,
       'every_page' => TRUE,
       'weight' => -10,
-      'version' => '2.26.4',
+      'version' => '2.27.2',
     ));
   }
   elseif ($format_fieldset) {
@@ -691,12 +691,12 @@ function uikit_preprocess_form(&$variables) {
       break;
   }
 
-  drupal_add_css("//cdnjs.cloudflare.com/ajax/libs/uikit/2.26.4/css/components/$form_advanced_css", array(
+  drupal_add_css("//cdnjs.cloudflare.com/ajax/libs/uikit/2.27.2/css/components/$form_advanced_css", array(
     'type' => 'external',
     'group' => CSS_THEME,
     'every_page' => TRUE,
     'weight' => -10,
-    'version' => '2.26.4',
+    'version' => '2.27.2',
   ));
 }
 
