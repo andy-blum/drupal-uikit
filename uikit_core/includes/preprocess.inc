@@ -594,7 +594,6 @@ function uikit_preprocess_field(&$variables) {
  * Implements hook_preprocess_HOOK() for theme_fieldset().
  */
 function uikit_preprocess_fieldset(&$variables) {
-  global $theme_key;
   $collapsible = isset($variables['element']['#collapsible']) && $variables['element']['#collapsible'];
   $group_fieldset = isset($variables['element']['#group_fieldset']) && $variables['element']['#group_fieldset'];
   $format_fieldset = isset($variables['element']['format']);
@@ -620,34 +619,7 @@ function uikit_preprocess_fieldset(&$variables) {
     }
 
     // Retrieve the accordion component CDN assets.
-    $uikit_style = theme_get_setting('base_style', $theme_key);
-    $accordion_css = 'accordion.min.css';
-
-    switch ($uikit_style) {
-      case 'almost-flat':
-        $accordion_css = 'accordion.almost-flat.min.css';
-        break;
-
-      case 'gradient':
-        $accordion_css = 'accordion.gradient.min.css';
-        break;
-    }
-
-    drupal_add_css("//cdnjs.cloudflare.com/ajax/libs/uikit/2.27.2/css/components/$accordion_css", array(
-      'type' => 'external',
-      'group' => CSS_THEME,
-      'every_page' => TRUE,
-      'weight' => -10,
-      'version' => '2.27.2',
-    ));
-
-    drupal_add_js('//cdnjs.cloudflare.com/ajax/libs/uikit/2.27.2/js/components/accordion.min.js', array(
-      'type' => 'external',
-      'group' => JS_THEME,
-      'every_page' => TRUE,
-      'weight' => -10,
-      'version' => '2.27.2',
-    ));
+    uikit_get_cdn_asset('accordion');
   }
   elseif ($format_fieldset) {
     $variables['theme_hook_suggestions'][] = 'fieldset__format';
@@ -662,7 +634,6 @@ function uikit_preprocess_fieldset(&$variables) {
  * Implements hook_preprocess_HOOK() for theme_form().
  */
 function uikit_preprocess_form(&$variables) {
-  global $theme_key;
   $attributes = $variables['element']['#attributes'];
 
   // Make sure the class attribute is an array. If not we take the class set
@@ -678,26 +649,7 @@ function uikit_preprocess_form(&$variables) {
   $variables['element']['#attributes']['class'][] = 'uk-form-stacked';
 
   // Retrieve the advanced form component CDN assets.
-  $uikit_style = theme_get_setting('base_style', $theme_key);
-  $form_advanced_css = 'form-advanced.min.css';
-
-  switch ($uikit_style) {
-    case 'almost-flat':
-      $form_advanced_css = 'form-advanced.almost-flat.min.css';
-      break;
-
-    case 'gradient':
-      $form_advanced_css = 'form-advanced.gradient.min.css';
-      break;
-  }
-
-  drupal_add_css("//cdnjs.cloudflare.com/ajax/libs/uikit/2.27.2/css/components/$form_advanced_css", array(
-    'type' => 'external',
-    'group' => CSS_THEME,
-    'every_page' => TRUE,
-    'weight' => -10,
-    'version' => '2.27.2',
-  ));
+  uikit_get_cdn_asset('form-advanced');
 }
 
 /**
