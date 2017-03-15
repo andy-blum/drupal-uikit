@@ -1134,7 +1134,7 @@ function uikit_status_messages($variables) {
     }
 
     $output .= "<div class=\"uk-alert $class\">\n";
-    $output .= '<a class="uk-alert-close uk-close"></a>';
+    $output .= '<a class="uk-alert-close" uk-close></a>';
 
     if (!empty($status_heading[$type])) {
       $output .= '<h2 class="uk-hidden">' . $status_heading[$type] . "</h2>\n";
