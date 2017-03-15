@@ -626,9 +626,6 @@ function uikit_preprocess_fieldset(&$variables) {
         $variables['element']['#attributes']['data-uk-accordion'] .= '{showfirst: false}';
       }
     }
-
-    // Retrieve the accordion component CDN assets.
-    uikit_get_cdn_asset('accordion');
   }
   elseif ($format_fieldset) {
     $variables['theme_hook_suggestions'][] = 'fieldset__format';
@@ -656,9 +653,6 @@ function uikit_preprocess_form(&$variables) {
   // Add the uk-form class to all forms.
   $variables['element']['#attributes']['class'][] = 'uk-form';
   $variables['element']['#attributes']['class'][] = 'uk-form-stacked';
-
-  // Retrieve the advanced form component CDN assets.
-  uikit_get_cdn_asset('form-advanced');
 }
 
 /**
