@@ -865,7 +865,7 @@ function uikit_menu_tree__navbar_flip($variables) {
  * Implements theme_menu_tree() for offcanvas menus.
  */
 function uikit_menu_tree__offcanvas($variables) {
-  return '<ul class="uk-nav uk-nav-offcanvas uk-nav-parent-icon" data-uk-nav>' . $variables['tree'] . '</ul>';
+  return '<ul class="uk-nav uk-nav-default uk-nav-parent-icon" uk-nav>' . $variables['tree'] . '</ul>';
 }
 
 /**

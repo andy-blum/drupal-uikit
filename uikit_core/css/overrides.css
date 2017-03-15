@@ -378,11 +378,11 @@
  * 2. Stacked offcanvas menus will show too much border and box-shadow, so we remove them so stacked menus blend well.
  */
 .uk-dropdown .uk-nav ul,
-.uk-nav-offcanvas .uk-nav-sub .uk-nav-header,
-.uk-nav-offcanvas .uk-nav-sub .uk-nav-divider {
+.uk-nav-default .uk-nav-sub .uk-nav-header,
+.uk-nav-default .uk-nav-sub .uk-nav-divider {
   display: none; /* 1 */
 }
-.uk-nav-offcanvas+.uk-nav-offcanvas>li:first-of-type>a {
+.uk-nav-defaults+.uk-nav-default>li:first-of-type>a {
   border-top: none;
   box-shadow: none;
 }
