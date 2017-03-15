@@ -178,19 +178,19 @@ function uikit_preprocess_page(&$variables) {
     $variables['sidebar_second_attributes_array']['class'][] = 'uk-width-1-4@l';
 
     if ($standard_grail) {
-      $variables['content_attributes_array']['class'][] = 'uk-push-large-1-4';
-      $variables['sidebar_first_attributes_array']['class'][] = 'uk-pull-large-1-2';
-      $variables['sidebar_second_attributes_array']['class'][] = 'uk-push-pull-large';
+      $variables['content_attributes_array']['class'][] = 'uk-push-1-4@l';
+      $variables['sidebar_first_attributes_array']['class'][] = 'uk-pull-1-2@l';
+      $variables['sidebar_second_attributes_array']['class'][] = 'uk-push-pull-@l';
     }
     elseif ($standard_left) {
-      $variables['content_attributes_array']['class'][] = 'uk-push-large-1-2';
-      $variables['sidebar_first_attributes_array']['class'][] = 'uk-pull-large-1-2';
-      $variables['sidebar_second_attributes_array']['class'][] = 'uk-pull-large-1-2';
+      $variables['content_attributes_array']['class'][] = 'uk-push-1-2@l';
+      $variables['sidebar_first_attributes_array']['class'][] = 'uk-pull-1-2@l';
+      $variables['sidebar_second_attributes_array']['class'][] = 'uk-pull-1-2@l';
     }
     elseif ($standard_right) {
-      $variables['content_attributes_array']['class'][] = 'uk-push-pull-large';
-      $variables['sidebar_first_attributes_array']['class'][] = 'uk-push-pull-large';
-      $variables['sidebar_second_attributes_array']['class'][] = 'uk-push-pull-large';
+      $variables['content_attributes_array']['class'][] = 'uk-push-pull-@l';
+      $variables['sidebar_first_attributes_array']['class'][] = 'uk-push-pull-@l';
+      $variables['sidebar_second_attributes_array']['class'][] = 'uk-push-pull-@l';
     }
 
     if ($tablet_grail || $tablet_left || $tablet_right) {
@@ -205,52 +205,52 @@ function uikit_preprocess_page(&$variables) {
     }
 
     if ($tablet_grail) {
-      $variables['content_attributes_array']['class'][] = 'uk-push-medium-1-4';
-      $variables['sidebar_first_attributes_array']['class'][] = 'uk-pull-medium-1-2';
-      $variables['sidebar_second_attributes_array']['class'][] = 'uk-push-pull-medium';
+      $variables['content_attributes_array']['class'][] = 'uk-push-1-4@m';
+      $variables['sidebar_first_attributes_array']['class'][] = 'uk-pull-1-2@m';
+      $variables['sidebar_second_attributes_array']['class'][] = 'uk-push-pull-@m';
     }
     elseif ($tablet_left) {
-      $variables['content_attributes_array']['class'][] = 'uk-push-medium-1-2';
-      $variables['sidebar_first_attributes_array']['class'][] = 'uk-pull-medium-1-2';
-      $variables['sidebar_second_attributes_array']['class'][] = 'uk-pull-medium-1-2';
+      $variables['content_attributes_array']['class'][] = 'uk-push-1-2@m';
+      $variables['sidebar_first_attributes_array']['class'][] = 'uk-pull-1-2@m';
+      $variables['sidebar_second_attributes_array']['class'][] = 'uk-pull-1-2@m';
     }
     elseif ($tablet_right) {
-      $variables['content_attributes_array']['class'][] = 'uk-push-pull-medium';
-      $variables['sidebar_first_attributes_array']['class'][] = 'uk-push-pull-medium';
-      $variables['sidebar_second_attributes_array']['class'][] = 'uk-push-pull-medium';
+      $variables['content_attributes_array']['class'][] = 'uk-push-pull-@m';
+      $variables['sidebar_first_attributes_array']['class'][] = 'uk-push-pull-@m';
+      $variables['sidebar_second_attributes_array']['class'][] = 'uk-push-pull-@m';
     }
     elseif ($tablet_left_stacked) {
-      $variables['content_attributes_array']['class'][] = 'uk-push-medium-1-4';
-      $variables['sidebar_first_attributes_array']['class'][] = 'uk-pull-medium-3-4';
-      $variables['sidebar_second_attributes_array']['class'][] = 'uk-push-pull-medium';
+      $variables['content_attributes_array']['class'][] = 'uk-push-1-4@m';
+      $variables['sidebar_first_attributes_array']['class'][] = 'uk-pull-3-4@m';
+      $variables['sidebar_second_attributes_array']['class'][] = 'uk-push-pull-@m';
     }
     elseif ($tablet_right_stacked) {
-      $variables['content_attributes_array']['class'][] = 'uk-push-pull-medium';
-      $variables['sidebar_first_attributes_array']['class'][] = 'uk-push-pull-medium';
-      $variables['sidebar_second_attributes_array']['class'][] = 'uk-push-pull-medium';
+      $variables['content_attributes_array']['class'][] = 'uk-push-pull-@m';
+      $variables['sidebar_first_attributes_array']['class'][] = 'uk-push-pull-@m';
+      $variables['sidebar_second_attributes_array']['class'][] = 'uk-push-pull-@m';
     }
 
     if ($mobile_stacked || $mobile_vertical) {
-      $variables['content_attributes_array']['class'][] = 'uk-width-small-1-1';
+      $variables['content_attributes_array']['class'][] = 'uk-width-1-1@s';
       $variables['content_attributes_array']['class'][] = 'uk-width-1-1';
-      $variables['content_attributes_array']['class'][] = 'uk-push-pull-small';
+      $variables['content_attributes_array']['class'][] = 'uk-push-pull-@s';
     }
 
     if ($mobile_stacked) {
-      $variables['sidebar_first_attributes_array']['class'][] = 'uk-width-small-1-1';
+      $variables['sidebar_first_attributes_array']['class'][] = 'uk-width-1-1@s';
       $variables['sidebar_first_attributes_array']['class'][] = 'uk-width-1-1';
-      $variables['sidebar_first_attributes_array']['class'][] = 'uk-push-pull-small';
-      $variables['sidebar_second_attributes_array']['class'][] = 'uk-width-small-1-1';
+      $variables['sidebar_first_attributes_array']['class'][] = 'uk-push-pull-@s';
+      $variables['sidebar_second_attributes_array']['class'][] = 'uk-width-1-1@s';
       $variables['sidebar_second_attributes_array']['class'][] = 'uk-width-1-1';
-      $variables['sidebar_second_attributes_array']['class'][] = 'uk-push-pull-small';
+      $variables['sidebar_second_attributes_array']['class'][] = 'uk-push-pull-@s';
     }
     elseif ($mobile_vertical) {
-      $variables['sidebar_first_attributes_array']['class'][] = 'uk-width-small-1-2';
+      $variables['sidebar_first_attributes_array']['class'][] = 'uk-width-1-2@s';
       $variables['sidebar_first_attributes_array']['class'][] = 'uk-width-1-2';
-      $variables['sidebar_first_attributes_array']['class'][] = 'uk-push-pull-small';
-      $variables['sidebar_second_attributes_array']['class'][] = 'uk-width-small-1-2';
+      $variables['sidebar_first_attributes_array']['class'][] = 'uk-push-pull-@s';
+      $variables['sidebar_second_attributes_array']['class'][] = 'uk-width-1-2@s';
       $variables['sidebar_second_attributes_array']['class'][] = 'uk-width-1-2';
-      $variables['sidebar_second_attributes_array']['class'][] = 'uk-push-pull-small';
+      $variables['sidebar_second_attributes_array']['class'][] = 'uk-push-pull-@s';
     }
   }
   elseif (!empty($sidebar_first)) {
@@ -258,12 +258,12 @@ function uikit_preprocess_page(&$variables) {
     $variables['sidebar_first_attributes_array']['class'][] = 'uk-width-1-4@l';
 
     if ($standard_grail || $standard_left) {
-      $variables['content_attributes_array']['class'][] = 'uk-push-large-1-4';
-      $variables['sidebar_first_attributes_array']['class'][] = 'uk-pull-large-3-4';
+      $variables['content_attributes_array']['class'][] = 'uk-push-1-4@l';
+      $variables['sidebar_first_attributes_array']['class'][] = 'uk-pull-3-4@l';
     }
     elseif ($standard_right) {
-      $variables['content_attributes_array']['class'][] = 'uk-push-pull-large';
-      $variables['sidebar_first_attributes_array']['class'][] = 'uk-push-pull-large';
+      $variables['content_attributes_array']['class'][] = 'uk-push-pull-@l';
+      $variables['sidebar_first_attributes_array']['class'][] = 'uk-push-pull-@l';
     }
 
     if ($tablet_layout) {
@@ -272,12 +272,12 @@ function uikit_preprocess_page(&$variables) {
     }
 
     if ($tablet_grail || $tablet_left || $tablet_left_stacked) {
-      $variables['content_attributes_array']['class'][] = 'uk-push-medium-1-4';
-      $variables['sidebar_first_attributes_array']['class'][] = 'uk-pull-medium-3-4';
+      $variables['content_attributes_array']['class'][] = 'uk-push-1-4@m';
+      $variables['sidebar_first_attributes_array']['class'][] = 'uk-pull-3-4@m';
     }
     elseif ($tablet_right || $tablet_right_stacked) {
-      $variables['content_attributes_array']['class'][] = 'uk-push-pull-medium';
-      $variables['sidebar_first_attributes_array']['class'][] = 'uk-push-pull-medium';
+      $variables['content_attributes_array']['class'][] = 'uk-push-pull-@m';
+      $variables['sidebar_first_attributes_array']['class'][] = 'uk-push-pull-@m';
     }
   }
   elseif (!empty($sidebar_second)) {
@@ -285,12 +285,12 @@ function uikit_preprocess_page(&$variables) {
     $variables['sidebar_second_attributes_array']['class'][] = 'uk-width-1-4@l';
 
     if ($standard_grail || $standard_right) {
-      $variables['content_attributes_array']['class'][] = 'uk-push-pull-large';
-      $variables['sidebar_second_attributes_array']['class'][] = 'uk-push-pull-large';
+      $variables['content_attributes_array']['class'][] = 'uk-push-pull-@l';
+      $variables['sidebar_second_attributes_array']['class'][] = 'uk-push-pull-@l';
     }
     elseif ($standard_left) {
-      $variables['content_attributes_array']['class'][] = 'uk-push-large-1-4';
-      $variables['sidebar_second_attributes_array']['class'][] = 'uk-pull-large-3-4';
+      $variables['content_attributes_array']['class'][] = 'uk-push-1-4@l';
+      $variables['sidebar_second_attributes_array']['class'][] = 'uk-pull-3-4@l';
     }
 
     if ($tablet_grail || $tablet_right || $tablet_left) {
@@ -303,16 +303,16 @@ function uikit_preprocess_page(&$variables) {
     }
 
     if ($tablet_grail || $tablet_right) {
-      $variables['content_attributes_array']['class'][] = 'uk-push-pull-medium';
-      $variables['sidebar_first_attributes_array']['class'][] = 'uk-push-pull-medium';
+      $variables['content_attributes_array']['class'][] = 'uk-push-pull-@m';
+      $variables['sidebar_first_attributes_array']['class'][] = 'uk-push-pull-@m';
     }
     elseif ($tablet_left) {
-      $variables['content_attributes_array']['class'][] = 'uk-push-medium-1-4';
-      $variables['sidebar_second_attributes_array']['class'][] = 'uk-pull-medium-3-4';
+      $variables['content_attributes_array']['class'][] = 'uk-push-1-4@m';
+      $variables['sidebar_second_attributes_array']['class'][] = 'uk-pull-3-4@m';
     }
     elseif ($tablet_left_stacked || $tablet_right_stacked) {
-      $variables['content_attributes_array']['class'][] = 'uk-push-pull-medium';
-      $variables['sidebar_second_attributes_array']['class'][] = 'uk-push-pull-medium';
+      $variables['content_attributes_array']['class'][] = 'uk-push-pull-@m';
+      $variables['sidebar_second_attributes_array']['class'][] = 'uk-push-pull-@m';
     }
   }
   elseif (empty($sidebar_first) && empty($sidebar_second)) {
