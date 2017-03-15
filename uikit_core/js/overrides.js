@@ -13,5 +13,8 @@
     navbar.on('click', '[href="#"], [href=""]', function (e) {
       e.preventDefault();
     }).find('[href="#"]').prop('href', '');
+
+    // Initialize alert closing actions.
+    UIkit.alert('#messages');
   });
 })(jQuery);

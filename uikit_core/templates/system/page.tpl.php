@@ -141,9 +141,7 @@
       <?php endif; ?>
 
       <?php if ($messages): ?>
-        <div id="messages" class="uk-width-1-1">
-          <?php print $messages; ?>
-        </div>
+        <?php print $messages; ?>
       <?php endif; ?>
 
       <?php print render($page['help']); ?>
