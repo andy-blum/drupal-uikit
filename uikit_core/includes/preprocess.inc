@@ -576,9 +576,9 @@ function uikit_preprocess_confirm_form(&$variables) {
  * Implements hook_preprocess_HOOK() for theme_container().
  */
 function uikit_preprocess_container(&$variables) {
-  // Add the uk-form-row class to provide proper margin between container
+  // Add the uk-margin class to provide proper margin between container
   // elements.
-  $variables['element']['#attributes']['class'][] = 'uk-form-row';
+  $variables['element']['#attributes']['class'][] = 'uk-margin';
 }
 
 /**
@@ -613,7 +613,7 @@ function uikit_preprocess_fieldset(&$variables) {
   }
   elseif ($collapsible) {
     $variables['theme_hook_suggestions'][] = 'fieldset__collapsible';
-    $variables['element']['#attributes']['class'][] = 'uk-form-row';
+    $variables['element']['#attributes']['class'][] = 'uk-margin';
     $variables['element']['#attributes']['class'][] = 'uk-accordion';
     $variables['element']['#attributes']['data-uk-accordion'] = '';
 
@@ -632,7 +632,7 @@ function uikit_preprocess_fieldset(&$variables) {
   }
   else {
     $variables['theme_hook_suggestions'][] = 'fieldset';
-    $variables['element']['#attributes']['class'][] = 'uk-form-row';
+    $variables['element']['#attributes']['class'][] = 'uk-margin';
   }
 }
 
@@ -649,10 +649,6 @@ function uikit_preprocess_form(&$variables) {
     $class = $attributes['class'];
     $variables['element']['#attributes']['class'] = array($class);
   }
-
-  // Add the uk-form class to all forms.
-  $variables['element']['#attributes']['class'][] = 'uk-form';
-  $variables['element']['#attributes']['class'][] = 'uk-form-stacked';
 }
 
 /**

@@ -39,9 +39,6 @@ form .field-add-more-submit {
   margin-top: 0.4em;
   margin-bottom: 0.4em;
 }
-.form-type-checkbox.uk-form-row+.form-type-checkbox.uk-form-row {
-  margin-top: 0.75em;
-}
 .form-checkboxes .form-type-checkbox+.form-type-checkbox {
   margin-top: 0;
 }

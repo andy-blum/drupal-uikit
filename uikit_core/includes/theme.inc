@@ -399,7 +399,7 @@ function uikit_form_element($variables) {
       }
 
       // Add a wrapping container around the elements.
-      $form_row_attributes['class'][] = 'uk-form-row';
+      $form_row_attributes['class'][] = 'uk-margin';
       $prefix = '<div' . drupal_attributes($form_row_attributes) . '>' . $prefix;
       $suffix .= '</div>';
     }

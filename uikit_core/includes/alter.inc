@@ -68,15 +68,6 @@ function uikit_html_head_alter(&$head_elements) {
 }
 
 /**
- * Implements hook_form_FORM_ID_alter().
- */
-function uikit_form_user_login_block_alter(&$form, &$form_state, $form_id) {
-  // Add utility classes to the login block links.
-  $form['links']['#prefix'] = '<div class="uk-form-row form-item-list">';
-  $form['links']['#suffix'] = '</div>';
-}
-
-/**
  * Implements hook_menu_local_tasks_alter().
  */
 function uikit_menu_local_tasks_alter(&$data, $router_item, $root_path) {
