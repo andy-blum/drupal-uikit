@@ -642,7 +642,7 @@ function uikit_links__node($variables) {
       $link['attributes']['class'] = array(str_replace('_', '-', $key));
 
       // Add the UIkit button utility classes.
-      $link['attributes']['class'][] = 'uk-button';
+      $link['attributes']['class'][] = 'uk-button-default';
 
       if ($key == 'node-readmore') {
         $link['attributes']['class'][] = 'uk-button-primary';

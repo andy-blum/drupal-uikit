@@ -488,8 +488,8 @@ function uikit_preprocess_breadcrumb(&$variables) {
  * Implements hook_preprocess_HOOK() for theme_button().
  */
 function uikit_preprocess_button(&$variables) {
-  // Add the uk-button class to all buttons.
-  $variables['element']['#attributes']['class'][] = 'uk-button';
+  // Add the uk-button-default class to all buttons.
+  $variables['element']['#attributes']['class'][] = 'uk-button-default';
   $variables['element']['#attributes']['class'][] = 'uk-margin-small-right';
 }
 
@@ -565,9 +565,9 @@ function uikit_preprocess_confirm_form(&$variables) {
     $type = isset($action['#type']) ? $action['#type'] : 0;
 
     if ($type && $type == 'link') {
-      // Add the uk-button class to form action links for consistent styling
-      // with form action buttons.
-      $variables['form']['actions'][$key]['#attributes']['class'][] = 'uk-button';
+      // Add the uk-button-default class to form action links for consistent
+      // styling with form action buttons.
+      $variables['form']['actions'][$key]['#attributes']['class'][] = 'uk-button-default';
     }
   }
 }
