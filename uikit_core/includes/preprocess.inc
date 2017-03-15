@@ -162,20 +162,20 @@ function uikit_preprocess_page(&$variables) {
   // Assign sidebar_first attributes.
   $variables['sidebar_first_attributes_array'] = array(
     'id' => 'sidebar-first',
-    'class' => array('uk-width-large-1-4'),
+    'class' => array('uk-width-1-4@l'),
   );
 
   // Assign sidebar_second attributes.
   $variables['sidebar_second_attributes_array'] = array(
     'id' => 'sidebar-second',
-    'class' => array('uk-width-large-1-4'),
+    'class' => array('uk-width-1-4@l'),
   );
 
   // Assign additional content attributes if either sidebar is not empty.
   if (!empty($sidebar_first) && !empty($sidebar_second)) {
-    $variables['content_attributes_array']['class'][] = 'uk-width-large-1-2';
-    $variables['sidebar_first_attributes_array']['class'][] = 'uk-width-large-1-4';
-    $variables['sidebar_second_attributes_array']['class'][] = 'uk-width-large-1-4';
+    $variables['content_attributes_array']['class'][] = 'uk-width-1-2@l';
+    $variables['sidebar_first_attributes_array']['class'][] = 'uk-width-1-4@l';
+    $variables['sidebar_second_attributes_array']['class'][] = 'uk-width-1-4@l';
 
     if ($standard_grail) {
       $variables['content_attributes_array']['class'][] = 'uk-push-large-1-4';
@@ -194,14 +194,14 @@ function uikit_preprocess_page(&$variables) {
     }
 
     if ($tablet_grail || $tablet_left || $tablet_right) {
-      $variables['content_attributes_array']['class'][] = 'uk-width-medium-1-2';
-      $variables['sidebar_first_attributes_array']['class'][] = 'uk-width-medium-1-4';
-      $variables['sidebar_second_attributes_array']['class'][] = 'uk-width-medium-1-4';
+      $variables['content_attributes_array']['class'][] = 'uk-width-1-2@m';
+      $variables['sidebar_first_attributes_array']['class'][] = 'uk-width-1-4@m';
+      $variables['sidebar_second_attributes_array']['class'][] = 'uk-width-1-4@m';
     }
     elseif ($tablet_left_stacked || $tablet_right_stacked) {
-      $variables['content_attributes_array']['class'][] = 'uk-width-medium-3-4';
-      $variables['sidebar_first_attributes_array']['class'][] = 'uk-width-medium-1-4';
-      $variables['sidebar_second_attributes_array']['class'][] = 'uk-width-medium-1-1';
+      $variables['content_attributes_array']['class'][] = 'uk-width-3-4@m';
+      $variables['sidebar_first_attributes_array']['class'][] = 'uk-width-1-4@m';
+      $variables['sidebar_second_attributes_array']['class'][] = 'uk-width-1-1@m';
     }
 
     if ($tablet_grail) {
@@ -254,8 +254,8 @@ function uikit_preprocess_page(&$variables) {
     }
   }
   elseif (!empty($sidebar_first)) {
-    $variables['content_attributes_array']['class'][] = 'uk-width-large-3-4';
-    $variables['sidebar_first_attributes_array']['class'][] = 'uk-width-large-1-4';
+    $variables['content_attributes_array']['class'][] = 'uk-width-3-4@l';
+    $variables['sidebar_first_attributes_array']['class'][] = 'uk-width-1-4@l';
 
     if ($standard_grail || $standard_left) {
       $variables['content_attributes_array']['class'][] = 'uk-push-large-1-4';
@@ -267,8 +267,8 @@ function uikit_preprocess_page(&$variables) {
     }
 
     if ($tablet_layout) {
-      $variables['content_attributes_array']['class'][] = 'uk-width-medium-3-4';
-      $variables['sidebar_first_attributes_array']['class'][] = 'uk-width-medium-1-4';
+      $variables['content_attributes_array']['class'][] = 'uk-width-3-4@m';
+      $variables['sidebar_first_attributes_array']['class'][] = 'uk-width-1-4@m';
     }
 
     if ($tablet_grail || $tablet_left || $tablet_left_stacked) {
@@ -281,8 +281,8 @@ function uikit_preprocess_page(&$variables) {
     }
   }
   elseif (!empty($sidebar_second)) {
-    $variables['content_attributes_array']['class'][] = 'uk-width-large-3-4';
-    $variables['sidebar_second_attributes_array']['class'][] = 'uk-width-large-1-4';
+    $variables['content_attributes_array']['class'][] = 'uk-width-3-4@l';
+    $variables['sidebar_second_attributes_array']['class'][] = 'uk-width-1-4@l';
 
     if ($standard_grail || $standard_right) {
       $variables['content_attributes_array']['class'][] = 'uk-push-pull-large';
@@ -294,12 +294,12 @@ function uikit_preprocess_page(&$variables) {
     }
 
     if ($tablet_grail || $tablet_right || $tablet_left) {
-      $variables['content_attributes_array']['class'][] = 'uk-width-medium-3-4';
-      $variables['sidebar_second_attributes_array']['class'][] = 'uk-width-medium-1-4';
+      $variables['content_attributes_array']['class'][] = 'uk-width-3-4@m';
+      $variables['sidebar_second_attributes_array']['class'][] = 'uk-width-1-4@m';
     }
     elseif ($tablet_left_stacked || $tablet_right_stacked) {
-      $variables['content_attributes_array']['class'][] = 'uk-width-medium-1-1';
-      $variables['sidebar_second_attributes_array']['class'][] = 'uk-width-medium-1-1';
+      $variables['content_attributes_array']['class'][] = 'uk-width-1-1@m';
+      $variables['sidebar_second_attributes_array']['class'][] = 'uk-width-1-1@m';
     }
 
     if ($tablet_grail || $tablet_right) {

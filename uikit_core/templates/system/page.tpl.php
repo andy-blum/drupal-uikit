@@ -121,7 +121,7 @@
     </div>
   <?php endif; ?>
 
-  <div class="uk-grid" data-uk-grid-margin>
+  <div class="uk-grid" uk-grid>
     <?php if ($page['header']): ?>
       <?php print render($page['header']); ?>
     <?php endif; ?>
@@ -179,7 +179,7 @@
 
   </div>
 
-  <div class="uk-grid" data-uk-grid-margin>
+  <div class="uk-grid" uk-grid>
     <?php if ($page['footer']): ?>
       <div id="footer" class="uk-width-1-1">
         <?php print render($page['footer']); ?>
