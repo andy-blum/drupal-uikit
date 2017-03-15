@@ -468,57 +468,6 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
     '#description' => t('UIkit offers different types of navigations, like navigation bars and side navigations. Use breadcrumbs or a pagination to steer through articles.'),
     '#group' => 'uikit',
   );
-  $form['navigations']['main_navbar'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Navigation bar'),
-    '#description' => t('Configure settings for the navigation bar.'),
-  );
-  $form['navigations']['main_navbar']['navbar_container_settings'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Navbar container'),
-    '#description' => t('Configure settings for the navigation bar container.'),
-    '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
-  );
-  $form['navigations']['main_navbar']['navbar_container_settings']['navbar_container'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Container'),
-    '#description' => t('Add the .uk-container class to the navbar container to give it a max-width and wrap the navbar of your website. For large screens it applies a different max-width.'),
-    '#default_value' => theme_get_setting('navbar_container', $theme_key),
-  );
-  $form['navigations']['main_navbar']['navbar_container_settings']['navbar_centering'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Centering'),
-    '#description' => t('To center the navbar container, use the .uk-container-center class.'),
-    '#default_value' => theme_get_setting('navbar_centering', $theme_key),
-  );
-  $form['navigations']['main_navbar']['navbar_container_settings']['navbar_attached'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Navbar attached'),
-    '#description' => t("Adds the <code>.uk-navbar-attached</code> class to optimize the navbar's styling to be attached to the top of the viewport. For example, rounded corners will be removed."),
-    '#default_value' => theme_get_setting('navbar_attached', $theme_key),
-  );
-  $form['navigations']['main_navbar']['navbar_margin'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Navbar margin'),
-    '#description' => t('Configure the top and bottom margin to apply to the navbar.'),
-    '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
-  );
-  $form['navigations']['main_navbar']['navbar_margin']['navbar_margin_top'] = array(
-    '#type' => 'select',
-    '#title' => t('Navbar top margin'),
-    '#description' => t('Select the amount of top margin to apply to the navbar.'),
-    '#default_value' => theme_get_setting('navbar_margin_top', $theme_key),
-    '#options' => $navbar_margin_top_options,
-  );
-  $form['navigations']['main_navbar']['navbar_margin']['navbar_margin_bottom'] = array(
-    '#type' => 'select',
-    '#title' => t('Navbar bottom margin'),
-    '#description' => t('Select the amount of bottom margin to apply to the navbar.'),
-    '#default_value' => theme_get_setting('navbar_margin_bottom', $theme_key),
-    '#options' => $navbar_margin_bottom_options,
-  );
   $form['navigations']['local_tasks'] = array(
     '#type' => 'fieldset',
     '#title' => t('Local tasks'),

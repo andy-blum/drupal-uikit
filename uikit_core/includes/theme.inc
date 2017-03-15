@@ -851,14 +851,7 @@ function uikit_menu_tree($variables) {
  * Implements theme_menu_tree() for the primary menu.
  */
 function uikit_menu_tree__navbar($variables) {
-  return '<ul class="uk-navbar-nav uk-hidden-small">' . $variables['tree'] . '</ul>';
-}
-
-/**
- * Implements theme_menu_tree() for the secondary menu.
- */
-function uikit_menu_tree__navbar_flip($variables) {
-  return '<div class="uk-navbar-flip uk-hidden-small"><ul class="uk-navbar-nav menu">' . $variables['tree'] . '</ul></div>';
+  return '<ul class="uk-navbar-nav uk-visible@m">' . $variables['tree'] . '</ul>';
 }
 
 /**

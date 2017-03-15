@@ -322,55 +322,22 @@ function uikit_preprocess_page(&$variables) {
   // Define header attributes.
   $variables['header_attributes_array'] = array(
     'id' => 'page-header',
+    'class' => array('uk-navbar-container'),
   );
-  if (theme_get_setting('navbar_container', $theme_key)) {
-    $variables['header_attributes_array']['class'][] = 'uk-container';
-  }
-  if (theme_get_setting('navbar_centering', $theme_key)) {
-    $variables['header_attributes_array']['class'][] = 'uk-container-center';
-  }
+
+  // Define navbar wrapper attributes.
+  $variables['navbar_wrapper_attributes_array'] = array(
+    'class' => array(
+      'uk-container',
+      'uk-container-expand',
+    ),
+  );
 
   // Define navbar attributes.
   $variables['navbar_attributes_array'] = array(
     'id' => 'page-navbar',
-    'class' => array('uk-navbar'),
+    'class' => 'uk-navbar',
   );
-
-  if (theme_get_setting('navbar_attached', $theme_key)) {
-    $variables['navbar_attributes_array']['class'][] = 'uk-navbar-attached';
-  }
-
-  if (theme_get_setting('navbar_margin_top', $theme_key)) {
-    switch (theme_get_setting('navbar_margin_top', $theme_key)) {
-      case 1:
-        $variables['navbar_attributes_array']['class'][] = 'uk-margin-top';
-        break;
-
-      case 2:
-        $variables['navbar_attributes_array']['class'][] = 'uk-margin-large-top';
-        break;
-
-      case 3:
-        $variables['navbar_attributes_array']['class'][] = 'uk-margin-small-top';
-        break;
-    }
-  }
-
-  if (theme_get_setting('navbar_margin_bottom', $theme_key)) {
-    switch (theme_get_setting('navbar_margin_bottom', $theme_key)) {
-      case 1:
-        $variables['navbar_attributes_array']['class'][] = 'uk-margin-bottom';
-        break;
-
-      case 2:
-        $variables['navbar_attributes_array']['class'][] = 'uk-margin-large-bottom';
-        break;
-
-      case 3:
-        $variables['navbar_attributes_array']['class'][] = 'uk-margin-small-bottom';
-        break;
-    }
-  }
 
   // Move the main and secondary menus into variables to set the attributes
   // accordingly.
@@ -399,7 +366,7 @@ function uikit_preprocess_page(&$variables) {
   if ($variables['secondary_menu']) {
     // Secondary navbar menu.
     $variables['navbar_secondary'] = menu_tree(variable_get('menu_secondary_links_source', 'user-menu'));
-    $variables['navbar_secondary']['#theme_wrappers'] = array('menu_tree__navbar_flip');
+    $variables['navbar_secondary']['#theme_wrappers'] = array('menu_tree__navbar');
 
     // Secondary offcanvas menu.
     $variables['offcanvas_secondary'] = menu_tree(variable_get('menu_secondary_links_source', 'user-menu'));

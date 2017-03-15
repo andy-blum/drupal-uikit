@@ -76,42 +76,33 @@
  */
 ?>
 <header<?php print $header_attributes; ?>>
-  <nav<?php print $navbar_attributes; ?>>
-    <?php if ($logo): ?>
-      <a href="<?php print $front_page; ?>" id="logo-large" class="uk-navbar-brand uk-hidden-small" title="<?php print t('Home'); ?>" rel="home">
-        <img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>"/>
-      </a>
-    <?php endif; ?>
-
-    <?php if ($site_name): ?>
-      <a href="<?php print $front_page; ?>" id="site-name" class="uk-navbar-brand uk-hidden-small" title="<?php print t('Home'); ?>" rel="home">
-        <span><?php print $site_name; ?></span>
-      </a>
-    <?php endif; ?>
-
-    <?php if ($main_menu || $secondary_menu): ?>
-      <?php print render($navbar_primary); ?>
-      <?php print render($navbar_secondary); ?>
-    <?php endif; ?>
-
-    <a href="#offcanvas" class="uk-navbar-toggle uk-visible-small" data-uk-offcanvas></a>
-
-    <?php if ($logo || $site_name): ?>
-      <div id="site-branding" class="uk-navbar-center uk-visible-small">
+  <div<?php print $navbar_wrapper_attributes; ?>>
+    <nav<?php print $navbar_attributes; ?>>
+      <div class="uk-navbar-left">
         <?php if ($logo): ?>
-          <a href="<?php print $front_page; ?>" class="uk-navbar-brand" title="<?php print t('Home'); ?>" rel="home" id="logo-small">
-            <img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>"/>
+          <a href="<?php print $front_page; ?>" id="site-logo" class="uk-navbar-item uk-logo" title="<?php print t('Home'); ?>" rel="home">
+            <img class="uk-margin-small-right" src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
+
+            <?php if ($site_name): ?>
+              <span><?php print $site_name; ?></span>
+            <?php endif; ?>
           </a>
         <?php endif; ?>
 
-        <?php if ($site_name): ?>
-          <a href="<?php print $front_page; ?>" class="uk-navbar-brand" title="<?php print t('Home'); ?>" rel="home">
-            <span><?php print $site_name; ?></span>
-          </a>
+        <?php if ($main_menu): ?>
+          <?php print render($navbar_primary); ?>
         <?php endif; ?>
       </div>
-    <?php endif; ?>
-  </nav>
+
+      <div class="uk-navbar-right">
+        <?php if ($secondary_menu): ?>
+          <?php print render($navbar_secondary); ?>
+        <?php endif; ?>
+
+        <a href="#offcanvas" class="uk-navbar-toggle uk-hidden@m" uk-navbar-toggle-icon></a>
+      </div>
+    </nav>
+  </div>
 </header>
 
 <div<?php print $page_container_attributes; ?>>
