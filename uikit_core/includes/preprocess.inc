@@ -16,6 +16,8 @@
  */
 function uikit_preprocess_html(&$variables) {
   global $theme_key;
+
+  // Load UIkit assets, i.e. stylesheets and scripts.
   uikit_get_cdn_assets();
 
   // Create an HTML5 doctype variable.
@@ -45,6 +47,7 @@ function uikit_preprocess_html(&$variables) {
     $variables['rdf_namespaces'] = ' prefix="' . implode('  ', $rdf_namespaces) . '"';
   }
 
+  // Add an http-equiv tag, if set.
   if (theme_get_setting('x_ua_compatible', $theme_key)) {
     $meta_x_ua_compatible = array(
       '#type' => 'html_tag',
@@ -70,6 +73,7 @@ function uikit_preprocess_html(&$variables) {
   $user_scalable = theme_get_setting('viewport_user_scalable', $theme_key);
   $viewport_array = array();
 
+  // Add each, if set, to the viewport array.
   if ($device_width_ratio == 'device-width') {
     $viewport_array['width'] = 'width=device-width';
   }
@@ -93,6 +97,7 @@ function uikit_preprocess_html(&$variables) {
   }
 
   if ($viewport_array) {
+    // Add the viewport options to the viewport meta tag.
     $viewport_content = implode(', ', $viewport_array);
 
     $meta_viewport = array(
@@ -115,22 +120,26 @@ function uikit_preprocess_html(&$variables) {
 function uikit_preprocess_page(&$variables) {
   global $theme_key;
 
+  // Get various theme settings to add the correct attributes.
   $sidebar_first = isset($variables['page']['sidebar_first']) ? $variables['page']['sidebar_first'] : '';
   $sidebar_second = isset($variables['page']['sidebar_second']) ? $variables['page']['sidebar_second'] : '';
   $standard_layout = theme_get_setting('standard_sidebar_positions', $theme_key);
   $tablet_layout = theme_get_setting('tablet_sidebar_positions', $theme_key);
   $mobile_layout = theme_get_setting('mobile_sidebar_positions', $theme_key);
 
+  // Determine the standard layout.
   $standard_grail = $standard_layout === 'holy-grail';
   $standard_left = $standard_layout === 'sidebars-left';
   $standard_right = $standard_layout === 'sidebars-right';
 
+  // Determine the tablet layout.
   $tablet_grail = $tablet_layout === 'holy-grail';
   $tablet_left = $tablet_layout === 'sidebars-left';
   $tablet_left_stacked = $tablet_layout === 'sidebar-left-stacked';
   $tablet_right = $tablet_layout === 'sidebars-right';
   $tablet_right_stacked = $tablet_layout === 'sidebar-right-stacked';
 
+  // Determine the mobile layout.
   $mobile_stacked = $mobile_layout === 'sidebars-stacked';
   $mobile_vertical = $mobile_layout === 'sidebars-vertical';
 
@@ -432,6 +441,7 @@ function uikit_preprocess_region(&$variables) {
   $region = $variables['region'];
   $wrapper_id = str_replace('_', '-', $region);
 
+  // Add a wrapper id and class to help themers.
   $variables['wrapper_attributes_array'] = array(
     'id' => 'region-' . $wrapper_id . '-wrapper',
     'class' => array('region-wrapper'),
@@ -460,13 +470,6 @@ function uikit_preprocess_region(&$variables) {
       }
     }
   }
-}
-
-/**
- * Implements template_preprocess_block().
- */
-function uikit_preprocess_block(&$variables) {
-  $variables['content_attributes_array']['class'][] = 'uk-margin';
 }
 
 /**
@@ -550,6 +553,7 @@ function uikit_preprocess_comment(&$variables) {
  * Implements template_preprocess_comment_wrapper().
  */
 function uikit_preprocess_comment_wrapper(&$variables) {
+  // Remove margin from the comment wrapper element.
   $variables['classes_array'][] = 'uk-margin-top-remove';
 }
 
@@ -559,7 +563,10 @@ function uikit_preprocess_comment_wrapper(&$variables) {
 function uikit_preprocess_confirm_form(&$variables) {
   foreach ($variables['form']['actions'] as $key => $action) {
     $type = isset($action['#type']) ? $action['#type'] : 0;
+
     if ($type && $type == 'link') {
+      // Add the uk-button class to form action links for consistent styling
+      // with form action buttons.
       $variables['form']['actions'][$key]['#attributes']['class'][] = 'uk-button';
     }
   }
@@ -569,6 +576,8 @@ function uikit_preprocess_confirm_form(&$variables) {
  * Implements hook_preprocess_HOOK() for theme_container().
  */
 function uikit_preprocess_container(&$variables) {
+  // Add the uk-form-row class to provide proper margin between container
+  // elements.
   $variables['element']['#attributes']['class'][] = 'uk-form-row';
 }
 
@@ -676,22 +685,6 @@ function uikit_preprocess_links(&$variables) {
 }
 
 /**
- * Implements template_preprocess_HOOK() for theme_menu_link().
- */
-function uikit_preprocess_menu_link(&$variables) {
-  $attributes = $variables['element']['#attributes'];
-
-  if (isset($attributes['class']) && ($key = array_search('leaf', $attributes['class'])) !== FALSE) {
-    if (count($attributes['class']) == 1) {
-      unset($variables['element']['#attributes']['class']);
-    }
-    else {
-      unset($variables['element']['#attributes']['class'][$key]);
-    }
-  }
-}
-
-/**
  * Implements hook_preprocess_HOOK() for theme_menu_local_tasks().
  */
 function uikit_preprocess_menu_local_tasks(&$variables) {
@@ -723,6 +716,7 @@ function uikit_preprocess_menu_local_tasks(&$variables) {
  * Implements hook_preprocess_HOOK() for theme_password().
  */
 function uikit_preprocess_password(&$variables) {
+  // Define size attribute for password fields for consistent styling.
   $variables['element']['#attributes']['size'] = 25;
 }
 
@@ -748,6 +742,7 @@ function uikit_preprocess_username(&$variables) {
   $user_language = isset($variables['attributes_array']['xml:lang']);
 
   if ($user_language) {
+    // Provide a proper lang attribute to username elements.
     $lang = $variables['attributes_array']['xml:lang'];
     unset($variables['attributes_array']['xml:lang']);
     $variables['attributes_array']['lang'] = !empty($lang) ? $lang : $language->language;

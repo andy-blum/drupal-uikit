@@ -41,6 +41,7 @@ function uikit_get_cdn_assets() {
         break;
     }
 
+    // Add the selected UIkit stylesheet.
     drupal_add_css('//cdnjs.cloudflare.com/ajax/libs/uikit/' . UIKIT_LIBRARY_VERSION . "/css/$uikit_css", array(
       'type' => 'external',
       'group' => CSS_THEME,
