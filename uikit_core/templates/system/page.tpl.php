@@ -99,7 +99,7 @@
           <?php print render($navbar_secondary); ?>
         <?php endif; ?>
 
-        <a href="#offcanvas" class="uk-navbar-toggle uk-hidden@m" uk-navbar-toggle-icon></a>
+        <a href="#offcanvas" uk-toggle uk-navbar-toggle-icon class="uk-navbar-toggle uk-hidden@m uk-navbar-toggle-icon uk-icon"></a>
       </div>
     </nav>
   </div>
@@ -181,8 +181,8 @@
 </div>
 
 <?php if ($offcanvas_primary || $offcanvas_secondary): ?>
-  <div id="offcanvas" class="uk-offcanvas">
-    <div class="uk-offcanvas-bar" mode="push">
+  <div id="offcanvas" uk-offcanvas="mode: push; overlay: true" class="uk-offcanvas">
+    <div class="uk-offcanvas-bar">
       <?php print render($offcanvas_primary); ?>
       <?php print render($offcanvas_secondary); ?>
     </div>
