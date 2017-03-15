@@ -148,9 +148,6 @@ function uikit_preprocess_page(&$variables) {
   if (theme_get_setting('page_container', $theme_key)) {
     $page_container_attributes['class'][] = 'uk-container';
   }
-  if (theme_get_setting('page_centering', $theme_key)) {
-    $page_container_attributes['class'][] = 'uk-container-center';
-  }
   if (theme_get_setting('page_margin', $theme_key)) {
     $page_container_attributes['class'][] = theme_get_setting('page_margin', $theme_key);
   }

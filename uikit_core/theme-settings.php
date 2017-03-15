@@ -70,20 +70,6 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
     '11' => 'IE11 mode',
   );
 
-  // Set the navbar margin options.
-  $navbar_margin_top_options = array(
-    'No top margin',
-    'Normal top margin',
-    'Smaller top margin',
-    'Larger top margin',
-  );
-  $navbar_margin_bottom_options = array(
-    'No bottom margin',
-    'Normal bottom margin',
-    'Smaller bottom margin',
-    'Larger bottom margin',
-  );
-
   // Build the markup for the local task demos.
   $demo_local_tasks = '<ul class="uk-subnav">';
   $demo_local_tasks .= '<li class="uk-active"><a href="#">Item</a></li>';
@@ -398,17 +384,6 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
     '#title' => t('Page Container'),
     '#description' => t('Add the .uk-container class to the page container to give it a max-width and wrap the main content of your website. For large screens it applies a different max-width.'),
     '#default_value' => theme_get_setting('page_container', $theme_key),
-    '#states' => array(
-      'visible' => array(
-        ':input[name="layout_advanced"]' => array('checked' => TRUE),
-      ),
-    ),
-  );
-  $form['layout']['page_layout']['page_centering'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Page Centering'),
-    '#description' => t('To center the page container, use the .uk-container-center class.'),
-    '#default_value' => theme_get_setting('page_centering', $theme_key),
     '#states' => array(
       'visible' => array(
         ':input[name="layout_advanced"]' => array('checked' => TRUE),
