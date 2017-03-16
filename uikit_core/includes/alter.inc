@@ -38,12 +38,6 @@ function uikit_css_alter(&$css) {
   if (isset($css[$field_css])) {
     $css[$field_css]['data'] = $theme . '/css/field.css';
   }
-
-  // Replace the user module's user.css with a custom version.
-  $user_css = drupal_get_path('module', 'user') . '/user.css';
-  if (isset($css[$user_css])) {
-    $css[$user_css]['data'] = $theme . '/css/user.css';
-  }
 }
 
 /**
@@ -72,7 +66,7 @@ function uikit_html_head_alter(&$head_elements) {
  */
 function uikit_menu_local_tasks_alter(&$data, $router_item, $root_path) {
   // Define various icons.
-  $plus = '<i class="uk-icon-plus"></i> ';
+  $plus = '<i uk-icon="icon:plus"></i> ';
 
   foreach ($data['actions']['output'] as $key => $action) {
     // Add icon based on link path.

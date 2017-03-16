@@ -537,15 +537,6 @@ function uikit_preprocess_confirm_form(&$variables) {
 }
 
 /**
- * Implements hook_preprocess_HOOK() for theme_container().
- */
-function uikit_preprocess_container(&$variables) {
-  // Add the uk-margin class to provide proper margin between container
-  // elements.
-  $variables['element']['#attributes']['class'][] = 'uk-margin';
-}
-
-/**
  * Implements template_preprocess_field().
  */
 function uikit_preprocess_field(&$variables) {
@@ -596,7 +587,7 @@ function uikit_preprocess_fieldset(&$variables) {
   }
   else {
     $variables['theme_hook_suggestions'][] = 'fieldset';
-    $variables['element']['#attributes']['class'][] = 'uk-margin';
+    $variables['element']['#attributes']['class'][] = 'uk-fieldset';
   }
 }
 

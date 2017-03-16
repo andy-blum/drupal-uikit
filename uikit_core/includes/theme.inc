@@ -102,6 +102,47 @@ function uikit_checkbox($variables) {
 }
 
 /**
+ * Implements theme_container().
+ */
+function uikit_container($variables) {
+  $element = $variables['element'];
+  // Ensure #attributes is set.
+  $element += array('#attributes' => array());
+  $file = 0;
+  $password = 0;
+  $password_confirm = 0;
+
+  if (isset($element['#attributes']['class'])) {
+    $file = in_array('form-type-file', $element['#attributes']['class']);
+    $password = in_array('form-item-pass-pass1', $element['#attributes']['class']);
+    $password_confirm = in_array('form-item-pass-pass2', $element['#attributes']['class']);
+  }
+
+  if (isset($element['element']) && !$file && !$password && !$password_confirm) {
+    // Add the 'uk-margin' class.
+    $element['#attributes']['class'][] = 'uk-margin';
+  }
+
+  if (isset($element['element']) && $file) {
+    // Add the 'uk-margin-small-top' class.
+    $element['#attributes']['class'][] = 'uk-margin-small-top';
+  }
+
+  // Special handling for form elements.
+  if (isset($element['#array_parents'])) {
+    // Assign an html ID.
+    if (!isset($element['#attributes']['id'])) {
+      $element['#attributes']['id'] = $element['#id'];
+    }
+
+    // Add the 'form-wrapper' class.
+    $element['#attributes']['class'][] = 'form-wrapper';
+  }
+
+  return '<div' . drupal_attributes($element['#attributes']) . '>' . $element['#children'] . '</div>';
+}
+
+/**
  * Implements theme_field() for tag fields.
  */
 function uikit_field__field_tags($variables) {
@@ -138,13 +179,11 @@ function uikit_fieldset($variables) {
   $output = '<fieldset' . drupal_attributes($element['#attributes']) . '>';
 
   if (!empty($element['#title'])) {
-    $output .= '<legend><span class="fieldset-legend">' . $element['#title'] . '</span></legend>';
+    $output .= '<legend class="uk-legend">' . $element['#title'] . '</legend>';
   }
 
-  $output .= '<div class="fieldset-wrapper">';
-
   if (!empty($element['#description'])) {
-    $output .= '<p class="uk-text-small uk-text-muted">' . $element['#description'] . '</p>';
+    $output .= '<p class="uk-text-small uk-text-muted uk-margin-small-top">' . $element['#description'] . '</p>';
   }
 
   $output .= $element['#children'];
@@ -153,7 +192,6 @@ function uikit_fieldset($variables) {
     $output .= $element['#value'];
   }
 
-  $output .= '</div>';
   $output .= '</fieldset>';
 
   return $output;
@@ -165,7 +203,7 @@ function uikit_fieldset($variables) {
 function uikit_fieldset__collapsible($variables) {
   $element = $variables['element'];
   element_set_attributes($element, array('id'));
-  _form_set_class($element, array('form-wrapper'));
+  _form_set_class($element, array('form-wrapper', 'uk-form-width-large'));
 
   // Grouped fieldsets are fieldsets grouped together, such as vertical tabs.
   $group_fieldset = isset($element['#group_fieldset']) && $element['#group_fieldset'];
@@ -180,7 +218,7 @@ function uikit_fieldset__collapsible($variables) {
   $output .= '<div class="uk-accordion-content">';
 
   if (!empty($element['#description'])) {
-    $output .= '<p class="uk-text-small uk-text-muted">' . $element['#description'] . '</p>';
+    $output .= '<p class="uk-text-small uk-text-muted uk-margin-small-top">' . $element['#description'] . '</p>';
   }
 
   $output .= $element['#children'];
@@ -206,13 +244,11 @@ function uikit_fieldset__format($variables) {
   $output = '<div' . drupal_attributes($element['#attributes']) . '>';
 
   if (!empty($element['#title'])) {
-    $output .= '<legend><span class="fieldset-legend">' . $element['#title'] . '</span></legend>';
+    $output .= '<legend class="fieldset-legend">' . $element['#title'] . '</legend>';
   }
 
-  $output .= '<div class="fieldset-wrapper">';
-
   if (!empty($element['#description'])) {
-    $output .= '<p class="uk-text-small uk-text-muted">' . $element['#description'] . '</p>';
+    $output .= '<p class="uk-text-small uk-text-muted uk-margin-small-top">' . $element['#description'] . '</p>';
   }
 
   $output .= $element['#children'];
@@ -221,7 +257,6 @@ function uikit_fieldset__format($variables) {
     $output .= $element['#value'];
   }
 
-  $output .= '</div>';
   $output .= '</div>';
 
   return $output;
@@ -238,13 +273,11 @@ function uikit_fieldset__grouped($variables) {
 
   if (!empty($element['#title'])) {
     // Always wrap fieldset legends in a SPAN for CSS positioning.
-    $output .= '<legend><span class="fieldset-legend">' . $element['#title'] . '</span></legend>';
+    $output .= '<legend class="fieldset-legend">' . $element['#title'] . '</legend>';
   }
 
-  $output .= '<div class="fieldset-wrapper uk-margin-top uk-margin-bottom">';
-
   if (!empty($element['#description'])) {
-    $output .= '<p class="uk-text-small uk-text-muted">' . $element['#description'] . '</p>';
+    $output .= '<p class="uk-text-small uk-text-muted uk-margin-small-top">' . $element['#description'] . '</p>';
   }
 
   $output .= $element['#children'];
@@ -253,10 +286,21 @@ function uikit_fieldset__grouped($variables) {
     $output .= $element['#value'];
   }
 
-  $output .= '</div>';
   $output .= '</fieldset>';
 
   return $output;
+}
+
+/**
+ * Implements theme_file().
+ */
+function uikit_file($variables) {
+  $element = $variables['element'];
+  $element['#attributes']['type'] = 'file';
+  element_set_attributes($element, array('id', 'name', 'size'));
+  _form_set_class($element, array('form-file'));
+
+  return '<div class="uk-form-controls"><input' . drupal_attributes($element['#attributes']) . ' /></div>';
 }
 
 /**
@@ -310,6 +354,17 @@ function uikit_filter_tips($variables) {
 function uikit_form($variables) {
   $element = $variables['element'];
 
+  $horizontal_forms = array(
+    'node_admin_content',
+  );
+
+  if (in_array($element['#form_id'], $horizontal_forms)) {
+    $element['#attributes']['class'][] = 'uk-form-horizontal';
+  }
+  else {
+    $element['#attributes']['class'][] = 'uk-form-stacked';
+  }
+
   if (isset($element['#action'])) {
     $element['#attributes']['action'] = drupal_strip_dangerous_protocols($element['#action']);
   }
@@ -320,8 +375,7 @@ function uikit_form($variables) {
     $element['#attributes']['accept-charset'] = "UTF-8";
   }
 
-  // Anonymous DIV to satisfy XHTML compliance.
-  return '<form' . drupal_attributes($element['#attributes']) . '><div>' . $element['#children'] . '</div></form>';
+  return '<form' . drupal_attributes($element['#attributes']) . '>' . $element['#children'] . '</form>';
 }
 
 /**
@@ -409,8 +463,7 @@ function uikit_form_element($variables) {
       }
 
       // Add a wrapping container around the elements.
-      $form_row_attributes['class'][] = 'uk-margin';
-      $prefix .= '<div' . drupal_attributes($form_row_attributes) . '>' . $prefix;
+      $prefix .= '<div>' . $prefix;
       $suffix .= '</div>';
     }
 
@@ -427,7 +480,11 @@ function uikit_form_element($variables) {
     $build['description'] = array(
       '#type' => 'container',
       '#attributes' => array(
-        'class' => array('uk-text-small', 'uk-text-muted'),
+        'class' => array(
+          'uk-text-small',
+          'uk-text-muted',
+          'uk-margin-small-top',
+        ),
       ),
       '#weight' => 20,
       0 => array('#markup' => $element['#description']),
@@ -941,27 +998,27 @@ function uikit_pager($variables) {
   }
 
   $li_first = theme('pager_first', array(
-    'text' => t('<span><i class="uk-icon-angle-double-left"></i> First</span>'),
+    'text' => t('<span><i uk-icon="icon:angle-double-left"></i> First</span>'),
     'element' => $element,
     'parameters' => $parameters,
   ));
 
   $li_previous = theme('pager_previous', array(
-    'text' => t('<span><i class="uk-icon-angle-left"></i> Previous</span>'),
+    'text' => t('<span><i uk-icon="icon:angle-left"></i> Previous</span>'),
     'element' => $element,
     'interval' => 1,
     'parameters' => $parameters,
   ));
 
   $li_next = theme('pager_next', array(
-    'text' => t('<span>Next <i class="uk-icon-angle-right"></i></span>'),
+    'text' => t('<span>Next <i uk-icon="icon:angle-right"></i></span>'),
     'element' => $element,
     'interval' => 1,
     'parameters' => $parameters,
   ));
 
   $li_last = theme('pager_last', array(
-    'text' => t('<span>Last <i class="uk-icon-angle-double-right"></i></span>'),
+    'text' => t('<span>Last <i uk-icon="icon:angle-double-right"></i></span>'),
     'element' => $element,
     'parameters' => $parameters,
   ));
@@ -1086,10 +1143,10 @@ function uikit_pager_link($variables) {
 
     if (!isset($titles)) {
       $titles = array(
-        t('<span><i class="uk-icon-angle-double-left"></i> First</span>') => t('Go to first page'),
-        t('<span><i class="uk-icon-angle-left"></i> Previous</span>') => t('Go to previous page'),
-        t('<span>Next <i class="uk-icon-angle-right"></i></span>') => t('Go to next page'),
-        t('<span>Last <i class="uk-icon-angle-double-right"></i></span>') => t('Go to last page'),
+        t('<span><i uk-icon="icon:angle-double-left"></i> First</span>') => t('Go to first page'),
+        t('<span><i uk-icon="icon:angle-left"></i> Previous</span>') => t('Go to previous page'),
+        t('<span>Next <i uk-icon="icon:angle-right"></i></span>') => t('Go to next page'),
+        t('<span>Last <i uk-icon="icon:angle-double-right"></i></span>') => t('Go to last page'),
       );
     }
 
@@ -1112,7 +1169,12 @@ function uikit_password($variables) {
   $element = $variables['element'];
   $element['#attributes']['type'] = 'password';
   element_set_attributes($element, array('id', 'name', 'size', 'maxlength'));
-  _form_set_class($element, array('form-text', 'uk-input'));
+
+  _form_set_class($element, array(
+    'form-text',
+    'uk-input',
+    'uk-form-width-large',
+  ));
 
   return '<input' . drupal_attributes($element['#attributes']) . ' />';
 }
@@ -1143,9 +1205,21 @@ function uikit_radio($variables) {
 function uikit_select($variables) {
   $element = $variables['element'];
   element_set_attributes($element, array('id', 'name', 'size'));
-  _form_set_class($element, array('form-select', 'uk-select'));
+  $prefix = '';
+  $suffix = '';
 
-  return '<select' . drupal_attributes($element['#attributes']) . '>' . form_select_options($element) . '</select>';
+  _form_set_class($element, array(
+    'form-select',
+    'uk-select',
+    'uk-form-width-large',
+  ));
+
+  if (in_array('filter', $element['#array_parents'])) {
+    $prefix = '<div class="uk-form-controls">';
+    $suffix = '</div>';
+  }
+
+  return $prefix . '<select' . drupal_attributes($element['#attributes']) . '>' . form_select_options($element) . '</select>' . $suffix;
 }
 
 /**
@@ -1225,7 +1299,7 @@ function uikit_table($variables) {
     $attributes['class'][] = 'sticky-enabled';
   }
 
-  $output = '<div class="uk-overflow-container">';
+  $output = '<div class="uk-overflow-auto">';
   $output .= '<table' . drupal_attributes($attributes) . ">\n";
 
   if (isset($caption)) {
@@ -1375,7 +1449,12 @@ function uikit_textfield($variables) {
     'maxlength',
   ));
 
-  _form_set_class($element, array('form-text', 'uk-input'));
+  _form_set_class($element, array(
+    'form-text',
+    'uk-input',
+    'uk-form-width-large',
+  ));
+
   $element['#attributes']['type'] = 'text';
   $extra = '';
 
