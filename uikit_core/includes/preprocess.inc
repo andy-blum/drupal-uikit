@@ -579,7 +579,7 @@ function uikit_preprocess_fieldset(&$variables) {
     $variables['theme_hook_suggestions'][] = 'fieldset__collapsible';
     $variables['element']['#attributes']['class'][] = 'uk-margin';
     $variables['element']['#attributes']['class'][] = 'uk-accordion';
-    $variables['element']['#attributes']['data-uk-accordion'] = '';
+    $variables['element']['#attributes']['uk-accordion'] = '';
 
     foreach ($variables['element']['#attributes']['class'] as $key => $class) {
       if ($class == 'collapsible' || $class == 'collapsed') {
@@ -587,7 +587,7 @@ function uikit_preprocess_fieldset(&$variables) {
         array_values($variables['element']['#attributes']['class']);
       }
       if ($class == 'collapsed') {
-        $variables['element']['#attributes']['data-uk-accordion'] .= '{showfirst: false}';
+        $variables['element']['#attributes']['uk-accordion'] .= '{showfirst: false}';
       }
     }
   }

@@ -144,7 +144,7 @@ function uikit_fieldset($variables) {
   $output .= '<div class="fieldset-wrapper">';
 
   if (!empty($element['#description'])) {
-    $output .= '<div class="uk-form-help-block"><p>' . $element['#description'] . '</p></div>';
+    $output .= '<p class="uk-text-small uk-text-muted">' . $element['#description'] . '</p>';
   }
 
   $output .= $element['#children'];
@@ -170,29 +170,17 @@ function uikit_fieldset__collapsible($variables) {
   // Grouped fieldsets are fieldsets grouped together, such as vertical tabs.
   $group_fieldset = isset($element['#group_fieldset']) && $element['#group_fieldset'];
 
-  $output = '<fieldset' . drupal_attributes($element['#attributes']) . '>';
+  $output = '<ul' . drupal_attributes($element['#attributes']) . '>';
+  $output .= '<li>';
 
   if (!empty($element['#title'])) {
-    if (!$group_fieldset) {
-      // Use an H3 element for non-grouped fieldset titles.
-      $output .= '<h3 class="uk-accordion-title"><span class="fieldset-legend">' . $element['#title'] . '</span></h3>';
-    }
-    else {
-      // Always wrap fieldset legends in a SPAN for CSS positioning.
-      $output .= '<legend><span class="fieldset-legend">' . $element['#title'] . '</span></legend>';
-    }
+    $output .= '<h3 class="uk-accordion-title">' . $element['#title'] . '</h3>';
   }
 
-  if (!$group_fieldset) {
-    // Use the uk-accordion-content class for non-grouped fieldsets.
-    $output .= '<div class="uk-accordion-content">';
-  }
-  else {
-    $output .= '<div class="fieldset-wrapper uk-margin-top uk-margin-bottom">';
-  }
+  $output .= '<div class="uk-accordion-content">';
 
   if (!empty($element['#description'])) {
-    $output .= '<div class="uk-form-help-block"><p>' . $element['#description'] . '</p></div>';
+    $output .= '<p class="uk-text-small uk-text-muted">' . $element['#description'] . '</p>';
   }
 
   $output .= $element['#children'];
@@ -202,7 +190,8 @@ function uikit_fieldset__collapsible($variables) {
   }
 
   $output .= '</div>';
-  $output .= '</fieldset>';
+  $output .= '</li>';
+  $output .= '</ul>';
 
   return $output;
 }
@@ -223,7 +212,7 @@ function uikit_fieldset__format($variables) {
   $output .= '<div class="fieldset-wrapper">';
 
   if (!empty($element['#description'])) {
-    $output .= '<div class="uk-form-help-block"><p>' . $element['#description'] . '</p></div>';
+    $output .= '<p class="uk-text-small uk-text-muted">' . $element['#description'] . '</p>';
   }
 
   $output .= $element['#children'];
@@ -255,7 +244,7 @@ function uikit_fieldset__grouped($variables) {
   $output .= '<div class="fieldset-wrapper uk-margin-top uk-margin-bottom">';
 
   if (!empty($element['#description'])) {
-    $output .= '<div class="uk-form-help-block"><p>' . $element['#description'] . '</p></div>';
+    $output .= '<p class="uk-text-small uk-text-muted">' . $element['#description'] . '</p>';
   }
 
   $output .= $element['#children'];
@@ -438,7 +427,7 @@ function uikit_form_element($variables) {
     $build['description'] = array(
       '#type' => 'container',
       '#attributes' => array(
-        'class' => array('uk-form-help-block', 'uk-text-muted'),
+        'class' => array('uk-text-small', 'uk-text-muted'),
       ),
       '#weight' => 20,
       0 => array('#markup' => $element['#description']),
