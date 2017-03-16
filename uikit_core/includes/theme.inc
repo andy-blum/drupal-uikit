@@ -81,6 +81,27 @@ function uikit_button($variables) {
 }
 
 /**
+ * Implements theme_checkbox().
+ */
+function uikit_checkbox($variables) {
+  $element = $variables['element'];
+  $element['#attributes']['type'] = 'checkbox';
+  element_set_attributes($element, array(
+    'id',
+    'name',
+    '#return_value' => 'value',
+  ));
+
+  // Unchecked checkbox has #value of integer 0.
+  if (!empty($element['#checked'])) {
+    $element['#attributes']['checked'] = 'checked';
+  }
+  _form_set_class($element, array('form-checkbox', 'uk-checkbox'));
+
+  return '<input' . drupal_attributes($element['#attributes']) . ' />';
+}
+
+/**
  * Implements theme_field() for tag fields.
  */
 function uikit_field__field_tags($variables) {
@@ -400,7 +421,7 @@ function uikit_form_element($variables) {
 
       // Add a wrapping container around the elements.
       $form_row_attributes['class'][] = 'uk-margin';
-      $prefix = '<div' . drupal_attributes($form_row_attributes) . '>' . $prefix;
+      $prefix .= '<div' . drupal_attributes($form_row_attributes) . '>' . $prefix;
       $suffix .= '</div>';
     }
 
@@ -1096,6 +1117,49 @@ function uikit_pager_link($variables) {
 }
 
 /**
+ * Implements theme_password().
+ */
+function uikit_password($variables) {
+  $element = $variables['element'];
+  $element['#attributes']['type'] = 'password';
+  element_set_attributes($element, array('id', 'name', 'size', 'maxlength'));
+  _form_set_class($element, array('form-text', 'uk-input'));
+
+  return '<input' . drupal_attributes($element['#attributes']) . ' />';
+}
+
+/**
+ * Implements theme_radio().
+ */
+function uikit_radio($variables) {
+  $element = $variables['element'];
+  $element['#attributes']['type'] = 'radio';
+  element_set_attributes($element, array(
+    'id',
+    'name',
+    '#return_value' => 'value',
+  ));
+
+  if (isset($element['#return_value']) && $element['#value'] !== FALSE && $element['#value'] == $element['#return_value']) {
+    $element['#attributes']['checked'] = 'checked';
+  }
+  _form_set_class($element, array('form-radio', 'uk-radio'));
+
+  return '<input' . drupal_attributes($element['#attributes']) . ' />';
+}
+
+/**
+ * Implements theme_select().
+ */
+function uikit_select($variables) {
+  $element = $variables['element'];
+  element_set_attributes($element, array('id', 'name', 'size'));
+  _form_set_class($element, array('form-select', 'uk-select'));
+
+  return '<select' . drupal_attributes($element['#attributes']) . '>' . form_select_options($element) . '</select>';
+}
+
+/**
  * Implements theme_status_messages().
  */
 function uikit_status_messages($variables) {
@@ -1322,9 +1386,8 @@ function uikit_textfield($variables) {
     'maxlength',
   ));
 
-  _form_set_class($element, array('form-text'));
+  _form_set_class($element, array('form-text', 'uk-input'));
   $element['#attributes']['type'] = 'text';
-  $element['#attributes']['size'] = '25';
   $extra = '';
 
   if ($element['#autocomplete_path'] && !empty($element['#autocomplete_input'])) {

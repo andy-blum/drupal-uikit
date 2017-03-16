@@ -453,8 +453,8 @@ function uikit_preprocess_breadcrumb(&$variables) {
  */
 function uikit_preprocess_button(&$variables) {
   // Add the uk-button-default class to all buttons.
+  $variables['element']['#attributes']['class'][] = 'uk-button';
   $variables['element']['#attributes']['class'][] = 'uk-button-default';
-  $variables['element']['#attributes']['class'][] = 'uk-margin-small-right';
 }
 
 /**
