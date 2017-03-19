@@ -1,0 +1,14 @@
+uikit:
+  remote: https://cdnjs.com/libraries/uikit
+    version: 2.27.2
+    license:
+      name: MIT
+      url: https://github.com/uikit/uikit/blob/develop/LICENSE.md
+      gpl-compatible: true
+    css:
+      theme:
+        //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.2/css/uikit.min.css: { type: external, minified: true }
+    js:
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.2/js/uikit.min.js: { type: external, minified: true }
+    dependencies:
+      - core/jquery
