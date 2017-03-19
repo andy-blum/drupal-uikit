@@ -10,7 +10,7 @@ libraries:
   - uikit/font-awesome
 
 regions:
-  header: Header
+  branding: Branding
   primary_menu: 'Primary menu'
   secondary_menu: 'Secondary menu'
   highlighted: Highlighted

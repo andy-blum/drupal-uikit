@@ -10,3 +10,17 @@
  *
  * @see process.inc
  */
+
+/**
+ * Implements template_preprocess_block() for the primary menu.
+ */
+function uikit_preprocess_block__primary_menu__menu(&$variables) {
+  $variables['content']['#theme'] = 'menu__primary';
+}
+
+/**
+ * Implements template_preprocess_block() for the secondary menu.
+ */
+function uikit_preprocess_block__secondary_menu__menu(&$variables) {
+  $variables['content']['#theme'] = 'menu__secondary';
+}

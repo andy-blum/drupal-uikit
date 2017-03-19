@@ -43,14 +43,13 @@
  * @see html.html.twig
  */
 #}
-<div class="layout-container">
+<div class="uk-container uk-container-center uk-margin-top uk-margin-large-bottom">
 
-  <header role="banner">
-    {{ page.header }}
-  </header>
-
-  {{ page.primary_menu }}
-  {{ page.secondary_menu }}
+  <nav class="uk-navbar uk-margin-large-bottom">
+    {{ page.branding }}
+    {{ page.primary_menu }}
+    {{ page.secondary_menu }}
+  </nav>
 
   {{ page.breadcrumb }}
 
@@ -59,11 +58,11 @@
   {{ page.help }}
 
   <main role="main">
-    <a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
+    <a id="main-content" tabindex="-1"></a>
 
     <div class="layout-content">
       {{ page.content }}
-    </div>{# /.layout-content #}
+    </div>
 
     {% if page.sidebar_first %}
       <aside class="layout-sidebar-first" role="complementary">
@@ -85,4 +84,4 @@
     </footer>
   {% endif %}
 
-</div>{# /.layout-container #}
+</div>
