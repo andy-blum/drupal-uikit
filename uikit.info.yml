@@ -6,7 +6,7 @@ base theme: stable
 package: UIkit
 
 libraries:
-  - uikit/global-styling
+  - uikit/uikit
 
 regions:
   header: Header
