@@ -1,5 +1,5 @@
 uikit:
-  remote: https://cdnjs.com/libraries/uikit
+  remote: https://getuikit.com/v2/index.html
   version: 2.27.2
   license:
     name: MIT
@@ -12,3 +12,14 @@ uikit:
     //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.2/js/uikit.min.js: { type: external, minified: true }
   dependencies:
     - core/jquery
+
+font-awesome:
+  remote: http://fontawesome.io/
+  version: 4.6.3
+  license:
+    name: MIT
+    url: http://fontawesome.io/license/
+    gpl-compatible: true
+  css:
+    theme:
+      //cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css: { type: external, minified: true }
