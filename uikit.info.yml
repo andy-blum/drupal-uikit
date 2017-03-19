@@ -1,0 +1,47 @@
+name: UIkit
+type: theme
+description: 'A lightweight frontend framework with a comprehensive collection of HTML, CSS, and JS components.'
+core: 8.x
+base theme: stable
+package: UIkit
+
+libraries:
+  - uikit/global-styling
+
+regions:
+  header: Header
+  primary_menu: 'Primary menu'
+  secondary_menu: 'Secondary menu'
+  highlighted: Highlighted
+  breadcrumb: Breadcrumb
+  content: Content
+  sidebar_first: 'Sidebar first'
+  sidebar_second: 'Sidebar second'
+  footer: 'Footer'
+
+features:
+  - base_style
+  - customizer_css
+  - meta_charset
+  - x_ua_compatible
+  - viewport_device_width_ratio
+  - viewport_device_height_ratio
+  - viewport_initial_scale
+  - viewport_maximum_scale
+  - viewport_minimum_scale
+  - viewport_user_scalable
+  - standard_sidebar_positions
+  - tablet_sidebar_positions
+  - mobile_sidebar_positions
+  - page_container
+  - page_centering
+  - page_margin
+  - navbar_container
+  - navbar_centering
+  - navbar_attached
+  - navbar_margin_top
+  - navbar_margin_bottom
+  - primary_tasks_style
+  - secondary_tasks_style
+  - display_breadcrumbs
+  - breakcrumbs_home_link
