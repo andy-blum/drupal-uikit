@@ -11,35 +11,6 @@
  */
 
 /**
- * Implements theme_admin_block_content().
- */
-function uikit_admin_block_content($variables) {
-  $content = $variables['content'];
-  $output = '';
-
-  if (!empty($content)) {
-    $class = 'uk-description-list-line';
-
-    if ($compact = system_admin_compact_mode()) {
-      $class .= ' compact';
-    }
-
-    $output .= '<dl class="' . $class . '">';
-
-    foreach ($content as $item) {
-      $output .= '<dt>' . l($item['title'], $item['href'], $item['localized_options']) . '</dt>';
-
-      if (!$compact && isset($item['description'])) {
-        $output .= '<dd>' . filter_xss_admin($item['description']) . '</dd>';
-      }
-    }
-
-    $output .= '</dl>';
-  }
-  return $output;
-}
-
-/**
  * Implements theme_breadcrumb().
  */
 function uikit_breadcrumb($variables) {
@@ -884,28 +855,6 @@ function uikit_menu_tree__offcanvas($variables) {
  */
 function uikit_menu_tree__offcanvas__below($variables) {
   return '<ul class="uk-nav-sub" role="menu">' . $variables['tree'] . '</ul>';
-}
-
-/**
- * Implements theme_node_add_list().
- */
-function uikit_node_add_list($variables) {
-  $content = $variables['content'];
-  $output = '';
-
-  if ($content) {
-    $output = '<dl class="uk-description-list-line">';
-    foreach ($content as $item) {
-      $output .= '<dt>' . l($item['title'], $item['href'], $item['localized_options']) . '</dt>';
-      $output .= '<dd>' . filter_xss_admin($item['description']) . '</dd>';
-    }
-    $output .= '</dl>';
-  }
-  else {
-    $output .= '<p>' . t('You have not created any content types yet. Go to the <a href="@create-content">content type creation page</a> to add a new content type.', array('@create-content' => url('admin/structure/types/add'))) . '</p>';
-  }
-
-  return $output;
 }
 
 /**
