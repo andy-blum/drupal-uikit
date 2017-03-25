@@ -385,14 +385,25 @@ function uikit_preprocess_page(&$variables) {
     $variables['navbar_primary'] = menu_tree(variable_get('menu_main_links_source', 'main-menu'));
     $variables['navbar_primary']['#theme_wrappers'] = array('menu_tree__navbar');
 
+    foreach ($variables['navbar_primary'] as $key => $value) {
+      // Define a theme wrapper for navbar menu links.
+      if (is_array($value) && isset($value['#original_link'])) {
+        $variables['navbar_primary'][$key]['#theme'] = 'menu_link__navbar';
+      }
+    }
+
     // Primary offcanvas menu.
     $variables['offcanvas_primary'] = menu_tree(variable_get('menu_main_links_source', 'main-menu'));
     $variables['offcanvas_primary']['#theme_wrappers'] = array('menu_tree__offcanvas');
 
-    // Primary offcanvas below menus.
     foreach ($variables['offcanvas_primary'] as $key => $value) {
+      // Define a theme wrapper for offcanvas below menu trees.
       if (is_array($value) && isset($value['#below']) && !empty($value['#below'])) {
         $variables['offcanvas_primary'][$key]['#below']['#theme_wrappers'] = array('menu_tree__offcanvas__below');
+      }
+      // Define a theme wrapper for offcanvas menu links.
+      if (is_array($value) && isset($value['#original_link'])) {
+        $variables['offcanvas_primary'][$key]['#theme'] = 'menu_link__offcanvas';
       }
     }
   }
@@ -401,14 +412,25 @@ function uikit_preprocess_page(&$variables) {
     $variables['navbar_secondary'] = menu_tree(variable_get('menu_secondary_links_source', 'user-menu'));
     $variables['navbar_secondary']['#theme_wrappers'] = array('menu_tree__navbar_flip');
 
+    foreach ($variables['navbar_secondary'] as $key => $value) {
+      // Define a theme wrapper for navbar menu links.
+      if (is_array($value) && isset($value['#original_link'])) {
+        $variables['navbar_secondary'][$key]['#theme'] = 'menu_link__navbar';
+      }
+    }
+
     // Secondary offcanvas menu.
     $variables['offcanvas_secondary'] = menu_tree(variable_get('menu_secondary_links_source', 'user-menu'));
     $variables['offcanvas_secondary']['#theme_wrappers'] = array('menu_tree__offcanvas');
 
-    // Primary offcanvas below menus.
     foreach ($variables['offcanvas_secondary'] as $key => $value) {
+      // Define a theme wrapper for offcanvas below menu trees.
       if (is_array($value) && isset($value['#below']) && !empty($value['#below'])) {
         $variables['offcanvas_secondary'][$key]['#below']['#theme_wrappers'] = array('menu_tree__offcanvas__below');
+      }
+      // Define a theme wrapper for offcanvas menu links.
+      if (is_array($value) && isset($value['#original_link'])) {
+        $variables['offcanvas_secondary'][$key]['#theme'] = 'menu_link__offcanvas';
       }
     }
   }
@@ -681,6 +703,23 @@ function uikit_preprocess_links(&$variables) {
   if ($inline) {
     $variables['attributes']['class'][] = 'uk-subnav';
     $variables['attributes']['class'][] = 'uk-subnav-line';
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for theme_menu_link().
+ */
+function uikit_preprocess_menu_link(&$variables) {
+  $depth = $variables['element']['#original_link']['depth'];
+  $href = $variables['element']['#href'];
+  $theme = $variables['element']['#theme'];
+
+  // Define #hidden variable with default value of FALSE.
+  $variables['element']['#hidden'] = FALSE;
+
+  if ($theme == 'menu_link__navbar' && $href == '<uk-nav-header>' && $depth == 1) {
+    // Top-level nav headers should be hidden for navbar menu links.
+    $variables['element']['#hidden'] = TRUE;
   }
 }
 

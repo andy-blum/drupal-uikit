@@ -693,6 +693,8 @@ function uikit_links__node($variables) {
 function uikit_menu_link(array $variables) {
   global $user;
   $element = $variables['element'];
+  $depth = $element['#original_link']['depth'];
+  $hidden = $element['#hidden'];
   $sub_menu = '';
 
   $options = !empty($element['#localized_options']) ? $element['#localized_options'] : array();
@@ -735,7 +737,7 @@ function uikit_menu_link(array $variables) {
       $attributes['class'][] = 'uk-parent';
       $attributes['aria-expanded'] = 'false';
     }
-    elseif ((!empty($element['#original_link']['depth'])) && ($element['#original_link']['depth'] == 1)) {
+    elseif ((!empty($depth)) && ($depth == 1)) {
       // Use our own theme wrapper.
       unset($element['#below']['#theme_wrappers']);
       $sub_menu = '<div class="uk-dropdown uk-dropdown-navbar uk-dropdown-bottom" aria-hidden="true">';
@@ -748,25 +750,34 @@ function uikit_menu_link(array $variables) {
       $attributes['aria-haspopup'] = 'true';
       $attributes['aria-expanded'] = 'false';
     }
-    elseif ((!empty($element['#original_link']['depth'])) && ($element['#original_link']['depth'] == 2)) {
+    elseif ((!empty($depth)) && ($depth == 2)) {
       // Use our own theme wrapper.
       unset($element['#below']['#theme_wrappers']);
       $sub_menu .= '<ul>' . drupal_render($element['#below']) . '</ul>';
     }
   }
 
+  // Add uk-hidden class if menu link should be hidden from display.
+  if ($hidden) {
+    $attributes['class'][] = 'uk-hidden';
+  }
+
   switch ($href) {
     case '<uk-nav-header>':
       $attributes['class'][] = 'uk-nav-header';
-      return '<li' . drupal_attributes($attributes) . '>' . $title . "</li>\n";
+      $output = '<li' . drupal_attributes($attributes) . '>' . $title . "</li>\n";
+      break;
 
     case '<uk-nav-divider>':
       $attributes['class'][] = 'uk-nav-divider';
-      return '<li' . drupal_attributes($attributes) . '>' . l($title, $href, $options) . $sub_menu . "</li>\n";
+      $output = '<li' . drupal_attributes($attributes) . '>' . l($title, $href, $options) . $sub_menu . "</li>\n";
+      break;
 
     default:
-      return '<li' . drupal_attributes($attributes) . '>' . l($title, $href, $options) . $sub_menu . "</li>\n";
+      $output = '<li' . drupal_attributes($attributes) . '>' . l($title, $href, $options) . $sub_menu . "</li>\n";
   }
+
+  return $output;
 }
 
 /**
