@@ -27,16 +27,12 @@ Drupal.tableHeader = function (table) {
   this.displayWeight = null;
   this.originalClasses = this.originalTable['0'].classList;
 
-  // Remove unneeded items from the original classes.
-  this.originalClasses.remove('sticky-enabled');
-  this.originalClasses.remove('tabledrag-processed');
-  this.originalClasses.remove('tableheader-processed');
-  this.originalClasses.remove('table-select-processed');
-
   // Add the original classes to the newClasses array.
   this.originalClasses.forEach(
     function(value, key, listObj, argument) {
-      newClasses.push(value);
+      if (value.match("^uk-")) {
+        newClasses.push(value);
+      }
     }
   );
 
