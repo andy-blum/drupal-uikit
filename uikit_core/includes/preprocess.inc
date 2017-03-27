@@ -747,7 +747,10 @@ function uikit_preprocess_menu_local_tasks(&$variables) {
   }
   else {
     $variables['primary_attributes_array']['class'][] = 'uk-subnav';
-    $variables['primary_attributes_array']['class'][] = $primary_style;
+
+    if ($primary_style != '0') {
+      $variables['primary_attributes_array']['class'][] = $primary_style;
+    }
   }
   if ($secondary_style) {
     $variables['secondary_attributes_array']['class'][] = $secondary_style;
