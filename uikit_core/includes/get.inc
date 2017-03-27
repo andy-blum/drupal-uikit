@@ -56,7 +56,7 @@ function uikit_get_cdn_assets() {
     'type' => 'external',
     'group' => CSS_THEME,
     'every_page' => TRUE,
-    'weight' => 0,
+    'weight' => -20,
     'version' => UIKIT_FONT_AWESOME_VERSION,
   ));
 
@@ -250,7 +250,7 @@ function uikit_get_cdn_asset($component = NULL) {
         'type' => 'external',
         'group' => CSS_THEME,
         'every_page' => TRUE,
-        'weight' => 20,
+        'weight' => -10,
         'version' => UIKIT_LIBRARY_VERSION,
       ));
     }
@@ -261,7 +261,7 @@ function uikit_get_cdn_asset($component = NULL) {
         'type' => 'external',
         'group' => JS_THEME,
         'every_page' => TRUE,
-        'weight' => 20,
+        'weight' => -10,
         'version' => UIKIT_LIBRARY_VERSION,
       ));
     }

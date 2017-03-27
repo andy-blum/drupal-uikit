@@ -756,7 +756,7 @@ function uikit_menu_link(array $variables) {
  */
 function uikit_menu_local_action($variables) {
   $link = $variables['element']['#link'];
-  $output = '<li class="uk-active">';
+  $output = '<li>';
 
   if (isset($link['href'])) {
     $output .= l($link['title'], $link['href'], isset($link['localized_options']) ? $link['localized_options'] : array());
@@ -768,7 +768,7 @@ function uikit_menu_local_action($variables) {
     $output .= check_plain($link['title']);
   }
 
-  $output .= "</li>\n";
+  $output .= '</li>';
 
   return $output;
 }
