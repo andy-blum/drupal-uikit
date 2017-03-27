@@ -601,6 +601,14 @@ function uikit_preprocess_container(&$variables) {
   // Add the uk-form-row class to provide proper margin between container
   // elements.
   $variables['element']['#attributes']['class'][] = 'uk-form-row';
+
+  // Add the uk-display-inline-block and uk-margin-remove classes to inline
+  // containers operation form items.
+  $classes = $variables['element']['#attributes']['class'];
+  if (in_array('container-inline', $classes) || in_array('form-item-operation', $classes)) {
+    $variables['element']['#attributes']['class'][] = 'uk-display-inline-block';
+    $variables['element']['#attributes']['class'][] = 'uk-margin-remove';
+  }
 }
 
 /**
