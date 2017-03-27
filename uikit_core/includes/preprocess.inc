@@ -735,7 +735,6 @@ function uikit_preprocess_menu_local_tasks(&$variables) {
   // Set the default attributes.
   $variables['primary_attributes_array'] = array(
     'id' => 'primary-local-tasks',
-    'class' => array('uk-subnav'),
   );
   $variables['secondary_attributes_array'] = array(
     'id' => 'secondary-local-tasks',
@@ -743,7 +742,11 @@ function uikit_preprocess_menu_local_tasks(&$variables) {
   );
 
   // Add additional styling from theme settings.
-  if ($primary_style) {
+  if ($primary_style == 'uk-tab') {
+    $variables['primary_attributes_array']['class'][] = $primary_style;
+  }
+  else {
+    $variables['primary_attributes_array']['class'][] = 'uk-subnav';
     $variables['primary_attributes_array']['class'][] = $primary_style;
   }
   if ($secondary_style) {
