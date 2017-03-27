@@ -25,18 +25,9 @@ Drupal.tableHeader = function (table) {
   this.originalHeader = $(table).children('thead');
   this.originalHeaderCells = this.originalHeader.find('> tr > th');
   this.displayWeight = null;
-  this.originalClasses = this.originalTable['0'].classList;
-
-  // Add the original classes to the newClasses array.
-  this.originalClasses.forEach(
-    function(value, key, listObj, argument) {
-      if (value.match("^uk-")) {
-        newClasses.push(value);
-      }
-    }
-  );
 
   // Add the uk-margin-remove and sticky-header classes to the newClasses array.
+  newClasses.push('uk-table');
   newClasses.push('uk-margin-remove');
   newClasses.push('sticky-header');
 

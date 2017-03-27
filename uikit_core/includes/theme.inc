@@ -43,12 +43,20 @@ function uikit_button($variables) {
   element_set_attributes($element, array('id', 'name', 'value'));
   $element['#attributes']['class'][] = 'form-' . $element['#button_type'];
   $value = $element['#attributes']['value'];
+  $id = $element['#attributes']['id'];
 
   if (!empty($element['#attributes']['disabled'])) {
     $element['#attributes']['class'][] = 'form-button-disabled';
   }
 
-  return '<button' . drupal_attributes($element['#attributes']) . '>' . $value . '</button>';
+  // Refresh buttons (for processing ajax calls) need to be output as an input
+  // element.
+  if ($id == 'edit-refresh') {
+    return '<input' . drupal_attributes($element['#attributes']) . ' />';
+  }
+  else {
+    return '<button' . drupal_attributes($element['#attributes']) . '>' . $value . '</button>';
+  }
 }
 
 /**
@@ -1139,11 +1147,10 @@ function uikit_table($variables) {
     $attributes['class'][] = 'sticky-enabled';
   }
 
-  $output = '<div class="uk-overflow-container">';
-  $output .= '<table' . drupal_attributes($attributes) . ">\n";
+  $output = '<table' . drupal_attributes($attributes) . '>';
 
   if (isset($caption)) {
-    $output .= '<caption>' . $caption . "</caption>\n";
+    $output .= '<caption>' . $caption . '</caption>';
   }
 
   // Format the table columns:
@@ -1174,10 +1181,10 @@ function uikit_table($variables) {
           $output .= ' <col' . drupal_attributes($col) . ' />';
         }
 
-        $output .= " </colgroup>\n";
+        $output .= '</colgroup>';
       }
       else {
-        $output .= ' <colgroup' . drupal_attributes($attributes) . " />\n";
+        $output .= ' <colgroup' . drupal_attributes($attributes) . ' />';
       }
     }
   }
@@ -1209,7 +1216,7 @@ function uikit_table($variables) {
     $ts = tablesort_init($header);
     // HTML requires that the thead tag has tr tags in it followed by tbody
     // tags. Using ternary operator to check and see if we have any rows.
-    $output .= (count($rows) ? ' <thead><tr class="uk-text-left">' : ' <tr>');
+    $output .= (count($rows) ? '<thead><tr class="uk-text-left">' : '<tr>');
 
     foreach ($header as $cell) {
       $cell = tablesort_header($cell, $header, $ts);
@@ -1218,7 +1225,7 @@ function uikit_table($variables) {
 
     // Using ternary operator to close the tags based on whether or not there
     // are rows.
-    $output .= (count($rows) ? " </tr></thead>\n" : "</tr>\n");
+    $output .= (count($rows) ? '</tr></thead>' : '</tr>');
   }
   else {
     $ts = array();
@@ -1226,7 +1233,7 @@ function uikit_table($variables) {
 
   // Format the table rows:
   if (count($rows)) {
-    $output .= "<tbody>\n";
+    $output .= '<tbody>';
     $flip = array('even' => 'odd', 'odd' => 'even');
     $class = 'even';
 
@@ -1257,21 +1264,20 @@ function uikit_table($variables) {
         $attributes['class'][] = 'uk-text-left';
 
         // Build row.
-        $output .= ' <tr' . drupal_attributes($attributes) . '>';
+        $output .= '<tr' . drupal_attributes($attributes) . '>';
         $i = 0;
 
         foreach ($cells as $cell) {
           $cell = tablesort_cell($cell, $header, $ts, $i++);
           $output .= _theme_table_cell($cell);
         }
-        $output .= " </tr>\n";
+        $output .= '</tr>';
       }
     }
-    $output .= "</tbody>\n";
+    $output .= '</tbody>';
   }
 
-  $output .= "</table>\n";
-  $output .= "</div>\n";
+  $output .= '</table>';
   return $output;
 }
 
