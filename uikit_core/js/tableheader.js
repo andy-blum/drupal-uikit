@@ -36,7 +36,8 @@ Drupal.tableHeader = function (table) {
     }
   );
 
-  // Add the sticky-header class to the newClasses array.
+  // Add the uk-margin-remove and sticky-header classes to the newClasses array.
+  newClasses.push('uk-margin-remove');
   newClasses.push('sticky-header');
 
   // React to columns change to avoid making checks in the scroll callback.
