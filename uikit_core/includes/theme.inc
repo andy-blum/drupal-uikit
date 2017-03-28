@@ -1113,7 +1113,7 @@ function uikit_status_messages($variables) {
 
     }
 
-    $output .= "<div class=\"uk-alert $class\" data-uk-alert>\n";
+    $output .= "<div class='uk-alert $class' data-uk-alert>";
     $output .= '<a class="uk-alert-close uk-close"></a>';
 
     if (!empty($status_heading[$type])) {
@@ -1121,19 +1121,19 @@ function uikit_status_messages($variables) {
     }
 
     if (count($messages) > 1) {
-      $output .= " <ul>\n";
+      $output .= '<ul class="uk-list">';
 
       foreach ($messages as $message) {
-        $output .= '  <li>' . $message . "</li>\n";
+        $output .= '<li>' . $message . '</li>';
       }
 
-      $output .= " </ul>\n";
+      $output .= '</ul>';
     }
     else {
       $output .= reset($messages);
     }
 
-    $output .= "</div>\n";
+    $output .= '</div>';
   }
 
   return $output;
