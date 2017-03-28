@@ -1071,6 +1071,18 @@ function uikit_pager_link($variables) {
 }
 
 /**
+ * Implements theme_progress_bar().
+ */
+function uikit_progress_bar($variables) {
+  $output = '<div id="progress" class="uk-progress uk-progress-striped uk-active">';
+  $output .= '<div class="uk-progress-bar" style="width: ' . $variables['percent'] . '%">' . $variables['percent'] . '%</div>';
+  $output .= '<div class="uk-alert">' . $variables['message'] . '</div>';
+  $output .= '</div>';
+
+  return $output;
+}
+
+/**
  * Implements theme_status_messages().
  */
 function uikit_status_messages($variables) {
