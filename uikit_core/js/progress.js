@@ -28,6 +28,9 @@ Drupal.progressBar = function (id, updateCallback, method, errorCallback) {
  * Set the percentage and status message for the progressbar.
  */
 Drupal.progressBar.prototype.setProgress = function (percentage, message) {
+  if (message === 'Initializing.<br/>&nbsp;') {
+    message = 'Initializing...';
+  }
   if (percentage >= 0 && percentage <= 100) {
     $('div.uk-progress-bar', this.element)
       .css('width', percentage + '%')
@@ -75,7 +78,7 @@ Drupal.progressBar.prototype.sendPing = function () {
       dataType: 'json',
       success: function (progress) {
         // Display errors.
-        if (progress.status == 0) {
+        if (progress.status === 0) {
           pb.displayError(progress.data);
           return;
         }
