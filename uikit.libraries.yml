@@ -13,6 +13,30 @@ uikit:
   dependencies:
     - core/jquery
 
+uikit.accordion:
+  remote: https://getuikit.com/v2/index.html
+  version: 2.27.2
+  license:
+    name: MIT
+    url: https://github.com/uikit/uikit/blob/develop/LICENSE.md
+    gpl-compatible: true
+  css:
+    theme:
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.2/css/components/accordion.min.css: { type: external, minified: true }
+  js:
+    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.2/js/components/accordion.min.js: { type: external, minified: true }
+
+uikit.form-advanced:
+  remote: https://getuikit.com/v2/index.html
+  version: 2.27.2
+  license:
+    name: MIT
+    url: https://github.com/uikit/uikit/blob/develop/LICENSE.md
+    gpl-compatible: true
+  css:
+    theme:
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.2/css/components/form-advanced.css: { type: external, minified: true }
+
 font-awesome:
   remote: http://fontawesome.io/
   version: 4.6.3
@@ -28,3 +52,9 @@ active-link:
   version: VERSION
   js:
     js/uikit.active-link.js: {}
+
+global-style:
+  version: VERSION
+  css:
+    base:
+      css/uikit.base.css: {}

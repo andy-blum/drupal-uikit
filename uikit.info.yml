@@ -8,6 +8,7 @@ package: UIkit
 libraries:
   - uikit/uikit
   - uikit/font-awesome
+  - uikit/global-style
 
 regions:
   navbar: 'Navigation Bar'

@@ -44,6 +44,7 @@
  * @see template_preprocess_form_element()
  */
 #}
+{{ attach_library('uikit/uikit.form-advanced') }}
 {%
   set classes = [
     'js-form-item',
@@ -61,7 +62,6 @@
   set description_classes = [
     'description',
     description_display == 'invisible' ? 'visually-hidden',
-    'uk-form-help-block',
   ]
 %}
 <div{{ attributes.addClass(classes) }}>
@@ -74,21 +74,21 @@
   {% endif %}
 
   {% if description_display == 'before' and description.content %}
-    <div{{ description.attributes.addClass('uk-form-help-block') }}>
+    <div{{ description.attributes }}>
       {{ description.content }}
     </div>
   {% endif %}
 
   <div class="uk-form-controls">
     {{ children }}
+
+    {% if label_display == 'after' %}
+      {{ label }}
+    {% endif %}
   </div>
 
   {% if suffix is not empty %}
     <span class="field-suffix">{{ suffix }}</span>
-  {% endif %}
-
-  {% if label_display == 'after' %}
-    {{ label }}
   {% endif %}
 
   {% if errors %}
