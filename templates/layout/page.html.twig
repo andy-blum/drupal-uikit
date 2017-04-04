@@ -44,44 +44,58 @@
  */
 #}
 <div class="uk-container uk-container-center uk-margin-top">
+  {% if page.navbar %}
+    <nav id="page-navbar" class="uk-navbar uk-margin">
+      {% if page.offcanvas %}
+        <a href="#offcanvas" class="uk-navbar-toggle uk-visible-small" data-uk-offcanvas=""></a>
+      {% endif %}
 
-  <nav class="uk-navbar">
-    {{ page.branding }}
-    {{ page.primary_menu }}
-    {{ page.secondary_menu }}
-  </nav>
+      {{ page.navbar }}
+    </nav>
+  {% endif %}
 
-  {{ page.breadcrumb }}
+  <div class="uk-grid" data-uk-grid-margin>
+    {%
+      set content_classes = [
+        'uk-width-small-1-1',
+        page.sidebar_first and page.sidebar_second ? 'uk-width-medium-1-2',
+        page.sidebar_first and page.sidebar_second is empty ? 'uk-width-medium-3-4',
+        page.sidebar_second and page.sidebar_first is empty ? 'uk-width-medium-3-4',
+        page.sidebar_first is empty and page.sidebar_second is empty ? 'uk-width-medium-1-1',
+      ]
+    %}
 
-  {{ page.highlighted }}
-
-  {{ page.help }}
-
-  <main role="main">
-    <a id="main-content" tabindex="-1"></a>
-
-    <div class="layout-content">
+    <div{{ content_attributes.addClass(content_classes) }}>
+      <a id="main-content" tabindex="-1"></a>
       {{ page.content }}
     </div>
 
     {% if page.sidebar_first %}
-      <aside class="layout-sidebar-first" role="complementary">
+      <aside class="uk-width-small-1-1 uk-width-medium-1-4">
         {{ page.sidebar_first }}
       </aside>
     {% endif %}
 
     {% if page.sidebar_second %}
-      <aside class="layout-sidebar-second" role="complementary">
+      <aside class="uk-width-small-1-1 uk-width-medium-1-4">
         {{ page.sidebar_second }}
       </aside>
     {% endif %}
-
-  </main>
-
-  {% if page.footer %}
-    <footer role="contentinfo">
-      {{ page.footer }}
-    </footer>
-  {% endif %}
-
+  </div>
 </div>
+
+{% if page.footer %}
+  <footer role="contentinfo">
+    <div class="uk-container uk-container-center uk-margin-top">
+      {{ page.footer }}
+    </div>
+  </footer>
+{% endif %}
+
+{% if page.offcanvas %}
+  <div id="offcanvas" class="uk-offcanvas">
+    <div class="uk-offcanvas-bar">
+      {{ page.offcanvas }}
+    </div>
+  </div>
+{% endif %}

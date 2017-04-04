@@ -11,16 +11,22 @@
  * @see process.inc
  */
 
-/**
- * Implements template_preprocess_block() for the primary menu.
- */
-function uikit_preprocess_block__primary_menu__menu(&$variables) {
-  $variables['content']['#theme'] = 'menu__primary';
-}
+use Drupal\block\Entity\Block;
 
-/**
- * Implements template_preprocess_block() for the secondary menu.
- */
-function uikit_preprocess_block__secondary_menu__menu(&$variables) {
-  $variables['content']['#theme'] = 'menu__secondary';
+function uikit_preprocess_block(&$variables) {
+  $system_menu_block = $variables['base_plugin_id'] == 'system_menu_block';
+  $block = Block::load($variables['elements']['#id']);
+  $region = $block->getRegion();
+
+  if ($system_menu_block) {
+    switch ($region) {
+      case 'navbar':
+        $variables['content']['#theme'] = 'menu__navbar';
+        break;
+
+      case 'offcanvas':
+        $variables['content']['#theme'] = 'menu__offcanvas';
+        break;
+    }
+  }
 }
