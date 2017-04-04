@@ -16,3 +16,7 @@ regions:
   sidebar_first: 'Left Sidebar'
   sidebar_second: 'Right Sidebar'
   footer: 'Footer'
+
+libraries-extend:
+  core/drupal.active-link:
+    - uikit/active-link

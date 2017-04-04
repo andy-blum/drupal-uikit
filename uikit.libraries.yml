@@ -23,3 +23,8 @@ font-awesome:
   css:
     theme:
       //cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css: { type: external, minified: true }
+
+active-link:
+  version: VERSION
+  js:
+    js/uikit.active-link.js: {}

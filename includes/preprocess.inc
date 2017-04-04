@@ -13,6 +13,9 @@
 
 use Drupal\block\Entity\Block;
 
+/**
+ * Implements template_preprocess_block().
+ */
 function uikit_preprocess_block(&$variables) {
   $system_menu_block = $variables['base_plugin_id'] == 'system_menu_block';
   $block = Block::load($variables['elements']['#id']);
@@ -29,4 +32,17 @@ function uikit_preprocess_block(&$variables) {
         break;
     }
   }
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for feed-icon.html.twig.
+ *
+ * Feed icon on the front page is missing the site name, as reported in
+ * @link https://www.drupal.org/node/2082657 Feed icon on the front page misses site title @endlink.
+ * We are following this issue so we can make the appropriate changes when the
+ * issue is fixed.
+ */
+function uikit_preprocess_feed_icon(&$variables) {
+  $config = \Drupal::config('system.site');
+  $variables['site_name'] = $config->get('name');
 }
