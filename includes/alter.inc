@@ -23,12 +23,16 @@ use \Drupal\block\Entity\Block;
  */
 function uikit_theme_suggestions_block_alter(array &$suggestions, array $variables) {
   $base_plugin_id = $variables['elements']['#base_plugin_id'];
-  $system_menu_block = $base_plugin_id == 'system_menu_block';
+  $id = $variables['elements']['#id'];
+  $block = Block::load($id);
+  $region = $block->get('region');
 
+  // Add block__REGION to theme suggestions.
+  $suggestions[] = 'block__' . $region;
+
+  // Add block__REGION__menu to system menu blocks.
+  $system_menu_block = $base_plugin_id == 'system_menu_block';
   if ($system_menu_block) {
-    $id = $variables['elements']['#id'];
-    $block = Block::load($id);
-    $region = $block->get('region');
     $suggestions[] = 'block__' . $region . '__menu';
   }
 }
