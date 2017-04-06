@@ -36,6 +36,8 @@ uikit.form-advanced:
   css:
     theme:
       //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.2/css/components/form-advanced.css: { type: external, minified: true }
+  js:
+    js/uikit.form-advanced.js: {}
 
 font-awesome:
   remote: http://fontawesome.io/

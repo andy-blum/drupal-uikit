@@ -19,6 +19,7 @@
   set classes = [
     'uk-accordion',
     'uk-form-row',
+    'uk-margin-top-remove',
   ]
 %}
 <details{{ attributes.addClass(classes) }} data-uk-accordion>
@@ -40,7 +41,10 @@
   {% endif %}
 
   <div class="uk-accordion-content">
-    {{ description }}
+    {% if description %}
+      <p class="uk-form-help-block">{{ description }}</p>
+    {% endif %}
+
     {{ children }}
     {{ value }}
   </div>

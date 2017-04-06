@@ -10,13 +10,8 @@
  * @see template_preprocess_select()
  */
 #}
-{%
-  set classes = [
-    'uk-form-width-large',
-  ]
-%}
 {% spaceless %}
-  <select{{ attributes.addClass(classes) }}>
+  <select{{ attributes }}>
     {% for option in options %}
       {% if option.type == 'optgroup' %}
         <optgroup label="{{ option.label }}">

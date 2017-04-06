@@ -13,11 +13,6 @@
  * @see template_preprocess_textarea()
  */
 #}
-{%
-  set classes = [
-    'uk-form-width-large',
-  ]
-%}
 <div{{ wrapper_attributes }}>
-  <textarea{{ attributes.addClass(classes) }}>{{ value }}</textarea>
+  <textarea{{ attributes.addClass('uk-width-1-1') }}>{{ value }}</textarea>
 </div>
