@@ -7,7 +7,7 @@ uikit:
     gpl-compatible: true
   css:
     theme:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.2/css/uikit.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.2/css/uikit.gradient.min.css: { type: external, minified: true }
   js:
     //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.2/js/uikit.min.js: { type: external, minified: true }
   dependencies:
@@ -55,8 +55,19 @@ active-link:
   js:
     js/uikit.active-link.js: {}
 
+dropbutton:
+  version: VERSION
+  js:
+    js/uikit.dropbutton.js: {}
+
 global-style:
   version: VERSION
   css:
     base:
       css/uikit.base.css: {}
+    layout:
+      css/uikit.layout.css: {}
+    component:
+      css/uikit.component.css: {}
+    theme:
+      css/uikit.theme.css: {}

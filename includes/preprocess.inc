@@ -63,6 +63,26 @@ function uikit_preprocess_form_element(&$variables) {
 }
 
 /**
+ * Implements template_preprocess_HOOK() for links--dropbutton.html.twig.
+ */
+function uikit_preprocess_links__dropbutton(&$variables) {
+  $links = $variables['links'];
+
+  // Shift the first link off the array to use it as the dropbutton link.
+  $dropbutton = array_shift($links);
+
+  if (isset($dropbutton['link'])) {
+    $dropbutton['link']['#options']['attributes']['class'] = array('uk-button');
+  }
+
+  $variables['dropbutton'] = $dropbutton;
+
+  // Assign the new links array with the first link shifted off the array to
+  // provide the dropdown menu links.
+  $variables['links'] = $links;
+}
+
+/**
  * Implements template_preprocess_HOOK().
  */
 function uikit_preprocess_user(&$variables) {

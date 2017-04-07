@@ -1,3 +1,4 @@
+/* CSS reset/normalize plus HTML element styling. */
 details.uk-accordion ::-webkit-details-marker {
   display:none;
 }
