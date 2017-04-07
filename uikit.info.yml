@@ -21,3 +21,6 @@ regions:
 libraries-extend:
   core/drupal.active-link:
     - uikit/active-link
+
+libraries-override:
+  core/drupal.tabledrag: uikit/tabledrag

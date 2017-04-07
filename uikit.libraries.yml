@@ -50,16 +50,6 @@ font-awesome:
     theme:
       //cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css: { type: external, minified: true }
 
-active-link:
-  version: VERSION
-  js:
-    js/uikit.active-link.js: {}
-
-dropbutton:
-  version: VERSION
-  js:
-    js/uikit.dropbutton.js: {}
-
 global-style:
   version: VERSION
   css:
@@ -71,3 +61,20 @@ global-style:
       css/uikit.component.css: {}
     theme:
       css/uikit.theme.css: {}
+  js:
+    js/uikit.theme.js: {}
+
+active-link:
+  version: VERSION
+  js:
+    js/uikit.active-link.js: {}
+
+dropbutton:
+  version: VERSION
+  js:
+    js/uikit.dropbutton.js: {}
+
+tabledrag:
+  version: VERSION
+  js:
+    js/uikit.tabledrag.js: { weight: -1 }

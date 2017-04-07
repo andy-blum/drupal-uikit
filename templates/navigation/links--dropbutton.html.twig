@@ -41,37 +41,51 @@
     {%- endif -%}
   {%- endif -%}
 
-  {%- if dropbutton.link -%}
-    {{ dropbutton.link }}
-  {%- elseif dropbutton.text_attributes -%}
-    <span{{ dropbutton.text_attributes }}>{{ item.text }}</span>
-  {%- else -%}
-    {{ dropbutton.text }}
-  {%- endif -%}
+  {% if multiple %}
+    <div class="uk-button-group">
+      {%- if dropbutton.link -%}
+        {{ dropbutton.link }}
+      {%- elseif dropbutton.text_attributes -%}
+        <span{{ dropbutton.text_attributes }}>{{ item.text }}</span>
+      {%- else -%}
+        {{ dropbutton.text }}
+      {%- endif -%}
 
-  <div data-uk-dropdown="{mode:'click'}">
-    <a class="uk-button"><i class="uk-icon-caret-down"></i></a>
+      <div data-uk-dropdown="{mode:'click'}">
+        <a class="uk-button"><i class="uk-icon-caret-down"></i></a>
 
-    <div class="uk-dropdown uk-dropdown-small">
-      {%
-        set classes = [
-          'uk-nav',
-          'uk-nav-dropdown'
-        ]
-      %}
-      <ul{{ attributes. addClass(classes) }}>
-        {%- for item in links -%}
-          <li{{ item.attributes }}>
-            {%- if item.link -%}
-              {{ item.link }}
-            {%- elseif item.text_attributes -%}
-              <span{{ item.text_attributes }}>{{ item.text }}</span>
-            {%- else -%}
-              {{ item.text }}
-            {%- endif -%}
-          </li>
-        {%- endfor -%}
-      </ul>
+        <div class="uk-dropdown uk-dropdown-small">
+          {%
+            set classes = [
+              'uk-nav',
+              'uk-nav-dropdown'
+            ]
+          %}
+          <ul{{ attributes. addClass(classes) }}>
+            {%- for item in links -%}
+              <li{{ item.attributes }}>
+                {%- if item.link -%}
+                  {{ item.link }}
+                {%- elseif item.text_attributes -%}
+                  <span{{ item.text_attributes }}>{{ item.text }}</span>
+                {%- else -%}
+                  {{ item.text }}
+                {%- endif -%}
+              </li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      </div>
     </div>
-  </div>
+  {% else %}
+    {%- for item in links -%}
+      {%- if item.link -%}
+        {{ item.link }}
+      {%- elseif item.text_attributes -%}
+        <span{{ item.text_attributes }}>{{ item.text }}</span>
+      {%- else -%}
+        {{ item.text }}
+      {%- endif -%}
+    {%- endfor -%}
+  {% endif %}
 {%- endif %}

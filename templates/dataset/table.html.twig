@@ -39,9 +39,14 @@
  * @see template_preprocess_table()
  */
 #}
-{% if responsive %}<div class="uk-overflow-container">{% endif %}
-
-<table{{ attributes.addClass('uk-table') }}>
+{%
+  set classes = [
+    'uk-table',
+    'uk-table-hover',
+    'uk-table-striped',
+  ]
+%}
+<table{{ attributes.addClass(classes) }}>
   {% if caption %}
     <caption>{{ caption }}</caption>
   {% endif %}
@@ -60,7 +65,7 @@
 
   {% if header %}
     <thead>
-      <tr>
+      <tr class="uk-table-middle">
         {% for cell in header %}
           <{{ cell.tag }}{{ cell.attributes }}>
             {{- cell.content -}}
@@ -73,7 +78,7 @@
   {% if rows %}
     <tbody>
       {% for row in rows %}
-        <tr{{ row.attributes }}>
+        <tr{{ row.attributes.addClass('uk-table-middle') }}>
           {% for cell in row.cells %}
             <{{ cell.tag }}{{ cell.attributes }}>
               {{- cell.content -}}
@@ -84,7 +89,7 @@
     </tbody>
   {% elseif empty %}
     <tbody>
-      <tr>
+      <tr class="uk-table-middle">
         <td colspan="{{ header_columns }}">{{ empty }}</td>
       </tr>
     </tbody>
@@ -92,7 +97,7 @@
   {% if footer %}
     <tfoot>
       {% for row in footer %}
-        <tr{{ row.attributes }}>
+        <tr{{ row.attributes.addClass('uk-table-middle') }}>
           {% for cell in row.cells %}
             <{{ cell.tag }}{{ cell.attributes }}>
               {{- cell.content -}}
@@ -103,5 +108,3 @@
     </tfoot>
   {% endif %}
 </table>
-
-{% if responsive %}</div>{% endif %}

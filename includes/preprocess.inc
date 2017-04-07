@@ -67,19 +67,48 @@ function uikit_preprocess_form_element(&$variables) {
  */
 function uikit_preprocess_links__dropbutton(&$variables) {
   $links = $variables['links'];
+  $multiple = count($links) > 1 ? TRUE : FALSE;
+  $variables['multiple'] = $multiple;
 
-  // Shift the first link off the array to use it as the dropbutton link.
-  $dropbutton = array_shift($links);
+  if ($multiple) {
+    // Shift the first link off the array to use it as the dropbutton link.
+    $dropbutton = array_shift($links);
 
-  if (isset($dropbutton['link'])) {
-    $dropbutton['link']['#options']['attributes']['class'] = array('uk-button');
+    if (isset($dropbutton['link'])) {
+      // Add the uk-button class to the dropbutton link.
+      $dropbutton['link']['#options']['attributes']['class'] = array('uk-button');
+    }
+
+    $variables['dropbutton'] = $dropbutton;
+  }
+  else {
+    foreach ($links as $key => $item) {
+      if (isset($item['link'])) {
+        // Links not in the dropbutton group need the uk-button class added.
+        $links[$key]['link']['#options']['attributes']['class'][] = 'uk-button';
+      }
+    }
   }
 
-  $variables['dropbutton'] = $dropbutton;
-
-  // Assign the new links array with the first link shifted off the array to
-  // provide the dropdown menu links.
+  // Assign new links with the first link shifted off the array to provide the
+  // dropdown menu links.
   $variables['links'] = $links;
+}
+
+function uikit_preprocess_menu__navbar(&$variables) {
+}
+
+/**
+ * Implements template_preprocess_HOOK().
+ */
+function uikit_preprocess_menu_local_action(&$variables) {
+  $link = $variables['element']['#link'];
+
+  // Set the link variable for menu-local-action.html.twig.
+  $variables['link'] = array(
+    'title' => $link['title'],
+    'url' => $link['url'],
+  );
 }
 
 /**

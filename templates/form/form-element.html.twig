@@ -54,7 +54,7 @@
     title_display not in ['after', 'before'] ? 'form-no-label',
     disabled == 'disabled' ? 'form-disabled',
     errors ? 'form-item--error',
-    not grouped ? 'uk-form-row',
+    'uk-form-row',
     grouped ? 'uk-margin-top',
   ]
 %}
@@ -84,7 +84,7 @@
     {{ children }}
 
     {% if suffix is not empty %}
-      <span class="field-suffix uk-float-left">{{ suffix }}</span>
+      <span class="field-suffix">{{ suffix }}</span>
     {% endif %}
   </div>
 
