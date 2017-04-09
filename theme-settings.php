@@ -9,8 +9,6 @@
  * Implements hook_form_system_theme_settings_alter().
  */
 function uikit_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id = NULL) {
-  /*global $theme_key;
-
   // General "alters" use a form id. Settings should not be set here. The only
   // thing useful about this is if you need to alter the form for the running
   // theme and *not* the theme setting.
@@ -20,11 +18,14 @@ function uikit_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormSt
   }
 
   // Get the active theme name.
-  $theme_key = $form_state['build_info']['args'][0] === $theme_key ? $form_state['build_info']['args'][0] : $theme_key;
+  $build_info = $form_state->getBuildInfo();
+  $active_theme = \Drupal::theme()->getActiveTheme();
+  $theme = $active_theme->getName();
+  $theme_key = $build_info['args'][0] === $theme ? $build_info['args'][0] : $theme;
 
   // Include theme-settings.php when the form is being rebuilt during file
   // Customizer CSS uploads.
-  $form_state['build_info']['files']['uikit'] = drupal_get_path('theme', 'uikit') . '/theme-settings.php';
+  $build_info['files']['uikit'] = drupal_get_path('theme', 'uikit') . '/theme-settings.php';
 
   // Get Customizer CSS theme setting for later use.
   $customizer_css = theme_get_setting('customizer_css', $theme_key);
@@ -132,32 +133,32 @@ function uikit_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormSt
   );
 
   // Fetch a list of regions for the current theme.
-  $all_regions = system_region_list($theme_key);
+  $all_regions = system_region_list($theme, $show = REGIONS_VISIBLE);
 
   // Create vertical tabs for all UIkit related settings.
   $form['uikit'] = array(
     '#type' => 'vertical_tabs',
-    '#attached' => array(
+    /*'#attached' => array(
       'css' => array(
         drupal_get_path('theme', 'uikit') . '/css/uikit.admin.css',
       ),
       'js' => array(drupal_get_path('theme', 'uikit') . '/js/uikit.admin.js'),
-    ),
+    ),*/
     '#prefix' => '<h3>' . t('UIkit Settings') . '</h3>',
     '#weight' => -10,
   );
 
   // UIkit theme styles.
   $form['theme'] = array(
-    '#type' => 'fieldset',
+    '#type' => 'details',
     '#title' => t('Theme styles'),
     '#description' => t('UIkit comes with a basic theme and two neat themes to get you started. Here you can select which base style to start with.'),
     '#group' => 'uikit',
-    '#attributes' => array(
+    /*'#attributes' => array(
       'class' => array(
         'uikit-theme-settings-form',
       ),
-    ),
+    ),*/
   );
   $form['theme']['base_style'] = array(
     '#type' => 'select',
@@ -172,7 +173,7 @@ function uikit_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormSt
     '#default_value' => theme_get_setting('base_style', $theme_key),
   );
   $form['theme']['theme_customizer'] = array(
-    '#type' => 'fieldset',
+    '#type' => 'details',
     '#title' => t('UIkit Customizer'),
     '#description' => t('UIkit comes with a customizer that enables you to make adjustments to the theme you are using with just a few clicks and no need for any CSS knowledge. You can then download your new CSS and upload it here to override the default styles provided by UIkit. Visit <a href="@customizer" target="_blank">How to customize</a> to learn how to use Customizer.', array('@customizer' => 'https://getuikit.com/v2/docs/documentation_how-to-customize.html')),
     '#states' => array(
@@ -193,7 +194,7 @@ function uikit_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormSt
 
   // Mobile settings.
   $form['mobile_settings'] = array(
-    '#type' => 'fieldset',
+    '#type' => 'details',
     '#title' => t('Mobile settings'),
     '#description' => t("Adjust the mobile layout settings to enhance your users' experience on smaller devices."),
     '#group' => 'uikit',
@@ -210,7 +211,7 @@ function uikit_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormSt
     '#default_value' => theme_get_setting('mobile_advanced', $theme_key),
   );
   $form['mobile_settings']['mobile_metadata'] = array(
-    '#type' => 'fieldset',
+    '#type' => 'details',
     '#title' => t('Mobile metadata'),
     '#description' => t('HTML5 has attributes that can be defined in meta elements. Here you can control some of these attributes.'),
   );
@@ -226,8 +227,9 @@ function uikit_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormSt
     '#title' => t('<code>x_ua_compatible</code> IE Mode'),
     '#options' => $x_ua_compatible_ie_options,
     '#default_value' => theme_get_setting('x_ua_compatible', $theme_key),
-    '#description' => t('In some cases, it might be necessary to restrict a webpage to a document mode supported by an older version of Windows Internet Explorer. Here we look at the x-ua-compatible header, which allows a webpage to be displayed as if it were viewed by an earlier version of the browser. @see !legacy', array(
-      '!legacy' => '<a href="https://msdn.microsoft.com/en-us/library/jj676915(v=vs.85).aspx" target="_blank">' . t('Specifying legacy document modes') . '</a>',
+    '#description' => t('In some cases, it might be necessary to restrict a webpage to a document mode supported by an older version of Windows Internet Explorer. Here we look at the x-ua-compatible header, which allows a webpage to be displayed as if it were viewed by an earlier version of the browser. See <a href=":url" target="_blank">@text</a>', array(
+      ':url' => 'https://msdn.microsoft.com/en-us/library/jj676915(v=vs.85).aspx',
+      '@text' => 'Specifying legacy document modes',
     )),
     '#states' => array(
       'visible' => array(
@@ -236,7 +238,7 @@ function uikit_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormSt
     ),
   );
   $form['mobile_settings']['mobile_metadata']['meta_viewport'] = array(
-    '#type' => 'fieldset',
+    '#type' => 'details',
     '#title' => t('Viewport metadata'),
     '#description' => t('Gives hints about the size of the initial size of the viewport. This pragma is used by several mobile devices only.'),
     '#states' => array(
@@ -246,7 +248,7 @@ function uikit_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormSt
     ),
   );
   $form['mobile_settings']['mobile_metadata']['meta_viewport']['device_width'] = array(
-    '#type' => 'fieldset',
+    '#type' => 'details',
     '#title' => t('Width'),
     '#collapsible' => TRUE,
   );
@@ -280,7 +282,7 @@ function uikit_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormSt
     '#element_validate' => array('_uikit_viewport_custom_width_validate'),
   );
   $form['mobile_settings']['mobile_metadata']['meta_viewport']['device_height'] = array(
-    '#type' => 'fieldset',
+    '#type' => 'details',
     '#title' => t('Height'),
     '#collapsible' => TRUE,
   );
@@ -347,7 +349,7 @@ function uikit_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormSt
 
   // Layout settings.
   $form['layout'] = array(
-    '#type' => 'fieldset',
+    '#type' => 'details',
     '#title' => t('Layout'),
     '#description' => t('Apply our fully responsive fluid grid system and panels, common layout parts like blog articles and comments and useful utility classes.'),
     '#group' => 'uikit',
@@ -363,12 +365,12 @@ function uikit_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormSt
     '#default_value' => theme_get_setting('layout_advanced', $theme_key),
   );
   $form['layout']['page_layout'] = array(
-    '#type' => 'fieldset',
+    '#type' => 'details',
     '#title' => t('Page Layout'),
     '#description' => t('Change page layout settings.'),
   );
   $form['layout']['page_layout']['standard_layout'] = array(
-    '#type' => 'fieldset',
+    '#type' => 'details',
     '#title' => t('Standard Layout'),
     '#description' => t('Change layout settings for desktops and large screens.'),
     '#collapsible' => TRUE,
@@ -394,7 +396,7 @@ function uikit_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormSt
     ),
   );
   $form['layout']['page_layout']['tablet_layout'] = array(
-    '#type' => 'fieldset',
+    '#type' => 'details',
     '#title' => t('Tablet Layout'),
     '#description' => t('Change layout settings for tablets and medium screens.'),
     '#collapsible' => TRUE,
@@ -422,7 +424,7 @@ function uikit_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormSt
     ),
   );
   $form['layout']['page_layout']['mobile_layout'] = array(
-    '#type' => 'fieldset',
+    '#type' => 'details',
     '#title' => t('Mobile Layout'),
     '#description' => t('Change layout settings for mobile devices and small screens.'),
     '#collapsible' => TRUE,
@@ -486,7 +488,7 @@ function uikit_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormSt
     ),
   );
   $form['layout']['region_layout'] = array(
-    '#type' => 'fieldset',
+    '#type' => 'details',
     '#title' => t('Region Layout'),
     '#description' => t('Change region layout settings.<br><br>Use the following links to see an example of each component style.<ul class="links"><li><a href="http://getuikit.com/docs/panel.html" target="_blank">Panel</a></li><li><a href="http://getuikit.com/docs/block.html" target="_blank">Block</a></li></ul>'),
     '#states' => array(
@@ -499,7 +501,7 @@ function uikit_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormSt
   // Load all regions to assign separate settings for each region.
   foreach ($all_regions as $region_key => $region) {
     $form['layout']['region_layout'][$region_key] = array(
-      '#type' => 'fieldset',
+      '#type' => 'details',
       '#title' => t('@region region', array('@region' => $region)),
       '#description' => t('Change the @region region settings.', array('@region' => $region)),
       '#collapsible' => TRUE,
@@ -516,18 +518,18 @@ function uikit_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormSt
 
   // Navigational settings.
   $form['navigations'] = array(
-    '#type' => 'fieldset',
+    '#type' => 'details',
     '#title' => t('Navigations'),
     '#description' => t('UIkit offers different types of navigations, like navigation bars and side navigations. Use breadcrumbs or a pagination to steer through articles.'),
     '#group' => 'uikit',
   );
   $form['navigations']['main_navbar'] = array(
-    '#type' => 'fieldset',
+    '#type' => 'details',
     '#title' => t('Navigation bar'),
     '#description' => t('Configure settings for the navigation bar.'),
   );
   $form['navigations']['main_navbar']['navbar_container_settings'] = array(
-    '#type' => 'fieldset',
+    '#type' => 'details',
     '#title' => t('Navbar container'),
     '#description' => t('Configure settings for the navigation bar container.'),
     '#collapsible' => TRUE,
@@ -552,7 +554,7 @@ function uikit_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormSt
     '#default_value' => theme_get_setting('navbar_attached', $theme_key),
   );
   $form['navigations']['main_navbar']['navbar_margin'] = array(
-    '#type' => 'fieldset',
+    '#type' => 'details',
     '#title' => t('Navbar margin'),
     '#description' => t('Configure the top and bottom margin to apply to the navbar.'),
     '#collapsible' => TRUE,
@@ -573,7 +575,7 @@ function uikit_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormSt
     '#options' => $navbar_margin_bottom_options,
   );
   $form['navigations']['local_tasks'] = array(
-    '#type' => 'fieldset',
+    '#type' => 'details',
     '#title' => t('Local tasks'),
     '#description' => t('Configure settings for the local tasks menus.'),
   );
@@ -604,7 +606,7 @@ function uikit_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormSt
     '#options' => $secondary_subnav_options,
   );
   $form['navigations']['breadcrumb'] = array(
-    '#type' => 'fieldset',
+    '#type' => 'details',
     '#title' => t('Breadcrumbs'),
     '#description' => t('Configure settings for breadcrumb navigation.'),
   );
@@ -619,7 +621,7 @@ function uikit_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormSt
     '#title' => t('Display home link in breadcrumbs'),
     '#description' => t('Check this box to display the home link in breadcrumb trail.'),
     '#default_value' => theme_get_setting('breakcrumbs_home_link', $theme_key),
-  );*/
+  );
 
   // Create vertical tabs to place Drupal's default theme settings in.
   $form['basic_settings'] = array(
