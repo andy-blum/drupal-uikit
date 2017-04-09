@@ -49,6 +49,13 @@ function uikit_preprocess_block(&$variables) {
 }
 
 /**
+ * Implements template_preprocess_HOOK() for details.html.twig.
+ */
+function uikit_preprocess_details(&$variables) {
+  $variables['#attached']['library'][] = UIkit::getUIkitComponent('accordion');
+}
+
+/**
  * Implements hook_preprocess_HOOK() for feed-icon.html.twig.
  *
  * Feed icon on the front page is missing the site name, as reported in
@@ -74,6 +81,13 @@ function uikit_preprocess_form_element(&$variables) {
   if ($groups) {
     $variables['grouped'] = TRUE;
   }
+}
+
+/**
+ * Implements template_preprocess_form_element() for form-element--advanced.html.twig.
+ */
+function uikit_preprocess_form_element__advanced(&$variables) {
+  $variables['#attached']['library'][] = UIkit::getUIkitComponent('form-advanced');
 }
 
 /**
