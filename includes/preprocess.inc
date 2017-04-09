@@ -11,6 +11,7 @@
  * @see process.inc
  */
 
+use Drupal\uikit\UIkit;
 use Drupal\block\Entity\Block;
 
 /**
@@ -19,7 +20,7 @@ use Drupal\block\Entity\Block;
 function uikit_preprocess_page(&$variables) {
   // Attach the UIkit framework, Font Awesome and base theme libraries to all
   // pages.
-  $variables['#attached']['library'][] = uikit_get_uikit_library();
+  $variables['#attached']['library'][] = UIkit::getUIkitLibrary();
   $variables['#attached']['library'][] = 'uikit/font-awesome';
   $variables['#attached']['library'][] = 'uikit/global-style';
 }
