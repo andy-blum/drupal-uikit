@@ -14,6 +14,17 @@
 use Drupal\block\Entity\Block;
 
 /**
+ * Implements template_preprocess_page().
+ */
+function uikit_preprocess_page(&$variables) {
+  // Attach the UIkit framework, Font Awesome and base theme libraries to all
+  // pages.
+  $variables['#attached']['library'][] = uikit_get_uikit_library();
+  $variables['#attached']['library'][] = 'uikit/font-awesome';
+  $variables['#attached']['library'][] = 'uikit/global-style';
+}
+
+/**
  * Implements template_preprocess_block().
  */
 function uikit_preprocess_block(&$variables) {
@@ -24,10 +35,12 @@ function uikit_preprocess_block(&$variables) {
   if ($system_menu_block) {
     switch ($region) {
       case 'navbar':
+        // Define #theme variable for navbar menus.
         $variables['content']['#theme'] = 'menu__navbar';
         break;
 
       case 'offcanvas':
+        // Define #theme variable for offcanvas menus.
         $variables['content']['#theme'] = 'menu__offcanvas';
         break;
     }

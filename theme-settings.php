@@ -23,13 +23,6 @@ function uikit_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormSt
   $theme = $active_theme->getName();
   $theme_key = $build_info['args'][0] === $theme ? $build_info['args'][0] : $theme;
 
-  // Include theme-settings.php when the form is being rebuilt during file
-  // Customizer CSS uploads.
-  $build_info['files']['uikit'] = drupal_get_path('theme', 'uikit') . '/theme-settings.php';
-
-  // Get Customizer CSS theme setting for later use.
-  $customizer_css = theme_get_setting('customizer_css', $theme_key);
-
   // Build the markup for the layout demos.
   $demo_layout = '<div class="uk-layout-wrapper">';
   $demo_layout .= '<div class="uk-layout-container">';
@@ -134,6 +127,7 @@ function uikit_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormSt
 
   // Fetch a list of regions for the current theme.
   $all_regions = system_region_list($theme, $show = REGIONS_VISIBLE);
+  $form['#attached']['library'][] = 'uikit/uikit.admin';
 
   // Create vertical tabs for all UIkit related settings.
   $form['uikit'] = array(
@@ -154,11 +148,11 @@ function uikit_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormSt
     '#title' => t('Theme styles'),
     '#description' => t('UIkit comes with a basic theme and two neat themes to get you started. Here you can select which base style to start with.'),
     '#group' => 'uikit',
-    /*'#attributes' => array(
+    '#attributes' => array(
       'class' => array(
         'uikit-theme-settings-form',
       ),
-    ),*/
+    ),
   );
   $form['theme']['base_style'] = array(
     '#type' => 'select',
@@ -167,184 +161,9 @@ function uikit_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormSt
       0 => t('UIkit default'),
       'almost-flat' => t('UIkit almost flat'),
       'gradient' => t('UIkit gradient'),
-      'customizer-css' => t('Customizer CSS'),
     ),
-    '#description' => t('Select which base style to use.<ol><li><strong>UIkit default:</strong> No border radius or gradients</li><li><strong>UIkit almost flat:</strong> Small border and border radius</li><li><strong>UIkit gradient:</strong> Almost flat style with gradient backgrounds.</li><li><strong>Customizer CSS:</strong> Use stylesheet uploaded from <a href="@customizer" target="_blank">Customizer</a>.</li></ol>', array('@customizer' => 'https://getuikit.com/v2/docs/customizer.html')),
+    '#description' => t('Select which base style to use.<ol><li><strong>UIkit default:</strong> No border radius or gradients</li><li><strong>UIkit almost flat:</strong> Small border and border radius</li><li><strong>UIkit gradient:</strong> Almost flat style with gradient backgrounds.</li></ol>'),
     '#default_value' => theme_get_setting('base_style', $theme_key),
-  );
-  $form['theme']['theme_customizer'] = array(
-    '#type' => 'details',
-    '#title' => t('UIkit Customizer'),
-    '#description' => t('UIkit comes with a customizer that enables you to make adjustments to the theme you are using with just a few clicks and no need for any CSS knowledge. You can then download your new CSS and upload it here to override the default styles provided by UIkit. Visit <a href="@customizer" target="_blank">How to customize</a> to learn how to use Customizer.', array('@customizer' => 'https://getuikit.com/v2/docs/documentation_how-to-customize.html')),
-    '#states' => array(
-      'visible' => array(
-        ':input[name="base_style"]' => array('value' => 'customizer-css'),
-      ),
-    ),
-  );
-  $form['theme']['theme_customizer']['customizer_css'] = array(
-    '#title' => t('Customizer CSS'),
-    '#type' => 'managed_file',
-    '#description' => t('Upload the CSS file you downloaded from Customizer. This stylesheet will be added to all pages that use your theme.'),
-    '#default_value' => isset($customizer_css['fid']) ? $customizer_css['fid'] : 0,
-    '#element_validate' => array('_uikit_customizer_css_file_validate'),
-    '#upload_location' => 'public://customizer_css/',
-    "#upload_validators"  => array('file_validate_extensions' => array('css')),
-  );
-
-  // Mobile settings.
-  $form['mobile_settings'] = array(
-    '#type' => 'details',
-    '#title' => t('Mobile settings'),
-    '#description' => t("Adjust the mobile layout settings to enhance your users' experience on smaller devices."),
-    '#group' => 'uikit',
-    '#attributes' => array(
-      'class' => array(
-        'uikit-mobile-settings-form',
-      ),
-    ),
-  );
-  $form['mobile_settings']['mobile_advanced'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Show advanced mobile settings'),
-    '#description' => t('Advanced mobile settings give you fine-grain control over additional metadata settings.'),
-    '#default_value' => theme_get_setting('mobile_advanced', $theme_key),
-  );
-  $form['mobile_settings']['mobile_metadata'] = array(
-    '#type' => 'details',
-    '#title' => t('Mobile metadata'),
-    '#description' => t('HTML5 has attributes that can be defined in meta elements. Here you can control some of these attributes.'),
-  );
-  $form['mobile_settings']['mobile_metadata']['meta_charset'] = array(
-    '#type' => 'select',
-    '#title' => t('<code>charset</code>'),
-    '#options' => $charsets,
-    '#description' => t('Specify the character encoding for the HTML document.'),
-    '#default_option' => theme_get_setting('meta_charset', $theme_key),
-  );
-  $form['mobile_settings']['mobile_metadata']['x_ua_compatible'] = array(
-    '#type' => 'select',
-    '#title' => t('<code>x_ua_compatible</code> IE Mode'),
-    '#options' => $x_ua_compatible_ie_options,
-    '#default_value' => theme_get_setting('x_ua_compatible', $theme_key),
-    '#description' => t('In some cases, it might be necessary to restrict a webpage to a document mode supported by an older version of Windows Internet Explorer. Here we look at the x-ua-compatible header, which allows a webpage to be displayed as if it were viewed by an earlier version of the browser. See <a href=":url" target="_blank">@text</a>', array(
-      ':url' => 'https://msdn.microsoft.com/en-us/library/jj676915(v=vs.85).aspx',
-      '@text' => 'Specifying legacy document modes',
-    )),
-    '#states' => array(
-      'visible' => array(
-        ':input[name="mobile_advanced"]' => array('checked' => TRUE),
-      ),
-    ),
-  );
-  $form['mobile_settings']['mobile_metadata']['meta_viewport'] = array(
-    '#type' => 'details',
-    '#title' => t('Viewport metadata'),
-    '#description' => t('Gives hints about the size of the initial size of the viewport. This pragma is used by several mobile devices only.'),
-    '#states' => array(
-      'visible' => array(
-        ':input[name="mobile_advanced"]' => array('checked' => TRUE),
-      ),
-    ),
-  );
-  $form['mobile_settings']['mobile_metadata']['meta_viewport']['device_width'] = array(
-    '#type' => 'details',
-    '#title' => t('Width'),
-    '#collapsible' => TRUE,
-  );
-  $form['mobile_settings']['mobile_metadata']['meta_viewport']['device_width']['viewport_device_width_ratio'] = array(
-    '#type' => 'select',
-    '#title' => t('Device width ratio'),
-    '#description' => t('Defines the ratio between the device width (device-width in portrait mode or device-height in landscape mode) and the viewport size. Literal device width is defined as <code>device-width</code> and is the recommended value. You can also specify a pixel width by selecting <b>Other</b>, such as <code>300</code>.'),
-    '#default_value' => theme_get_setting('viewport_device_width_ratio', $theme_key),
-    '#options' => array(
-      0 => t('-- Select --'),
-      'device-width' => t('Literal device width (Recommended)'),
-      '1' => t('Other'),
-    ),
-  );
-  $form['mobile_settings']['mobile_metadata']['meta_viewport']['device_width']['viewport_custom_width'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Custom device width'),
-    '#description' => t('Defines the width, in pixels, of the viewport. Do not add <b>px</b>, the value must be a non-decimal integer number.'),
-    '#default_value' => theme_get_setting('viewport_custom_width', $theme_key),
-    '#attributes' => array(
-      'size' => 15,
-    ),
-    '#states' => array(
-      'visible' => array(
-        ':input[name="viewport_device_width_ratio"]' => array('value' => '1'),
-      ),
-      'required' => array(
-        ':input[name="viewport_device_width_ratio"]' => array('value' => '1'),
-      ),
-    ),
-    '#element_validate' => array('_uikit_viewport_custom_width_validate'),
-  );
-  $form['mobile_settings']['mobile_metadata']['meta_viewport']['device_height'] = array(
-    '#type' => 'details',
-    '#title' => t('Height'),
-    '#collapsible' => TRUE,
-  );
-  $form['mobile_settings']['mobile_metadata']['meta_viewport']['device_height']['viewport_device_height_ratio'] = array(
-    '#type' => 'select',
-    '#title' => t('Device height ratio'),
-    '#description' => t('Defines the ratio between the device height (device-height in portrait mode or device-width in landscape mode) and the viewport size. Literal device height is defined as <code>device-height</code> and is the recommended value. You can also specify a pixel height by selecting <b>Other</b>, such as <code>300</code>.'),
-    '#default_value' => theme_get_setting('viewport_device_height_ratio', $theme_key),
-    '#options' => array(
-      0 => t('-- Select --'),
-      'device-height' => t('Literal device height (Recommended)'),
-      '1' => t('Other'),
-    ),
-  );
-  $form['mobile_settings']['mobile_metadata']['meta_viewport']['device_height']['viewport_custom_height'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Custom device height'),
-    '#description' => t('Defines the height, in pixels, of the viewport. Do not add <b>px</b>, the value must be a non-decimal integer number.'),
-    '#default_value' => theme_get_setting('viewport_custom_height', $theme_key),
-    '#attributes' => array(
-      'size' => 15,
-    ),
-    '#states' => array(
-      'visible' => array(
-        ':input[name="viewport_device_height_ratio"]' => array('value' => '1'),
-      ),
-      'required' => array(
-        ':input[name="viewport_device_height_ratio"]' => array('value' => '1'),
-      ),
-    ),
-    '#element_validate' => array('_uikit_viewport_custom_height_validate'),
-  );
-  $form['mobile_settings']['mobile_metadata']['meta_viewport']['viewport_initial_scale'] = array(
-    '#type' => 'select',
-    '#title' => t('initial-scale'),
-    '#description' => t('Defines the ratio between the device width (device-width in portrait mode or device-height in landscape mode) and the viewport size.'),
-    '#default_value' => theme_get_setting('viewport_initial_scale', $theme_key),
-    '#options' => $viewport_scale,
-  );
-  $form['mobile_settings']['mobile_metadata']['meta_viewport']['viewport_maximum_scale'] = array(
-    '#type' => 'select',
-    '#title' => t('maximum-scale'),
-    '#description' => t('Defines the maximum value of the zoom; it must be greater or equal to the minimum-scale or the behavior is indeterminate.'),
-    '#default_value' => theme_get_setting('viewport_maximum_scale', $theme_key),
-    '#options' => $viewport_scale,
-  );
-  $form['mobile_settings']['mobile_metadata']['meta_viewport']['viewport_minimum_scale'] = array(
-    '#type' => 'select',
-    '#title' => t('minimum-scale'),
-    '#description' => t('Defines the minimum value of the zoom; it must be smaller or equal to the maximum-scale or the behavior is indeterminate.'),
-    '#default_value' => theme_get_setting('viewport_minimum_scale', $theme_key),
-    '#options' => $viewport_scale,
-  );
-  $form['mobile_settings']['mobile_metadata']['meta_viewport']['viewport_user_scalable'] = array(
-    '#type' => 'select',
-    '#title' => t('user-scalable'),
-    '#description' => t('If set to no, the user is not able to zoom in the webpage. Default value is <b>Yes</b>.'),
-    '#default_value' => theme_get_setting('viewport_user_scalable', $theme_key),
-    '#options' => array(
-      1 => t('Yes'),
-      0 => t('No'),
-    ),
   );
 
   // Layout settings.
@@ -368,6 +187,9 @@ function uikit_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormSt
     '#type' => 'details',
     '#title' => t('Page Layout'),
     '#description' => t('Change page layout settings.'),
+    '#attributes' => array(
+      'open' => 'open',
+    ),
   );
   $form['layout']['page_layout']['standard_layout'] = array(
     '#type' => 'details',
@@ -500,20 +322,22 @@ function uikit_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormSt
 
   // Load all regions to assign separate settings for each region.
   foreach ($all_regions as $region_key => $region) {
-    $form['layout']['region_layout'][$region_key] = array(
-      '#type' => 'details',
-      '#title' => t('@region region', array('@region' => $region)),
-      '#description' => t('Change the @region region settings.', array('@region' => $region)),
-      '#collapsible' => TRUE,
-      '#collapsed' => TRUE,
-    );
-    $form['layout']['region_layout'][$region_key][$region_key . '_style'] = array(
-      '#type' => 'select',
-      '#title' => t('@title style', array('@title' => $region)),
-      '#description' => t('Set the style for the @region region. The theme will automatically style the region accordingly.', array('@region' => $region)),
-      '#default_value' => theme_get_setting($region_key . '_style', $theme_key),
-      '#options' => $region_style_options,
-    );
+    if ($region_key != 'navbar' && $region_key != 'offcanvas') {
+      $form['layout']['region_layout'][$region_key] = array(
+        '#type' => 'details',
+        '#title' => t('@region region', array('@region' => $region)),
+        '#description' => t('Change the @region region settings.', array('@region' => $region)),
+        '#collapsible' => TRUE,
+        '#collapsed' => TRUE,
+      );
+      $form['layout']['region_layout'][$region_key][$region_key . '_style'] = array(
+        '#type' => 'select',
+        '#title' => t('@title style', array('@title' => $region)),
+        '#description' => t('Set the style for the @region region. The theme will automatically style the region accordingly.', array('@region' => $region)),
+        '#default_value' => theme_get_setting($region_key . '_style', $theme_key),
+        '#options' => $region_style_options,
+      );
+    }
   }
 
   // Navigational settings.
@@ -527,6 +351,9 @@ function uikit_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormSt
     '#type' => 'details',
     '#title' => t('Navigation bar'),
     '#description' => t('Configure settings for the navigation bar.'),
+    '#attributes' => array(
+      'open' => 'open',
+    ),
   );
   $form['navigations']['main_navbar']['navbar_container_settings'] = array(
     '#type' => 'details',
@@ -578,6 +405,9 @@ function uikit_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormSt
     '#type' => 'details',
     '#title' => t('Local tasks'),
     '#description' => t('Configure settings for the local tasks menus.'),
+    '#attributes' => array(
+      'open' => 'open',
+    ),
   );
   $form['navigations']['local_tasks']['primary_tasks'] = array(
     '#type' => 'container',
@@ -609,6 +439,9 @@ function uikit_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormSt
     '#type' => 'details',
     '#title' => t('Breadcrumbs'),
     '#description' => t('Configure settings for breadcrumb navigation.'),
+    '#attributes' => array(
+      'open' => 'open',
+    ),
   );
   $form['navigations']['breadcrumb']['display_breadcrumbs'] = array(
     '#type' => 'checkbox',
@@ -634,117 +467,4 @@ function uikit_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormSt
   $form['theme_settings']['#group'] = 'basic_settings';
   $form['logo']['#group'] = 'basic_settings';
   $form['favicon']['#group'] = 'basic_settings';
-
-  // Set validation callback to call when saving theme settings.
-  // $form['#validate'][] = 'uikit_theme_settings_validate';
-}
-
-/**
- * Callback function to validate the Customizer CSS field.
- *
- * When using the Customizer option as a base style, this function validates the
- * file being uploaded. This provides the user with useful information and
- * instructions to be sure the file is uploaded and saved as a managed file.
- * This allows the base theme to load the stylesheet as a managed file from the
- * database.
- */
-function _uikit_customizer_css_file_validate($element, &$form_state) {
-  $theme_key = $form_state['build_info']['args'][0];
-
-  // If referencing an existing file, only allow if there are existing
-  // references. This prevents unmanaged files from being deleted if this
-  // item were to be deleted.
-  $clicked_button = end($form_state['triggering_element']['#parents']);
-
-  if ($clicked_button == 'upload_button') {
-    if ($file = !file_load($element['fid']['#value'])) {
-      form_error($element, t('The file referenced by the !name field does not exist.', array('!name' => $element['#title'])));
-    }
-    else {
-      $fid = $element['fid']['#value'];
-      $file = file_load($fid);
-
-      if (is_object($file)) {
-
-        // Check to make sure that the file is set to be permanent.
-        if ($file->status == 0) {
-          // Update the status.
-          $file->status = FILE_STATUS_PERMANENT;
-
-          // Save the update.
-          file_save($file);
-
-          // Add a reference to prevent warnings.
-          file_usage_add($file, $theme_key, 'theme', 1);
-
-          // Alert the user to save the form to update the theme settings.
-          drupal_set_message(t('@filename successfully uploaded. All changes are stored temporarily. Click Save configuration to make your changes permanent.', array('@filename' => $file->filename)), 'warning');
-        }
-      }
-    }
-  }
-  elseif ($clicked_button == 'remove_button') {
-    // Delete the file and file usage from the database and file system.
-    $file = file_load($element['fid']['#value']);
-    file_usage_delete($file, $theme_key, 'theme', 1);
-    file_delete($file);
-
-    // Alert the user to save the form to update the theme settings.
-    drupal_set_message(t('@filename successfully removed. All changes are stored temporarily. Click Save configuration to make your changes permanent.', array('@filename' => $file->filename)), 'warning');
-  }
-}
-
-/**
- * Callback function to validate the viewport width.
- *
- * The default value for the initial scale is turned off, but it is recommended
- * to use the literal device width. If the user chooses to define a pixel width,
- * the value for the initial scale needs to be validated to ensure only an
- * integer is entered.
- */
-function _uikit_viewport_custom_width_validate($element, &$form_state) {
-  $device_width_ratio = $form_state['values']['viewport_device_width_ratio'] == 1;
-
-  if ($device_width_ratio && empty($element['#value'])) {
-    form_set_error($element['#name'], t('<b>Other</b> was selected for <b>Device width ratio</b>, but no value was given for <b>Custom device width</b>. Please enter an integer value in <b>Custom device width</b> under <b>Mobile settings</b> and save the configuration.'));
-  }
-  elseif ($device_width_ratio && !empty($element['#value']) && !ctype_digit($element['#value'])) {
-    form_set_error($element['#name'], t('<b>Custom device width</b> can only contain an integer number, without a decimal point. Please check the value for <b>Custom device width</b> under <b>Mobile settings</b> and save the configuration.'));
-  }
-}
-
-/**
- * Callback function to validate the viewport height.
- *
- * The default value for the initial scale is turned off, but it is recommended
- * to use the literal device width. If the user chooses to define a pixel width,
- * the value for the initial scale needs to be validated to ensure only an
- * integer is entered.
- */
-function _uikit_viewport_custom_height_validate($element, &$form_state) {
-  $device_height_ratio = $form_state['values']['viewport_device_height_ratio'] == 1;
-
-  if ($device_height_ratio && empty($element['#value'])) {
-    form_set_error($element['#name'], t('<b>Other</b> was selected for <b>Device height ratio</b>, but no value was given for <b>Custom device height</b>. Please enter an integer value in <b>Custom device height</b> under <b>Mobile settings</b> and save the configuration.'));
-  }
-  elseif ($device_height_ratio && !empty($element['#value']) && !ctype_digit($element['#value'])) {
-    form_set_error($element['#name'], t('<b>Custom device height</b> can only contain an integer number, without a decimal point. Please check the value for <b>Custom device height</b> under <b>Mobile settings</b> and save the configuration.'));
-  }
-}
-
-/**
- * Callback function to validate the system theme settings form.
- *
- * When the Customizer option is used as a base style, this function validates
- * a stylesheet was in fact uploaded. This ensures the base theme will still
- * load a UIkit-supplied style until the user fixes the error and uploads a
- * stylesheet.
- */
-function uikit_theme_settings_validate($form, &$form_state) {
-  $base_style = $form_state['values']['base_style'];
-  $customizer_css = $form_state['values']['customizer_css']['fid'];
-
-  if ($base_style == 'customizer-css' && !$customizer_css) {
-    form_set_error('customizer_css', t('Customizer CSS is selected as your base style but you have not uploaded a stylesheet.'));
-  }
 }

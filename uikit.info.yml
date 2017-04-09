@@ -5,11 +5,6 @@ core: 8.x
 base theme: stable
 package: UIkit
 
-libraries:
-  - uikit/uikit
-  - uikit/font-awesome
-  - uikit/global-style
-
 regions:
   navbar: 'Navigation Bar'
   offcanvas: 'Offcanvas Navigation'

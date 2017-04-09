@@ -19,6 +19,13 @@
 use Drupal\block\Entity\Block;
 
 /**
+ * Implements hook_css_alter().
+ */
+function uikit_css_alter(&$css, \Drupal\Core\Asset\AttachedAssetsInterface $assets) {
+  //ksm($css);
+}
+
+/**
  * Implements hook_theme_suggestions_HOOK_alter() for block templates.
  */
 function uikit_theme_suggestions_block_alter(array &$suggestions, array $variables) {
