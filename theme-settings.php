@@ -17,6 +17,9 @@ function uikit_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormSt
     return;
   }
 
+  // Attach the uikit.admin library from the base theme.
+  $form['#attached']['library'][] = 'uikit/uikit.admin';
+
   // Get the active theme name.
   $build_info = $form_state->getBuildInfo();
   $active_theme = \Drupal::theme()->getActiveTheme();
@@ -36,49 +39,18 @@ function uikit_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormSt
   $tablet_sidebar_pos = theme_get_setting('tablet_sidebar_positions', $theme_key);
   $mobile_sidebar_pos = theme_get_setting('mobile_sidebar_positions', $theme_key);
 
-  // Set the charset options.
-  $charsets = array(
-    'utf-8' => 'UTF-8: All languages (Recommended)',
-    'ISO-8859-1' => 'ISO 8859-1: Latin 1',
-    'ISO-8859-2' => 'ISO 8859-2: Central & East European',
-    'ISO-8859-3' => 'ISO 8859-3: South European, Maltese & Esperanto',
-    'ISO-8859-4' => 'ISO 8859-4: North European',
-    'ISO-8859-5' => 'ISO 8859-5: Cyrillic',
-    'ISO-8859-6' => 'ISO 8859-6: Arabic',
-    'ISO-8859-7' => 'ISO 8859-7: Modern Greek',
-    'ISO-8859-8' => 'ISO 8859-8: Hebrew & Yiddish',
-    'ISO-8859-9' => 'ISO 8859-9: Turkish',
-    'ISO-8859-10' => 'ISO 8859-10: Nordic (Lappish, Inuit, Icelandic)',
-    'ISO-8859-11' => 'ISO 8859-11: Thai',
-    'ISO-8859-13' => 'ISO 8859-13: Baltic Rim',
-    'ISO-8859-14' => 'ISO 8859-14: Celtic',
-    'ISO-8859-16' => 'ISO 8859-16: South-Eastern Europe',
-  );
-
-  // Set the x-ua-compatible options.
-  $x_ua_compatible_ie_options = array(
-    0 => 'None (Recommended)',
-    'edge' => 'Highest supported document mode',
-    '5' => 'Quirks Mode',
-    '7' => 'IE7 mode',
-    '8' => 'IE8 mode',
-    '9' => 'IE9 mode',
-    '10' => 'IE10 mode',
-    '11' => 'IE11 mode',
-  );
-
   // Set the navbar margin options.
   $navbar_margin_top_options = array(
-    'No top margin',
-    'Normal top margin',
-    'Smaller top margin',
-    'Larger top margin',
+    0 => 'No top margin',
+    'uk-margin-top' => 'Normal top margin',
+    'uk-margin-small-top' => 'Smaller top margin',
+    'uk-margin-large-top' => 'Larger top margin',
   );
   $navbar_margin_bottom_options = array(
-    'No bottom margin',
-    'Normal bottom margin',
-    'Smaller bottom margin',
-    'Larger bottom margin',
+    0 => 'No bottom margin',
+    'uk-margin-bottom' => 'Normal top margin',
+    'uk-margin-small-bottom' => 'Smaller bottom margin',
+    'uk-margin-large-bottom' => 'Larger bottom margin',
   );
 
   // Build the markup for the local task demos.
@@ -109,35 +81,12 @@ function uikit_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormSt
     'block' => 'Block',
   );
 
-  // Set the viewport scale options.
-  $viewport_scale = array(
-    -1 => t('-- Select --'),
-    '0' => '0',
-    '1' => '1',
-    '2' => '2',
-    '3' => '3',
-    '4' => '4',
-    '5' => '5',
-    '6' => '6',
-    '7' => '7',
-    '8' => '8',
-    '9' => '9',
-    '10' => '10',
-  );
-
   // Fetch a list of regions for the current theme.
   $all_regions = system_region_list($theme, $show = REGIONS_VISIBLE);
-  $form['#attached']['library'][] = 'uikit/uikit.admin';
 
   // Create vertical tabs for all UIkit related settings.
   $form['uikit'] = array(
     '#type' => 'vertical_tabs',
-    /*'#attached' => array(
-      'css' => array(
-        drupal_get_path('theme', 'uikit') . '/css/uikit.admin.css',
-      ),
-      'js' => array(drupal_get_path('theme', 'uikit') . '/js/uikit.admin.js'),
-    ),*/
     '#prefix' => '<h3>' . t('UIkit Settings') . '</h3>',
     '#weight' => -10,
   );

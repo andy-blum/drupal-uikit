@@ -113,4 +113,248 @@ class UIkit {
         return "uikit/uikit.$component";
     }
   }
+
+  public static function getGridClasses($sidebar_first = FALSE, $sidebar_second = FALSE) {
+    $standard_layout = UIkit::getThemeSetting('standard_sidebar_positions');
+    $tablet_layout = UIkit::getThemeSetting('tablet_sidebar_positions');
+    $mobile_layout = UIkit::getThemeSetting('mobile_sidebar_positions');
+
+    $grid_classes = array(
+      'content' => array(),
+      'sidebar' => array(),
+    );
+
+    if ($sidebar_first) {
+      $grid_classes['sidebar']['first'] = array();
+    }
+    if ($sidebar_second) {
+      $grid_classes['sidebar']['second'] = array();
+    }
+
+    if ($sidebar_first && $sidebar_second) {
+      $grid_classes['content'][] = 'uk-width-large-1-2';
+      $grid_classes['sidebar']['first'][] = 'uk-width-large-1-4';
+      $grid_classes['sidebar']['second'][] = 'uk-width-large-1-4';
+
+      switch ($standard_layout) {
+        case 'holy-grail':
+          $grid_classes['content'][] = 'uk-push-large-1-4';
+          $grid_classes['sidebar']['first'][] = 'uk-pull-large-1-2';
+          $grid_classes['sidebar']['second'][] = 'uk-push-pull-large';
+          break;
+
+        case 'sidebars-left':
+          $grid_classes['content'][] = 'uk-push-large-1-2';
+          $grid_classes['sidebar']['first'][] = 'uk-pull-large-1-2';
+          $grid_classes['sidebar']['second'][] = 'uk-pull-large-1-2';
+          break;
+
+        case 'sidebars-right':
+          $grid_classes['content'][] = 'uk-push-pull-large';
+          $grid_classes['sidebar']['first'][] = 'uk-push-pull-large';
+          $grid_classes['sidebar']['second'][] = 'uk-push-pull-large';
+          break;
+      }
+
+      switch ($tablet_layout) {
+        case 'holy-grail':
+          $grid_classes['content'][] = 'uk-width-medium-1-2';
+          $grid_classes['content'][] = 'uk-push-medium-1-4';
+
+          $grid_classes['sidebar']['first'][] = 'uk-width-medium-1-4';
+          $grid_classes['sidebar']['first'][] = 'uk-pull-medium-1-2';
+
+          $grid_classes['sidebar']['second'][] = 'uk-width-medium-1-4';
+          $grid_classes['sidebar']['second'][] = 'uk-push-pull-medium';
+          break;
+
+        case 'sidebars-left':
+          $grid_classes['content'][] = 'uk-width-medium-1-2';
+          $grid_classes['content'][] = 'uk-push-medium-1-2';
+
+          $grid_classes['sidebar']['first'][] = 'uk-width-medium-1-4';
+          $grid_classes['sidebar']['first'][] = 'uk-pull-medium-1-2';
+
+          $grid_classes['sidebar']['second'][] = 'uk-width-medium-1-4';
+          $grid_classes['sidebar']['second'][] = 'uk-pull-medium-1-2';
+          break;
+
+        case 'sidebars-right':
+          $grid_classes['content'][] = 'uk-width-medium-1-2';
+          $grid_classes['content'][] = 'uk-push-pull-medium';
+
+          $grid_classes['sidebar']['first'][] = 'uk-width-medium-1-4';
+          $grid_classes['sidebar']['first'][] = 'uk-push-pull-medium';
+
+          $grid_classes['sidebar']['second'][] = 'uk-width-medium-1-4';
+          $grid_classes['sidebar']['second'][] = 'uk-push-pull-medium';
+          break;
+
+        case 'sidebar-left-stacked':
+          $grid_classes['content'][] = 'uk-width-medium-3-4';
+          $grid_classes['content'][] = 'uk-push-medium-1-4';
+
+          $grid_classes['sidebar']['first'][] = 'uk-width-medium-1-4';
+          $grid_classes['sidebar']['first'][] = 'uk-pull-medium-3-4';
+
+          $grid_classes['sidebar']['second'][] = 'uk-width-medium-1-1';
+          $grid_classes['sidebar']['second'][] = 'uk-push-pull-medium';
+          break;
+
+        case 'sidebar-right-stacked':
+          $grid_classes['content'][] = 'uk-width-medium-3-4';
+          $grid_classes['content'][] = 'uk-push-pull-medium';
+
+          $grid_classes['sidebar']['first'][] = 'uk-width-medium-1-4';
+          $grid_classes['sidebar']['first'][] = 'uk-push-pull-medium';
+
+          $grid_classes['sidebar']['second'][] = 'uk-width-medium-1-1';
+          $grid_classes['sidebar']['second'][] = 'uk-push-pull-medium';
+          break;
+      }
+
+      switch ($mobile_layout) {
+        case 'sidebars-stacked':
+          $grid_classes['content'][] = 'uk-width-small-1-1';
+          $grid_classes['content'][] = 'uk-width-1-1';
+          $grid_classes['content'][] = 'uk-push-pull-small';
+
+          $grid_classes['sidebar']['first'][] = 'uk-width-small-1-1';
+          $grid_classes['sidebar']['first'][] = 'uk-width-1-1';
+          $grid_classes['sidebar']['first'][] = 'uk-push-pull-small';
+
+          $grid_classes['sidebar']['second'][] = 'uk-width-small-1-1';
+          $grid_classes['sidebar']['second'][] = 'uk-width-1-1';
+          $grid_classes['sidebar']['second'][] = 'uk-push-pull-small';
+          break;
+
+        case 'sidebars-vertical':
+          $grid_classes['content'][] = 'uk-width-small-1-1';
+          $grid_classes['content'][] = 'uk-width-1-1';
+          $grid_classes['content'][] = 'uk-push-pull-small';
+
+          $grid_classes['sidebar']['first'][] = 'uk-width-small-1-2';
+          $grid_classes['sidebar']['first'][] = 'uk-width-1-2';
+          $grid_classes['sidebar']['first'][] = 'uk-push-pull-small';
+
+          $grid_classes['sidebar']['second'][] = 'uk-width-small-1-2';
+          $grid_classes['sidebar']['second'][] = 'uk-width-1-2';
+          $grid_classes['sidebar']['second'][] = 'uk-push-pull-small';
+          break;
+      }
+    }
+    elseif ($sidebar_first) {
+      $grid_classes['content'][] = 'uk-width-large-3-4';
+      $grid_classes['sidebar']['first'][] = 'uk-width-large-1-4';
+      $grid_classes['content'][] = 'uk-width-medium-3-4';
+      $grid_classes['sidebar']['first'][] = 'uk-width-medium-1-4';
+
+      switch ($standard_layout) {
+        case 'holy-grail':
+          $grid_classes['content'][] = 'uk-push-large-1-4';
+          $grid_classes['sidebar']['first'][] = 'uk-pull-large-3-4';
+          break;
+
+        case 'sidebars-left':
+          $grid_classes['content'][] = 'uk-push-large-1-4';
+          $grid_classes['sidebar']['first'][] = 'uk-pull-large-3-4';
+          break;
+
+        case 'sidebars-right':
+          $grid_classes['content'][] = 'uk-push-pull-large';
+          $grid_classes['sidebar']['first'][] = 'uk-push-pull-large';
+          break;
+      }
+
+      switch ($tablet_layout) {
+        case 'holy-grail':
+          $grid_classes['content'][] = 'uk-push-medium-1-4';
+          $grid_classes['sidebar']['first'][] = 'uk-pull-medium-3-4';
+          break;
+
+        case 'sidebars-left':
+          $grid_classes['content'][] = 'uk-push-medium-1-4';
+          $grid_classes['sidebar']['first'][] = 'uk-pull-medium-3-4';
+          break;
+
+        case 'sidebars-right':
+          $grid_classes['content'][] = 'uk-push-pull-medium';
+          $grid_classes['sidebar']['first'][] = 'uk-push-pull-medium';
+          break;
+
+        case 'sidebar-left-stacked':
+          $grid_classes['content'][] = 'uk-push-medium-1-4';
+          $grid_classes['sidebar']['first'][] = 'uk-pull-medium-3-4';
+          break;
+
+        case 'sidebar-right-stacked':
+          $grid_classes['content'][] = 'uk-push-pull-medium';
+          $grid_classes['sidebar']['first'][] = 'uk-push-pull-medium';
+          break;
+      }
+    }
+    elseif ($sidebar_second) {
+      $grid_classes['content'][] = 'uk-width-large-3-4';
+      $grid_classes['sidebar']['second'][] = 'uk-width-large-1-4';
+
+      switch ($standard_layout) {
+        case 'holy-grail':
+          $grid_classes['content'][] = 'uk-push-pull-large';
+          $grid_classes['sidebar']['second'][] = 'uk-push-pull-large';
+          break;
+
+        case 'sidebars-left':
+          $grid_classes['content'][] = 'uk-push-large-1-4';
+          $grid_classes['sidebar']['second'][] = 'uk-pull-large-3-4';
+          break;
+
+        case 'sidebars-right':
+          $grid_classes['content'][] = 'uk-push-pull-large';
+          $grid_classes['sidebar']['second'][] = 'uk-push-pull-large';
+          break;
+      }
+
+      switch ($tablet_layout) {
+        case 'holy-grail':
+          $grid_classes['content'][] = 'uk-width-medium-3-4';
+          $grid_classes['sidebar']['second'][] = 'uk-width-medium-1-4';
+          $grid_classes['content'][] = 'uk-push-pull-medium';
+          $grid_classes['sidebar']['first'][] = 'uk-push-pull-medium';
+          break;
+
+        case 'sidebars-left':
+          $grid_classes['content'][] = 'uk-width-medium-3-4';
+          $grid_classes['sidebar']['second'][] = 'uk-width-medium-1-4';
+          $grid_classes['content'][] = 'uk-push-medium-1-4';
+          $grid_classes['sidebar']['second'][] = 'uk-pull-medium-3-4';
+          break;
+
+        case 'sidebars-right':
+          $grid_classes['content'][] = 'uk-width-medium-3-4';
+          $grid_classes['sidebar']['second'][] = 'uk-width-medium-1-4';
+          $grid_classes['content'][] = 'uk-push-pull-medium';
+          $grid_classes['sidebar']['first'][] = 'uk-push-pull-medium';
+          break;
+
+        case 'sidebar-left-stacked':
+          $grid_classes['content'][] = 'uk-width-medium-1-1';
+          $grid_classes['sidebar']['second'][] = 'uk-width-medium-1-1';
+          $grid_classes['content'][] = 'uk-push-pull-medium';
+          $grid_classes['sidebar']['second'][] = 'uk-push-pull-medium';
+          break;
+
+        case 'sidebar-right-stacked':
+          $grid_classes['content'][] = 'uk-width-medium-1-1';
+          $grid_classes['sidebar']['second'][] = 'uk-width-medium-1-1';
+          $grid_classes['content'][] = 'uk-push-pull-medium';
+          $grid_classes['sidebar']['second'][] = 'uk-push-pull-medium';
+          break;
+      }
+    }
+    else {
+      $grid_classes['content'][] = 'uk-width-1-1';
+    }
+
+    return $grid_classes;
+  }
 }

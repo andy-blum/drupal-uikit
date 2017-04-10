@@ -43,9 +43,9 @@
  * @see html.html.twig
  */
 #}
-<header class="uk-container uk-container-center uk-margin-top">
+<header{{ header_attributes }}>
   {% if page.navbar %}
-    <nav id="page-navbar" class="uk-navbar uk-margin">
+    <nav{{ navbar_attributes }}>
       {% if page.offcanvas %}
         <a href="#offcanvas" class="uk-navbar-toggle uk-visible-small" data-uk-offcanvas=""></a>
       {% endif %}
@@ -55,31 +55,21 @@
   {% endif %}
 </header>
 
-<div class="uk-container uk-container-center">
-  <div class="uk-grid" data-uk-grid-margin>
-    {%
-      set content_classes = [
-        'uk-width-small-1-1',
-        page.sidebar_first and page.sidebar_second ? 'uk-width-medium-1-2',
-        page.sidebar_first and page.sidebar_second is empty ? 'uk-width-medium-3-4',
-        page.sidebar_second and page.sidebar_first is empty ? 'uk-width-medium-3-4',
-        page.sidebar_first is empty and page.sidebar_second is empty ? 'uk-width-medium-1-1',
-      ]
-    %}
-
-    <div{{ content_attributes.addClass(content_classes) }}>
+<div{{ page_attributes }}>
+  <div id="page--wrapper" class="uk-grid" data-uk-grid-margin>
+    <main{{ content_attributes }}>
       <a id="main-content" tabindex="-1"></a>
       {{ page.content }}
-    </div>
+    </main>
 
     {% if page.sidebar_first %}
-      <aside class="uk-width-small-1-1 uk-width-medium-1-4">
+      <aside{{ sidebar_first_attributes }}>
         {{ page.sidebar_first }}
       </aside>
     {% endif %}
 
     {% if page.sidebar_second %}
-      <aside class="uk-width-small-1-1 uk-width-medium-1-4">
+      <aside{{ sidebar_second_attributes }}>
         {{ page.sidebar_second }}
       </aside>
     {% endif %}

@@ -12,6 +12,7 @@
  */
 
 use Drupal\uikit\UIkit;
+use Drupal\Core\Template\Attribute;
 use Drupal\block\Entity\Block;
 
 /**
@@ -23,6 +24,85 @@ function uikit_preprocess_page(&$variables) {
   $variables['#attached']['library'][] = UIkit::getUIkitLibrary();
   $variables['#attached']['library'][] = 'uikit/font-awesome';
   $variables['#attached']['library'][] = 'uikit/global-style';
+
+  // Assign new header attributes.
+  $variables['header_attributes'] = new Attribute();
+  $variables['header_attributes']['id'] = 'page--header';
+  $variables['header_attributes']['class'] = array();
+
+  // Add classes to header attributes based on theme settings.
+  $navbar_container = UIkit::getThemeSetting('navbar_container');
+  if ($navbar_container) {
+    $variables['header_attributes']['class'][] = 'uk-container';
+  }
+  $navbar_centering = UIkit::getThemeSetting('navbar_centering');
+  if ($navbar_centering) {
+    $variables['header_attributes']['class'][] = 'uk-container-center';
+  }
+
+  // Assign new navbar attributes.
+  $variables['navbar_attributes'] = new Attribute();
+  $variables['navbar_attributes']['id'] = 'page--navbar';
+  $variables['navbar_attributes']['class'] = array('uk-navbar');
+
+  // Add classes to navbar attribtues based on theme settings.
+  $navbar_attached = UIkit::getThemeSetting('navbar_attached');
+  if ($navbar_attached) {
+    $variables['navbar_attributes']['class'][] = 'uk-navbar-attached';
+  }
+  $navbar_margin_top = UIkit::getThemeSetting('navbar_margin_top');
+  if ($navbar_margin_top) {
+    $variables['navbar_attributes']['class'][] = $navbar_margin_top;
+  }
+  $navbar_margin_bottom = UIkit::getThemeSetting('navbar_margin_bottom');
+  if ($navbar_margin_bottom) {
+    $variables['navbar_attributes']['class'][] = $navbar_margin_bottom;
+  }
+
+  // Assign new page attributes.
+  $variables['page_attributes'] = new Attribute();
+  $variables['page_attributes']['id'] = 'page';
+  $variables['page_attributes']['class'] = array();
+
+  // Add classes to page attribtues based on theme settings.
+  $page_container = UIkit::getThemeSetting('page_container');
+  if ($page_container) {
+    $variables['page_attributes']['class'][] = 'uk-container';
+  }
+  $page_centering = UIkit::getThemeSetting('page_centering');
+  if ($page_centering) {
+    $variables['page_attributes']['class'][] = 'uk-container-center';
+  }
+  $page_margin = UIkit::getThemeSetting('page_margin');
+  if ($page_margin) {
+    $variables['page_attributes']['class'][] = $page_margin;
+  }
+
+  $left_sidebar = !empty($variables['page']['sidebar_first']);
+  $right_sidebar = !empty($variables['page']['sidebar_second']);
+  $grid_classes = UIkit::getGridClasses($left_sidebar, $right_sidebar);
+
+  $variables['content_attributes']['id'] = 'page--content';
+  foreach ($grid_classes['content'] as $content_class) {
+    $variables['content_attributes']['class'][] = $content_class;
+  }
+
+  if ($left_sidebar) {
+    $variables['sidebar_first_attributes'] = new Attribute();
+    $variables['sidebar_first_attributes']['id'] = 'page--sidebar-first';
+    $variables['sidebar_first_attributes']['class'] = array();
+    foreach ($grid_classes['sidebar']['first'] as $sidebar_first_class) {
+      $variables['sidebar_first_attributes']['class'][] = $sidebar_first_class;
+    }
+  }
+  if ($right_sidebar) {
+    $variables['sidebar_second_attributes'] = new Attribute();
+    $variables['sidebar_second_attributes']['id'] = 'page--sidebar-second';
+    $variables['sidebar_second_attributes']['class'] = array();
+    foreach ($grid_classes['sidebar']['second'] as $sidebar_second_class) {
+      $variables['sidebar_second_attributes']['class'][] = $sidebar_second_class;
+    }
+  }
 }
 
 /**
