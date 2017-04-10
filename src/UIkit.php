@@ -357,4 +357,10 @@ class UIkit {
 
     return $grid_classes;
   }
+
+  public static function getPageTitle() {
+    $request = \Drupal::request();
+    $route_match = \Drupal::routeMatch();
+    return \Drupal::service('title_resolver')->getTitle($request, $route_match->getRouteObject());
+  }
 }

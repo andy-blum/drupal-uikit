@@ -78,16 +78,19 @@ function uikit_preprocess_page(&$variables) {
     $variables['page_attributes']['class'][] = $page_margin;
   }
 
+  // Get the grid classes for the page content and sidebars.
   $left_sidebar = !empty($variables['page']['sidebar_first']);
   $right_sidebar = !empty($variables['page']['sidebar_second']);
   $grid_classes = UIkit::getGridClasses($left_sidebar, $right_sidebar);
 
+  // Add page content grid classes.
   $variables['content_attributes']['id'] = 'page--content';
   foreach ($grid_classes['content'] as $content_class) {
     $variables['content_attributes']['class'][] = $content_class;
   }
 
   if ($left_sidebar) {
+    // Add left sidebar grid classes.
     $variables['sidebar_first_attributes'] = new Attribute();
     $variables['sidebar_first_attributes']['id'] = 'page--sidebar-first';
     $variables['sidebar_first_attributes']['class'] = array();
@@ -96,6 +99,7 @@ function uikit_preprocess_page(&$variables) {
     }
   }
   if ($right_sidebar) {
+    // Add right sidebar grid classes.
     $variables['sidebar_second_attributes'] = new Attribute();
     $variables['sidebar_second_attributes']['id'] = 'page--sidebar-second';
     $variables['sidebar_second_attributes']['class'] = array();
@@ -125,6 +129,35 @@ function uikit_preprocess_block(&$variables) {
         $variables['content']['#theme'] = 'menu__offcanvas';
         break;
     }
+  }
+}
+
+/**
+ * Implements template_preprocess_HOOK().
+ */
+function uikit_preprocess_breadcrumb(&$variables) {
+  // Add bool variable for breadcrumb display.
+  $variables['display_breadcrumbs'] = UIkit::getThemeSetting('display_breadcrumbs');
+
+  // Remove "Home" breadcrumb if disabled in the theme settings.
+  $breadcrumb_home_link = UIkit::getThemeSetting('breakcrumbs_home_link');
+  if (!$breadcrumb_home_link) {
+    array_shift($variables['breadcrumb']);
+  }
+
+  if (UIkit::getThemeSetting('breakcrumbs_current_page')) {
+    foreach ($variables['breadcrumb'] as $key => $breadcrumb) {
+      // Set all other items as not being active.
+      $variables['breadcrumb'][$key]['active'] = FALSE;
+    }
+
+    // Display the current page title if enabled in the theme settings and set
+    // it as being active.
+    $page_title = UIkit::getPageTitle();
+    $variables['breadcrumb'][] = array(
+      'text' => $page_title,
+      'active' => TRUE,
+    );
   }
 }
 
@@ -203,9 +236,6 @@ function uikit_preprocess_links__dropbutton(&$variables) {
   $variables['links'] = $links;
 }
 
-function uikit_preprocess_menu__navbar(&$variables) {
-}
-
 /**
  * Implements template_preprocess_HOOK().
  */
@@ -217,6 +247,38 @@ function uikit_preprocess_menu_local_action(&$variables) {
     'title' => $link['title'],
     'url' => $link['url'],
   );
+}
+
+/**
+ * Implements template_preprocess_HOOK().
+ */
+function uikit_preprocess_menu_local_tasks(&$variables) {
+  $primary_tasks_style = UIkit::getThemeSetting('primary_tasks_style');
+  $secondary_tasks_style = UIkit::getThemeSetting('secondary_tasks_style');
+
+  // Create new primary tasks attributes.
+  $variables['primary_attributes'] = new Attribute();
+  $variables['primary_attributes']['class'] = array();
+  if ($primary_tasks_style == 'uk-tab') {
+    // Add uk-tab class to primary tasks.
+    $variables['primary_attributes']['class'][] = 'uk-tab';
+  }
+  else {
+    // Add uk-subnav class to primary tasks.
+    $variables['primary_attributes']['class'][] = 'uk-subnav';
+    if ($primary_tasks_style) {
+      // Add uk-subnav-* class to primary tasks.
+      $variables['primary_attributes']['class'][] = $primary_tasks_style;
+    }
+  }
+
+  // Create new secondary tasks attributes.
+  $variables['secondary_attributes'] = new Attribute();
+  $variables['secondary_attributes']['class'] = array('uk-subnav');
+  if ($secondary_tasks_style) {
+    // Add uk-subnav-* class to secondary tasks.
+    $variables['secondary_attributes']['class'][] = $secondary_tasks_style;
+  }
 }
 
 /**

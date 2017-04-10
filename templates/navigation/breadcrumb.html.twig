@@ -7,18 +7,20 @@
  * - breadcrumb: Breadcrumb trail items.
  */
 #}
-{% if breadcrumb %}
+{% if breadcrumb and display_breadcrumbs %}
   <nav role="navigation" aria-labelledby="system-breadcrumb">
     <h2 id="system-breadcrumb" class="visually-hidden">{{ 'Breadcrumb'|t }}</h2>
     <ol class="uk-breadcrumb">
     {% for item in breadcrumb %}
-      <li>
-        {% if item.url %}
-          <a href="{{ item.url }}">{{ item.text }}</a>
+      {% if item.url %}
+        <li><a href="{{ item.url }}">{{ item.text }}</a></li>
+      {% else %}
+        {% if not item.active %}
+          <li><span>{{ item.text }}</span></li>
         {% else %}
-          {{ item.text }}
+          <li class="uk-active"><span>{{ item.text }}</span></li>
         {% endif %}
-      </li>
+      {% endif %}
     {% endfor %}
     </ol>
   </nav>
