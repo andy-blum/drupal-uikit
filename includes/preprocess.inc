@@ -133,7 +133,7 @@ function uikit_preprocess_block(&$variables) {
 }
 
 /**
- * Implements template_preprocess_HOOK().
+ * Implements template_preprocess_breadcrumb().
  */
 function uikit_preprocess_breadcrumb(&$variables) {
   // Add bool variable for breadcrumb display.
@@ -162,7 +162,7 @@ function uikit_preprocess_breadcrumb(&$variables) {
 }
 
 /**
- * Implements template_preprocess_HOOK() for details.html.twig.
+ * Implements template_preprocess_details().
  */
 function uikit_preprocess_details(&$variables) {
   $variables['#attached']['library'][] = UIkit::getUIkitComponent('accordion');
@@ -204,7 +204,7 @@ function uikit_preprocess_form_element__advanced(&$variables) {
 }
 
 /**
- * Implements template_preprocess_HOOK() for links--dropbutton.html.twig.
+ * Implements template_preprocess_links() for links--dropbutton.html.twig.
  */
 function uikit_preprocess_links__dropbutton(&$variables) {
   $links = $variables['links'];
@@ -237,7 +237,7 @@ function uikit_preprocess_links__dropbutton(&$variables) {
 }
 
 /**
- * Implements template_preprocess_HOOK().
+ * Implements template_preprocess_menu_local_action().
  */
 function uikit_preprocess_menu_local_action(&$variables) {
   $link = $variables['element']['#link'];
@@ -250,7 +250,7 @@ function uikit_preprocess_menu_local_action(&$variables) {
 }
 
 /**
- * Implements template_preprocess_HOOK().
+ * Implements hook_preprocess_HOOK() for menu-local-tasks.html.twig.
  */
 function uikit_preprocess_menu_local_tasks(&$variables) {
   $primary_tasks_style = UIkit::getThemeSetting('primary_tasks_style');
@@ -282,7 +282,7 @@ function uikit_preprocess_menu_local_tasks(&$variables) {
 }
 
 /**
- * Implements template_preprocess_HOOK().
+ * Implements template_preprocess_user().
  */
 function uikit_preprocess_user(&$variables) {
   // $variables['content']['member_for'] doesn't style well. Instead of

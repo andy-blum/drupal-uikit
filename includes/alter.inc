@@ -19,13 +19,6 @@
 use Drupal\block\Entity\Block;
 
 /**
- * Implements hook_css_alter().
- */
-function uikit_css_alter(&$css, \Drupal\Core\Asset\AttachedAssetsInterface $assets) {
-  //ksm($css);
-}
-
-/**
  * Implements hook_theme_suggestions_HOOK_alter() for block templates.
  */
 function uikit_theme_suggestions_block_alter(array &$suggestions, array $variables) {
@@ -45,13 +38,16 @@ function uikit_theme_suggestions_block_alter(array &$suggestions, array $variabl
 }
 
 /**
- * Implements hook_theme_suggestions_HOOK_alter() for form element suggestions.
+ * Implements hook_theme_suggestions_HOOK_alter() for form element templates.
  */
 function uikit_theme_suggestions_form_element_alter(array &$suggestions, array $variables) {
   $type = $variables['element']['#type'];
-  $suggestions[] = 'form_element__' . $type;
-  $form_advanced = $type == 'checkbox' || $type == 'radio';
 
+  // Add suggestions with the element type.
+  $suggestions[] = 'form_element__' . $type;
+
+  // Add suggestions for checkbox and radios to style advanced form elements.
+  $form_advanced = $type == 'checkbox' || $type == 'radio';
   if ($form_advanced) {
     $suggestions[] = 'form_element__' . 'advanced';
   }
