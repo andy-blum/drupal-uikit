@@ -371,15 +371,3 @@ function uikit_preprocess_menu__offcanvas(&$variables) {
     }
   }
 }
-
-/**
- * Implements template_preprocess_user().
- */
-function uikit_preprocess_user(&$variables) {
-  // $variables['content']['member_for'] doesn't style well. Instead of
-  // overriding with CSS, we reformat the markup used.
-  $created = $variables['elements']['#user']->getCreatedTime();
-  $created_diff = \Drupal::service('date.formatter')->formatTimeDiffSince($created);
-  $member_for = '<strong>' . t('Member for') . '</strong> ' . $created_diff;
-  $variables['content']['member_for']['#markup'] = $member_for;
-}

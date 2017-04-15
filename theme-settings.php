@@ -5,6 +5,9 @@
  * Provides theme settings for UIkit themes.
  */
 
+use Drupal\Core\Extension\InfoParser;
+use Drupal\uikit\UIkit;
+
 /**
  * Implements hook_form_system_theme_settings_alter().
  */
@@ -19,6 +22,8 @@ function uikit_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormSt
 
   // Attach the uikit.admin library from the base theme.
   $form['#attached']['library'][] = 'uikit/uikit.admin';
+  $form['#attached']['library'][] = 'uikit/uikit.gradient';
+  $form['#attached']['library'][] = 'uikit/font-awesome';
 
   // Get the active theme name.
   $build_info = $form_state->getBuildInfo();
@@ -83,6 +88,41 @@ function uikit_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormSt
 
   // Fetch a list of regions for the current theme.
   $all_regions = system_region_list($theme, $show = REGIONS_VISIBLE);
+
+  // Create markup for UIkit theme information.
+  $info_parser = new InfoParser();
+  $uikit_theme_info = $info_parser->parse(drupal_get_path('theme', 'uikit') . '/uikit.info.yml');
+  $uikit_version = isset($uikit_theme_info['version']) ? $uikit_theme_info['version'] : UIkit::UIKIT_PROJECT_BRANCH;
+  $uikit_info = '<div class="uk-container uk-container-center uk-margin-top">';
+  $uikit_info .= '<div class="uk-grid">';
+  $uikit_info .= '<div class="uk-panel uk-panel-box uk-width-1-1">';
+  $uikit_info .= '<h3 class="uk-panel-title uk-text-center"><img src="/' . drupal_get_path('theme', 'uikit') . '/uikit.png" /></h3>';
+  $uikit_info .= '<blockquote class="uk-text-small">';
+  $uikit_info .= '<p><i class="uk-icon-quote-left uk-icon-large uk-align-left"></i> ' . $uikit_theme_info['description'] . '</p>';
+  $uikit_info .= '</blockquote>';
+  $uikit_info .= '</div>';
+  $uikit_info .= '<div class="uk-width-1-1 uk-margin">';
+  $uikit_info .= '<div class="uk-grid">';
+  $uikit_info .= '<ul class="uk-list uk-width-1-1 uk-text-center">';
+  $uikit_info .= '<li class="uk-width-small-1-1 uk-width-medium-1-3 uk-float-left"><a href="' . UIkit::UIKIT_LIBRARY . '" target="_blank">UIkit homepage</a></li>';
+  $uikit_info .= '<li class="uk-width-small-1-1 uk-width-medium-1-3 uk-float-left"><a href="' . UIkit::UIKIT_PROJECT . '" target="_blank">Drupal.org project page</a></li>';
+  $uikit_info .= '<li class="uk-width-small-1-1 uk-width-medium-1-3 uk-float-left"><a href="' . UIkit::UIKIT_PROJECT_API . '" target="_blank">UIkit API site</a></li>';
+  $uikit_info .= '<li class="uk-width-small-1-1 uk-width-medium-1-3 uk-float-left"><strong>UIkit library version</strong>: v' . UIkit::UIKIT_LIBRARY_VERSION . '</li>';
+  $uikit_info .= '<li class="uk-width-small-1-1 uk-width-medium-1-3 uk-float-left"><strong>UIkit Drupal version</strong>: ' . $uikit_version . '</li>';
+  $uikit_info .= '<li class="uk-width-small-1-1 uk-width-medium-1-3 uk-float-left"><strong>Ported to Drupal by</strong>: <a href="http://richardbuchanan.com" target="_blank">Richard Buchanan</a></li>';
+  $uikit_info .= '<li class="uk-width-small-1-1 uk-float-left uk-margin-top">UIkit <i class="uk-icon-copyright"></i> <a href="http://www.yootheme.com/" target="_blank">YOOtheme</a>, with love and caffeine, under the <a href="http://opensource.org/licenses/MIT" target="_blank">MIT license</a>.</li>';
+  $uikit_info .= '<li class="uk-width-small-1-1 uk-float-left">UIkit for Drupal <i class="uk-icon-copyright"></i> <a href="http://richardbuchanan.com" target="_blank">Richard Buchanan</a></li>';
+  $uikit_info .= '</ul>';
+  $uikit_info .= '</div></div></div></div>';
+
+  // UIkit theme information.
+  $form['uikit_details'] = array(
+    '#type' => 'container',
+    '#weight' => -20,
+  );
+  $form['uikit_details']['info'] = array(
+    '#markup' => $uikit_info,
+  );
 
   // Create vertical tabs for all UIkit related settings.
   $form['uikit'] = array(
