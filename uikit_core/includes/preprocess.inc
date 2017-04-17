@@ -11,6 +11,8 @@
  * @see process.inc
  */
 
+use Drupal\uikit\UIkit;
+
 /**
  * Implements template_preprocess_html().
  */
@@ -456,6 +458,13 @@ function uikit_preprocess_breadcrumb(&$variables) {
   // Remove home link from breadcrumb if disabled in theme settings.
   if (!theme_get_setting('breakcrumbs_home_link', $theme_key)) {
     array_shift($variables['breadcrumb']);
+  }
+
+  if (UIkit::getThemeSetting('breakcrumbs_current_page') && !drupal_is_front_page()) {
+    // Display the current page title if enabled in the theme settings and set
+    // it as being active.
+    $page_title = UIkit::getPageTitle();
+    $variables['breadcrumb'][] = '<span>' . $page_title . '</span>';
   }
 }
 
