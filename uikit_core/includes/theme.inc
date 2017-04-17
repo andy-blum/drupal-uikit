@@ -328,7 +328,7 @@ function uikit_filter_tips($variables) {
       }
 
       if (count($tiplist) > 0) {
-        $output .= '<ul class="tips uk-list uk-list-space">';
+        $output .= '<ul class="tips uk-list">';
         foreach ($tiplist as $tip) {
           $output .= '<li' . ($long ? ' id="filter-' . str_replace("/", "-", $tip['id']) . '">' : '>') . $tip['tip'] . '</li>';
         }
