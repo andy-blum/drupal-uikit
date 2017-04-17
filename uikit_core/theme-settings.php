@@ -657,6 +657,17 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
     '#description' => t('Check this box to display the home link in breadcrumb trail.'),
     '#default_value' => theme_get_setting('breakcrumbs_home_link', $theme_key),
   );
+  $form['navigations']['breadcrumb']['breakcrumbs_current_page'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Display current page title in breadcrumbs'),
+    '#description' => t('Check this box to display the current page title in breadcrumb trail.'),
+    '#default_value' => theme_get_setting('breakcrumbs_current_page', $theme_key),
+    '#states' => array(
+      'disabled' => array(
+        ':input[name="display_breadcrumbs"]' => array('checked' => FALSE),
+      ),
+    ),
+  );
 
   // UIkit theme information.
   $form['uikit_details'] = array(
