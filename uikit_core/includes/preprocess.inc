@@ -321,21 +321,13 @@ function uikit_preprocess_page(&$variables) {
   // Define header attributes.
   $variables['header_attributes_array'] = array(
     'id' => 'page-header',
-    'class' => array('uk-navbar-container'),
-  );
-
-  // Define navbar wrapper attributes.
-  $variables['navbar_wrapper_attributes_array'] = array(
-    'class' => array(
-      'uk-container',
-      'uk-container-expand',
-    ),
   );
 
   // Define navbar attributes.
   $variables['navbar_attributes_array'] = array(
     'id' => 'page-navbar',
-    'class' => 'uk-navbar',
+    'class' => 'uk-navbar-container',
+    'uk-navbar' => '',
   );
 
   // Move the main and secondary menus into variables to set the attributes
