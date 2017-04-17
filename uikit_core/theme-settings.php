@@ -160,10 +160,7 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
         ),
       ),
       'js' => array(
-        drupal_get_path('theme', 'uikit') . '/js/uikit.admin.js' => array(
-          'group' => JS_THEME,
-          'weight' => 20,
-        ),
+        drupal_get_path('theme', 'uikit') . '/js/uikit.admin.js',
       ),
     ),
     '#prefix' => '<h3>' . t('UIkit Settings') . '</h3>',
