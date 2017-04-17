@@ -108,6 +108,8 @@ function uikit_container($variables) {
   $element = $variables['element'];
   // Ensure #attributes is set.
   $element += array('#attributes' => array());
+  $prefix = '';
+  $suffix = '';
 
   // Special handling for form elements.
   if (isset($element['#array_parents'])) {
@@ -120,7 +122,14 @@ function uikit_container($variables) {
     $element['#attributes']['class'][] = 'form-wrapper';
   }
 
-  return '<div' . drupal_attributes($element['#attributes']) . '>' . $element['#children'] . '</div>';
+  $type = isset($element['#type']) ? $element['#type'] : 0;
+  $actions = $type && $type === 'actions';
+  if ($actions) {
+    $prefix .= '<div class="uk-button-group">';
+    $suffix .= '</div>';
+  }
+
+  return '<div' . drupal_attributes($element['#attributes']) . '>' . $prefix . $element['#children'] . $suffix . '</div>';
 }
 
 /**
@@ -370,6 +379,7 @@ function uikit_form_element($variables) {
   $suffix = isset($element['#field_suffix']) ? $element['#field_suffix'] : '';
   $checkbox = $type && $type === 'checkbox';
   $radio = $type && $type === 'radio';
+  $select = $type && $type === 'select';
 
   // Create an attributes array for the wrapping container.
   if (empty($element['#wrapper_attributes'])) {
@@ -407,7 +417,9 @@ function uikit_form_element($variables) {
   if (!empty($element['#autocomplete_path']) && drupal_valid_path($element['#autocomplete_path'])) {
     $wrapper_attributes['class'][] = 'form-autocomplete';
   }
-  $wrapper_attributes['class'][] = 'uk-margin';
+  if (!$select) {
+    $wrapper_attributes['class'][] = 'uk-margin';
+  }
 
   // TODO: Add advanced password options in theme settings.
   // Add a space before the labels of checkboxes and radios.
