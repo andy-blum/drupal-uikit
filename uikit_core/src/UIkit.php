@@ -46,4 +46,25 @@ class UIkit {
    * @var string
    */
   const UIKIT_PROJECT_API = 'http://uikit-drupal.com';
+
+  /**
+   * The jQuery library version UIkit supports.
+   *
+   * @var string
+   */
+  const UIKIT_JQUERY_VERSION = '2.1.4';
+
+  /**
+   * The jQuery Migrate library version UIkit supports.
+   *
+   * @var string
+   */
+  const UIKIT_JQUERY_MIGRATE_VERSION = '1.4.1';
+
+  /**
+   * The Font Awesome library version UIkit supports.
+   *
+   * @var string
+   */
+  const UIKIT_FONT_AWESOME_VERSION = '4.6.3';
 }
