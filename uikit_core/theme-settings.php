@@ -85,13 +85,11 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
   // Set the subnav options for primary and secondary tasks.
   $primary_subnav_options = array(
     0 => 'Basic subnav',
-    'uk-subnav-line' => 'Subnav line',
     'uk-subnav-pill' => 'Subnav pill',
     'uk-tab' => 'Tabbed',
   );
   $secondary_subnav_options = array(
     0 => 'Basic subnav',
-    'uk-subnav-line' => 'Subnav line',
     'uk-subnav-pill' => 'Subnav pill',
   );
 

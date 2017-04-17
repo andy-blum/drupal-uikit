@@ -651,12 +651,11 @@ function uikit_preprocess_item_list(&$variables) {
 function uikit_preprocess_links(&$variables) {
   $classes = isset($variables['attributes']['class']) ? $variables['attributes']['class'] : array();
 
-  // Add uk-subnav and uk-subnav-line classes to inline links.
+  // Add uk-subnav class to inline links.
   $inline = in_array('inline', $classes);
 
   if ($inline) {
     $variables['attributes']['class'][] = 'uk-subnav';
-    $variables['attributes']['class'][] = 'uk-subnav-line';
   }
 }
 

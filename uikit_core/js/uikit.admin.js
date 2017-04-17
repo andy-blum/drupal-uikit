@@ -129,8 +129,7 @@
 
       // Change the demo menu classes when the setting is changed.
       $('select[name=primary_tasks_style]').change(function () {
-        primaryMenu.removeClass('uk-subnav-line')
-          .removeClass('uk-subnav-pill');
+        primaryMenu.removeClass('uk-subnav-pill');
 
         if ($(this).val() !== '0') {
           primaryMenu.addClass($(this).val());
@@ -138,8 +137,7 @@
       });
 
       $('select[name=secondary_tasks_style]').change(function () {
-        secondaryMenu.removeClass('uk-subnav-line')
-          .removeClass('uk-subnav-pill');
+        secondaryMenu.removeClass('uk-subnav-pill');
 
         if ($(this).val() !== '0') {
           secondaryMenu.addClass($(this).val());
