@@ -94,8 +94,8 @@ function uikit_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormSt
   $uikit_version = isset($uikit_theme_info['version']) ? $uikit_theme_info['version'] : UIkit::UIKIT_PROJECT_BRANCH;
   $uikit_info = '<div class="uk-container uk-container-center uk-margin-top">';
   $uikit_info .= '<div class="uk-grid">';
-  $uikit_info .= '<div class="uk-panel uk-panel-box uk-width-1-1">';
-  $uikit_info .= '<h3 class="uk-panel-title uk-text-center"><img src="/' . drupal_get_path('theme', 'uikit') . '/images/uikit-small.png" /></h3>';
+  $uikit_info .= '<div class="uk-width-1-1">';
+  $uikit_info .= '<div class="uk-text-center"><img src="/' . drupal_get_path('theme', 'uikit') . '/images/uikit-small.png" /></div>';
   $uikit_info .= '<blockquote class="uk-text-small">';
   $uikit_info .= '<p><i class="uk-icon-quote-left uk-icon-large uk-align-left"></i> ' . $uikit_theme_info['description'] . '</p>';
   $uikit_info .= '</blockquote>';
@@ -461,15 +461,41 @@ function uikit_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormSt
     '#markup' => $uikit_info,
   );
 
-  // Create vertical tabs to place Drupal's default theme settings in.
-  $form['basic_settings'] = array(
-    '#type' => 'vertical_tabs',
-    '#prefix' => '<h3>' . t('Basic Settings') . '</h3>',
-    '#weight' => 0,
+  // Get logo from theme settings to show a preview.
+  $logo = UIkit::getThemeSetting('logo');
+  $render_logo = array(
+    '#theme' => 'image',
+    '#uri' => $logo['url'],
+    '#attributes' => array(
+      'class' => array('uk-thumbnail'),
+      'style' => 'max-width: 80px;',
+    ),
+  );
+  $form['logo']['logo_preview'] = array(
+    '#type' => 'item',
+    '#title' => t('Logo preview'),
+    '#markup' => render($render_logo),
+    '#description' => t('Preview of image to display as the site logo. The preview will be updated when the configuration is saved.'),
   );
 
-  // Group Drupal's default theme settings in the basic settings.
-  $form['theme_settings']['#group'] = 'basic_settings';
-  $form['logo']['#group'] = 'basic_settings';
-  $form['favicon']['#group'] = 'basic_settings';
+  // Get favicon from theme settings to show a preview.
+  $favicon = UIkit::getThemeSetting('favicon');
+  $render_favicon = array(
+    '#theme' => 'image',
+    '#uri' => $favicon['url'],
+    '#attributes' => array(
+      'class' => array('uk-thumbnail'),
+      'style' => 'max-width: 80px;',
+    ),
+  );
+  $form['favicon']['favicon_preview'] = array(
+    '#type' => 'item',
+    '#title' => t('Favicon preview'),
+    '#markup' => render($render_favicon),
+    '#description' => t('Preview of favicon displayed in the address bar and bookmarks of most browsers. The preview will be updated when the configuration is saved.'),
+  );
+
+  // Close the logo and favicon details elements by default.
+  $form['logo']['#open'] = FALSE;
+  $form['favicon']['#open'] = FALSE;
 }

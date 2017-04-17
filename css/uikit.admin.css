@@ -150,51 +150,6 @@ blockquote {
 .uk-margin-top {
   margin-top: 15px!important;
 }
-.uk-panel {
-  display: block;
-  position: relative
-}
-.uk-panel,.uk-panel:hover {
-  text-decoration: none
-}
-.uk-panel:after,.uk-panel:before {
-  content: "";
-  display: table
-}
-.uk-panel:after {
-  clear: both
-}
-.uk-panel>:not(.uk-panel-title):last-child {
-  margin-bottom: 0
-}
-.uk-panel-title {
-  margin-top: 0;
-  margin-bottom: 15px;
-  font-size: 18px;
-  line-height: 24px;
-  font-weight: 400;
-  text-transform: none;
-  color: #444
-}
-.uk-panel-badge {
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: 1
-}
-.uk-panel-teaser {
-  margin-bottom: 15px
-}
-.uk-panel-body {
-  padding: 15px
-}
-.uk-panel-box {
-  padding: 15px;
-  background: #fafafa;
-  color: #444;
-  border: 1px solid #ddd;
-  border-radius: 4px
-}
 .uk-subnav {
   display: -ms-flexbox;
   display: -webkit-flex;
@@ -331,6 +286,17 @@ blockquote {
 .uk-text-small {
   font-size: 11px;
   line-height: 16px;
+}
+.uk-thumbnail {
+  display: inline-block;
+  max-width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 4px;
+  border: 1px solid #E5E5E5;
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.05);
 }
 [class*=uk-width] {
   box-sizing: border-box;
