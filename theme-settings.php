@@ -115,15 +115,6 @@ function uikit_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormSt
   $uikit_info .= '</ul>';
   $uikit_info .= '</div></div></div></div>';
 
-  // UIkit theme information.
-  $form['uikit_details'] = array(
-    '#type' => 'container',
-    '#weight' => -20,
-  );
-  $form['uikit_details']['info'] = array(
-    '#markup' => $uikit_info,
-  );
-
   // Create vertical tabs for all UIkit related settings.
   $form['uikit'] = array(
     '#type' => 'vertical_tabs',
@@ -459,6 +450,16 @@ function uikit_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormSt
         ':input[name="display_breadcrumbs"]' => array('checked' => FALSE),
       ),
     ),
+  );
+
+  // UIkit theme information.
+  $form['uikit_details'] = array(
+    '#type' => 'details',
+    '#title' => t('About UIkit'),
+    '#group' => 'uikit',
+  );
+  $form['uikit_details']['info'] = array(
+    '#markup' => $uikit_info,
   );
 
   // Create vertical tabs to place Drupal's default theme settings in.
