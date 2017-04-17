@@ -240,7 +240,7 @@ function uikit_fieldset__collapsible($variables) {
 function uikit_fieldset__format($variables) {
   $element = $variables['element'];
   element_set_attributes($element, array('id'));
-  _form_set_class($element, array('form-wrapper', 'uk-panel', 'uk-panel-box'));
+  _form_set_class($element, array('form-wrapper', 'uk-card', 'uk-card-body'));
   $output = '<div' . drupal_attributes($element['#attributes']) . '>';
 
   if (!empty($element['#title'])) {

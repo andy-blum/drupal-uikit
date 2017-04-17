@@ -36,8 +36,10 @@ function uikit_process_page(&$variables) {
  */
 function uikit_process_region(&$variables) {
   // Convert attribute arrays to an attribute string.
-  $attributes = $variables['wrapper_attributes_array'];
-  $variables['wrapper_attributes'] = drupal_attributes($attributes);
+  $wrapper_attributes = $variables['wrapper_attributes_array'];
+  $attributes = $variables['attributes_array'];
+  $variables['wrapper_attributes'] = drupal_attributes($wrapper_attributes);
+  $variables['attributes'] = drupal_attributes($attributes);
 }
 
 /**

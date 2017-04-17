@@ -405,6 +405,11 @@ function uikit_preprocess_region(&$variables) {
     'class' => array('region-wrapper'),
   );
 
+  // Add an attributes id.
+  $variables['attributes_array'] = array(
+    'id' => 'region-' . $wrapper_id,
+  );
+
   // Get all regions for the theme.
   $regions = system_region_list($theme_key);
 
@@ -412,17 +417,31 @@ function uikit_preprocess_region(&$variables) {
     // Get the settings for each region being used.
     if ($region == $key) {
       $style_setting = UIkit::getThemeSetting($key . '_style', $theme_key);
+      $card_style = UIkit::getThemeSetting($key . '_card_style', $theme_key);
       $region_style = $style_setting ? $style_setting : 0;
+      $region_card_style = $card_style ? $card_style : 0;
 
       if ($region_style) {
         switch ($region_style) {
-          case 'panel':
-            $variables['wrapper_attributes_array']['class'][] = 'uk-panel';
-            $variables['wrapper_attributes_array']['class'][] = 'uk-panel-box';
+          case 'card':
+            $variables['attributes_array']['class'][] = 'uk-card';
+            $variables['attributes_array']['class'][] = 'uk-card-body';
+            break;
+        }
+      }
+
+      if ($region_card_style) {
+        switch ($region_card_style) {
+          case 'default':
+            $variables['attributes_array']['class'][] = 'uk-card-default';
             break;
 
-          case 'block':
-            $variables['wrapper_attributes_array']['class'][] = 'uk-block';
+          case 'primary':
+            $variables['attributes_array']['class'][] = 'uk-card-primary';
+            break;
+
+          case 'secondary':
+            $variables['attributes_array']['class'][] = 'uk-card-secondary';
             break;
         }
       }

@@ -98,8 +98,13 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
   // Set the region style options.
   $region_style_options = array(
     0 => 'No style',
-    'panel' => 'Panel',
-    'block' => 'Block',
+    'card' => 'Card',
+  );
+  $region_card_style_options = array(
+    0 => 'No card style',
+    'default' => 'Default',
+    'primary' => 'Primary',
+    'secondary' => 'Secondary',
   );
 
   // Set the viewport scale options.
@@ -325,7 +330,7 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
   $form['layout'] = array(
     '#type' => 'fieldset',
     '#title' => t('Layout'),
-    '#description' => t('Apply our fully responsive fluid grid system and panels, common layout parts like blog articles and comments and useful utility classes.'),
+    '#description' => t('Apply our fully responsive fluid grid system and cards, common layout parts like blog articles and comments and useful utility classes.'),
     '#group' => 'uikit',
     '#attributes' => array(
       'class' => array(
@@ -453,7 +458,7 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
   $form['layout']['region_layout'] = array(
     '#type' => 'fieldset',
     '#title' => t('Region Layout'),
-    '#description' => t('Change region layout settings.<br><br>Use the following links to see an example of each component style.<ul class="links"><li><a href="http://getuikit.com/docs/panel.html" target="_blank">Panel</a></li><li><a href="http://getuikit.com/docs/block.html" target="_blank">Block</a></li></ul>'),
+    '#description' => t('Change region layout settings.<br><br>Use the following links to see an example of each component style.<ul class="links"><li><a href="https://getuikit.com/docs/card" target="_blank">Card</a></li></ul>'),
     '#states' => array(
       'visible' => array(
         ':input[name="layout_advanced"]' => array('checked' => TRUE),
@@ -476,6 +481,18 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
       '#description' => t('Set the style for the @region region. The theme will automatically style the region accordingly.', array('@region' => $region)),
       '#default_value' => UIkit::getThemeSetting($region_key . '_style', $theme_key),
       '#options' => $region_style_options,
+    );
+    $form['layout']['region_layout'][$region_key][$region_key . '_card_style'] = array(
+      '#type' => 'select',
+      '#title' => t('@title card style', array('@title' => $region)),
+      '#description' => t('Set the card style for the @region region.', array('@region' => $region)),
+      '#default_value' => UIkit::getThemeSetting($region_key . '_card_style', $theme_key),
+      '#options' => $region_card_style_options,
+      '#states' => array(
+        'visible' => array(
+          ':input[name="' . $region_key . '_style"]' => array('value' => 'card'),
+        ),
+      ),
     );
   }
 

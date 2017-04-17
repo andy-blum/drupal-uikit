@@ -35,7 +35,7 @@
 ?>
 <?php if ($content): ?>
   <div<?php print $wrapper_attributes; ?>>
-    <div class="<?php print $classes; ?>">
+    <div<?php print $attributes; ?>>
       <?php print $content; ?>
     </div>
   </div>

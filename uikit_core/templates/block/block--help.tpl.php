@@ -58,7 +58,7 @@
   <?php endif;?>
   <?php print render($title_suffix); ?>
 
-  <div class="uk-panel uk-panel-box uk-margin"<?php print $content_attributes; ?>>
+  <div class="uk-card uk-card-default uk-card-body uk-margin"<?php print $content_attributes; ?>>
     <?php print $content ?>
   </div>
 </div>
