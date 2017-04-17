@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Contains \Drupal\uikit\UIkit.
+ */
+
 namespace Drupal\uikit;
 
 /**
