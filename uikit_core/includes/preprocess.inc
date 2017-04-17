@@ -381,8 +381,8 @@ function uikit_preprocess_page(&$variables) {
 function uikit_preprocess_node(&$variables) {
   $node = $variables['node'];
 
-  // Add the uk-article-title class to all node titles.
-  $variables['title_attributes_array']['class'][] = 'uk-article-title';
+  // Add the uk-text-lead class to all node titles.
+  $variables['title_attributes_array']['class'][] = 'uk-text-lead';
 
   // Theme the submitted meta data.
   $datetime = date('F j, Y', $node->created);
@@ -666,6 +666,18 @@ function uikit_preprocess_menu_local_tasks(&$variables) {
   }
   if ($secondary_style) {
     $variables['secondary_attributes_array']['class'][] = $secondary_style;
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for theme_menu_tree().
+ */
+function uikit_preprocess_menu_tree(&$variables) {
+  $shortcut_set = preg_grep("/^(menu_tree__shortcut_set)/", $variables['#tree']['#theme_wrappers']);
+
+  if ($shortcut_set) {
+    // Provide hook suggestion for shortcut set menu trees.
+    $variables['theme_hook_suggestions'][] = 'menu_tree__shortcut_set';
   }
 }
 

@@ -110,7 +110,7 @@
     <?php print render($content['links']); ?>
 
     <?php if (!$teaser): ?>
-      <hr class="uk-article-divider">
+      <hr>
     <?php endif; ?>
   </div>
 
@@ -119,5 +119,5 @@
 <?php print render($content['comments']); ?>
 
 <?php if ($teaser): ?>
-  <hr class="uk-article-divider">
+  <hr>
 <?php endif; ?>

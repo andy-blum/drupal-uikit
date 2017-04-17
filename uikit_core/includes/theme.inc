@@ -702,20 +702,13 @@ function uikit_links__node($variables) {
       $output .= '>' . check_plain($heading['text']) . '</' . $heading['level'] . '>';
     }
 
+    $output .= '<ul class="uk-subnav uk-subnav-divider">';
+
     $num_links = count($links);
     $i = 1;
 
     foreach ($links as $key => $link) {
       $link['attributes']['class'] = array(str_replace('_', '-', $key));
-
-      // Add the UIkit button utility classes.
-      $link['attributes']['class'][] = 'uk-button-default';
-
-      if ($key == 'node-readmore') {
-        $link['attributes']['class'][] = 'uk-button-primary';
-      }
-
-      $link['attributes']['class'][] = 'uk-margin-small-right';
 
       // Add first and last classes to the list of links to help out themers.
       if ($i == 1) {
@@ -748,6 +741,8 @@ function uikit_links__node($variables) {
 
       $i++;
     }
+
+    $output .= '</ul>';
 
   }
 
@@ -911,7 +906,7 @@ function uikit_menu_local_tasks($variables) {
  * Implements theme_menu_tree().
  */
 function uikit_menu_tree($variables) {
-  return '<ul class="menu">' . $variables['tree'] . '</ul>';
+  return '<ul class="uk-list">' . $variables['tree'] . '</ul>';
 }
 
 /**
@@ -933,6 +928,13 @@ function uikit_menu_tree__offcanvas($variables) {
  */
 function uikit_menu_tree__offcanvas__below($variables) {
   return '<ul class="uk-nav-sub" role="menu">' . $variables['tree'] . '</ul>';
+}
+
+/**
+ * Implements theme_menu_tree() for shortcut sets.
+ */
+function uikit_menu_tree__shortcut_set($variables) {
+  return '<ul class="menu">' . $variables['tree'] . '</ul>';
 }
 
 /**
