@@ -108,25 +108,6 @@ function uikit_container($variables) {
   $element = $variables['element'];
   // Ensure #attributes is set.
   $element += array('#attributes' => array());
-  $file = 0;
-  $password = 0;
-  $password_confirm = 0;
-
-  if (isset($element['#attributes']['class'])) {
-    $file = in_array('form-type-file', $element['#attributes']['class']);
-    $password = in_array('form-item-pass-pass1', $element['#attributes']['class']);
-    $password_confirm = in_array('form-item-pass-pass2', $element['#attributes']['class']);
-  }
-
-  if (isset($element['element']) && !$file && !$password && !$password_confirm) {
-    // Add the 'uk-margin' class.
-    $element['#attributes']['class'][] = 'uk-margin';
-  }
-
-  if (isset($element['element']) && $file) {
-    // Add the 'uk-margin-small-top' class.
-    $element['#attributes']['class'][] = 'uk-margin-small-top';
-  }
 
   // Special handling for form elements.
   if (isset($element['#array_parents'])) {
@@ -388,7 +369,6 @@ function uikit_form_element($variables) {
   $prefix = isset($element['#field_prefix']) ? $element['#field_prefix'] : '';
   $suffix = isset($element['#field_suffix']) ? $element['#field_suffix'] : '';
   $checkbox = $type && $type === 'checkbox';
-  /* $password = $type && $type === 'password'; */
   $radio = $type && $type === 'radio';
 
   // Create an attributes array for the wrapping container.
@@ -427,6 +407,7 @@ function uikit_form_element($variables) {
   if (!empty($element['#autocomplete_path']) && drupal_valid_path($element['#autocomplete_path'])) {
     $wrapper_attributes['class'][] = 'form-autocomplete';
   }
+  $wrapper_attributes['class'][] = 'uk-margin';
 
   // TODO: Add advanced password options in theme settings.
   // Add a space before the labels of checkboxes and radios.
@@ -1207,19 +1188,17 @@ function uikit_radio($variables) {
 function uikit_select($variables) {
   $element = $variables['element'];
   element_set_attributes($element, array('id', 'name', 'size'));
-  $prefix = '';
-  $suffix = '';
+  $prefix = '<div uk-form-custom="target: > * > span:first">';
+  $suffix = '<button class="uk-button uk-button-default" type="button" tabindex="-1">';
+  $suffix .= '<span></span>';
+  $suffix .= '<span uk-icon="icon: chevron-down"></span>';
+  $suffix .= '</button>';
+  $suffix .= '</div>';
 
   _form_set_class($element, array(
     'form-select',
     'uk-select',
-    'uk-form-width-large',
   ));
-
-  if (in_array('filter', $element['#array_parents'])) {
-    $prefix = '<div class="uk-form-controls">';
-    $suffix = '</div>';
-  }
 
   return $prefix . '<select' . drupal_attributes($element['#attributes']) . '>' . form_select_options($element) . '</select>' . $suffix;
 }
@@ -1434,6 +1413,30 @@ function uikit_table($variables) {
 
   $output .= "</table>\n";
   $output .= "</div>\n";
+  return $output;
+}
+
+/**
+ * Implements theme_textarea().
+ */
+function uikit_textarea($variables) {
+  $element = $variables['element'];
+  element_set_attributes($element, array('id', 'name', 'cols', 'rows'));
+  _form_set_class($element, array('form-textarea', 'uk-textarea'));
+
+  $wrapper_attributes = array(
+    'class' => array('form-textarea-wrapper'),
+  );
+
+  // Add resizable behavior.
+  if (!empty($element['#resizable'])) {
+    drupal_add_library('system', 'drupal.textarea');
+    $wrapper_attributes['class'][] = 'resizable';
+  }
+
+  $output = '<div' . drupal_attributes($wrapper_attributes) . '>';
+  $output .= '<textarea' . drupal_attributes($element['#attributes']) . '>' . check_plain($element['#value']) . '</textarea>';
+  $output .= '</div>';
   return $output;
 }
 
