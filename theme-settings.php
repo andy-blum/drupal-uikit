@@ -22,7 +22,6 @@ function uikit_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormSt
 
   // Attach the uikit.admin library from the base theme.
   $form['#attached']['library'][] = 'uikit/uikit.admin';
-  $form['#attached']['library'][] = 'uikit/uikit.gradient';
   $form['#attached']['library'][] = 'uikit/font-awesome';
 
   // Get the active theme name.
@@ -96,7 +95,7 @@ function uikit_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormSt
   $uikit_info = '<div class="uk-container uk-container-center uk-margin-top">';
   $uikit_info .= '<div class="uk-grid">';
   $uikit_info .= '<div class="uk-panel uk-panel-box uk-width-1-1">';
-  $uikit_info .= '<h3 class="uk-panel-title uk-text-center"><img src="/' . drupal_get_path('theme', 'uikit') . '/uikit.png" /></h3>';
+  $uikit_info .= '<h3 class="uk-panel-title uk-text-center"><img src="/' . drupal_get_path('theme', 'uikit') . '/images/uikit-small.png" /></h3>';
   $uikit_info .= '<blockquote class="uk-text-small">';
   $uikit_info .= '<p><i class="uk-icon-quote-left uk-icon-large uk-align-left"></i> ' . $uikit_theme_info['description'] . '</p>';
   $uikit_info .= '</blockquote>';
