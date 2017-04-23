@@ -618,6 +618,15 @@ function uikit_preprocess_confirm_form(&$variables) {
  * Implements hook_preprocess_HOOK() for theme_container().
  */
 function uikit_preprocess_container(&$variables) {
+  // Some modules do not set the classes in attributes as an array and use a
+  // string instead. Move these classes into an array to avoid string to array
+  // errors.
+  $attributes = $variables['element']['#attributes'];
+  if (isset($attributes['class']) && !is_array($attributes['class'])) {
+    $old_classes = explode(' ', $variables['element']['#attributes']['class']);
+    $variables['element']['#attributes']['class'] = $old_classes;
+  }
+
   // Add the uk-form-row class to provide proper margin between container
   // elements.
   $variables['element']['#attributes']['class'][] = 'uk-form-row';
