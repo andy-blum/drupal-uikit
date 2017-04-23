@@ -371,6 +371,14 @@
 }
 
 /**
+ * Forms.
+ */
+sup.form-required {
+  top: .1em;
+  font-size: 20px;
+}
+
+/**
  * Navs
  *
  * 1. By default UIkit does not support 3rd level menu items in navbars, and 2nd level headers and dividers in offcanvas
