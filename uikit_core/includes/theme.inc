@@ -98,6 +98,11 @@ function uikit_checkbox($variables) {
   }
   _form_set_class($element, array('form-checkbox', 'uk-checkbox'));
 
+  // Check for errors and set correct error class.
+  if (form_get_error($element)) {
+    $element['#attributes']['class'][] = 'uk-form-danger';
+  }
+
   return '<input' . drupal_attributes($element['#attributes']) . ' />';
 }
 
@@ -290,6 +295,11 @@ function uikit_file($variables) {
   element_set_attributes($element, array('id', 'name', 'size'));
   _form_set_class($element, array('form-file'));
 
+  // Check for errors and set correct error class.
+  if (form_get_error($element)) {
+    $element['#attributes']['class'][] = 'uk-form-danger';
+  }
+
   return '<input' . drupal_attributes($element['#attributes']) . ' />';
 }
 
@@ -397,11 +407,6 @@ function uikit_form_element($variables) {
   // Add wrapper ID for 'item' type.
   if ($type && $type === 'item' && !empty($element['#markup']) && !empty($element['#id'])) {
     $wrapper_attributes['id'] = $element['#id'];
-  }
-
-  // Check for errors and set correct error class.
-  if ((isset($element['#parents']) && form_get_error($element))) {
-    $wrapper_attributes['class'][] = 'uk-form-danger';
   }
 
   // Add necessary classes to wrapper container.
@@ -1187,6 +1192,11 @@ function uikit_password($variables) {
     'uk-form-width-large',
   ));
 
+  // Check for errors and set correct error class.
+  if (form_get_error($element)) {
+    $element['#attributes']['class'][] = 'uk-form-danger';
+  }
+
   return '<input' . drupal_attributes($element['#attributes']) . ' />';
 }
 
@@ -1206,6 +1216,11 @@ function uikit_radio($variables) {
     $element['#attributes']['checked'] = 'checked';
   }
   _form_set_class($element, array('form-radio', 'uk-radio'));
+
+  // Check for errors and set correct error class.
+  if (form_get_error($element)) {
+    $element['#attributes']['class'][] = 'uk-form-danger';
+  }
 
   return '<input' . drupal_attributes($element['#attributes']) . ' />';
 }
@@ -1227,6 +1242,11 @@ function uikit_select($variables) {
     'form-select',
     'uk-select',
   ));
+
+  // Check for errors and set correct error class.
+  if (form_get_error($element)) {
+    $element['#attributes']['class'][] = 'uk-form-danger';
+  }
 
   return $prefix . '<select' . drupal_attributes($element['#attributes']) . '>' . form_select_options($element) . '</select>' . $suffix;
 }
@@ -1462,6 +1482,11 @@ function uikit_textarea($variables) {
     $wrapper_attributes['class'][] = 'resizable';
   }
 
+  // Check for errors and set correct error class.
+  if (form_get_error($element)) {
+    $element['#attributes']['class'][] = 'uk-form-danger';
+  }
+
   $output = '<div' . drupal_attributes($wrapper_attributes) . '>';
   $output .= '<textarea' . drupal_attributes($element['#attributes']) . '>' . check_plain($element['#value']) . '</textarea>';
   $output .= '</div>';
@@ -1502,6 +1527,11 @@ function uikit_textfield($variables) {
     $attributes['disabled'] = 'disabled';
     $attributes['class'][] = 'autocomplete';
     $extra = '<input' . drupal_attributes($attributes) . ' />';
+  }
+
+  // Check for errors and set correct error class.
+  if (form_get_error($element)) {
+    $element['#attributes']['class'][] = 'uk-form-danger';
   }
 
   $output = '<input' . drupal_attributes($element['#attributes']) . ' />';
