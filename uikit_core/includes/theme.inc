@@ -556,6 +556,22 @@ function uikit_form_element_label($variables) {
 }
 
 /**
+ * Implements theme_form_required_marker().
+ */
+function uikit_form_required_marker($variables) {
+  // This is also used in the installer, pre-database setup.
+  $t = get_t();
+  $attributes = array(
+    'class' => array(
+      'form-required',
+      'uk-text-danger',
+    ),
+    'title' => $t('This field is required.'),
+  );
+  return '<sup' . drupal_attributes($attributes) . '>*</sup>';
+}
+
+/**
  * Implements theme_link().
  */
 function uikit_link($variables) {
