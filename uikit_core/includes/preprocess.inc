@@ -855,17 +855,6 @@ function uikit_preprocess_textarea(&$variables) {
 }
 
 /**
- * Implements hook_preprocess_HOOK() for theme_textfield().
- */
-function uikit_preprocess_textfield(&$variables) {
-  $element = $variables['element'];
-
-  if (isset($element['#parents']) && !empty($element['#validated']) && form_get_error($element)) {
-    $variables['element']['#attributes']['class'][] = 'uk-form-danger';
-  }
-}
-
-/**
  * Implements template_preprocess_username().
  */
 function uikit_preprocess_username(&$variables) {

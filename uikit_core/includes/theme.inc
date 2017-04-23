@@ -1337,6 +1337,11 @@ function uikit_textfield($variables) {
     $extra = '<input' . drupal_attributes($attributes) . ' />';
   }
 
+  // Check for errors and set correct error class.
+  if (form_get_error($element)) {
+    $element['#attributes']['class'][] = 'uk-form-danger';
+  }
+
   $output = '<input' . drupal_attributes($element['#attributes']) . ' />';
 
   return $output . $extra;
