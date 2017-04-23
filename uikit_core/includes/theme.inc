@@ -324,11 +324,6 @@ function uikit_form_element($variables) {
     $wrapper_attributes['id'] = $element['#id'];
   }
 
-  // Check for errors and set correct error class.
-  if ((isset($element['#parents']) && form_get_error($element))) {
-    $wrapper_attributes['class'][] = 'uk-form-danger';
-  }
-
   // Add necessary classes to wrapper container.
   if ($name) {
     $wrapper_attributes['class'][] = 'form-item-' . drupal_html_class($name);

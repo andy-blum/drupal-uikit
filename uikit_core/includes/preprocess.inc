@@ -800,6 +800,33 @@ function uikit_preprocess_menu_local_tasks(&$variables) {
 function uikit_preprocess_password(&$variables) {
   // Define size attribute for password fields for consistent styling.
   $variables['element']['#attributes']['size'] = 25;
+  $element = $variables['element'];
+
+  if (isset($element['#parents']) && !empty($element['#validated']) && form_get_error($element)) {
+    $variables['element']['#attributes']['class'][] = 'uk-form-danger';
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for theme_radio().
+ */
+function uikit_preprocess_radio(&$variables) {
+  $element = $variables['element'];
+
+  if (isset($element['#parents']) && !empty($element['#validated']) && form_get_error($element)) {
+    $variables['element']['#attributes']['class'][] = 'uk-form-danger';
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for theme_select().
+ */
+function uikit_preprocess_select(&$variables) {
+  $element = $variables['element'];
+
+  if (isset($element['#parents']) && !empty($element['#validated']) && form_get_error($element)) {
+    $variables['element']['#attributes']['class'][] = 'uk-form-danger';
+  }
 }
 
 /**
@@ -813,6 +840,28 @@ function uikit_preprocess_table(&$variables) {
   if ($filter_tips) {
     $variables['attributes']['class'][] = 'uk-table-striped';
     $variables['attributes']['class'][] = 'table-filter-tips';
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for theme_textarea().
+ */
+function uikit_preprocess_textarea(&$variables) {
+  $element = $variables['element'];
+
+  if (isset($element['#parents']) && !empty($element['#validated']) && form_get_error($element)) {
+    $variables['element']['#attributes']['class'][] = 'uk-form-danger';
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for theme_textfield().
+ */
+function uikit_preprocess_textfield(&$variables) {
+  $element = $variables['element'];
+
+  if (isset($element['#parents']) && !empty($element['#validated']) && form_get_error($element)) {
+    $variables['element']['#attributes']['class'][] = 'uk-form-danger';
   }
 }
 
