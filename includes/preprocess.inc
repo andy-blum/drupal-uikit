@@ -207,6 +207,20 @@ function uikit_preprocess_form_element__advanced(&$variables) {
 }
 
 /**
+ * Implements template_preprocess_HOOK() for input.html.twig.
+ */
+function uikit_preprocess_input(&$variables) {
+  $element = $variables['element'];
+  $errors = FALSE;
+
+  if (isset($element['#parents']) && isset($element['#errors']) && !empty($element['#validated'])) {
+    $errors = TRUE;
+  }
+
+  $variables['errors'] = $errors;
+}
+
+/**
  * Implements template_preprocess_links() for links--dropbutton.html.twig.
  */
 function uikit_preprocess_links__dropbutton(&$variables) {
