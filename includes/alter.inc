@@ -17,6 +17,22 @@
  */
 
 use Drupal\block\Entity\Block;
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_form_FORM_ID_alter() for Drupal\search\Form\SearchPageForm.
+ */
+function uikit_form_search_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // SearchPageForm assigns a class to the help link as a string instead of an
+  // an array. Let's fix that first.
+  $help_link_classes = explode(' ' , $form['help_link']['#options']['attributes']['class']);
+  $form['help_link']['#options']['attributes']['class'] = $help_link_classes;
+
+  // Now add some classes to the help link for better spacing below the search
+  // input.
+  $form['help_link']['#options']['attributes']['class'][] = 'uk-display-inline-block';
+  $form['help_link']['#options']['attributes']['class'][] = 'uk-margin-small-top';
+}
 
 /**
  * Implements hook_theme_suggestions_HOOK_alter() for block templates.

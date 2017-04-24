@@ -24,34 +24,10 @@ function uikit_preprocess_page(&$variables) {
   $variables['header_attributes']['id'] = 'page--header';
   $variables['header_attributes']['class'] = [];
 
-  // Add classes to header attributes based on theme settings.
-  $navbar_container = UIkit::getThemeSetting('navbar_container');
-  if ($navbar_container) {
-    $variables['header_attributes']['class'][] = 'uk-container';
-  }
-  $navbar_centering = UIkit::getThemeSetting('navbar_centering');
-  if ($navbar_centering) {
-    $variables['header_attributes']['class'][] = 'uk-container-center';
-  }
-
   // Assign new navbar attributes.
   $variables['navbar_attributes'] = new Attribute();
   $variables['navbar_attributes']['id'] = 'page--navbar';
   $variables['navbar_attributes']['class'] = ['uk-navbar'];
-
-  // Add classes to navbar attribtues based on theme settings.
-  $navbar_attached = UIkit::getThemeSetting('navbar_attached');
-  if ($navbar_attached) {
-    $variables['navbar_attributes']['class'][] = 'uk-navbar-attached';
-  }
-  $navbar_margin_top = UIkit::getThemeSetting('navbar_margin_top');
-  if ($navbar_margin_top) {
-    $variables['navbar_attributes']['class'][] = $navbar_margin_top;
-  }
-  $navbar_margin_bottom = UIkit::getThemeSetting('navbar_margin_bottom');
-  if ($navbar_margin_bottom) {
-    $variables['navbar_attributes']['class'][] = $navbar_margin_bottom;
-  }
 
   // Assign new page attributes.
   $variables['page_attributes'] = new Attribute();
@@ -62,10 +38,6 @@ function uikit_preprocess_page(&$variables) {
   $page_container = UIkit::getThemeSetting('page_container');
   if ($page_container) {
     $variables['page_attributes']['class'][] = 'uk-container';
-  }
-  $page_centering = UIkit::getThemeSetting('page_centering');
-  if ($page_centering) {
-    $variables['page_attributes']['class'][] = 'uk-container-center';
   }
   $page_margin = UIkit::getThemeSetting('page_margin');
   if ($page_margin) {
@@ -177,7 +149,7 @@ function uikit_preprocess_feed_icon(&$variables) {
 function uikit_preprocess_form_element(&$variables) {
   $element = $variables['element'];
 
-  // Grouped form elements do not need the uk-form-row class. This adds a
+  // Grouped form elements do not need the uk-margin class. This adds a
   // grouped variable to use in form-element.html.twig.
   $groups = isset($element['#groups']) && is_array($element['#groups']);
   $variables['grouped'] = FALSE;

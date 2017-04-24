@@ -2,7 +2,7 @@
  * @file
  * Attaches behaviors for UIkit's advanced form elements.
  *
- * Grouped checkboxes and radios do not need to be wrapped in a uk-form-row
+ * Grouped checkboxes and radios do not need to be wrapped in a uk-margin
  * element.
  */
 
@@ -23,7 +23,7 @@
           var radio = $(this).hasClass('form-type-radio') || $(this).hasClass('js-form-type-radio');
 
           if (checkbox || radio) {
-            $(this).removeClass('uk-form-row');
+            $(this).removeClass('uk-margin');
           }
         })
       })

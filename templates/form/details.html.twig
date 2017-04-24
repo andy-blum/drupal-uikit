@@ -18,8 +18,7 @@
 #}
 {%
   set details_classes = [
-    'uk-form-row',
-    'uk-accordion',
+    'uk-margin',
   ]
 %}
 <details{{ attributes.addClass(details_classes) }}>
@@ -27,14 +26,13 @@
     set summary_classes = [
       required ? 'js-form-required',
       required ? 'form-required',
-      'uk-accordion-title'
     ]
   %}
   {%- if title -%}
     <summary{{ summary_attributes.addClass(summary_classes) }}>{{ title }}</summary>
   {%- endif -%}
 
-  <div class="uk-accordion-content">
+  <div>
     {% if errors %}
       <div>
         {{ errors }}

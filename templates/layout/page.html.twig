@@ -45,7 +45,7 @@
  * @ingroup uikit_themeable
  */
 #}
-<header{{ header_attributes }}>
+<header{{ header_attributes.addClass('uk-navbar-container') }}>
   {% if page.navbar %}
     <nav{{ navbar_attributes }}>
       {% if page.offcanvas %}
@@ -58,7 +58,7 @@
 </header>
 
 <div{{ page_attributes }}>
-  <div id="page--wrapper" class="uk-grid" data-uk-grid-margin>
+  <div id="page--wrapper" class="uk-grid" uk-grid>
     <main{{ content_attributes }}>
       <a id="main-content" tabindex="-1"></a>
       {{ page.content }}
@@ -80,7 +80,7 @@
 
 {% if page.footer %}
   <footer role="contentinfo">
-    <div class="uk-container uk-container-center uk-margin-top">
+    <div class="uk-container uk-margin-top">
       {{ page.footer }}
     </div>
   </footer>

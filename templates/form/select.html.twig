@@ -13,7 +13,7 @@
  */
 #}
 {% spaceless %}
-  <select{{ attributes }}>
+  <select{{ attributes.addClass('uk-select') }}>
     {% for option in options %}
       {% if option.type == 'optgroup' %}
         <optgroup label="{{ option.label }}">

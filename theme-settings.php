@@ -42,20 +42,6 @@ function uikit_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormSt
   $tablet_sidebar_pos = UIkit::getThemeSetting('tablet_sidebar_positions', $theme_key);
   $mobile_sidebar_pos = UIkit::getThemeSetting('mobile_sidebar_positions', $theme_key);
 
-  // Set the navbar margin options.
-  $navbar_margin_top_options = [
-    0 => 'No top margin',
-    'uk-margin-top' => 'Normal top margin',
-    'uk-margin-small-top' => 'Smaller top margin',
-    'uk-margin-large-top' => 'Larger top margin',
-  ];
-  $navbar_margin_bottom_options = [
-    0 => 'No bottom margin',
-    'uk-margin-bottom' => 'Normal top margin',
-    'uk-margin-small-bottom' => 'Smaller bottom margin',
-    'uk-margin-large-bottom' => 'Larger bottom margin',
-  ];
-
   // Build the markup for the local task demos.
   $demo_local_tasks = '<ul>';
   $demo_local_tasks .= '<li class="uk-active"><a href="#">Item</a></li>';
@@ -235,17 +221,6 @@ function uikit_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormSt
       ],
     ],
   ];
-  $form['layout']['page_layout']['page_centering'] = [
-    '#type' => 'checkbox',
-    '#title' => t('Page Centering'),
-    '#description' => t('To center the page container, use the .uk-container-center class.'),
-    '#default_value' => UIkit::getThemeSetting('page_centering', $theme_key),
-    '#states' => [
-      'visible' => [
-        ':input[name="layout_advanced"]' => ['checked' => TRUE],
-      ],
-    ],
-  ];
   $form['layout']['page_layout']['page_margin'] = [
     '#type' => 'select',
     '#title' => t('Page margin'),
@@ -300,60 +275,6 @@ function uikit_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormSt
     '#title' => t('Navigations'),
     '#description' => t('UIkit offers different types of navigations, like navigation bars and side navigations. Use breadcrumbs or a pagination to steer through articles.'),
     '#group' => 'uikit',
-  ];
-  $form['navigations']['main_navbar'] = [
-    '#type' => 'details',
-    '#title' => t('Navigation bar'),
-    '#description' => t('Configure settings for the navigation bar.'),
-    '#attributes' => [
-      'open' => 'open',
-    ],
-  ];
-  $form['navigations']['main_navbar']['navbar_container_settings'] = [
-    '#type' => 'details',
-    '#title' => t('Navbar container'),
-    '#description' => t('Configure settings for the navigation bar container.'),
-    '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
-  ];
-  $form['navigations']['main_navbar']['navbar_container_settings']['navbar_container'] = [
-    '#type' => 'checkbox',
-    '#title' => t('Container'),
-    '#description' => t('Add the .uk-container class to the navbar container to give it a max-width and wrap the navbar of your website. For large screens it applies a different max-width.'),
-    '#default_value' => UIkit::getThemeSetting('navbar_container', $theme_key),
-  ];
-  $form['navigations']['main_navbar']['navbar_container_settings']['navbar_centering'] = [
-    '#type' => 'checkbox',
-    '#title' => t('Centering'),
-    '#description' => t('To center the navbar container, use the .uk-container-center class.'),
-    '#default_value' => UIkit::getThemeSetting('navbar_centering', $theme_key),
-  ];
-  $form['navigations']['main_navbar']['navbar_container_settings']['navbar_attached'] = [
-    '#type' => 'checkbox',
-    '#title' => t('Navbar attached'),
-    '#description' => t("Adds the <code>.uk-navbar-attached</code> class to optimize the navbar's styling to be attached to the top of the viewport. For example, rounded corners will be removed."),
-    '#default_value' => UIkit::getThemeSetting('navbar_attached', $theme_key),
-  ];
-  $form['navigations']['main_navbar']['navbar_margin'] = [
-    '#type' => 'details',
-    '#title' => t('Navbar margin'),
-    '#description' => t('Configure the top and bottom margin to apply to the navbar.'),
-    '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
-  ];
-  $form['navigations']['main_navbar']['navbar_margin']['navbar_margin_top'] = [
-    '#type' => 'select',
-    '#title' => t('Navbar top margin'),
-    '#description' => t('Select the amount of top margin to apply to the navbar.'),
-    '#default_value' => UIkit::getThemeSetting('navbar_margin_top', $theme_key),
-    '#options' => $navbar_margin_top_options,
-  ];
-  $form['navigations']['main_navbar']['navbar_margin']['navbar_margin_bottom'] = [
-    '#type' => 'select',
-    '#title' => t('Navbar bottom margin'),
-    '#description' => t('Select the amount of bottom margin to apply to the navbar.'),
-    '#default_value' => UIkit::getThemeSetting('navbar_margin_bottom', $theme_key),
-    '#options' => $navbar_margin_bottom_options,
   ];
   $form['navigations']['local_tasks'] = [
     '#type' => 'details',
