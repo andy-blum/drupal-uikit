@@ -19,12 +19,6 @@ use Drupal\block\Entity\Block;
  * Implements template_preprocess_page().
  */
 function uikit_preprocess_page(&$variables) {
-  // Attach the UIkit framework, Font Awesome and base theme libraries to all
-  // pages.
-  $variables['#attached']['library'][] = UIkit::getUIkitLibrary();
-  $variables['#attached']['library'][] = 'uikit/font-awesome';
-  $variables['#attached']['library'][] = 'uikit/global-style';
-
   // Assign new header attributes.
   $variables['header_attributes'] = new Attribute();
   $variables['header_attributes']['id'] = 'page--header';
@@ -165,13 +159,6 @@ function uikit_preprocess_breadcrumb(&$variables) {
 }
 
 /**
- * Implements template_preprocess_details().
- */
-function uikit_preprocess_details(&$variables) {
-  $variables['#attached']['library'][] = UIkit::getUIkitComponent('accordion');
-}
-
-/**
  * Implements hook_preprocess_HOOK() for feed-icon.html.twig.
  *
  * Feed icon on the front page is missing the site name, as reported in
@@ -197,13 +184,6 @@ function uikit_preprocess_form_element(&$variables) {
   if ($groups) {
     $variables['grouped'] = TRUE;
   }
-}
-
-/**
- * Implements template_preprocess_form_element() for form-element--advanced.html.twig.
- */
-function uikit_preprocess_form_element__advanced(&$variables) {
-  $variables['#attached']['library'][] = UIkit::getUIkitComponent('form-advanced');
 }
 
 /**

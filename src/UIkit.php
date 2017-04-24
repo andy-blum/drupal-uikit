@@ -12,14 +12,14 @@ class UIkit {
    *
    * @var string
    */
-  const UIKIT_LIBRARY = 'https://getuikit.com/v2/';
+  const UIKIT_LIBRARY = 'https://getuikit.com/';
 
   /**
    * The UIkit library version supported in the UIkit base theme.
    *
    * @var string
    */
-  const UIKIT_LIBRARY_VERSION = '2.27.2';
+  const UIKIT_LIBRARY_VERSION = '3.0.0-Beta.21';
 
   /**
    * The Drupal project page for the UIkit base theme.
@@ -33,7 +33,7 @@ class UIkit {
    *
    * @var string
    */
-  const UIKIT_PROJECT_BRANCH = '8.x-2.x';
+  const UIKIT_PROJECT_BRANCH = '8.x-3.x';
 
   /**
    * The Drupal project API site for the UIkit base theme.
@@ -73,64 +73,6 @@ class UIkit {
     }
     else {
       throw new \LogicException('Missing argument $setting');
-    }
-  }
-
-  /**
-   * Retrieves the base style for a theme.
-   *
-   * @return mixed
-   *   The base style for the theme.
-   */
-  public static function getBaseStyle() {
-    return UIkit::getThemeSetting('base_style');
-  }
-
-  /**
-   * Retrieves the base-style library of the UIkit base theme.
-   *
-   * @return string
-   *   The base-style's library to retrieve from the UIkit base theme.
-   */
-  public static function getUIkitLibrary() {
-    switch (UIkit::getBaseStyle()) {
-      case 'almost-flat':
-        return 'uikit/uikit.almost-flat';
-        break;
-
-      case 'gradient':
-        return 'uikit/uikit.gradient';
-        break;
-
-      default:
-        return 'uikit/uikit';
-    }
-  }
-
-  /**
-   * Retrieves a component library of the UIkit base theme.
-   *
-   * @param string $component
-   *   The component to retrieve.
-   *
-   * @return string
-   *   The component's library to retrieve from the UIkit base theme.
-   */
-  public static function getUIkitComponent($component) {
-    if (!empty($component)) {
-      switch (UIkit::getBaseStyle()) {
-        case 'almost-flat':
-          return "uikit/uikit.$component.almost-flat";
-
-        case 'gradient':
-          return "uikit/uikit.$component.gradient";
-
-        default:
-          return "uikit/uikit.$component";
-      }
-    }
-    else {
-      throw new \LogicException('Missing argument $component');
     }
   }
 

@@ -13,6 +13,10 @@ regions:
   sidebar_second: 'Right Sidebar'
   footer: 'Footer'
 
+libraries:
+  - uikit/uikit
+  - uikit/global-style
+
 libraries-extend:
   core/drupal.active-link:
     - uikit/active-link

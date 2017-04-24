@@ -22,7 +22,6 @@ function uikit_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormSt
 
   // Attach the uikit.admin library from the base theme.
   $form['#attached']['library'][] = 'uikit/uikit.admin';
-  $form['#attached']['library'][] = 'uikit/font-awesome';
 
   // Get the active theme name.
   $build_info = $form_state->getBuildInfo();
@@ -119,30 +118,6 @@ function uikit_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormSt
     '#type' => 'vertical_tabs',
     '#prefix' => '<h3>' . t('UIkit Settings') . '</h3>',
     '#weight' => -10,
-  ];
-
-  // UIkit theme styles.
-  $form['theme'] = [
-    '#type' => 'details',
-    '#title' => t('Theme styles'),
-    '#description' => t('UIkit comes with a basic theme and two neat themes to get you started. Here you can select which base style to start with.'),
-    '#group' => 'uikit',
-    '#attributes' => [
-      'class' => [
-        'uikit-theme-settings-form',
-      ],
-    ],
-  ];
-  $form['theme']['base_style'] = [
-    '#type' => 'select',
-    '#title' => t('Base style'),
-    '#options' => [
-      0 => t('UIkit default'),
-      'almost-flat' => t('UIkit almost flat'),
-      'gradient' => t('UIkit gradient'),
-    ],
-    '#description' => t('Select which base style to use.<ol><li><strong>UIkit default:</strong> No border radius or gradients</li><li><strong>UIkit almost flat:</strong> Small border and border radius</li><li><strong>UIkit gradient:</strong> Almost flat style with gradient backgrounds.</li></ol>'),
-    '#default_value' => UIkit::getThemeSetting('base_style', $theme_key),
   ];
 
   // Layout settings.
