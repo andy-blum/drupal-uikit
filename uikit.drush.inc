@@ -15,11 +15,11 @@ function uikit_drush_command() {
     'description' => 'Create a UIkit sub-theme.',
     'arguments' => [
       'machine_name' => '[optional] A machine-readable name for your theme.',
-      'name' => 'A name for your theme.',
+      'name' => 'A human-readable name for your theme.',
     ],
     'aliases' => array('uikit-sk'),
     'options' => [
-      'name' => 'A name for your theme.',
+      'name' => 'A human-readable name for your theme.',
       'machine-name' => '[a-z, 0-9, _] A machine-readable name for your theme.',
       'path' => 'The path where your theme will be created. Defaults to: themes',
       'description' => 'A description of your theme.',
