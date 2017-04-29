@@ -80,7 +80,7 @@ function drush_uikit_starterkit($machine_name = NULL, $name = NULL) {
   $machine_name = preg_replace($search, '', $machine_name);
 
   // Determine the path to the new sub-theme.
-  $subtheme_path = 'themes';
+  $subtheme_path = file_exists(DRUPAL_ROOT . '/themes/contrib') ? 'themes/custom' : 'themes';
   if ($path = drush_get_option('path')) {
     $subtheme_path = drush_trim_path($path);
   }
@@ -112,21 +112,23 @@ function drush_uikit_starterkit($machine_name = NULL, $name = NULL) {
   $subtheme_info_file = $subtheme_path . '/' . $machine_name . '.info.yml';
   $subtheme_libraries_file = $subtheme_path . '/' . $machine_name . '.libraries.yml';
   $subtheme_theme_file = $subtheme_path . '/' . $machine_name . '.theme';
+  $subtheme_settings_file = $subtheme_path . '/config/install/' . $machine_name . '.settings.yml';
   $subtheme_css_base_file = $subtheme_path . '/css/' . $machine_name . '.base.css';
   $subtheme_css_component_file = $subtheme_path . '/css/' . $machine_name . '.component.css';
   $subtheme_css_layout_file = $subtheme_path . '/css/' . $machine_name . '.layout.css';
   $subtheme_css_theme_file = $subtheme_path . '/css/' . $machine_name . '.theme.css';
   $subtheme_js_theme_file = $subtheme_path . '/js/' . $machine_name . '.theme.js';
-  drush_op('rename', drush_normalize_path($subtheme_path . '/STARTERKIT.info'), drush_normalize_path($subtheme_info_file));
+  drush_op('rename', drush_normalize_path($subtheme_path . '/STARTERKIT.info.txt'), drush_normalize_path($subtheme_info_file));
   drush_op('rename', drush_normalize_path($subtheme_path . '/STARTERKIT.libraries.yml'), drush_normalize_path($subtheme_libraries_file));
   drush_op('rename', drush_normalize_path($subtheme_path . '/STARTERKIT.theme'), drush_normalize_path($subtheme_theme_file));
+  drush_op('rename', drush_normalize_path($subtheme_path . '/config/install/STARTERKIT.settings.yml'), drush_normalize_path($subtheme_settings_file));
   drush_op('rename', drush_normalize_path($subtheme_path . '/css/STARTERKIT.base.css'), drush_normalize_path($subtheme_css_base_file));
   drush_op('rename', drush_normalize_path($subtheme_path . '/css/STARTERKIT.component.css'), drush_normalize_path($subtheme_css_component_file));
   drush_op('rename', drush_normalize_path($subtheme_path . '/css/STARTERKIT.layout.css'), drush_normalize_path($subtheme_css_layout_file));
   drush_op('rename', drush_normalize_path($subtheme_path . '/css/STARTERKIT.theme.css'), drush_normalize_path($subtheme_css_theme_file));
   drush_op('rename', drush_normalize_path($subtheme_path . '/js/STARTERKIT.theme.js'), drush_normalize_path($subtheme_js_theme_file));
 
-  // Alter the contents of the .info file based on the command options.
+  // Alter the contents of the .info.yml file based on the command options.
   $alterations = array(
     'name: STARTERKIT' => 'name: ' . $name,
     'STARTERKIT/global-styling' => $machine_name . '/global-styling',
@@ -149,9 +151,9 @@ function drush_uikit_starterkit($machine_name = NULL, $name = NULL) {
   // Notify user of the newly created theme.
   if (FALSE) {
     // Allow localize.drupal.org to pick up the string to translate.
-    t('Starter kit for "!name" created in: !path', array('!name' => $name, '!path' => $subtheme_path));
+    t('Starterkit for "!name" created in: !path', array('!name' => $name, '!path' => $subtheme_path));
   }
-  drush_print(dt('Starter kit for "!name" created in: !path', array(
+  drush_print(dt('Starterkit for "!name" created in: !path', array(
     '!name' => $name,
     '!path' => $subtheme_path,
   )));
