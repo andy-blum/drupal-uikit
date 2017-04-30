@@ -1231,12 +1231,6 @@ function uikit_radio($variables) {
 function uikit_select($variables) {
   $element = $variables['element'];
   element_set_attributes($element, array('id', 'name', 'size'));
-  $prefix = '<div uk-form-custom="target: > * > span:first">';
-  $suffix = '<button class="uk-button uk-button-default" type="button" tabindex="-1">';
-  $suffix .= '<span></span>';
-  $suffix .= '<span uk-icon="icon: chevron-down"></span>';
-  $suffix .= '</button>';
-  $suffix .= '</div>';
 
   _form_set_class($element, array(
     'form-select',
