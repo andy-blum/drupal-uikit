@@ -1242,7 +1242,7 @@ function uikit_select($variables) {
     $element['#attributes']['class'][] = 'uk-form-danger';
   }
 
-  return $prefix . '<select' . drupal_attributes($element['#attributes']) . '>' . form_select_options($element) . '</select>' . $suffix;
+  return '<select' . drupal_attributes($element['#attributes']) . '>' . form_select_options($element) . '</select>';
 }
 
 /**
