@@ -65,7 +65,7 @@ class UIkit {
    */
   public static function getThemeSetting($setting, $theme = NULL) {
     if (empty($theme)) {
-      $theme = UIkit::getActiveTheme();
+      $theme = self::getActiveTheme();
     }
 
     if (!empty($setting)) {
@@ -88,9 +88,9 @@ class UIkit {
    *   An array of grid classes to use in page.html.twig.
    */
   public static function getGridClasses($sidebar_first = FALSE, $sidebar_second = FALSE) {
-    $standard_layout = UIkit::getThemeSetting('standard_sidebar_positions');
-    $tablet_layout = UIkit::getThemeSetting('tablet_sidebar_positions');
-    $mobile_layout = UIkit::getThemeSetting('mobile_sidebar_positions');
+    $standard_layout = self::getThemeSetting('standard_sidebar_positions');
+    $tablet_layout = self::getThemeSetting('tablet_sidebar_positions');
+    $mobile_layout = self::getThemeSetting('mobile_sidebar_positions');
 
     $grid_classes = [
       'content' => [],
