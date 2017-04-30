@@ -7,8 +7,8 @@ dependencies:
     - uikit
 id: uikit_powered
 theme: uikit
-region: navbar
-weight: 10
+region: footer
+weight: -5
 provider: null
 plugin: system_powered_by_block
 settings:

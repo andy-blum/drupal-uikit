@@ -9,8 +9,8 @@ dependencies:
     - uikit
 id: uikit_footer
 theme: uikit
-region: navbar
-weight: 0
+region: footer
+weight: -6
 provider: null
 plugin: 'system_menu_block:footer'
 settings:

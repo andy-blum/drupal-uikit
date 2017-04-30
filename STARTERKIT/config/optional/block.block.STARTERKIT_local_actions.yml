@@ -6,7 +6,7 @@ dependencies:
 id: STARTERKIT_local_actions
 theme: STARTERKIT
 region: content
-weight: -20
+weight: -3
 provider: null
 plugin: local_actions_block
 settings:

@@ -2,22 +2,22 @@ langcode: en
 status: true
 dependencies:
   config:
-    - system.menu.main
+    - system.menu.tools
   module:
     - system
   theme:
     - uikit
-id: uikit_main_menu
+id: uikit_tools
 theme: uikit
-region: navbar
-weight: -5
+region: sidebar_first
+weight: 0
 provider: null
-plugin: 'system_menu_block:main'
+plugin: 'system_menu_block:tools'
 settings:
-  id: 'system_menu_block:main'
-  label: 'Main navigation'
+  id: 'system_menu_block:tools'
+  label: Tools
   provider: system
-  label_display: '0'
+  label_display: visible
   level: 1
   depth: 0
 visibility: {  }

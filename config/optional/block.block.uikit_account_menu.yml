@@ -10,7 +10,7 @@ dependencies:
 id: uikit_account_menu
 theme: uikit
 region: navbar
-weight: 0
+weight: -3
 provider: null
 plugin: 'system_menu_block:account'
 settings:
@@ -19,5 +19,5 @@ settings:
   provider: system
   label_display: '0'
   level: 1
-  depth: 1
+  depth: 0
 visibility: {  }

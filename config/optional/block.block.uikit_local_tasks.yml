@@ -6,7 +6,7 @@ dependencies:
 id: uikit_local_tasks
 theme: uikit
 region: content
-weight: -40
+weight: -4
 provider: null
 plugin: local_tasks_block
 settings:
