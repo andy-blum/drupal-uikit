@@ -6,7 +6,7 @@ dependencies:
 id: STARTERKIT_page_title
 theme: STARTERKIT
 region: content
-weight: -50
+weight: -6
 provider: null
 plugin: page_title_block
 settings:

@@ -7,8 +7,8 @@ dependencies:
     - STARTERKIT
 id: STARTERKIT_breadcrumbs
 theme: STARTERKIT
-region: navbar
-weight: 0
+region: content
+weight: -5
 provider: null
 plugin: system_breadcrumb_block
 settings:

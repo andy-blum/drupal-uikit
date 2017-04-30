@@ -136,6 +136,9 @@ function drush_uikit_starterkit($machine_name = NULL, $name = NULL) {
   $subtheme_block_page_title_file = $subtheme_path . '/config/optional/block.block.' . $machine_name . '_page_title.yml';
   $subtheme_block_powered_file = $subtheme_path . '/config/optional/block.block.' . $machine_name . '_powered.yml';
   $subtheme_block_search_file = $subtheme_path . '/config/optional/block.block.' . $machine_name . '_search.yml';
+  $subtheme_block_tools_file = $subtheme_path . '/config/optional/block.block.' . $machine_name . '_tools.yml';
+
+  $subtheme_block_schema_file = $subtheme_path . '/config/schema/' . $machine_name . '.schema.yml';
 
   drush_op('rename', drush_normalize_path($subtheme_path . '/STARTERKIT.info.txt'), drush_normalize_path($subtheme_info_file));
   drush_op('rename', drush_normalize_path($subtheme_path . '/STARTERKIT.libraries.yml'), drush_normalize_path($subtheme_libraries_file));
@@ -164,6 +167,9 @@ function drush_uikit_starterkit($machine_name = NULL, $name = NULL) {
   drush_op('rename', drush_normalize_path($subtheme_path . '/config/optional/block.block.STARTERKIT_page_title.yml'), drush_normalize_path($subtheme_block_page_title_file));
   drush_op('rename', drush_normalize_path($subtheme_path . '/config/optional/block.block.STARTERKIT_powered.yml'), drush_normalize_path($subtheme_block_powered_file));
   drush_op('rename', drush_normalize_path($subtheme_path . '/config/optional/block.block.STARTERKIT_search.yml'), drush_normalize_path($subtheme_block_search_file));
+  drush_op('rename', drush_normalize_path($subtheme_path . '/config/optional/block.block.STARTERKIT_tools.yml'), drush_normalize_path($subtheme_block_tools_file));
+
+  drush_op('rename', drush_normalize_path($subtheme_path . '/config/schema/STARTERKIT.schema.yml'), drush_normalize_path($subtheme_block_schema_file));
 
   // Alter the contents of the .info.yml file based on the command options.
   $alterations = [
@@ -202,6 +208,11 @@ function drush_uikit_starterkit($machine_name = NULL, $name = NULL) {
   drush_op('uikit_file_str_replace', $subtheme_block_page_title_file, 'STARTERKIT', $machine_name);
   drush_op('uikit_file_str_replace', $subtheme_block_powered_file, 'STARTERKIT', $machine_name);
   drush_op('uikit_file_str_replace', $subtheme_block_search_file, 'STARTERKIT', $machine_name);
+  drush_op('uikit_file_str_replace', $subtheme_block_tools_file, 'STARTERKIT', $machine_name);
+
+  drush_op('uikit_file_str_replace', $subtheme_block_schema_file, 'STARTERKIT theme', $name . ' theme');
+  drush_op('uikit_file_str_replace', $subtheme_block_schema_file, 'STARTERKIT.settings', $machine_name . '.settings');
+  drush_op('uikit_file_str_replace', $subtheme_block_schema_file, 'STARTERKIT settings', $name . ' settings');
 
   // Notify user of the newly created theme.
   if (FALSE) {
