@@ -17,7 +17,7 @@ function uikit_drush_command() {
       'machine_name' => '[optional] A machine-readable name for your theme.',
       'name' => 'A human-readable name for your theme.',
     ],
-    'aliases' => array('uikit-sk'),
+    'aliases' => ['uikit-sk'],
     'options' => [
       'name' => 'A human-readable name for your theme.',
       'machine-name' => '[a-z, 0-9, _] A machine-readable name for your theme.',
@@ -73,10 +73,10 @@ function drush_uikit_starterkit($machine_name = NULL, $name = NULL) {
 
   // Clean up the machine name.
   $machine_name = str_replace(' ', '_', strtolower($machine_name));
-  $search = array(
+  $search = [
     '/[^a-z0-9_]/', // Remove characters not valid in function names.
     '/^[^a-z]+/',   // Functions must begin with an alpha character.
-  );
+  ];
   $machine_name = preg_replace($search, '', $machine_name);
 
   // Determine the path to the new sub-theme.
@@ -90,9 +90,9 @@ function drush_uikit_starterkit($machine_name = NULL, $name = NULL) {
   if (!is_dir(dirname($subtheme_path))) {
     if (FALSE) {
       // Allow localize.drupal.org to pick up the string to translate.
-      t('The directory "!directory" was not found.', array('!directory' => dirname($subtheme_path)));
+      t('The directory "!directory" was not found.', ['!directory' => dirname($subtheme_path)]);
     }
-    return drush_set_error('UIKIT_DESTINATION_NOT_FOUND', dt('The directory "!directory" was not found.', array('!directory' => dirname($subtheme_path))));
+    return drush_set_error('UIKIT_DESTINATION_NOT_FOUND', dt('The directory "!directory" was not found.', ['!directory' => dirname($subtheme_path)]));
   }
 
   // Ensure the STARTERKIT directory exists.
@@ -100,9 +100,9 @@ function drush_uikit_starterkit($machine_name = NULL, $name = NULL) {
   if (!is_dir($starterkit_path)) {
     if (FALSE) {
       // Allow localize.drupal.org to pick up the string to translate.
-      t('The STARTERKIT directory was not found in "!directory"', array('!directory' => dirname($starterkit_path)));
+      t('The STARTERKIT directory was not found in "!directory"', ['!directory' => dirname($starterkit_path)]);
     }
-    return drush_set_error('UIKIT_STARTERKIT_NOT_FOUND', dt('The STARTERKIT directory was not found in "!directory"', array('!directory' => dirname($starterkit_path))));
+    return drush_set_error('UIKIT_STARTERKIT_NOT_FOUND', dt('The STARTERKIT directory was not found in "!directory"', ['!directory' => dirname($starterkit_path)]));
   }
 
   // Make a fresh copy of the original starter kit.
@@ -129,10 +129,10 @@ function drush_uikit_starterkit($machine_name = NULL, $name = NULL) {
   drush_op('rename', drush_normalize_path($subtheme_path . '/js/STARTERKIT.theme.js'), drush_normalize_path($subtheme_js_theme_file));
 
   // Alter the contents of the .info.yml file based on the command options.
-  $alterations = array(
+  $alterations = [
     'name: STARTERKIT' => 'name: ' . $name,
     'STARTERKIT/global-styling' => $machine_name . '/global-styling',
-  );
+  ];
   if ($description = drush_get_option('description')) {
     $alterations['UIkit Sub-theme'] = $description;
   }
@@ -151,12 +151,12 @@ function drush_uikit_starterkit($machine_name = NULL, $name = NULL) {
   // Notify user of the newly created theme.
   if (FALSE) {
     // Allow localize.drupal.org to pick up the string to translate.
-    t('Starterkit for "!name" created in: !path', array('!name' => $name, '!path' => $subtheme_path));
+    t('Starterkit for "!name" created in: !path', ['!name' => $name, '!path' => $subtheme_path]);
   }
-  drush_print(dt('Starterkit for "!name" created in: !path', array(
-    '!name' => $name,
+  drush_print(dt('Starterkit for "!name" created in: !path', [
     '!path' => $subtheme_path,
-  )));
+    '!name' => $name,
+  ]));
 }
 
 /**
