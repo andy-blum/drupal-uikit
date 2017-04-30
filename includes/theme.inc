@@ -204,7 +204,9 @@ function uikit_fieldset__collapsible($variables) {
   $group_fieldset = isset($element['#group_fieldset']) && $element['#group_fieldset'];
 
   $output = '<ul' . drupal_attributes($element['#attributes']) . '>';
-  $output .= '<li>';
+
+  $open = $element['#collapsed'] ? '' : ' class="uk-open"';
+  $output .= '<li' . $open . '>';
 
   if (!empty($element['#title'])) {
     $output .= '<h3 class="uk-accordion-title">' . $element['#title'] . '</h3>';
