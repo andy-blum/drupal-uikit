@@ -7,8 +7,8 @@ dependencies:
     - uikit
 id: uikit_breadcrumbs
 theme: uikit
-region: navbar
-weight: 0
+region: content
+weight: -5
 provider: null
 plugin: system_breadcrumb_block
 settings:
