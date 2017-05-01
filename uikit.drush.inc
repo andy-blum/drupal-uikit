@@ -140,7 +140,7 @@ function drush_uikit_starterkit($machine_name = NULL, $name = NULL) {
 
   $subtheme_block_schema_file = $subtheme_path . '/config/schema/' . $machine_name . '.schema.yml';
 
-  drush_op('rename', drush_normalize_path($subtheme_path . '/STARTERKIT.info.txt'), drush_normalize_path($subtheme_info_file));
+  drush_op('rename', drush_normalize_path($subtheme_path . '/STARTERKIT.info.ymltmp'), drush_normalize_path($subtheme_info_file));
   drush_op('rename', drush_normalize_path($subtheme_path . '/STARTERKIT.libraries.yml'), drush_normalize_path($subtheme_libraries_file));
   drush_op('rename', drush_normalize_path($subtheme_path . '/STARTERKIT.theme'), drush_normalize_path($subtheme_theme_file));
 
