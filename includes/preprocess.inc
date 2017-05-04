@@ -117,21 +117,23 @@ function uikit_preprocess_block(&$variables) {
   $block = Block::load($variables['elements']['#id']);
   $region = $block->getRegion();
 
-  if ($system_menu_block) {
-    switch ($region) {
-      case 'navbar':
-        // Get navbar alignment from block settings.
-        $variables['navbar_flip'] = $navbar_alignment = $block->getThirdPartySetting('uikit_components', 'navbar_alignment') ? 1 : 0;
+  switch ($region) {
+    case 'navbar':
+      // Get navbar alignment from block settings.
+      $variables['navbar_flip'] = $navbar_alignment = $block->getThirdPartySetting('uikit_components', 'navbar_alignment') ? 1 : 0;
 
+      if ($system_menu_block) {
         // Define #theme variable for navbar menus.
         $variables['content']['#theme'] = 'menu__navbar';
-        break;
+      }
+      break;
 
-      case 'offcanvas':
+    case 'offcanvas':
+      if ($system_menu_block) {
         // Define #theme variable for offcanvas menus.
         $variables['content']['#theme'] = 'menu__offcanvas';
-        break;
-    }
+      }
+      break;
   }
 }
 
