@@ -180,6 +180,7 @@ function drush_uikit_starterkit($machine_name = NULL, $name = NULL) {
     $alterations['UIkit Sub-theme'] = $description;
   }
   drush_op('uikit_file_str_replace', $subtheme_info_file, array_keys($alterations), $alterations);
+  drush_op('uikit_file_str_replace', $subtheme_info_file, 'STARTERKIT', $machine_name);
 
   // Replace all occurrences of 'STARTERKIT' with the machine name of our sub theme.
   drush_op('uikit_file_str_replace', $subtheme_path . '/README.txt', 'STARTERKIT', $name);
