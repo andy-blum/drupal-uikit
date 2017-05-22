@@ -165,6 +165,38 @@ function uikit_preprocess_breadcrumb(&$variables) {
 }
 
 /**
+ * Implements template_preprocess_comment().
+ */
+function uikit_preprocess_comment(&$variables) {
+  $indented = $variables['elements']['#comment_indent'];
+  $variables['indented'] = FALSE;
+
+  if ($indented) {
+    $variables['indented'] = TRUE;
+  }
+
+  $link = $variables['permalink']->getGeneratedLink();
+  preg_match_all('/<a[^>]+href=([\'"])(.+?)\1[^>]*>/i', $link, $permalink);
+  $variables['comment_url'] = $permalink[2][0];
+}
+
+/**
+ * Implements template_preprocess_field() for field--comment.html.twig.
+ */
+function uikit_preprocess_field__comment(&$variables) {
+  $comments = $variables['comments'];
+  $comment_count = 0;
+
+  foreach ($comments as $comment) {
+    if (isset($comment['#comment'])) {
+      $comment_count++;
+    }
+  }
+
+  $variables['comment_count'] = $comment_count;
+}
+
+/**
  * Implements template_preprocess_details().
  */
 function uikit_preprocess_details(&$variables) {
