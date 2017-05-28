@@ -66,17 +66,17 @@
  */
 #}
 {%
-  set classes = [
-    'js-comment',
-    'uk-comment',
-    not parent ? 'uk-comment-primary',
-  ]
+set classes = [
+'js-comment',
+'uk-comment',
+not parent ? 'uk-comment-primary',
+]
 %}
 <li>
   <article{{ attributes.addClass(classes) }}>
     <header class="uk-comment-header">
       <div class="uk-comment-avatar">{{ user_picture }}</div>
-      <h4 class="uk-comment-title">{{ author }}</h4>
+      <h4 class="uk-comment-title">{{ title }}</h4>
       <p class="uk-comment-meta">{{ submitted }}</p>
     </header>
 
@@ -100,7 +100,7 @@
       <div class="uk-comment-body">
         {% if title %}
           {{ title_prefix }}
-          <h3{{ title_attributes.addClass('uk-comment-title') }}>{{ title }} <i class="uk-icon-link"></i></h3>
+          <h3{{ title_attributes.addClass('uk-hidden') }}>{{ title }}</h3>
           {{ title_suffix }}
         {% endif %}
 

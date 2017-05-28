@@ -39,7 +39,7 @@
       });
 
       // Now move the indented comments into the previous list item.
-      var indented = $('.uk-comment-list>.indented');
+      var indented = comments.find('.indented');
       var comment = '<ul>' + indented.html() + '</ul>';
       var sibling = indented.prev('li');
       $(comment).appendTo(sibling);
