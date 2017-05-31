@@ -456,7 +456,7 @@ sup > i.form-required {
 /**
  * Forms
  */
-.form-actions {
+.uk-form .uk-form-row:nth-child(n+2) {
   margin-top: 15px;
 }
 
