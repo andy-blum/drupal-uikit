@@ -135,6 +135,7 @@ function drush_uikit_starterkit($machine_name = NULL, $name = NULL) {
   // Replace all occurrences of 'STARTERKIT' with the machine name of our sub theme.
   drush_op('uikit_file_str_replace', $subtheme_path . '/theme-settings.php', 'STARTERKIT', $machine_name);
   drush_op('uikit_file_str_replace', $subtheme_path . '/template.php', 'STARTERKIT', $machine_name);
+  drush_op('uikit_file_str_replace', $subtheme_path . '/css/' . $machine_name . '.css', 'STARTERKIT', $machine_name);
   drush_op('uikit_file_str_replace', $subtheme_path . '/js/' . $machine_name . '.js', 'Drupal.behaviors.STARTERKIT', str_replace(' ', '', 'Drupal.behaviors.' . $name));
   drush_op('uikit_file_str_replace', $subtheme_path . '/js/' . $machine_name . '.js', 'STARTERKIT', $machine_name);
 
