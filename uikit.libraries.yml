@@ -163,6 +163,45 @@ uikit.sticky.gradient:
   js:
     //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.2/js/components/sticky.min.js: { type: external, minified: true, weight: -10 }
 
+uikit.tooltip:
+  remote: https://getuikit.com/v2/index.html
+  version: 2.27.2
+  license:
+    name: MIT
+    url: https://github.com/uikit/uikit/blob/develop/LICENSE.md
+    gpl-compatible: true
+  css:
+    base:
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.2/css/components/tooltip.min.css: { type: external, minified: true, weight: -10 }
+  js:
+    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.2/js/components/tooltip.min.js: { type: external, minified: true, weight: -10 }
+
+uikit.tooltip.almost-flat:
+  remote: https://getuikit.com/v2/index.html
+  version: 2.27.2
+  license:
+    name: MIT
+    url: https://github.com/uikit/uikit/blob/develop/LICENSE.md
+    gpl-compatible: true
+  css:
+    base:
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.2/css/components/tooltip.almost-flat.min.css: { type: external, minified: true, weight: -10 }
+  js:
+    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.2/js/components/tooltip.min.js: { type: external, minified: true, weight: -10 }
+
+uikit.tooltip.gradient:
+  remote: https://getuikit.com/v2/index.html
+  version: 2.27.2
+  license:
+    name: MIT
+    url: https://github.com/uikit/uikit/blob/develop/LICENSE.md
+    gpl-compatible: true
+  css:
+    base:
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.2/css/components/tooltip.gradient.min.css: { type: external, minified: true, weight: -10 }
+  js:
+    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.2/js/components/tooltip.min.js: { type: external, minified: true, weight: -10 }
+
 uikit.admin:
   version: VERSION
   css:
