@@ -305,6 +305,17 @@ active-link:
   js:
     js/uikit.active-link.js: {}
 
+comment-new-indicator:
+  version: VERSION
+  js:
+    js/uikit.comment-new-indicator.js: {}
+  dependencies:
+    - core/jquery
+    - core/jquery.once
+    - core/drupal
+    - history/api
+    - core/drupal.displace
+
 dropbutton:
   version: VERSION
   js:

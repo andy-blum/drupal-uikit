@@ -80,20 +80,22 @@
         server which comments are new for the user. Rendering the final "new"
         indicator here would break the render cache.
       #}
-      <mark class="hidden uk-badge uk-float-right" data-comment-timestamp="{{ new_indicator_timestamp }}"></mark>
+      <mark class="uk-badge uk-float-right uk-hidden hidden" data-comment-timestamp="{{ new_indicator_timestamp }}"></mark>
       <div class="uk-comment-avatar">{{ user_picture }}</div>
       <h4 class="uk-comment-title">{{ title }}</h4>
       <p class="uk-comment-meta">{{ submitted }}</p>
-    </header>
 
-    {#
-      Indicate the semantic relationship between parent and child comments for
-      accessibility. The list is difficult to navigate in a screen reader
-      without this information.
-    #}
-    {% if parent %}
-      <p class="visually-hidden">{{ parent }}</p>
-    {% endif %}
+      {#
+        Indicate the semantic relationship between parent and child comments for
+        accessibility. The list is difficult to navigate in a screen reader
+        without this information.
+      #}
+      {% if parent %}
+        <p class="visually-hidden">{{ parent }}</p>
+      {% endif %}
+
+      <span class="uk-hidden">{{ permalink }}</span>
+    </header>
 
     <div{{ content_attributes }}>
       <div class="uk-comment-body">
