@@ -46,6 +46,17 @@ active-link:
   js:
     js/uikit.active-link.js: {}
 
+comment-new-indicator:
+  version: VERSION
+  js:
+    js/uikit.comment-new-indicator.js: {}
+  dependencies:
+    - core/jquery
+    - core/jquery.once
+    - core/drupal
+    - history/api
+    - core/drupal.displace
+
 dropbutton:
   version: VERSION
   js:
@@ -55,14 +66,3 @@ tabledrag:
   version: VERSION
   js:
     js/uikit.tabledrag.js: {}
-
-font-awesome:
-  remote: http://fontawesome.io/
-  version: 4.6.3
-  license:
-    name: MIT
-    url: http://fontawesome.io/license/
-    gpl-compatible: true
-  css:
-    base:
-      //cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css: { type: external, minified: true }

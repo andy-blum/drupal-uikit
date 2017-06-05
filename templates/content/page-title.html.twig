@@ -20,8 +20,8 @@
     'uk-margin-remove-top',
   ]
 %}
-{{ title_prefix }}
 {% if title %}
+  {{ title_prefix }}
   <h1{{ title_attributes.addClass(classes) }}>{{ title }}</h1>
+  {{ title_suffix }}
 {% endif %}
-{{ title_suffix }}
