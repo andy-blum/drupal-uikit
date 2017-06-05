@@ -400,4 +400,5 @@ class UIkit {
     $route_match = \Drupal::routeMatch();
     return \Drupal::service('title_resolver')->getTitle($request, $route_match->getRouteObject());
   }
+
 }
