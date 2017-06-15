@@ -399,14 +399,3 @@ function uikit_preprocess_menu__offcanvas(&$variables) {
     }
   }
 }
-
-/**
- * Implements hook_preprocess_HOOK() for page-title.html.twig.
- */
-function uikit_preprocess_page_title(&$variables) {
-  if (!is_object($variables['title'])) {
-    // If the markup is empty set the title to an empty array so the content is
-    // not displayed, since this throws off the flow of the page.
-    $variables['title'] = array();
-  }
-}
