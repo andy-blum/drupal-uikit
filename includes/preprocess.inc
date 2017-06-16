@@ -304,26 +304,30 @@ function uikit_preprocess_menu_local_tasks(&$variables) {
  * Implements hook_preprocess_HOOK() for menu--navbar.html.twig
  */
 function uikit_preprocess_menu__navbar(&$variables) {
-  $current_path = Url::fromRouteMatch(\Drupal::routeMatch())->getInternalPath();
-  $user_id = \Drupal::currentUser()->getAccount()->id();
   $items = $variables['items'];
+  $current_url = Url::fromRoute('<current>');
+  $current_path = $current_url->toString();
 
   foreach ($items as $key => $item) {
     $variables['items'][$key]['has_url'] = TRUE;
     $route = $item['url']->getRouteName();
-    $item_internal_path = Url::fromRoute($route)->getInternalPath();
-    $is_active = $current_path == $item_internal_path;
-    $has_active_class = $item['attributes']->hasClass('uk-active');
-    $viewing_own_account = $item_internal_path == 'user' && $current_path == "user/$user_id";
-
-    if ($viewing_own_account || ($is_active && !$has_active_class)) {
-      // Add uk-active class.
-      $variables['items'][$key]['attributes']->addClass('uk-active');
-    }
+    $is_active = FALSE;
 
     if ($route == '<none>') {
       // <none> routes do not have a URL.
       $variables['items'][$key]['has_url'] = FALSE;
+    }
+
+    if ($item['url']->toString() == '/user') {
+      $uid = \Drupal::currentUser()->id();
+
+      if ($uid && $current_path == "/user/$uid") {
+        $is_active = TRUE;
+      }
+    }
+
+    if ($is_active && !$item['attributes']->hasClass('uk-active')) {
+      $item['attributes']->addClass('uk-active');
     }
 
     if ($item['below']) {
