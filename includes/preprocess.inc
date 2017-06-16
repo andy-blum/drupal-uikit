@@ -583,6 +583,13 @@ function uikit_preprocess_field(&$variables) {
   }
 
   $variables['classes_array'] = $classes;
+
+  if ($variables['element']['#field_name'] == 'field_tags') {
+    foreach ($variables['items'] as $delta => $item) {
+      $variables['item_attributes_array'][$delta]['class'][] = 'field-item';
+      $variables['item_attributes_array'][$delta]['class'][] = $delta % 2 ? 'odd' : 'even';
+    }
+  }
 }
 
 /**
