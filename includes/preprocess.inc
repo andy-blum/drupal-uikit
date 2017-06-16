@@ -11,6 +11,7 @@
  * @see process.inc
  */
 
+use Drupal\Core\Render\Markup;
 use Drupal\Core\Template\Attribute;
 use Drupal\Core\Url;
 use Drupal\block\Entity\Block;
@@ -78,6 +79,45 @@ function uikit_preprocess_page(&$variables) {
 }
 
 /**
+ * Implements template_preprocess_region().
+ */
+function uikit_preprocess_region(&$variables) {
+  if ($variables['region'] == 'navbar') {
+    $variables['content_left'] = [];
+    $variables['content_center'] = [];
+    $variables['content_right'] = [];
+
+    foreach ($variables['elements'] as $id => $element) {
+      if (is_array($element) && isset($element['#id'])) {
+        $block = Block::load($element['#id']);
+        $block_navbar_alignment = $block->getThirdPartySetting('uikit_components', 'uikit_navbar_alignment');
+        $navbar_alignment = $block_navbar_alignment ? $block_navbar_alignment : 'left';
+
+        switch ($navbar_alignment) {
+          case 'left':
+            $variables['content_left'][$id] = [
+              '#markup' => render($element),
+            ];
+            break;
+
+          case 'center':
+            $variables['content_center'][$id] = [
+              '#markup' => render($element),
+            ];
+            break;
+
+          case 'right':
+            $variables['content_right'][$id] = [
+              '#markup' => render($element),
+            ];
+            break;
+        }
+      }
+    }
+  }
+}
+
+/**
  * Implements template_preprocess_block().
  */
 function uikit_preprocess_block(&$variables) {
@@ -87,9 +127,6 @@ function uikit_preprocess_block(&$variables) {
 
   switch ($region) {
     case 'navbar':
-      // Get navbar alignment from block settings.
-      $variables['navbar_alignment'] = $block->getThirdPartySetting('uikit_components', 'uikit_navbar_alignment');
-
       if ($system_menu_block) {
         // Define #theme variable for navbar menus.
         $variables['content']['#theme'] = 'menu__navbar';

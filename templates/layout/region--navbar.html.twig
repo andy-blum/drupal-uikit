@@ -14,6 +14,20 @@
  * @ingroup uikit_themeable
  */
 #}
-{% if content %}
-  {{ content }}
+{% if content_left %}
+  <div class="uk-navbar-left">
+    {{ content_left }}
+  </div>
+{% endif %}
+
+{% if content_center %}
+  <div class="uk-navbar-center">
+    {{ content_center }}
+  </div>
+{% endif %}
+
+{% if content_right %}
+  <div class="uk-navbar-right">
+    {{ content_right }}
+  </div>
 {% endif %}
