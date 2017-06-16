@@ -837,15 +837,9 @@ function uikit_menu_link(array $variables) {
     elseif ((!empty($element['#original_link']['depth'])) && ($element['#original_link']['depth'] == 1)) {
       // Use our own theme wrapper.
       unset($element['#below']['#theme_wrappers']);
-      $sub_menu = '<div class="uk-dropdown uk-dropdown-navbar uk-dropdown-bottom" aria-hidden="true">';
-      $sub_menu .= '<ul class="uk-nav uk-nav-navbar">' . drupal_render($element['#below']) . '</ul>';
+      $sub_menu = '<div class="uk-navbar-dropdown">';
+      $sub_menu .= '<ul class="uk-nav uk-navbar-dropdown-nav">' . drupal_render($element['#below']) . '</ul>';
       $sub_menu .= '</div>';
-
-      // Generate as standard dropdown.
-      $attributes['class'][] = 'uk-parent';
-      $attributes['data-uk-dropdown'] = '';
-      $attributes['aria-haspopup'] = 'true';
-      $attributes['aria-expanded'] = 'false';
     }
     elseif ((!empty($element['#original_link']['depth'])) && ($element['#original_link']['depth'] == 2)) {
       // Use our own theme wrapper.
