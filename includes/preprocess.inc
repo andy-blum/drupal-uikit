@@ -217,6 +217,7 @@ function uikit_preprocess_field__comment(&$variables) {
  */
 function uikit_preprocess_form_element(&$variables) {
   $element = $variables['element'];
+  $type = $element['#type'];
 
   // Grouped form elements do not need the uk-margin class. This adds a
   // grouped variable to use in form-element.html.twig.
@@ -224,6 +225,13 @@ function uikit_preprocess_form_element(&$variables) {
   $variables['grouped'] = FALSE;
   if ($groups) {
     $variables['grouped'] = TRUE;
+  }
+
+  // Perform various changes to the variables for advanced form elements.
+  $form_advanced = $type == 'checkbox' || $type == 'radio';
+  if ($form_advanced) {
+    $label = $variables['label']['#title']->getUntranslatedString();
+    $variables['label_text'] = t('@label', ['@label' => $label]);
   }
 }
 
