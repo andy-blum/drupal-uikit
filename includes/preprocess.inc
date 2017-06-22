@@ -131,6 +131,10 @@ function uikit_preprocess_block(&$variables) {
         // Define #theme variable for navbar menus.
         $variables['content']['#theme'] = 'menu__navbar';
       }
+      else {
+        // Add the uk-navbar-item class.
+        $variables['attributes']['class'][] = 'uk-navbar-item';
+      }
       break;
 
     case 'offcanvas':
