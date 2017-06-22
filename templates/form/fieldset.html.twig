@@ -28,21 +28,19 @@
     'form-item',
     'js-form-wrapper',
     'form-wrapper',
-    'uk-margin',
+    'uk-fieldset',
   ]
 %}
 <fieldset{{ attributes.addClass(classes) }}>
   {%
-    set legend_span_classes = [
+    set legend_classes = [
       'fieldset-legend',
+      'uk-legend',
       required ? 'js-form-required',
       required ? 'form-required',
     ]
   %}
-  {#  Always wrap fieldset legends in a SPAN for CSS positioning. #}
-  <legend{{ legend.attributes }}>
-    <span{{ legend_span.attributes.addClass(legend_span_classes) }}>{{ legend.title }}</span>
-  </legend>
+  <legend{{ legend.attributes.addClass(legend_classes) }}>{{ legend.title }}</legend>
   <div class="fieldset-wrapper">
     {% if errors %}
       <div>
