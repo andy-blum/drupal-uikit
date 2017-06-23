@@ -9,6 +9,9 @@
  * All menus receive the uk-list class, which disrupts the flow of the toolbar
  * tray menus. We may end up adding a toolbar tray menu template in the future.
  */
+#toolbar-administration {
+  z-index: 1000 !important;
+}
 .toolbar-tray>nav>ul,
 .toolbar-tray>nav>ul>li:nth-child(n+2),
 .toolbar-tray>nav>ul>li>ul {
