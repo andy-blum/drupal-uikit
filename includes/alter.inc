@@ -59,6 +59,15 @@ function uikit_theme_suggestions_block_alter(array &$suggestions, array $variabl
 }
 
 /**
+ * Implements hook_theme_suggestions_HOOK_alter() for container templates.
+ */
+function uikit_theme_suggestions_container_alter(array &$suggestions, array $variables) {
+  if (isset($variables['element']['administration_menu'])) {
+    $suggestions[] = 'container__admin__toolbar';
+  }
+}
+
+/**
  * Implements hook_theme_suggestions_HOOK_alter() for form element templates.
  */
 function uikit_theme_suggestions_form_element_alter(array &$suggestions, array $variables) {
