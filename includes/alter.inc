@@ -25,8 +25,10 @@ use Drupal\Core\Form\FormStateInterface;
 function uikit_form_search_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   // SearchPageForm assigns a class to the help link as a string instead of an
   // an array. Let's fix that first.
-  $help_link_classes = explode(' ' , $form['help_link']['#options']['attributes']['class']);
-  $form['help_link']['#options']['attributes']['class'] = $help_link_classes;
+  if (!is_array($form['help_link']['#options']['attributes']['class'])) {
+    $help_link_classes = explode(' ', $form['help_link']['#options']['attributes']['class']);
+    $form['help_link']['#options']['attributes']['class'] = $help_link_classes;
+  }
 
   // Now add some classes to the help link for better spacing below the search
   // input.
