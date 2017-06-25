@@ -19,6 +19,8 @@
     'uk-article-title',
   ]
 %}
-{{ title_prefix }}
-<h1{{ title_attributes.addClass(classes) }}>{{ title }}</h1>
-{{ title_suffix }}
+{% if title|render %}
+  {{ title_prefix }}
+  <h1{{ title_attributes.addClass(classes) }}>{{ title }}</h1>
+  {{ title_suffix }}
+{% endif %}
