@@ -30,15 +30,25 @@
  * See http://juicystudio.com/article/screen-readers-display-none.php and
  * http://www.w3.org/TR/WCAG-TECHS/H42.html for more information.
  *
+ * @see template_preprocess_block()
+ * @see uikit_preprocess_block()
+ *
  * @ingroup uikit_themeable
  */
 #}
+{%
+  set classes = [
+    'block',
+    'block-' ~ configuration.provider|clean_class,
+    'block-' ~ plugin_id|clean_class,
+  ]
+%}
 {% if content %}
   {% if navbar_flip %}
-    <div class="uk-navbar-flip">
+    <div class="uk-navbar-flip navbar-flip--{{ plugin_id }}">
   {% endif %}
 
-  <div{{ attributes }}>
+  <div{{ attributes.addClass(classes) }}>
     {% set heading_id = attributes.id ~ '-menu'|clean_id %}
     {# Label. If not displayed, we still provide it for screen readers. #}
     {% if not configuration.label_display %}

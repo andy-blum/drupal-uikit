@@ -11,6 +11,7 @@
  * @see process.inc
  */
 
+use Drupal\Component\Utility\Html;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\Core\Template\Attribute;
 use Drupal\block\Entity\Block;

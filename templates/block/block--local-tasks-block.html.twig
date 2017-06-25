@@ -23,10 +23,21 @@
  *   displayed after the main title tag that appears in the template.
  *
  * @see template_preprocess_block()
+ * @see uikit_preprocess_block()
+ *
+ * @ingroup uikit_themeable
  */
 #}
+{%
+  set classes = [
+    'block',
+    'block-' ~ configuration.provider|clean_class,
+    'block-' ~ plugin_id|clean_class,
+    'uk-margin-bottom',
+  ]
+%}
 {% if content %}
-  <div{{ attributes.addClass('uk-margin-bottom') }}>
+  <div{{ attributes.addClass(classes) }}>
     {{ title_prefix }}
     {% if label %}
       <h2{{ title_attributes }}>{{ label }}</h2>
