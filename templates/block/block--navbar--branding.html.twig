@@ -14,20 +14,22 @@
  * @ingroup uikit_themeable
  */
 #}
-{% if navbar_flip %}
-  <div class="uk-navbar-flip">
-{% endif %}
+{% if site_logo or site_name or site_slogan %}
+  {% if navbar_flip %}
+    <div class="uk-navbar-flip">
+  {% endif %}
 
-{% if site_logo or site_name %}
-  <a href="{{ path('<front>') }}" title="{{ 'Home'|t }}" rel="home" class="uk-navbar-brand">
-    <img src="{{ site_logo }}" alt="{{ 'Home'|t }}" />{% if site_name %} {{ site_name }}{% endif %}
-  </a>
-{% endif %}
+  {% if site_logo or site_name %}
+    <a href="{{ path('<front>') }}" title="{{ 'Home'|t }}" rel="home" class="uk-navbar-brand">
+      <img src="{{ site_logo }}" alt="{{ 'Home'|t }}" />{% if site_name %} {{ site_name }}{% endif %}
+    </a>
+  {% endif %}
 
-{% if site_slogan %}
-  <span class="uk-navbar-brand">{{ site_slogan }}</span>
-{% endif %}
+  {% if site_slogan %}
+    <span class="uk-navbar-brand">{{ site_slogan }}</span>
+  {% endif %}
 
-{% if navbar_flip %}
-  </div>
+  {% if navbar_flip %}
+    </div>
+  {% endif %}
 {% endif %}

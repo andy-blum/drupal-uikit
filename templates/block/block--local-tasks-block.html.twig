@@ -25,13 +25,15 @@
  * @see template_preprocess_block()
  */
 #}
-<div{{ attributes.addClass('uk-margin-bottom') }}>
-  {{ title_prefix }}
-  {% if label %}
-    <h2{{ title_attributes }}>{{ label }}</h2>
-  {% endif %}
-  {{ title_suffix }}
-  {% block content %}
-    {{ content }}
-  {% endblock %}
-</div>
+{% if content %}
+  <div{{ attributes.addClass('uk-margin-bottom') }}>
+    {{ title_prefix }}
+    {% if label %}
+      <h2{{ title_attributes }}>{{ label }}</h2>
+    {% endif %}
+    {{ title_suffix }}
+    {% block content %}
+      {{ content }}
+    {% endblock %}
+  </div>
+{% endif %}

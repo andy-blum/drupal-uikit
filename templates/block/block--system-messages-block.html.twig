@@ -12,4 +12,8 @@
  * @ingroup uikit_themeable
  */
 #}
-{{ content }}
+{% if content %}
+  <div{{ attributes }}>
+    {{ content }}
+  </div>
+{% endif %}
