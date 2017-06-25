@@ -58,6 +58,8 @@ uikit.accordion:
       //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/accordion.min.css: { type: external, minified: true }
   js:
     //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/accordion.min.js: { type: external, minified: true }
+  dependencies:
+    - uikit/uikit
 
 uikit.accordion.almost-flat:
   remote: https://getuikit.com/v2/index.html
@@ -71,6 +73,8 @@ uikit.accordion.almost-flat:
       //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/accordion.almost-flat.min.css: { type: external, minified: true }
   js:
     //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/accordion.min.js: { type: external, minified: true }
+  dependencies:
+    - uikit/uikit
 
 uikit.accordion.gradient:
   remote: https://getuikit.com/v2/index.html
@@ -84,6 +88,8 @@ uikit.accordion.gradient:
       //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/accordion.gradient.min.css: { type: external, minified: true }
   js:
     //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/accordion.min.js: { type: external, minified: true }
+  dependencies:
+    - uikit/uikit
 
 uikit.form-advanced:
   remote: https://getuikit.com/v2/index.html
@@ -97,6 +103,8 @@ uikit.form-advanced:
       //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/form-advanced.css: { type: external, minified: true }
   js:
     js/uikit.form-advanced.js: {}
+  dependencies:
+    - uikit/uikit
 
 uikit.form-advanced.almost-flat:
   remote: https://getuikit.com/v2/index.html
@@ -110,6 +118,8 @@ uikit.form-advanced.almost-flat:
       //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/form-advanced.almost-flat.css: { type: external, minified: true }
   js:
     js/uikit.form-advanced.js: {}
+  dependencies:
+    - uikit/uikit
 
 uikit.form-advanced.gradient:
   remote: https://getuikit.com/v2/index.html
@@ -123,6 +133,8 @@ uikit.form-advanced.gradient:
       //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/form-advanced.gradient.css: { type: external, minified: true }
   js:
     js/uikit.form-advanced.js: {}
+  dependencies:
+    - uikit/uikit
 
 uikit.search:
   remote: https://getuikit.com/v2/index.html
@@ -136,6 +148,8 @@ uikit.search:
       //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/search.min.css: { type: external, minified: true }
   js:
     //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/search.min.js: { type: external, minified: true }
+  dependencies:
+    - uikit/uikit
 
 uikit.search.almost-flat:
   remote: https://getuikit.com/v2/index.html
@@ -149,6 +163,8 @@ uikit.search.almost-flat:
       //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/search.almost-flat.min.css: { type: external, minified: true }
   js:
     //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/search.min.js: { type: external, minified: true }
+  dependencies:
+    - uikit/uikit
 
 uikit.search.gradient:
   remote: https://getuikit.com/v2/index.html
@@ -162,6 +178,8 @@ uikit.search.gradient:
       //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/search.gradient.min.css: { type: external, minified: true }
   js:
     //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/search.min.js: { type: external, minified: true }
+  dependencies:
+    - uikit/uikit
 
 uikit.slidenav:
   remote: https://getuikit.com/v2/index.html
@@ -173,6 +191,8 @@ uikit.slidenav:
   css:
     base:
       //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/slidenav.min.css: { type: external, minified: true }
+  dependencies:
+    - uikit/uikit
 
 uikit.slidenav.almost-flat:
   remote: https://getuikit.com/v2/index.html
@@ -184,6 +204,8 @@ uikit.slidenav.almost-flat:
   css:
     base:
       //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/slidenav.almost-flat.min.css: { type: external, minified: true }
+  dependencies:
+    - uikit/uikit
 
 uikit.slidenav.gradient:
   remote: https://getuikit.com/v2/index.html
@@ -195,6 +217,8 @@ uikit.slidenav.gradient:
   css:
     base:
       //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/slidenav.gradient.min.css: { type: external, minified: true }
+  dependencies:
+    - uikit/uikit
 
 uikit.sticky:
   remote: https://getuikit.com/v2/index.html
@@ -208,6 +232,8 @@ uikit.sticky:
       //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/sticky.min.css: { type: external, minified: true }
   js:
     //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/sticky.min.js: { type: external, minified: true }
+  dependencies:
+    - uikit/uikit
 
 uikit.sticky.almost-flat:
   remote: https://getuikit.com/v2/index.html
@@ -221,6 +247,8 @@ uikit.sticky.almost-flat:
       //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/sticky.almost-flat.min.css: { type: external, minified: true }
   js:
     //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/sticky.min.js: { type: external, minified: true }
+  dependencies:
+    - uikit/uikit
 
 uikit.sticky.gradient:
   remote: https://getuikit.com/v2/index.html
@@ -234,6 +262,8 @@ uikit.sticky.gradient:
       //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/sticky.gradient.min.css: { type: external, minified: true }
   js:
     //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/sticky.min.js: { type: external, minified: true }
+  dependencies:
+    - uikit/uikit
 
 uikit.tooltip:
   remote: https://getuikit.com/v2/index.html
@@ -247,6 +277,8 @@ uikit.tooltip:
       //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/tooltip.min.css: { type: external, minified: true }
   js:
     //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/tooltip.min.js: { type: external, minified: true }
+  dependencies:
+    - uikit/uikit
 
 uikit.tooltip.almost-flat:
   remote: https://getuikit.com/v2/index.html
@@ -260,6 +292,8 @@ uikit.tooltip.almost-flat:
       //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/tooltip.almost-flat.min.css: { type: external, minified: true }
   js:
     //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/tooltip.min.js: { type: external, minified: true }
+  dependencies:
+    - uikit/uikit
 
 uikit.tooltip.gradient:
   remote: https://getuikit.com/v2/index.html
@@ -273,6 +307,8 @@ uikit.tooltip.gradient:
       //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/tooltip.gradient.min.css: { type: external, minified: true }
   js:
     //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/tooltip.min.js: { type: external, minified: true }
+  dependencies:
+    - uikit/uikit
 
 uikit.admin:
   version: VERSION
