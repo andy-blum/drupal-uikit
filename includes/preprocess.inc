@@ -315,6 +315,12 @@ function uikit_preprocess_input(&$variables) {
   }
 
   $variables['errors'] = $errors;
+
+  if ($variables['element']['#type'] == 'file') {
+    $variables['#attached']['library'][] = UIkit::getUIkitComponent('form-file');
+    $title = $variables['element']['#title']->getUntranslatedString();
+    $variables['title'] = t('@title', ['@title' => $title]);
+  }
 }
 
 /**
