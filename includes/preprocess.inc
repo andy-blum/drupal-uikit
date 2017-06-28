@@ -289,21 +289,6 @@ function uikit_preprocess_feed_icon(&$variables) {
 }
 
 /**
- * Implements template_preprocess_form_element().
- */
-function uikit_preprocess_form_element(&$variables) {
-  $element = $variables['element'];
-
-  // Grouped form elements do not need the uk-form-row class. This adds a
-  // grouped variable to use in form-element.html.twig.
-  $groups = isset($element['#groups']) && is_array($element['#groups']);
-  $variables['grouped'] = FALSE;
-  if ($groups) {
-    $variables['grouped'] = TRUE;
-  }
-}
-
-/**
  * Implements template_preprocess_form_element() for form-element--advanced.html.twig.
  */
 function uikit_preprocess_form_element__advanced(&$variables) {
