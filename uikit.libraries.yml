@@ -7,9 +7,9 @@ uikit:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/uikit.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/uikit.min.css: { type: external, minified: true, weight: -10 }
   js:
-    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/uikit.min.js: { type: external, minified: true }
+    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/uikit.min.js: { type: external, minified: true, weight: -10 }
   dependencies:
     - core/jquery
     - core/drupal
@@ -23,9 +23,9 @@ uikit.almost-flat:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/uikit.almost-flat.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/uikit.almost-flat.min.css: { type: external, minified: true, weight: -10 }
   js:
-    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/uikit.min.js: { type: external, minified: true }
+    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/uikit.min.js: { type: external, minified: true, weight: -10 }
   dependencies:
     - core/jquery
     - core/drupal
@@ -39,9 +39,9 @@ uikit.gradient:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/uikit.gradient.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/uikit.gradient.min.css: { type: external, minified: true, weight: -9 }
   js:
-    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/uikit.min.js: { type: external, minified: true }
+    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/uikit.min.js: { type: external, minified: true, weight: -9 }
   dependencies:
     - core/jquery
     - core/drupal
@@ -55,9 +55,9 @@ uikit.accordion:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/accordion.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/accordion.min.css: { type: external, minified: true, weight: -9 }
   js:
-    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/accordion.min.js: { type: external, minified: true }
+    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/accordion.min.js: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit
 
@@ -70,9 +70,9 @@ uikit.accordion.almost-flat:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/accordion.almost-flat.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/accordion.almost-flat.min.css: { type: external, minified: true, weight: -9 }
   js:
-    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/accordion.min.js: { type: external, minified: true }
+    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/accordion.min.js: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit.almost-flat
 
@@ -85,9 +85,9 @@ uikit.accordion.gradient:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/accordion.gradient.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/accordion.gradient.min.css: { type: external, minified: true, weight: -9 }
   js:
-    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/accordion.min.js: { type: external, minified: true }
+    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/accordion.min.js: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit.gradient
 
@@ -100,9 +100,9 @@ uikit.autocomplete:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/autocomplete.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/autocomplete.min.css: { type: external, minified: true, weight: -9 }
   js:
-    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/autocomplete.min.js: { type: external, minified: true }
+    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/autocomplete.min.js: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit
 
@@ -115,9 +115,9 @@ uikit.autocomplete.almost-flat:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/autocomplete.almost-flat.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/autocomplete.almost-flat.min.css: { type: external, minified: true, weight: -9 }
   js:
-    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/autocomplete.min.js: { type: external, minified: true }
+    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/autocomplete.min.js: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit.almost-flat
 
@@ -130,9 +130,9 @@ uikit.autocomplete.gradient:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/autocomplete.gradient.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/autocomplete.gradient.min.css: { type: external, minified: true, weight: -9 }
   js:
-    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/autocomplete.min.js: { type: external, minified: true }
+    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/autocomplete.min.js: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit.gradient
 
@@ -145,9 +145,9 @@ uikit.datepicker:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/datepicker.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/datepicker.min.css: { type: external, minified: true, weight: -9 }
   js:
-    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/datepicker.min.js: { type: external, minified: true }
+    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/datepicker.min.js: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit
 
@@ -160,9 +160,9 @@ uikit.datepicker.almost-flat:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/datepicker.almost-flat.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/datepicker.almost-flat.min.css: { type: external, minified: true, weight: -9 }
   js:
-    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/datepicker.min.js: { type: external, minified: true }
+    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/datepicker.min.js: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit.almost-flat
 
@@ -175,9 +175,9 @@ uikit.datepicker.gradient:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/datepicker.gradient.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/datepicker.gradient.min.css: { type: external, minified: true, weight: -9 }
   js:
-    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/datepicker.min.js: { type: external, minified: true }
+    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/datepicker.min.js: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit.gradient
 
@@ -190,7 +190,7 @@ uikit.dotnav:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/dotnav.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/dotnav.min.css: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit
 
@@ -203,7 +203,7 @@ uikit.dotnav.almost-flat:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/dotnav.almost-flat.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/dotnav.almost-flat.min.css: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit.almost-flat
 
@@ -216,7 +216,7 @@ uikit.dotnav.gradient:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/dotnav.gradient.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/dotnav.gradient.min.css: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit.gradient
 
@@ -229,7 +229,7 @@ uikit.form-advanced:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/form-advanced.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/form-advanced.css: { type: external, minified: true, weight: -9 }
   js:
     js/uikit.form-advanced.js: {}
   dependencies:
@@ -244,7 +244,7 @@ uikit.form-advanced.almost-flat:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/form-advanced.almost-flat.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/form-advanced.almost-flat.css: { type: external, minified: true, weight: -9 }
   js:
     js/uikit.form-advanced.js: {}
   dependencies:
@@ -259,7 +259,7 @@ uikit.form-advanced.gradient:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/form-advanced.gradient.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/form-advanced.gradient.css: { type: external, minified: true, weight: -9 }
   js:
     js/uikit.form-advanced.js: {}
   dependencies:
@@ -274,7 +274,7 @@ uikit.form-file:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/form-file.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/form-file.css: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit
 
@@ -287,7 +287,7 @@ uikit.form-file.almost-flat:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/form-file.almost-flat.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/form-file.almost-flat.css: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit.almost-flat
 
@@ -300,7 +300,7 @@ uikit.form-file.gradient:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/form-file.gradient.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/form-file.gradient.css: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit.gradient
 
@@ -313,9 +313,9 @@ uikit.form-password:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/form-password.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/form-password.min.css: { type: external, minified: true, weight: -9 }
   js:
-    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/form-password.min.js: { type: external, minified: true }
+    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/form-password.min.js: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit
 
@@ -328,9 +328,9 @@ uikit.form-password.almost-flat:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/form-password.almost-flat.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/form-password.almost-flat.min.css: { type: external, minified: true, weight: -9 }
   js:
-    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/form-password.min.js: { type: external, minified: true }
+    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/form-password.min.js: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit.almost-flat
 
@@ -343,9 +343,9 @@ uikit.form-password.gradient:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/form-password.gradient.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/form-password.gradient.min.css: { type: external, minified: true, weight: -9 }
   js:
-    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/form-password.min.js: { type: external, minified: true }
+    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/form-password.min.js: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit.gradient
 
@@ -358,9 +358,9 @@ uikit.form-select:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/form-select.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/form-select.min.css: { type: external, minified: true, weight: -9 }
   js:
-    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/form-select.min.js: { type: external, minified: true }
+    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/form-select.min.js: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit
 
@@ -373,9 +373,9 @@ uikit.form-select.almost-flat:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/form-select.almost-flat.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/form-select.almost-flat.min.css: { type: external, minified: true, weight: -9 }
   js:
-    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/form-select.min.js: { type: external, minified: true }
+    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/form-select.min.js: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit.almost-flat
 
@@ -388,9 +388,9 @@ uikit.form-select.gradient:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/form-select.gradient.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/form-select.gradient.min.css: { type: external, minified: true, weight: -9 }
   js:
-    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/form-select.min.js: { type: external, minified: true }
+    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/form-select.min.js: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit.gradient
 
@@ -402,7 +402,7 @@ uikit.grid-parallax:
     url: https://github.com/uikit/uikit/blob/develop/LICENSE.md
     gpl-compatible: true
   js:
-    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/grid-parallax.min.js: { type: external, minified: true }
+    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/grid-parallax.min.js: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit
 
@@ -414,7 +414,7 @@ uikit.grid:
     url: https://github.com/uikit/uikit/blob/develop/LICENSE.md
     gpl-compatible: true
   js:
-    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/grid.min.js: { type: external, minified: true }
+    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/grid.min.js: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit
 
@@ -427,9 +427,9 @@ uikit.htmleditor:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/htmleditor.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/htmleditor.min.css: { type: external, minified: true, weight: -9 }
   js:
-    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/htmleditor.min.js: { type: external, minified: true }
+    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/htmleditor.min.js: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit
 
@@ -442,9 +442,9 @@ uikit.htmleditor.almost-flat:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/htmleditor.almost-flat.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/htmleditor.almost-flat.min.css: { type: external, minified: true, weight: -9 }
   js:
-    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/htmleditor.min.js: { type: external, minified: true }
+    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/htmleditor.min.js: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit.almost-flat
 
@@ -457,9 +457,9 @@ uikit.htmleditor.gradient:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/htmleditor.gradient.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/htmleditor.gradient.min.css: { type: external, minified: true, weight: -9 }
   js:
-    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/htmleditor.min.js: { type: external, minified: true }
+    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/htmleditor.min.js: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit.gradient
 
@@ -471,7 +471,7 @@ uikit.lightbox:
     url: https://github.com/uikit/uikit/blob/develop/LICENSE.md
     gpl-compatible: true
   js:
-    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/lightbox.min.js: { type: external, minified: true }
+    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/lightbox.min.js: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit
 
@@ -484,9 +484,9 @@ uikit.nestable:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/nestable.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/nestable.min.css: { type: external, minified: true, weight: -9 }
   js:
-    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/nestable.min.js: { type: external, minified: true }
+    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/nestable.min.js: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit
 
@@ -499,9 +499,9 @@ uikit.nestable.almost-flat:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/nestable.almost-flat.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/nestable.almost-flat.min.css: { type: external, minified: true, weight: -9 }
   js:
-    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/nestable.min.js: { type: external, minified: true }
+    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/nestable.min.js: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit.almost-flat
 
@@ -514,9 +514,9 @@ uikit.nestable.gradient:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/nestable.gradient.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/nestable.gradient.min.css: { type: external, minified: true, weight: -9 }
   js:
-    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/nestable.min.js: { type: external, minified: true }
+    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/nestable.min.js: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit.gradient
 
@@ -529,9 +529,9 @@ uikit.notify:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/notify.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/notify.min.css: { type: external, minified: true, weight: -9 }
   js:
-    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/notify.min.js: { type: external, minified: true }
+    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/notify.min.js: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit
 
@@ -544,9 +544,9 @@ uikit.notify.almost-flat:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/notify.almost-flat.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/notify.almost-flat.min.css: { type: external, minified: true, weight: -9 }
   js:
-    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/notify.min.js: { type: external, minified: true }
+    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/notify.min.js: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit.almost-flat
 
@@ -559,9 +559,9 @@ uikit.notify.gradient:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/notify.gradient.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/notify.gradient.min.css: { type: external, minified: true, weight: -9 }
   js:
-    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/notify.min.js: { type: external, minified: true }
+    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/notify.min.js: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit.gradient
 
@@ -573,7 +573,7 @@ uikit.pagination:
     url: https://github.com/uikit/uikit/blob/develop/LICENSE.md
     gpl-compatible: true
   js:
-    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/pagination.min.js: { type: external, minified: true }
+    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/pagination.min.js: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit
 
@@ -585,7 +585,7 @@ uikit.parallax:
     url: https://github.com/uikit/uikit/blob/develop/LICENSE.md
     gpl-compatible: true
   js:
-    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/parallax.min.js: { type: external, minified: true }
+    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/parallax.min.js: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit
 
@@ -598,7 +598,7 @@ uikit.placeholder:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/placeholder.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/placeholder.min.css: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit
 
@@ -611,7 +611,7 @@ uikit.placeholder.almost-flat:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/placeholder.almost-flat.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/placeholder.almost-flat.min.css: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit.almost-flat
 
@@ -624,7 +624,7 @@ uikit.placeholder.gradient:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/placeholder.gradient.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/placeholder.gradient.min.css: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit.gradient
 
@@ -637,7 +637,7 @@ uikit.progress:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/progress.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/progress.min.css: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit
 
@@ -650,7 +650,7 @@ uikit.progress.almost-flat:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/progress.almost-flat.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/progress.almost-flat.min.css: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit.almost-flat
 
@@ -663,7 +663,7 @@ uikit.progress.gradient:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/progress.gradient.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/progress.gradient.min.css: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit.gradient
 
@@ -676,9 +676,9 @@ uikit.search:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/search.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/search.min.css: { type: external, minified: true, weight: -9 }
   js:
-    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/search.min.js: { type: external, minified: true }
+    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/search.min.js: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit
 
@@ -691,9 +691,9 @@ uikit.search.almost-flat:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/search.almost-flat.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/search.almost-flat.min.css: { type: external, minified: true, weight: -9 }
   js:
-    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/search.min.js: { type: external, minified: true }
+    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/search.min.js: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit.almost-flat
 
@@ -706,9 +706,9 @@ uikit.search.gradient:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/search.gradient.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/search.gradient.min.css: { type: external, minified: true, weight: -9 }
   js:
-    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/search.min.js: { type: external, minified: true }
+    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/search.min.js: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit.gradient
 
@@ -721,7 +721,7 @@ uikit.slidenav:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/slidenav.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/slidenav.min.css: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit
 
@@ -734,7 +734,7 @@ uikit.slidenav.almost-flat:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/slidenav.almost-flat.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/slidenav.almost-flat.min.css: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit.almost-flat
 
@@ -747,7 +747,7 @@ uikit.slidenav.gradient:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/slidenav.gradient.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/slidenav.gradient.min.css: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit.gradient
 
@@ -760,9 +760,9 @@ uikit.slider:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/slider.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/slider.min.css: { type: external, minified: true, weight: -9 }
   js:
-    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/slider.min.js: { type: external, minified: true }
+    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/slider.min.js: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit
 
@@ -775,9 +775,9 @@ uikit.slider.almost-flat:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/slider.almost-flat.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/slider.almost-flat.min.css: { type: external, minified: true, weight: -9 }
   js:
-    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/slider.min.js: { type: external, minified: true }
+    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/slider.min.js: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit.almost-flat
 
@@ -790,9 +790,9 @@ uikit.slider.gradient:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/slider.gradient.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/slider.gradient.min.css: { type: external, minified: true, weight: -9 }
   js:
-    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/slider.min.js: { type: external, minified: true }
+    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/slider.min.js: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit.gradient
 
@@ -804,7 +804,7 @@ uikit.slideset:
     url: https://github.com/uikit/uikit/blob/develop/LICENSE.md
     gpl-compatible: true
   js:
-    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/slideset.min.js: { type: external, minified: true }
+    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/slideset.min.js: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit
 
@@ -816,7 +816,7 @@ uikit.slideshow-fx:
     url: https://github.com/uikit/uikit/blob/develop/LICENSE.md
     gpl-compatible: true
   js:
-    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/slideshow-fx.min.js: { type: external, minified: true }
+    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/slideshow-fx.min.js: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit
 
@@ -829,9 +829,9 @@ uikit.slideshow:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/slideshow.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/slideshow.min.css: { type: external, minified: true, weight: -9 }
   js:
-    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/slideshow.min.js: { type: external, minified: true }
+    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/slideshow.min.js: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit
 
@@ -844,9 +844,9 @@ uikit.slideshow.almost-flat:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/slideshow.almost-flat.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/slideshow.almost-flat.min.css: { type: external, minified: true, weight: -9 }
   js:
-    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/slideshow.min.js: { type: external, minified: true }
+    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/slideshow.min.js: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit.almost-flat
 
@@ -859,9 +859,9 @@ uikit.slideshow.gradient:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/slideshow.gradient.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/slideshow.gradient.min.css: { type: external, minified: true, weight: -9 }
   js:
-    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/slideshow.min.js: { type: external, minified: true }
+    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/slideshow.min.js: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit.gradient
 
@@ -874,9 +874,9 @@ uikit.sortable:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/sortable.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/sortable.min.css: { type: external, minified: true, weight: -9 }
   js:
-    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/sortable.min.js: { type: external, minified: true }
+    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/sortable.min.js: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit
 
@@ -889,9 +889,9 @@ uikit.sortable.almost-flat:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/sortable.almost-flat.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/sortable.almost-flat.min.css: { type: external, minified: true, weight: -9 }
   js:
-    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/sortable.min.js: { type: external, minified: true }
+    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/sortable.min.js: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit.almost-flat
 
@@ -904,9 +904,9 @@ uikit.sortable.gradient:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/sortable.gradient.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/sortable.gradient.min.css: { type: external, minified: true, weight: -9 }
   js:
-    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/sortable.min.js: { type: external, minified: true }
+    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/sortable.min.js: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit.gradient
 
@@ -919,9 +919,9 @@ uikit.sticky:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/sticky.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/sticky.min.css: { type: external, minified: true, weight: -9 }
   js:
-    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/sticky.min.js: { type: external, minified: true }
+    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/sticky.min.js: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit
 
@@ -934,9 +934,9 @@ uikit.sticky.almost-flat:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/sticky.almost-flat.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/sticky.almost-flat.min.css: { type: external, minified: true, weight: -9 }
   js:
-    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/sticky.min.js: { type: external, minified: true }
+    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/sticky.min.js: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit.almost-flat
 
@@ -949,9 +949,9 @@ uikit.sticky.gradient:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/sticky.gradient.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/sticky.gradient.min.css: { type: external, minified: true, weight: -9 }
   js:
-    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/sticky.min.js: { type: external, minified: true }
+    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/sticky.min.js: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit.gradient
 
@@ -963,7 +963,7 @@ uikit.timepicker:
     url: https://github.com/uikit/uikit/blob/develop/LICENSE.md
     gpl-compatible: true
   js:
-    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/timepicker.min.js: { type: external, minified: true }
+    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/timepicker.min.js: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit
 
@@ -976,9 +976,9 @@ uikit.tooltip:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/tooltip.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/tooltip.min.css: { type: external, minified: true, weight: -9 }
   js:
-    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/tooltip.min.js: { type: external, minified: true }
+    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/tooltip.min.js: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit
 
@@ -991,9 +991,9 @@ uikit.tooltip.almost-flat:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/tooltip.almost-flat.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/tooltip.almost-flat.min.css: { type: external, minified: true, weight: -9 }
   js:
-    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/tooltip.min.js: { type: external, minified: true }
+    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/tooltip.min.js: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit.almost-flat
 
@@ -1006,9 +1006,9 @@ uikit.tooltip.gradient:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/tooltip.gradient.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/tooltip.gradient.min.css: { type: external, minified: true, weight: -9 }
   js:
-    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/tooltip.min.js: { type: external, minified: true }
+    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/tooltip.min.js: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit.gradient
 
@@ -1021,9 +1021,9 @@ uikit.upload:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/upload.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/upload.min.css: { type: external, minified: true, weight: -9 }
   js:
-    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/upload.min.js: { type: external, minified: true }
+    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/upload.min.js: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit
 
@@ -1036,9 +1036,9 @@ uikit.upload.almost-flat:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/upload.almost-flat.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/upload.almost-flat.min.css: { type: external, minified: true, weight: -9 }
   js:
-    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/upload.min.js: { type: external, minified: true }
+    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/upload.min.js: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit.almost-flat
 
@@ -1051,9 +1051,9 @@ uikit.upload.gradient:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/upload.gradient.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/upload.gradient.min.css: { type: external, minified: true, weight: -9 }
   js:
-    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/upload.min.js: { type: external, minified: true }
+    //cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/upload.min.js: { type: external, minified: true, weight: -9 }
   dependencies:
     - uikit/uikit.gradient
 
@@ -1061,9 +1061,9 @@ uikit.admin:
   version: VERSION
   css:
     theme:
-      css/uikit.admin.css: {}
+      css/uikit.admin.css: { weight: -8 }
   js:
-    js/uikit.admin.js: {}
+    js/uikit.admin.js: { weight: -8 }
   dependencies:
     - core/jquery
     - core/jquery.once
@@ -1073,20 +1073,24 @@ global-style:
   version: VERSION
   css:
     base:
-      css/uikit.base.css: {}
+      css/uikit.base.css: { weight: -7 }
     layout:
-      css/uikit.layout.css: {}
+      css/uikit.layout.css: { weight: -7 }
     component:
-      css/uikit.component.css: {}
+      css/uikit.component.css: { weight: -7 }
     theme:
-      css/uikit.theme.css: {}
+      css/uikit.theme.css: { weight: -7 }
   js:
-    js/uikit.theme.js: {}
+    js/uikit.theme.js: { weight: -7 }
 
 active-link:
   version: VERSION
   js:
     js/uikit.active-link.js: {}
+  dependencies:
+    - core/drupal
+    - core/drupalSettings
+    - core/classList
 
 comment-new-indicator:
   version: VERSION
@@ -1107,4 +1111,10 @@ dropbutton:
 tabledrag:
   version: VERSION
   js:
-    js/uikit.tabledrag.js: {}
+    js/uikit.tabledrag.js: { weight: -1 }
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/drupalSettings
+    - core/jquery.once
+    - core/jquery.cookie
