@@ -293,6 +293,14 @@ function uikit_preprocess_feed_icon(&$variables) {
  */
 function uikit_preprocess_form_element__advanced(&$variables) {
   $variables['#attached']['library'][] = UIkit::getUIkitComponent('form-advanced');
+
+  if (is_object($variables['label']['#title'])) {
+    $label = $variables['label']['#title']->getUntranslatedString();
+  }
+  else {
+    $label = $variables['label']['#title'];
+  }
+  $variables['label_text'] = t('@label', ['@label' => $label]);
 }
 
 /**
