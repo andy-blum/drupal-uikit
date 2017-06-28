@@ -224,7 +224,55 @@ function uikit_preprocess_field__comment(&$variables) {
  * Implements template_preprocess_details().
  */
 function uikit_preprocess_details(&$variables) {
-  $variables['#attached']['library'][] = UIkit::getUIkitComponent('accordion');
+  // Set the accordion attributes.
+  $attributes = $variables['attributes'];
+  $accordion_attributes = new Attribute;
+
+  foreach ($attributes as $attribute => $value) {
+    if ($attribute != 'class' && $attribute != 'open') {
+      $accordion_attributes->setAttribute($attribute, $value);
+    }
+    elseif ($attribute == 'class') {
+      foreach ($value as $class) {
+        $accordion_attributes->addClass($class);
+      }
+    }
+  }
+  $accordion_attributes->addClass('uk-form-row');
+  $accordion_attributes->addClass('uk-accordion');
+
+  // Set the data-uk-accordion attribute based on the #open value.
+  $open = isset($variables['element']['#open']) ? $variables['element']['#open'] : FALSE;
+  if ($open) {
+    $accordion_attributes->setAttribute('data-uk-accordion', '{showfirst: true}');
+  }
+  else {
+    $accordion_attributes->setAttribute('data-uk-accordion', '{showfirst: false}');
+  }
+
+  $variables['accordion_attributes'] = $accordion_attributes;
+
+  // Set the accordion title attributes.
+  $accordion_title_attributes = new Attribute;
+  $accordion_title_attributes->addClass('uk-accordion-title');
+  $variables['accordion_title_attributes'] = $accordion_title_attributes;
+
+  // Set the accordion content attributes.
+  $accordion_content_attributes = new Attribute;
+  $accordion_content_attributes->addClass('uk-accordion-content');
+  $variables['accordion_content_attributes'] = $accordion_content_attributes;
+
+  // Set the error classes.
+  $error_classes = new Attribute;
+  $error_classes->addClass('uk-alert');
+  $error_classes->addClass('uk-alert-danger');
+  $variables['error_classes'] = $error_classes;
+
+  // Set the description attributes.
+  $description_attributes = new Attribute;
+  $description_attributes->addClass('uk-form-help-block');
+  $description_attributes->addClass('uk-margin-small-bottom');
+  $variables['description_attributes'] = $description_attributes;
 }
 
 /**
