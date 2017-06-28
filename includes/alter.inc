@@ -25,20 +25,11 @@ function uikit_form_search_form_alter(&$form, \Drupal\Core\Form\FormStateInterfa
   // Drupal core does not place the submit buttons or the help link in container
   // elements. First copy, then remove these elements.
   $submit = $form['basic']['submit'];
-  $advanced_submit = $form['advanced']['submit'];
   $help_link = $form['help_link'];
   unset($form['basic']['submit']);
-  unset($form['advanced']['submit']);
-
-  // Remove the prefix and suffix from the advanced submit element.
-  unset($advanced_submit['#prefix']);
-  unset($advanced_submit['#suffix']);
 
   // Create the new containers.
   $form['basic']['actions'] = [
-    '#type' => 'actions',
-  ];
-  $form['advanced']['actions'] = [
     '#type' => 'actions',
   ];
   $form['help_link'] = [
@@ -47,8 +38,23 @@ function uikit_form_search_form_alter(&$form, \Drupal\Core\Form\FormStateInterfa
 
   // Place the submit buttons and help link inside their respective containers.
   $form['basic']['actions']['submit'] = $submit;
-  $form['advanced']['actions']['submit'] = $advanced_submit;
   $form['help_link']['help'] = $help_link;
+
+  // Now do the same for the advanced search form, if set.
+  if (isset($form['advanced'])) {
+    $advanced_submit = $form['advanced']['submit'];
+    unset($form['advanced']['submit']);
+
+    // Remove the prefix and suffix from the advanced submit element.
+    unset($advanced_submit['#prefix']);
+    unset($advanced_submit['#suffix']);
+
+    $form['advanced']['actions'] = [
+      '#type' => 'actions',
+    ];
+
+    $form['advanced']['actions']['submit'] = $advanced_submit;
+  }
 }
 
 /**
