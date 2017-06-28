@@ -4,6 +4,19 @@
  */
 
 /**
+ * Inline forms.
+ */
+.container-inline div {
+  display: block;
+}
+.container-inline>div {
+  display: inline-block;
+}
+.container-inline input {
+  width: auto;
+}
+
+/**
  * Toolbar module.
  *
  * All menus receive the uk-list class, which disrupts the flow of the toolbar
