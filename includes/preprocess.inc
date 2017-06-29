@@ -205,22 +205,6 @@ function uikit_preprocess_comment(&$variables) {
 }
 
 /**
- * Implements template_preprocess_field() for field--comment.html.twig.
- */
-function uikit_preprocess_field__comment(&$variables) {
-  $comments = $variables['comments'];
-  $comment_count = 0;
-
-  foreach ($comments as $comment) {
-    if (isset($comment['#comment'])) {
-      $comment_count++;
-    }
-  }
-
-  $variables['comment_count'] = $comment_count;
-}
-
-/**
  * Implements template_preprocess_details().
  */
 function uikit_preprocess_details(&$variables) {
@@ -273,6 +257,22 @@ function uikit_preprocess_details(&$variables) {
   $description_attributes->addClass('uk-form-help-block');
   $description_attributes->addClass('uk-margin-small-bottom');
   $variables['description_attributes'] = $description_attributes;
+}
+
+/**
+ * Implements template_preprocess_field() for field--comment.html.twig.
+ */
+function uikit_preprocess_field__comment(&$variables) {
+  $comments = $variables['comments'];
+  $comment_count = 0;
+
+  foreach ($comments as $comment) {
+    if (isset($comment['#comment'])) {
+      $comment_count++;
+    }
+  }
+
+  $variables['comment_count'] = $comment_count;
 }
 
 /**
