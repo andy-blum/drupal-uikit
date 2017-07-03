@@ -1135,6 +1135,7 @@ function uikit_pager($variables) {
     $pagination = theme('item_list', array(
       'items' => $items,
       'attributes' => array('class' => array('uk-pagination')),
+      'pagination' => TRUE,
     ));
 
     return '<h2 class="element-invisible">' . t('Pages') . '</h2>' . $pagination;

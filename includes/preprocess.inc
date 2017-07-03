@@ -651,8 +651,12 @@ function uikit_preprocess_form(&$variables) {
  * Implements hook_preprocess_HOOK() for theme_item_list().
  */
 function uikit_preprocess_item_list(&$variables) {
-  // Add the uk-list class to all item lists.
-  $variables['attributes']['class'][] = 'uk-list';
+  $pagination = isset($variables['pagination']) && $variables['pagination'];
+
+  // Add the uk-list class to all but pagination item lists.
+  if (!$pagination) {
+    $variables['attributes']['class'][] = 'uk-list';
+  }
 }
 
 /**
