@@ -68,7 +68,7 @@
 
     {{ children }}
 
-    {% if label_display != 'invisible' %}
+    {% if label_display != 'invisible' and label_text %}
       <span> {{ label_text }}</span>
     {% endif %}
 
