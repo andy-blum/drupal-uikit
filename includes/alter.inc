@@ -92,7 +92,7 @@ function uikit_js_alter(&$javascript) {
   // Replace the Drupal core's progress.js with a custom version.
   if (isset($javascript['misc/progress.js'])) {
     $javascript['misc/progress.js']['data'] = $theme . '/js/progress.js';
-    uikit_get_cdn_asset('progress');
+    UIkit::getCdnAsset('progress');
   }
 }
 
