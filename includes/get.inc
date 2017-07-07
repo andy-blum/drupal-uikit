@@ -5,7 +5,7 @@
  * Common get functions.
  */
 
-use \Drupal\uikit\UIkit;
+use Drupal\uikit\UIkit;
 
 /**
  * Retrieves UIkit, jQuery and jQuery Migrate CDN assets.
