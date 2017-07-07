@@ -60,6 +60,26 @@ function uikit_button($variables) {
 }
 
 /**
+ * Implements theme_captcha().
+ */
+function uikit_captcha($variables) {
+  $element = $variables['element'];
+  if (!empty($element['#description']) && isset($element['captcha_widgets'])) {
+    $fieldset = array(
+      '#type' => 'fieldset',
+      '#title' => t('CAPTCHA'),
+      '#description' => $element['#description'],
+      '#children' => drupal_render_children($element),
+      '#attributes' => array('class' => array('captcha', 'uk-margin')),
+    );
+    return theme('fieldset', array('element' => $fieldset));
+  }
+  else {
+    return '<div class="captcha uk-margin">' . drupal_render_children($element) . '</div>';
+  }
+}
+
+/**
  * Implements theme_field() for tag fields.
  */
 function uikit_field__field_tags($variables) {
