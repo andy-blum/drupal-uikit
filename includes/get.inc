@@ -287,7 +287,7 @@ function uikit_get_cdn_asset($component = NULL) {
  *   Returns true if the given path is the current path, false if otherwise.
  *
  * @deprecated in UIkit 7.x-2.7, will be removed before UIkit 7.x-2.10.
- *   Use \Drupal\uikit\UIkit::getCdnAssets();
+ *   Use \Drupal\uikit\UIkit::getActivePath();
  *
  * @see https://www.drupal.org/node/2893149
  */
