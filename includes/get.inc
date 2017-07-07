@@ -9,6 +9,11 @@ use Drupal\uikit\UIkit;
 
 /**
  * Retrieves UIkit, jQuery and jQuery Migrate CDN assets.
+ *
+ * @deprecated in UIkit 7.x-2.6, will be removed before UIkit 7.x-2.10.
+ *   Use \Drupal\uikit\UIkit::getCdnAssets();
+ *
+ * @see https://www.drupal.org/node/2893149
  */
 function uikit_get_cdn_assets() {
   global $theme_key;
@@ -90,6 +95,11 @@ function uikit_get_cdn_assets() {
  *
  * @param string $component
  *   The component to retrieve CDN assets for.
+ *
+ * @deprecated in UIkit 7.x-2.6, will be removed before UIkit 7.x-2.10.
+ *   Use \Drupal\uikit\UIkit::getCdnAsset();
+ *
+ * @see https://www.drupal.org/node/2893149
  */
 function uikit_get_cdn_asset($component = NULL) {
   global $theme_key;
@@ -275,6 +285,11 @@ function uikit_get_cdn_asset($component = NULL) {
  *
  * @return bool
  *   Returns true if the given path is the current path, false if otherwise.
+ *
+ * @deprecated in UIkit 7.x-2.7, will be removed before UIkit 7.x-2.10.
+ *   Use \Drupal\uikit\UIkit::getCdnAssets();
+ *
+ * @see https://www.drupal.org/node/2893149
  */
 function uikit_get_active_path($path) {
   $active_path = FALSE;
