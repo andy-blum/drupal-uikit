@@ -116,6 +116,25 @@ function uikit_preprocess_region(&$variables) {
   // Provide an id attribute to help themers.
   $region = $variables['region'];
   $variables['attributes']['id'] = "region--$region";
+
+  if ($region != 'offcanvas') {
+    $region_style = UIkit::getThemeSetting($region . '_style');
+
+    if ($region_style) {
+      // Add the region style classes to the region.
+      switch ($region_style) {
+        case 'block':
+          $variables['attributes']['class'][] = 'uk-block';
+          $variables['attributes']['class'][] = 'uk-block-muted';
+          break;
+
+        case 'panel':
+          $variables['attributes']['class'][] = 'uk-panel';
+          $variables['attributes']['class'][] = 'uk-panel-box';
+          break;
+      }
+    }
+  }
 }
 
 /**
@@ -149,6 +168,15 @@ function uikit_preprocess_block(&$variables) {
         $variables['content']['#theme'] = 'menu__offcanvas';
       }
       break;
+
+    default:
+      $region_style = UIkit::getThemeSetting($region . '_style');
+
+      if ($region_style == 'block') {
+        // Add the uk-container class to provide spacing for regions styled
+        // with the block component.
+        $variables['attributes']['class'][] = 'uk-container';
+      }
   }
 }
 
