@@ -138,10 +138,22 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
   // Fetch a list of regions for the current theme.
   $all_regions = system_region_list($theme_key);
 
-  // Create markup for UIkit theme information.
+  // Retrieve the theme info for currently installed version of UIkit.
   $uikit_theme_info = drupal_parse_info_file(drupal_get_path('theme', 'uikit') . '/uikit.info');
   $uikit_version = isset($uikit_theme_info['version']) ? $uikit_theme_info['version'] : UIkit::UIKIT_PROJECT_BRANCH;
   $uikit_description = $uikit_theme_info['description'];
+
+  // Warn users about the future requirement of the X Autoload module.
+  if (!module_exists('xautoload')) {
+    $message = t('<strong>Please be advised</strong>: UIkit will soon require the <a href="@xautoload" target="_blank">X Autoload</a> module in order to work properly. This will occur before the 7.x-2.10 release (installed: @uikit_version). Please be sure to install the X Autoload module before then. <a href="@issue" target="_blank">More information</a>', array(
+      '@xautoload' => 'https://www.drupal.org/project/xautoload',
+      '@uikit_version' => $uikit_version,
+      '@issue' => 'https://www.drupal.org/node/2893149',
+    ));
+    drupal_set_message($message, 'warning');
+  }
+
+  // Create markup for UIkit theme information.
   $uikit_info = '<div class="uk-container uk-container-center uk-margin-top">';
   $uikit_info .= '<div class="uk-grid">';
   $uikit_info .= '<div class="uk-width-1-1">';
