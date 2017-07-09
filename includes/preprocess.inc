@@ -466,27 +466,20 @@ function uikit_preprocess_region(&$variables) {
     'class' => array('region-wrapper'),
   );
 
-  // Get all regions for the theme.
-  $regions = system_region_list(UIkit::getActiveTheme());
+  $region_style = UIkit::getThemeSetting($region . '_style');
 
-  foreach ($regions as $key => $value) {
-    // Get the settings for each region being used.
-    if ($region == $key) {
-      $style_setting = UIkit::getThemeSetting($key . '_style', UIkit::getActiveTheme());
-      $region_style = $style_setting ? $style_setting : 0;
+  if ($region_style) {
+    // Add the region style classes.
+    $variables['wrapper_attributes_array']['class'][] = "uk-$region_style";
 
-      if ($region_style) {
-        switch ($region_style) {
-          case 'panel':
-            $variables['wrapper_attributes_array']['class'][] = 'uk-panel';
-            $variables['wrapper_attributes_array']['class'][] = 'uk-panel-box';
-            break;
+    switch ($region_style) {
+      case 'block':
+        $variables['wrapper_attributes_array']['class'][] = 'uk-block-muted';
+        break;
 
-          case 'block':
-            $variables['wrapper_attributes_array']['class'][] = 'uk-block';
-            break;
-        }
-      }
+      case 'panel':
+        $variables['wrapper_attributes_array']['class'][] = 'uk-panel-box';
+        break;
     }
   }
 }
@@ -499,6 +492,14 @@ function uikit_preprocess_block(&$variables) {
 
   if ($region == 'sidebar_first' || $region == 'sidebar_second') {
     $variables['classes_array'][] = 'uk-margin';
+  }
+
+  $region_style = UIkit::getThemeSetting($region . '_style');
+
+  if ($region_style == 'block') {
+    // Add the uk-container class to provide spacing for regions styled with the
+    // block component.
+    $variables['classes_array'][] = 'uk-container';
   }
 }
 
