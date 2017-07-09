@@ -69,6 +69,12 @@ function uikit_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormSt
     0 => 'No style',
     'card' => 'Card',
   ];
+  $region_card_style_options = [
+    0 => 'No card style',
+    'default' => 'Default',
+    'primary' => 'Primary',
+    'secondary' => 'Secondary',
+  ];
 
   // Fetch a list of regions for the current theme.
   $all_regions = system_region_list($theme, $show = REGIONS_VISIBLE);
@@ -267,6 +273,18 @@ function uikit_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormSt
         '#default_value' => UIkit::getThemeSetting($region_key . '_style', $theme_key),
         '#options' => $region_style_options,
       ];
+      $form['layout']['region_layout'][$region_key][$region_key . '_card_style'] = array(
+        '#type' => 'select',
+        '#title' => t('@title card style', ['@title' => $region]),
+        '#description' => t('Set the card style for the @region region.', ['@region' => $region]),
+        '#default_value' => UIkit::getThemeSetting($region_key . '_card_style', $theme_key),
+        '#options' => $region_card_style_options,
+        '#states' => [
+          'visible' => [
+            ':input[name="' . $region_key . '_style"]' => ['value' => 'card'],
+          ],
+        ],
+      );
     }
   }
 

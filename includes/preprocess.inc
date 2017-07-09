@@ -121,13 +121,20 @@ function uikit_preprocess_region(&$variables) {
   }
   elseif ($region != 'offcanvas') {
     $region_style = UIkit::getThemeSetting($region . '_style');
+    $card_style = UIkit::getThemeSetting($region . '_card_style');
+    $region_style = $region_style ? $region_style : 0;
+    $region_card_style = $card_style ? $card_style : 0;
 
     if ($region_style) {
+      // Add the region style classes.
       switch ($region_style) {
         case 'card':
           $variables['attributes']['class'][] = 'uk-card';
           $variables['attributes']['class'][] = 'uk-card-body';
-          $variables['attributes']['class'][] = 'uk-card-default';
+
+          if ($region_card_style) {
+            $variables['attributes']['class'][] = "uk-card-$region_card_style";
+          }
           break;
       }
     }
