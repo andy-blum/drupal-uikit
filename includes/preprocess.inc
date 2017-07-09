@@ -86,7 +86,7 @@ function uikit_preprocess_region(&$variables) {
   $region = $variables['region'];
   $variables['attributes']['id'] = "region--$region";
 
-  if ($variables['region'] == 'navbar') {
+  if ($region == 'navbar') {
     $variables['content_left'] = [];
     $variables['content_center'] = [];
     $variables['content_right'] = [];
@@ -116,6 +116,19 @@ function uikit_preprocess_region(&$variables) {
             ];
             break;
         }
+      }
+    }
+  }
+  elseif ($region != 'offcanvas') {
+    $region_style = UIkit::getThemeSetting($region . '_style');
+
+    if ($region_style) {
+      switch ($region_style) {
+        case 'card':
+          $variables['attributes']['class'][] = 'uk-card';
+          $variables['attributes']['class'][] = 'uk-card-body';
+          $variables['attributes']['class'][] = 'uk-card-default';
+          break;
       }
     }
   }
