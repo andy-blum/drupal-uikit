@@ -122,14 +122,13 @@ function uikit_preprocess_region(&$variables) {
 
     if ($region_style) {
       // Add the region style classes to the region.
+      $variables['attributes']['class'][] = "uk-$region_style";
       switch ($region_style) {
         case 'block':
-          $variables['attributes']['class'][] = 'uk-block';
           $variables['attributes']['class'][] = 'uk-block-muted';
           break;
 
         case 'panel':
-          $variables['attributes']['class'][] = 'uk-panel';
           $variables['attributes']['class'][] = 'uk-panel-box';
           break;
       }
