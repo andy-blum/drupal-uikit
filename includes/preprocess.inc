@@ -92,29 +92,38 @@ function uikit_preprocess_region(&$variables) {
     $variables['content_right'] = [];
 
     foreach ($variables['elements'] as $id => $element) {
-      if (is_array($element) && isset($element['#id'])) {
-        $block = Block::load($element['#id']);
-        $block_navbar_alignment = $block->getThirdPartySetting('uikit_components', 'uikit_navbar_alignment');
-        $navbar_alignment = $block_navbar_alignment ? $block_navbar_alignment : 'left';
+      if (is_array($element)) {
+        $block = array();
 
-        switch ($navbar_alignment) {
-          case 'left':
-            $variables['content_left'][$id] = [
-              '#markup' => render($element),
-            ];
-            break;
+        if (isset($element['#id'])) {
+          $block = Block::load($element['#id']);
+        }
+        elseif (isset($element['#markup'])) {
+          $block = Block::load($id);
+        }
 
-          case 'center':
-            $variables['content_center'][$id] = [
-              '#markup' => render($element),
-            ];
-            break;
+        if ($block) {
+          $navbar_alignment = $block->getThirdPartySetting('uikit_components', 'uikit_navbar_alignment', 'left');
 
-          case 'right':
-            $variables['content_right'][$id] = [
-              '#markup' => render($element),
-            ];
-            break;
+          switch ($navbar_alignment) {
+            case 'left':
+              $variables['content_left'][$id] = [
+                '#markup' => render($element),
+              ];
+              break;
+
+            case 'center':
+              $variables['content_center'][$id] = [
+                '#markup' => render($element),
+              ];
+              break;
+
+            case 'right':
+              $variables['content_right'][$id] = [
+                '#markup' => render($element),
+              ];
+              break;
+          }
         }
       }
     }
