@@ -372,6 +372,128 @@ function uikit_preprocess_page(&$variables) {
 }
 
 /**
+ * Implements template_preprocess_maintenance_page().
+ */
+function uikit_preprocess_maintenance_page(&$variables) {
+  // Load UIkit assets, i.e. stylesheets and scripts.
+  UIkit::getCdnAssets();
+
+  // Add an http-equiv tag, if set.
+  if (UIkit::getThemeSetting('x_ua_compatible')) {
+    $meta_x_ua_compatible = array(
+      '#type' => 'html_tag',
+      '#tag' => 'meta',
+      '#attributes' => array(
+        'http-equiv' => 'x-ua-compatible',
+        'content' => 'IE=' . UIkit::getThemeSetting('x_ua_compatible'),
+      ),
+      '#weight' => -9998,
+    );
+
+    drupal_add_html_head($meta_x_ua_compatible, 'uikit_x_ua_compatible');
+  }
+
+  // Get viewport metadata settings for mobile devices.
+  $device_width_ratio = UIkit::getThemeSetting('viewport_device_width_ratio', UIkit::getActiveTheme());
+  $custom_device_width = UIkit::getThemeSetting('viewport_custom_width', UIkit::getActiveTheme());
+  $device_height_ratio = UIkit::getThemeSetting('viewport_device_height_ratio', UIkit::getActiveTheme());
+  $custom_device_height = UIkit::getThemeSetting('viewport_custom_height', UIkit::getActiveTheme());
+  $initial_scale = UIkit::getThemeSetting('viewport_initial_scale', UIkit::getActiveTheme());
+  $maximum_scale = UIkit::getThemeSetting('viewport_maximum_scale', UIkit::getActiveTheme());
+  $minimum_scale = UIkit::getThemeSetting('viewport_minimum_scale', UIkit::getActiveTheme());
+  $user_scalable = UIkit::getThemeSetting('viewport_user_scalable', UIkit::getActiveTheme());
+  $viewport_array = array();
+
+  // Add each, if set, to the viewport array.
+  if ($device_width_ratio == 'device-width') {
+    $viewport_array['width'] = 'width=device-width';
+  }
+  elseif ($device_width_ratio) {
+    $viewport_array['width'] = 'width=' . $custom_device_width;
+  }
+  if ($device_height_ratio == 1) {
+    $viewport_array['height'] = 'height=' . $custom_device_height;
+  }
+  if ($initial_scale) {
+    $viewport_array['initial-scale'] = 'initial-scale=' . $initial_scale;
+  }
+  if ($maximum_scale) {
+    $viewport_array['maximum-scale'] = 'maximum-scale=' . $maximum_scale;
+  }
+  if ($minimum_scale) {
+    $viewport_array['minimum-scale'] = 'minimum-scale=' . $minimum_scale;
+  }
+  if ($viewport_array && !$user_scalable) {
+    $viewport_array['user-scalable'] = 'user-scalable=no';
+  }
+
+  if ($viewport_array) {
+    // Add the viewport options to the viewport meta tag.
+    $viewport_content = implode(', ', $viewport_array);
+
+    $meta_viewport = [
+      '#type' => 'html_tag',
+      '#tag' => 'meta',
+      '#attributes' => [
+        'name' => 'viewport',
+        'content' => $viewport_content,
+      ],
+      '#weight' => -9997,
+    ];
+
+    drupal_add_html_head($meta_viewport, 'uikit_viewport');
+  }
+
+  // Assign content attributes.
+  $content_attributes = array(
+    'id' => 'page-content',
+    'class' => array('uk-width-1-1@s'),
+  );
+
+  // Assign sidebar_first attributes.
+  $sidebar_first_attributes = array(
+    'id' => 'sidebar-first',
+    'class' => array('uk-width-1-1@s'),
+  );
+
+  // Assign sidebar_second attributes.
+  $sidebar_second_attributes = array(
+    'id' => 'sidebar-second',
+    'class' => array('uk-width-1-1@s'),
+  );
+
+  // Assign additional content attributes if either sidebar is not empty.
+  $sidebar_first = $variables['sidebar_first'];
+  $sidebar_second = $variables['sidebar_second'];
+  if (!empty($sidebar_first) && !empty($sidebar_second)) {
+    $content_attributes['class'][] = 'uk-width-1-2@m';
+    $content_attributes['class'][] = 'uk-push-1-4@m';
+    $sidebar_first_attributes['class'][] = 'uk-width-1-4@m';
+    $sidebar_first_attributes['class'][] = 'uk-pull-1-2@m';
+    $sidebar_second_attributes['class'][] = 'uk-width-1-4@m';
+    $sidebar_second_attributes['class'][] = 'uk-push-pull-@m';
+  }
+  elseif (!empty($sidebar_first)) {
+    $content_attributes['class'][] = 'uk-width-3-4@m';
+    $content_attributes['class'][] = 'uk-push-1-4@m';
+    $sidebar_first_attributes['class'][] = 'uk-width-1-4@m';
+    $sidebar_first_attributes['class'][] = 'uk-pull-3-4@m';
+  }
+  elseif (!empty($sidebar_second)) {
+    $content_attributes['class'][] = 'uk-width-3-4@m';
+    $content_attributes['class'][] = 'uk-push-pull-@m';
+    $sidebar_second_attributes['class'][] = 'uk-width-1-4@m';
+    $sidebar_second_attributes['class'][] = 'uk-push-pull-@m';
+  }
+
+  // Add attributes.
+  $variables['classes_array'][] = 'uk-height-1-1';
+  $variables['content_attributes_array'] = $content_attributes;
+  $variables['sidebar_first_attributes_array'] = $sidebar_first_attributes;
+  $variables['sidebar_second_attributes_array'] = $sidebar_second_attributes;
+}
+
+/**
  * Implements template_preprocess_node().
  */
 function uikit_preprocess_node(&$variables) {
