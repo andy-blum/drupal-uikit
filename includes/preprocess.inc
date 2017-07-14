@@ -122,14 +122,35 @@ function uikit_preprocess_region(&$variables) {
 
     if ($region_style) {
       // Add the region style classes to the region.
-      $variables['attributes']['class'][] = "uk-$region_style";
+      $variables['attributes']['class'][] = $region_style;
+
       switch ($region_style) {
-        case 'block':
-          $variables['attributes']['class'][] = 'uk-block-muted';
+        case 'uk-block':
+          $block_style = UIkit::getThemeSetting($region . '_block_style');
+          $block_padding = UIkit::getThemeSetting($region . '_block_padding');
+          $variables['attributes']['class'][] = $block_style;
+
+          if ($block_padding) {
+            $variables['attributes']['class'][] = $block_padding;
+          }
           break;
 
-        case 'panel':
+        case 'uk-panel':
+          $panel_style = UIkit::getThemeSetting($region . '_panel_style');
+          $panel_modifiers = UIkit::getThemeSetting($region . '_panel_modifiers');
           $variables['attributes']['class'][] = 'uk-panel-box';
+
+          if ($panel_style) {
+            $variables['attributes']['class'][] = $panel_style;
+          }
+
+          if ($panel_modifiers) {
+            foreach ($panel_modifiers as $panel_modifier => $value) {
+              if ($value) {
+                $variables['attributes']['class'][] = $panel_modifier;
+              }
+            }
+          }
           break;
       }
     }
@@ -171,7 +192,7 @@ function uikit_preprocess_block(&$variables) {
     default:
       $region_style = UIkit::getThemeSetting($region . '_style');
 
-      if ($region_style == 'block') {
+      if ($region_style == 'uk-block') {
         // Add the uk-container class to provide spacing for regions styled
         // with the block component.
         $variables['attributes']['class'][] = 'uk-container';

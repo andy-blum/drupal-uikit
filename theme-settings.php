@@ -81,8 +81,32 @@ function uikit_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormSt
   // Set the region style options.
   $region_style_options = [
     0 => 'No style',
-    'panel' => 'Panel',
-    'block' => 'Block',
+    'uk-block' => 'Block',
+    'uk-panel' => 'Panel',
+  ];
+  $region_block_style_options = [
+    'uk-block-default' => t('Detault'),
+    'uk-block-muted' => t('Muted'),
+    'uk-block-primary' => t('Primary'),
+    'uk-block-secondary' => t('Secondary'),
+  ];
+  $region_block_padding_options = [
+    0 => t('Default padding'),
+    'uk-block-large' => t('Large top and bottom padding'),
+    'uk-padding-remove' => t('Remove all padding'),
+    'uk-padding-top-remove' => t('Remove top padding'),
+    'uk-padding-bottom-remove' => t('Remove bottom padding'),
+    'uk-padding-vertical-remove' => t('Remove top and bottom padding'),
+  ];
+  $region_panel_style_options = [
+    0 => t('Default'),
+    'uk-panel-box-primary' => t('Primary'),
+    'uk-panel-box-secondary' => t('Secondary'),
+  ];
+  $region_panel_modifier_options = [
+    'uk-panel-hover' => t('Panel hover'),
+    'uk-panel-space' => t('Panel space'),
+    'uk-panel-divider' => t('Panel divider'),
   ];
 
   // Fetch a list of regions for the current theme.
@@ -315,6 +339,56 @@ function uikit_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormSt
         '#description' => t('Set the style for the @region region. The theme will automatically style the region accordingly.', ['@region' => $region]),
         '#default_value' => UIkit::getThemeSetting($region_key . '_style', $theme_key),
         '#options' => $region_style_options,
+      ];
+      $form['layout']['region_layout'][$region_key][$region_key . '_block_style'] = [
+        '#type' => 'select',
+        '#title' => t('@title block style', ['@title' => $region]),
+        '#description' => t('Set the block style for the @region region.', ['@region' => $region]),
+        '#default_value' => UIkit::getThemeSetting($region_key . '_block_style', $theme_key),
+        '#options' => $region_block_style_options,
+        '#states' => [
+          'visible' => [
+            ':input[name="' . $region_key . '_style"]' => ['value' => 'uk-block'],
+          ],
+        ],
+      ];
+      $form['layout']['region_layout'][$region_key][$region_key . '_block_padding'] = [
+        '#type' => 'select',
+        '#title' => t('@title block padding', ['@title' => $region]),
+        '#description' => t('Set the block padding for the @region region.', ['@region' => $region]),
+        '#default_value' => UIkit::getThemeSetting($region_key . '_block_padding', $theme_key),
+        '#options' => $region_block_padding_options,
+        '#states' => [
+          'visible' => [
+            ':input[name="' . $region_key . '_style"]' => ['value' => 'uk-block'],
+          ],
+        ],
+      ];
+      $form['layout']['region_layout'][$region_key][$region_key . '_panel_style'] = [
+        '#type' => 'select',
+        '#title' => t('@title panel style', ['@title' => $region]),
+        '#description' => t('Set the panel style for the @region region.', ['@region' => $region]),
+        '#default_value' => UIkit::getThemeSetting($region_key . '_panel_style', $theme_key),
+        '#options' => $region_panel_style_options,
+        '#states' => [
+          'visible' => [
+            ':input[name="' . $region_key . '_style"]' => ['value' => 'uk-panel'],
+          ],
+        ],
+      ];
+
+      $panel_modifiers = UIkit::getThemeSetting($region_key . '_panel_modifiers', $theme_key);
+      $form['layout']['region_layout'][$region_key][$region_key . '_panel_modifiers'] = [
+        '#type' => 'checkboxes',
+        '#title' => t('@title panel modifiers', ['@title' => $region]),
+        '#description' => t('Set the panel modifiers for the @region region.', ['@region' => $region]),
+        '#default_value' => $panel_modifiers ? $panel_modifiers : [],
+        '#options' => array_map('\Drupal\Component\Utility\Html::escape', $region_panel_modifier_options),
+        '#states' => [
+          'visible' => [
+            ':input[name="' . $region_key . '_style"]' => ['value' => 'uk-panel'],
+          ],
+        ],
       ];
     }
   }
