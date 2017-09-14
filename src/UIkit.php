@@ -43,6 +43,73 @@ class UIkit {
   const UIKIT_PROJECT_API = 'http://uikit-drupal.com';
 
   /**
+   * Loads a project's include file.
+   *
+   * This function essentially does the same as Drupal core's
+   * module_load_include() function, except targeting theme include files. It also
+   * allows you to place the include files in a sub-directory of the theme for
+   * better organization.
+   *
+   * Examples:
+   * @code
+   *   // Load node.admin.inc from the node module.
+   *   UIkitComponents::loadIncludeFile('inc', 'node', 'module', 'node.admin');
+   *
+   *   // Load includes/alter.inc from the uikit theme.
+   *   UIkitComponents::loadIncludeFile('inc', 'uikit', 'theme', 'preprocess', 'includes');
+   * @endcode
+   *
+   * Do not use this function in a global context since it requires Drupal to be
+   * fully bootstrapped, use require_once DRUPAL_ROOT . '/path/file' instead.
+   *
+   * @param string $type
+   *   The include file's type (file extension).
+   * @param string $project
+   *   The project to which the include file belongs.
+   * @param string $project_type
+   *   The project type to which the include file belongs, either "theme" or
+   *   "module". Defaults to "module".
+   * @param string $name
+   *   (optional) The base file name (without the $type extension). If omitted,
+   *   $theme is used; i.e., resulting in "$theme.$type" by default.
+   * @param string $sub_directory
+   *   (optional) The sub-directory to which the include file resides.
+   *
+   * @return string
+   *   The name of the included file, if successful; FALSE otherwise.
+   */
+  public static function loadIncludeFile($type, $project, $project_type = 'module', $name = NULL, $sub_directory = '') {
+    static $files = [];
+
+    if (isset($sub_directory)) {
+      $sub_directory = '/' . $sub_directory;
+    }
+
+    if (!isset($name)) {
+      $name = $project;
+    }
+
+    $key = $type . ':' . $project . ':' . $name . ':' . $sub_directory;
+
+    if (isset($files[$key])) {
+      return $files[$key];
+    }
+
+    if (function_exists('drupal_get_path')) {
+      $file = DRUPAL_ROOT . '/' . drupal_get_path($project_type, $project) . "$sub_directory/$name.$type";
+      if (is_file($file)) {
+        require_once $file;
+        $files[$key] = $file;
+        return $file;
+      }
+      else {
+        $files[$key] = FALSE;
+      }
+    }
+    return FALSE;
+  }
+
+  /**
    * Retrieves the active theme.
    *
    * @return
