@@ -109,7 +109,7 @@ class UIkit {
 
     if ($uikit_style == 'customizer-css') {
       // If Customizer is used, locate and add the stylehseet.
-      $customizer_css = self::getThemeSetting('customizer_css', self::getctiveTheme());
+      $customizer_css = self::getThemeSetting('customizer_css', self::getActiveTheme());
       $file = file_load($customizer_css['fid']);
 
       drupal_add_css($file->uri, array(
