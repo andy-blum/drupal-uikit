@@ -20,4 +20,11 @@
     errors ? 'uk-form-danger',
   ]
 %}
-<input{{ attributes.addClass(classes) }} />{{ children }}
+{% if attributes.hasClass('form-autocomplete') %}
+  <div class="uk-form-icon">
+    <i class="uk-icon-circle-o-notch"></i>
+    <input{{ attributes.addClass(classes) }} />{{ children }}
+  </div>
+{% else %}
+  <input{{ attributes.addClass(classes) }} />{{ children }}
+{% endif %}
