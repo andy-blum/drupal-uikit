@@ -5,9 +5,7 @@
  * Provides theme settings for UIkit themes.
  */
 
-include_once 'src/UIkit.php';
-
-use \Drupal\uikit\UIkit;
+use Drupal\uikit\UIkit;
 
 /**
  * Implements hook_form_system_theme_settings_alter().
@@ -169,12 +167,11 @@ function uikit_form_system_theme_settings_alter(&$form, &$form_state, $form_id =
 
   // Warn users about the future requirement of the X Autoload module.
   if (!module_exists('xautoload')) {
-    $message = t('<strong>Please be advised</strong>: UIkit will soon require the <a href="@xautoload" target="_blank">X Autoload</a> module in order to work properly. This will occur before the 7.x-2.10 release (installed: @uikit_version). Please be sure to install the X Autoload module before then. <a href="@issue" target="_blank">More information</a>', array(
+    $message = t('UIkit now requires the <a href="@xautoload" target="_blank">X Autoload</a> module in order to work properly. <a href="@issue" target="_blank">More information</a>', array(
       '@xautoload' => 'https://www.drupal.org/project/xautoload',
-      '@uikit_version' => $uikit_version,
       '@issue' => 'https://www.drupal.org/node/2893149',
     ));
-    drupal_set_message($message, 'warning');
+    drupal_set_message($message, 'error');
   }
 
   // Create markup for UIkit theme information.
