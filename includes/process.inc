@@ -50,7 +50,7 @@ function uikit_process_region(&$variables) {
 }
 
 /**
- * Implements template_process_HOOK() for theme_html_tag().
+ * Implements hook_preprocess_HOOK() for theme_html_tag().
  */
 function uikit_process_html_tag(&$variables) {
   $element = &$variables['element'];

@@ -438,7 +438,7 @@ function uikit_preprocess_page(&$variables) {
 }
 
 /**
- * Implements template_preprocess_maintenance().
+ * Implements template_preprocess_maintenance_page().
  */
 function uikit_preprocess_maintenance_page(&$variables) {
   // Load UIkit assets, i.e. stylesheets and scripts.
@@ -648,7 +648,7 @@ function uikit_preprocess_block(&$variables) {
 }
 
 /**
- * Implements template_preprocess_HOOK().
+ * Implements hook_preprocess_HOOK().
  */
 function uikit_preprocess_breadcrumb(&$variables) {
   // Remove home link from breadcrumb if disabled in theme settings.
