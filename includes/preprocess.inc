@@ -271,7 +271,7 @@ function uikit_preprocess_form_element(&$variables) {
   $variables['label_text'] = '';
   if ($form_advanced) {
     if (is_object($variables['label']['#title'])) {
-      $label = $variables['label']['#title']->getUntranslatedString();
+      $label = $variables['label']['#title']->__toString();
     }
     else {
       $label = $variables['label']['#title'];
