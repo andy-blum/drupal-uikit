@@ -34,7 +34,6 @@
  * @ingroup uikit_themeable
  */
 #}
-{{ attach_library('uikit/dropbutton') }}
 {% if links -%}
   {%- if heading -%}
     {%- if heading.level -%}
@@ -54,14 +53,13 @@
         {{ dropbutton.text }}
       {%- endif -%}
 
-      <div data-uk-dropdown="{mode:'click'}">
-        <a class="uk-button"><i uk-icon="icon: caret-down"></i></a>
-
-        <div class="uk-dropdown uk-dropdown-small">
+      <div class="uk-inline">
+        <button class="uk-button uk-button-default" type="button"><span uk-icon="icon: triangle-down"></span></button>
+        <div uk-dropdown="mode: click; boundary: ! .uk-button-group; boundary-align: true;">
           {%
             set classes = [
               'uk-nav',
-              'uk-nav-dropdown'
+              'uk-dropdown-nav'
             ]
           %}
           <ul{{ attributes. addClass(classes) }}>

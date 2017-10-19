@@ -13,7 +13,7 @@
 
   Drupal.behaviors.uikitDropButton = {
     attach: function () {
-      var dropdownNav = $('.uk-nav-dropdown');
+      var dropdownNav = $('.uk-dropdown-nav');
       var dropdownLinks = dropdownNav.children();
 
       dropdownLinks.each(function() {

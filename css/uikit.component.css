@@ -36,9 +36,24 @@
 /**
  * UIkit buttons.
  */
-.uk-button-group>input {
-  font: 400 14px/20px "Helvetica Neue",Helvetica,Arial,sans-serif !important;
-  vertical-align: top !important;
+.uk-dropdown-nav>li>button,
+.uk-dropdown-nav>li>input {
+  background-color: transparent;
+  border: 0;
+  color: #999;
+  font-size: 14px;
+  line-height: 21px;
+  padding: 5px 0;
+  text-transform: none;
+  transition: none;
+}
+.uk-dropdown-nav>li>button:hover,
+.uk-dropdown-nav>li>button:focus,
+.uk-dropdown-nav>li>input:hover,
+.uk-dropdown-nav>li>input:focus,
+.uk-dropdown-nav>li.uk-active>button,
+.uk-dropdown-nav>li.uk-active>input {
+  color: #666;
 }
 
 /**
