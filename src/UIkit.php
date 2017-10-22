@@ -19,7 +19,7 @@ class UIkit {
    *
    * @var string
    */
-  const UIKIT_LIBRARY_VERSION = '3.0.0-beta.30';
+  const UIKIT_LIBRARY_VERSION = '3.0.0-beta.31';
 
   /**
    * The Drupal project page for the UIkit base theme.
@@ -108,25 +108,6 @@ class UIkit {
       'every_page' => TRUE,
       'weight' => -100,
       'version' => self::UIKIT_LIBRARY_VERSION,
-    ));
-
-    // Add the jQuery script.
-    drupal_add_js('//cdnjs.cloudflare.com/ajax/libs/jquery/' . self::UIKIT_JQUERY_VERSION . '/jquery.min.js', array(
-      'type' => 'external',
-      'group' => JS_THEME,
-      'every_page' => TRUE,
-      'weight' => -20,
-      'version' => self::UIKIT_JQUERY_VERSION,
-    ));
-
-    // Add the jQuery Migrate script so we can use multiple jQuery versions
-    // simultaneously.
-    drupal_add_js('//cdnjs.cloudflare.com/ajax/libs/jquery-migrate/' . self::UIKIT_JQUERY_MIGRATE_VERSION . '/jquery-migrate.min.js', array(
-      'type' => 'external',
-      'group' => JS_THEME,
-      'every_page' => TRUE,
-      'weight' => -20,
-      'version' => self::UIKIT_JQUERY_MIGRATE_VERSION,
     ));
 
     // Add the UIkit script.
