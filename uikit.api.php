@@ -59,12 +59,6 @@
  * retrieved automatically. jQuery Migrate allows us to use old code from jQuery
  * 1.9+.
  *
- * In addition to the jQuery requirements above, the
- * @link https://www.drupal.org/project/xautoload X Autoload @endlink module
- * is required in order for the UIkit theme to work properly. This allows us to
- * provide a more object-oriented project with PSR-4 namespaces and autoloading
- * features, not availble in Drupal 7 (which uses basic PSR-0 support).
- *
  * @section download-uikit Download UIkit
  * First of all you need to download UIkit 7. There are three ways to do this:
  * - direct download from drupal.org project page (recommended)

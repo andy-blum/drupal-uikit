@@ -27,13 +27,7 @@ for customizing with very little requirements.
 REQUIREMENTS
 ------------
 
-The following module is required for the UIkit for Drupal theme to work
-properly.
-
- * X Autoload:
-   A comprehensive and yet highly efficient PHP class loading suite. D8-style
-   PSR-4 namespaces in D7!
-   https://www.drupal.org/xautoload
+None
 
 
 RECOMMENDATIONS
@@ -53,11 +47,6 @@ UIkit for Drupal theme.
 
 INSTALLATION
 ------------
-
- * Install the X Autoload module as you would normally install a contributed
-   Drupal module. See:
-   https://www.drupal.org/docs/7/extending-drupal-7/installing-drupal-7-contributed-modules
-   for further information.
 
  * Install as you would normally install a contributed Drupal theme. See:
    https://www.drupal.org/docs/7/extending-drupal/installing-themes

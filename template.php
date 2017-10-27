@@ -5,6 +5,9 @@
  * Conditional logic and data processing for the UIkit theme.
  */
 
+// Include the UIkit class definition.
+include_once 'src/UIkit.php';
+
 use Drupal\uikit\UIkit;
 
 /**
@@ -17,8 +20,8 @@ use Drupal\uikit\UIkit;
  *
  * Examples:
  * @code
- *   // Load includes/uikit_subtheme.admin.inc from the node module.
- *   uikit_load_include('inc', 'uikit_subtheme', 'uikit_subtheme.admin', 'includes');
+ *   // Load includes/theme.inc from the uikit_subtheme theme.
+ *   uikit_load_include('inc', 'uikit_subtheme', 'theme', 'includes');
  *   // Load preprocess.inc from the uikit_subtheme theme.
  *   uikit_load_include('inc', 'uikit_subtheme', 'preprocess');
  * @endcode
