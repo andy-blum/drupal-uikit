@@ -27,7 +27,7 @@ for customizing with very little requirements.
 REQUIREMENTS
 ------------
 
-None
+There are no requirements to using UIkit.
 
 
 RECOMMENDATIONS
