@@ -5,6 +5,9 @@
  * Conditional logic and data processing for the UIkit theme.
  */
 
+// Include the UIkit class definition.
+include_once 'src/UIkit.php';
+
 use Drupal\uikit\UIkit;
 
 /**
