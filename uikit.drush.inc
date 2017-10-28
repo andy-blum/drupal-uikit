@@ -192,6 +192,7 @@ function drush_uikit_starterkit($machine_name = NULL, $name = NULL) {
   drush_op('uikit_file_str_replace', $subtheme_path . '/theme-settings.php', 'STARTERKIT', $machine_name);
   drush_op('uikit_file_str_replace', $subtheme_path . '/includes/alter.inc', 'STARTERKIT', $machine_name);
   drush_op('uikit_file_str_replace', $subtheme_path . '/includes/preprocess.inc', 'STARTERKIT', $machine_name);
+  drush_op('uikit_file_str_replace', $subtheme_path . '/includes/process.inc', 'STARTERKIT', $machine_name);
   drush_op('uikit_file_str_replace', $subtheme_path . '/includes/theme.inc', 'STARTERKIT', $machine_name);
 
   drush_op('uikit_file_str_replace', $subtheme_block_account_menu_file, 'STARTERKIT', $machine_name);
