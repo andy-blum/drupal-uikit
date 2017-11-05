@@ -223,6 +223,19 @@ function uikit_preprocess_comment(&$variables) {
 }
 
 /**
+ * Implements template_preprocess_details().
+ */
+function uikit_preprocess_details(&$variables) {
+  $element = $variables['element'];
+  $group_details = isset($element['#group_details']) && $element['#group_details'];
+  $variables['group_details'] = FALSE;
+
+  if ($group_details) {
+    $variables['group_details'] = TRUE;
+  }
+}
+
+/**
  * Implements hook_preprocess_HOOK() for feed-icon.html.twig.
  *
  * Feed icon on the front page is missing the site name, as reported in

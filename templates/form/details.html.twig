@@ -16,7 +16,12 @@
  * @ingroup uikit_themeable
  */
 #}
-<details{{ attributes.addClass('uk-margin') }}>
+{%
+  set classes = [
+    group_details ? 'uk-padding-small' : 'uk-margin',
+  ]
+%}
+<details{{ attributes.addClass(classes) }}>
   {%- if title -%}
     <summary{{ summary_attributes }}>{{ title }}</summary>
   {%- endif -%}
