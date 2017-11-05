@@ -22,6 +22,13 @@
  * @ingroup uikit_themeable
  */
 #}
+{%
+  set description_classes = [
+    'description',
+    'uk-text-meta',
+    'uk-margin-small-top',
+  ]
+%}
 <fieldset{{ attributes.addClass('uk-fieldset') }}>
   <legend{{ legend.attributes.addClass('uk-legend') }}>{{ legend.title }}</legend>
   <div class="fieldset-wrapper">
@@ -38,7 +45,7 @@
       <span class="field-suffix">{{ suffix }}</span>
     {% endif %}
     {% if description.content %}
-      <div{{ description.attributes.addClass('description') }}>{{ description.content }}</div>
+      <div{{ description.attributes.addClass(description_classes) }}>{{ description.content }}</div>
     {% endif %}
   </div>
 </fieldset>
