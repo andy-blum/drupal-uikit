@@ -323,6 +323,16 @@ function uikit_preprocess_links__dropbutton(&$variables) {
   if ($multiple) {
     // Shift the first link off the array to use it as the dropbutton link.
     $dropbutton = array_shift($links);
+
+    if (isset($dropbutton['link']) && $dropbutton['link']) {
+      $dropbutton['link']['#options']['attributes']['class'][] = 'uk-button';
+      $dropbutton['link']['#options']['attributes']['class'][] = 'uk-button-default';
+    }
+    else {
+      $dropbutton['attributes']->addClass('uk-button');
+      $dropbutton['attributes']->addClass('uk-button-default');
+    }
+
     $variables['dropbutton'] = $dropbutton;
   }
 
