@@ -67,3 +67,8 @@ tabledrag:
   version: VERSION
   js:
     js/uikit.tabledrag.js: {}
+
+tableselect:
+  version: VERSION
+  js:
+    js/uikit.tableselect.js: {}
