@@ -24,6 +24,13 @@
 }
 
 /**
+ * Progress
+ */
+.progress__track {
+  border: 0;
+}
+
+/**
  * Subnavs.
  */
 .uk-list ul.uk-subnav {

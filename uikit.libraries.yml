@@ -63,6 +63,15 @@ dropbutton:
   js:
     js/uikit.dropbutton.js: {}
 
+progress:
+  version: VERSION
+  js:
+    js/uikit.progress.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/drupalSettings
+
 tabledrag:
   version: VERSION
   js:
