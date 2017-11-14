@@ -282,7 +282,7 @@ function uikit_preprocess_form_element(&$variables) {
   // Perform various changes to the variables for advanced form elements.
   $form_advanced = $type == 'checkbox' || $type == 'radio';
   $variables['label_text'] = '';
-  if ($form_advanced) {
+  if ($form_advanced && isset($variables['label']['#title'])) {
     if (is_object($variables['label']['#title'])) {
       $label = $variables['label']['#title']->__toString();
     }
