@@ -58,10 +58,21 @@ comment-new-indicator:
     - history/api
     - core/drupal.displace
 
+autocomplete:
+  version: VERSION
+  js:
+    js/uikit.autocomplete.js: {}
+
 dropbutton:
   version: VERSION
   js:
     js/uikit.dropbutton.js: {}
+
+jquery.ui:
+  version: VERSION
+  css:
+    theme:
+      css/uikit.jquery.ui.css: {}
 
 progress:
   version: VERSION

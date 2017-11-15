@@ -20,6 +20,10 @@ libraries:
 libraries-extend:
   core/drupal.active-link:
     - uikit/active-link
+  core/drupal.autocomplete:
+    - uikit/autocomplete
+  core/jquery.ui:
+    - uikit/jquery.ui
 
 libraries-override:
   core/drupal.progress: uikit/progress
