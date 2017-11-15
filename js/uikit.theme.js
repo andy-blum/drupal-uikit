@@ -17,7 +17,7 @@
 
         if (coreButton) {
           // Add the uk-button class to button links.
-          $(this).addClass('uk-button');
+          $(this).addClass('uk-button uk-button-default');
         }
 
         if (dangerButton) {
