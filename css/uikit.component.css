@@ -34,6 +34,26 @@
 }
 
 /**
+ * Drupal buttons.
+ */
+.link:not(.uk-button) {
+  display: inline;
+  cursor: pointer;
+  padding: 0;
+  border: 0;
+  background: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  color: #1976d2;
+  text-decoration: none;
+}
+.link:not(.uk-button):focus,
+.link:not(.uk-button):hover {
+  color: #0f6ecd;
+  text-decoration: underline;
+}
+
+/**
  * UIkit buttons.
  */
 .uk-dropdown-nav>li>button,
