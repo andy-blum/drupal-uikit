@@ -27,6 +27,5 @@ libraries-extend:
 
 libraries-override:
   core/drupal.progress: uikit/progress
-  core/drupal.tabledrag: uikit/tabledrag
   core/drupal.tableselect: uikit/tableselect
   comment/drupal.comment-new-indicator: uikit/comment-new-indicator

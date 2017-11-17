@@ -83,11 +83,6 @@ progress:
     - core/jquery
     - core/drupalSettings
 
-tabledrag:
-  version: VERSION
-  js:
-    js/uikit.tabledrag.js: {}
-
 tableselect:
   version: VERSION
   js:
