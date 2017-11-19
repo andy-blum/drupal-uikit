@@ -83,7 +83,22 @@ progress:
     - core/jquery
     - core/drupalSettings
 
+tableheader:
+  version: VERSION
+  js:
+    js/uikit.tableheader.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/drupalSettings
+    - core/jquery.once
+    - core/drupal.displace
+
 tableselect:
   version: VERSION
   js:
     js/uikit.tableselect.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/jquery.once

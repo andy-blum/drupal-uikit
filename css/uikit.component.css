@@ -95,3 +95,14 @@
     top: 78px !important;
   }
 }
+
+/**
+ * UIkit tables
+ */
+.uk-table.sticky-header thead {
+  background: #f8f8f8;
+  border-bottom: 1px solid #e5e5e5;
+}
+.uk-table.sticky-header th {
+  font-weight: bolder;
+}
