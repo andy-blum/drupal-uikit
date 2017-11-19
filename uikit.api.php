@@ -14,7 +14,7 @@
  * UIkit is a lightweight and modular front-end framework for developing fast
  * and powerful web interfaces. This API site contains documentation for the
  * UIkit Drupal 7 theme. To view the official UIkit framework documentation,
- * please see @link https://getuikit.com/v2/index.html getuikit.com @endlink.
+ * please see @link https://getuikit.com getuikit.com @endlink.
  *
  * UIkit gives you a comprehensive collection of HTML, CSS, and JS components
  * with configurable options built-in. This collection of small, responsive
