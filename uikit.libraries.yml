@@ -102,3 +102,9 @@ tableselect:
     - core/drupal
     - core/jquery
     - core/jquery.once
+
+toolbar.menu:
+  version: VERSION
+  css:
+    state:
+      css/uikit.toolbar.menu.css: {}

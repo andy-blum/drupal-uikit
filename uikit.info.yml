@@ -24,6 +24,8 @@ libraries-extend:
     - uikit/autocomplete
   core/jquery.ui:
     - uikit/jquery.ui
+  toolbar/toolbar.menu:
+    - uikit/toolbar.menu
 
 libraries-override:
   core/drupal.progress: uikit/progress
