@@ -16,14 +16,14 @@
         var dangerButton = this.classList.contains('button--danger');
         var smallButton = this.classList.contains('button--small');
 
-        if (coreButton) {
-          // Add the uk-button class to button links.
-          $(this).addClass('uk-button uk-button-default');
-        }
 
         if (dangerButton) {
           // Add the uk-button-danger class to button--danger links.
-          $(this).addClass('uk-button-danger');
+          $(this).addClass('uk-button uk-button-danger');
+        }
+        else if (coreButton) {
+          // Add the uk-button class to button links.
+          $(this).addClass('uk-button uk-button-default');
         }
 
         if (smallButton) {
