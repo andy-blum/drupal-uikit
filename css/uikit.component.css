@@ -119,6 +119,6 @@
 /**
  * Vertical tabs
  */
-.vertical-tabs__panes *+.uk-margin {
+.vertical-tabs__panes .form-wrapper+.form-wrapper {
   margin-top: 0 !important;
 }
