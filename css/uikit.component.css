@@ -56,6 +56,15 @@
 /**
  * UIkit buttons.
  */
+.uk-button-default {
+  background-color: #f8f8f8;
+}
+.uk-button-default:focus,
+.uk-button-default:hover,
+.uk-button-default.uk-active,
+.uk-button-default:active {
+  background-color: #fff;
+}
 .uk-dropdown-nav>li>button,
 .uk-dropdown-nav>li>input {
   background-color: transparent;

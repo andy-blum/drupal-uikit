@@ -22,10 +22,16 @@ libraries-extend:
     - uikit/active-link
   core/drupal.autocomplete:
     - uikit/autocomplete
+  core/drupal.dropbutton:
+    - uikit/dropbutton
   core/jquery.ui:
     - uikit/jquery.ui
+  core/jquery.ui.dialog:
+    - uikit/jquery.ui.dialog
   toolbar/toolbar.menu:
     - uikit/toolbar.menu
+  views_ui/admin.styling:
+    - uikit/views_ui.admin.styling
 
 libraries-override:
   core/drupal.progress: uikit/progress

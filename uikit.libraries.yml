@@ -65,14 +65,21 @@ autocomplete:
 
 dropbutton:
   version: VERSION
-  js:
-    js/uikit.dropbutton.js: {}
+  css:
+    component:
+      css/uikit.dropbutton.css: {}
 
 jquery.ui:
   version: VERSION
   css:
     theme:
       css/uikit.jquery.ui.css: {}
+
+jquery.ui.dialog:
+  version: VERSION
+  css:
+    theme:
+      css/uikit.jquery.ui.dialog.css: {}
 
 progress:
   version: VERSION
@@ -108,3 +115,11 @@ toolbar.menu:
   css:
     state:
       css/uikit.toolbar.menu.css: {}
+
+views_ui.admin.styling:
+  version: VERSION
+  css:
+    component:
+      css/uikit.views_ui.admin.css: {}
+    theme:
+      css/uikit.views_ui.admin.theme.css: {}

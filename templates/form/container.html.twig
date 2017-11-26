@@ -27,6 +27,8 @@
     has_parent ? 'form-wrapper',
     'uk-form-row',
     'toolbar-menu-administration' not in attributes ? 'uk-margin',
+    attributes.hasClass('messages') ? 'uk-alert',
+    attributes.hasClass('messages--warning') ? 'uk-alert-warning',
   ]
 %}
 <div{{ attributes.addClass(classes) }}>{{ children }}</div>
