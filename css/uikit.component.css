@@ -115,3 +115,10 @@
 .uk-table.sticky-header th {
   font-weight: bolder;
 }
+
+/**
+ * Vertical tabs
+ */
+.vertical-tabs__panes *+.uk-margin {
+  margin-top: 0 !important;
+}
