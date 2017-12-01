@@ -140,3 +140,11 @@
 .vertical-tabs__panes .form-wrapper+.form-wrapper {
   margin-top: 0 !important;
 }
+
+/**
+ * Remove default style in iOS.
+ */
+input[type="submit"],
+input[type="button"] {
+  -webkit-appearance: none;
+}
