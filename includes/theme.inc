@@ -43,7 +43,7 @@ function uikit_button($variables) {
   element_set_attributes($element, array('id', 'name', 'value'));
   $element['#attributes']['class'][] = 'form-' . $element['#button_type'];
   $value = $element['#attributes']['value'];
-  $id = $element['#attributes']['id'];
+  $id = isset($element['#attributes']['id']) ? $element['#attributes']['id'] : '';
 
   if (!empty($element['#attributes']['disabled'])) {
     $element['#attributes']['class'][] = 'form-button-disabled';
