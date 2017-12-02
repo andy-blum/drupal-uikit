@@ -71,3 +71,10 @@ fieldset.form-wrapper legend:after {
 .uk-list>li.uk-active>a {
   color: #444;
 }
+
+/**
+ * Vertical tabs.
+ */
+.vertical-tabs__pane {
+  padding: 15px;
+}
