@@ -4,6 +4,13 @@
  */
 
 /**
+ * Forms.
+ */
+.form-item+.form-submit {
+  margin-top: 15px;
+}
+
+/**
  * Inline forms.
  */
 .container-inline div {
@@ -44,4 +51,11 @@
 .uk-button-group>input {
   font: 400 14px/20px "Helvetica Neue",Helvetica,Arial,sans-serif !important;
   vertical-align: top !important;
+}
+
+/**
+ * UIkit lists.
+ */
+.uk-list>li.uk-active>a {
+  color: #444;
 }
