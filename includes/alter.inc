@@ -76,7 +76,6 @@ function uikit_theme_suggestions_details_alter(array &$suggestions, array $varia
   if (isset($variables['element']['#group']) && $variables['element']['#group']) {
     $suggestions[] = 'details__grouped';
   }
-  ksm($variables);
 }
 
 /**
