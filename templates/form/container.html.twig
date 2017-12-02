@@ -25,8 +25,7 @@
   set classes = [
     has_parent ? 'js-form-wrapper',
     has_parent ? 'form-wrapper',
-    'uk-form-row',
-    attributes.hasClass('form-actions') ? 'uk-margin',
+    'uk-margin',
   ]
 %}
 <div{{ attributes.addClass(classes) }}>{{ children }}</div>
