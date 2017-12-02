@@ -86,7 +86,7 @@
 .js .dropbutton-widget .dropbutton-action input,
 .js .dropbutton-widget .dropbutton-action button {
   border-radius: 0;
-  padding: 4px 1.5em;
+  padding: 10px 16px;
   display: block;
   width: 100%;
 }
@@ -113,7 +113,7 @@
 .js .dropbutton-wrapper .dropbutton-widget .dropbutton-action a:focus,
 .js .dropbutton-wrapper .dropbutton-widget .dropbutton-action button:focus,
 .js .dropbutton-wrapper .dropbutton-widget .dropbutton-action input:focus {
-  background-color: #0f7ae5;
+  background-color: #2369a6;
   color: #fff;
   z-index: 3;
 }
@@ -121,7 +121,7 @@
 .js .dropbutton-wrapper .dropbutton-widget .dropbutton-action input:active,
 .js .dropbutton-wrapper .dropbutton-widget .dropbutton-action button:active {
   text-decoration: none;
-  background-color: #0f7ae5;
+  background-color: #2369a6;
   color: #fff;
 }
 

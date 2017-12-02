@@ -33,6 +33,9 @@ fieldset.form-wrapper legend {
 fieldset.form-wrapper legend:after {
   display: none;
 }
+.form-actions *+input:not([type="hidden"]) {
+  margin-left: 5px;
+}
 
 /**
  * Composite forms.
