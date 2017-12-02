@@ -91,6 +91,13 @@
 }
 
 /**
+ * UIkit lists.
+ */
+.uk-list>li.uk-active>a {
+  color: #666;
+}
+
+/**
  * Sticky nav.
  */
 @media (max-width: 767px) {
