@@ -84,6 +84,11 @@
 .uk-dropdown-nav>li.uk-active>input {
   color: #666;
 }
+.uk-subnav>*>.uk-button-primary:first-child,
+.uk-subnav>*>.uk-button-secondary:first-child,
+.uk-subnav>*>.uk-button-danger:first-child {
+  color: #fff;
+}
 
 /**
  * Sticky nav.
