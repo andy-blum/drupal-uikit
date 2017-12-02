@@ -88,12 +88,19 @@
   border-radius: 0;
   padding: 10px 16px;
   display: block;
+  line-height: 18px;
   width: 100%;
 }
 .js .dropbutton-widget .dropbutton-action a:focus,
 .js .dropbutton-widget .dropbutton-action input:focus,
 .js .dropbutton-widget .dropbutton-action button:focus {
   text-decoration: underline;
+}
+.js .uk-table .dropbutton-widget .dropbutton-action a,
+.js .uk-table .dropbutton-widget .dropbutton-action input,
+.js .uk-table .dropbutton-widget .dropbutton-action button {
+  padding: 5px 16px;
+  line-height: normal;
 }
 .js .dropbutton-multiple.open .dropbutton-action a,
 .js .dropbutton-multiple.open .dropbutton-action .button {
