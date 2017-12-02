@@ -14,8 +14,8 @@
  */
 #}
 {% set title %}
-  <i uk-icon="icon: plus"></i> {{ link.title }}
+  <i uk-icon="icon: plus; ratio: .75;"></i> {{ link.title }}
 {% endset %}
 <li{{ attributes }}>
-  <a href="{{ link.url }}" class="uk-button uk-button-primary">{{ title }}</a>
+  <a href="{{ link.url }}" class="uk-button uk-button-primary uk-button-small uk-text-capitalize">{{ title }}</a>
 </li>
