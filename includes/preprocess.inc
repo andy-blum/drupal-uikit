@@ -155,29 +155,31 @@ function uikit_preprocess_region(&$variables) {
  */
 function uikit_preprocess_block(&$variables) {
   // Provide an id attribute to help themers.
-  $id = $variables['elements']['#id'];
-  $id = Html::cleanCssIdentifier($id);
-  $variables['attributes']['id'] = $id;
+  if (isset($variables['elements']['#id']) && $id = $variables['elements']['#id']) {
+    $id = Html::cleanCssIdentifier($id);
+    $variables['attributes']['id'] = $id;
 
-  $base_plugin_id = $variables['base_plugin_id'];
-  $system_menu_block = $base_plugin_id == 'system_menu_block';
-  $block = Block::load($variables['elements']['#id']);
-  $region = $block->getRegion();
+    $base_plugin_id = $variables['base_plugin_id'];
+    $system_menu_block = $base_plugin_id == 'system_menu_block';
+    if ($block = Block::load($variables['elements']['#id'])) {
+      $region = $block->getRegion();
 
-  switch ($region) {
-    case 'navbar':
-      if ($system_menu_block) {
-        // Define #theme variable for navbar menus.
-        $variables['content']['#theme'] = 'menu__navbar';
+      switch ($region) {
+        case 'navbar':
+          if ($system_menu_block) {
+            // Define #theme variable for navbar menus.
+            $variables['content']['#theme'] = 'menu__navbar';
+          }
+          break;
+
+        case 'offcanvas':
+          if ($system_menu_block) {
+            // Define #theme variable for offcanvas menus.
+            $variables['content']['#theme'] = 'menu__offcanvas';
+          }
+          break;
       }
-      break;
-
-    case 'offcanvas':
-      if ($system_menu_block) {
-        // Define #theme variable for offcanvas menus.
-        $variables['content']['#theme'] = 'menu__offcanvas';
-      }
-      break;
+    }
   }
 }
 
@@ -324,7 +326,7 @@ function uikit_preprocess_input(&$variables) {
 
     case 'radio':
       $variables['attributes']['class'][] = 'uk-radio';
-     break;
+      break;
 
     case 'range':
       $variables['attributes']['class'][] = 'uk-range';
@@ -522,7 +524,7 @@ function uikit_preprocess_menu__offcanvas(&$variables) {
           switch ($menu_item_type) {
             case 'nav_divider':
             case 'nav_header':
-            $variables['items'][$key]['below'][$below_key]['display_item'] = FALSE;
+              $variables['items'][$key]['below'][$below_key]['display_item'] = FALSE;
               break;
           }
         }
