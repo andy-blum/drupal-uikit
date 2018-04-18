@@ -438,14 +438,10 @@ function uikit_preprocess_menu__navbar(&$variables) {
   $current_path = $current_url->toString();
 
   foreach ($items as $key => $item) {
-    $variables['items'][$key]['has_url'] = TRUE;
-    $route = $item['url']->getRouteName();
-    $is_active = FALSE;
+    $variables['items'][$key]['has_url'] = $item['url']->isRouted();
+    $variables['items'][$key]['is_external'] = $item['url']->isExternal();
 
-    if ($route == '<none>') {
-      // <none> routes do not have a URL.
-      $variables['items'][$key]['has_url'] = FALSE;
-    }
+    $is_active = FALSE;
 
     if ($item['url']->toString() == '/user') {
       $uid = \Drupal::currentUser()->id();
@@ -500,20 +496,18 @@ function uikit_preprocess_menu__offcanvas(&$variables) {
 
   foreach ($items as $key => $item) {
     $variables['items'][$key]['display_item'] = TRUE;
-    $variables['items'][$key]['has_url'] = TRUE;
-    $route = $item['url']->getRouteName();
-
-    if ($route == '<none>') {
-      $variables['items'][$key]['has_url'] = FALSE;
-    }
+    $variables['items'][$key]['has_url'] = $item['url']->isRouted();
+    $variables['items'][$key]['is_external'] = $item['url']->isExternal();
 
     if ($item['below']) {
       $variables['items'][$key]['has_url'] = FALSE;
+      $variables['items'][$key]['is_external'] = FALSE;
 
       foreach ($item['below'] as $below_key => $below_item) {
         // Set is_divider and is_header variables to FALSE.
         $variables['items'][$key]['below'][$below_key]['display_item'] = TRUE;
-        $variables['items'][$key]['below'][$below_key]['has_url'] = TRUE;
+        $variables['items'][$key]['below'][$below_key]['is_external'] = $below_item['url']->isExternal();
+        $variables['items'][$key]['below'][$below_key]['has_url'] = $below_item['url']->isRouted();
 
         // Get the menu item options and menu_item_type, if set. menu_item_type
         // is set by the UIkit Components module.
