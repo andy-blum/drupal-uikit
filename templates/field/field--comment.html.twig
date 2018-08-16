@@ -38,9 +38,11 @@
     {{ title_prefix }}
     <h2 id="comments"{{ title_attributes.addClass('uk-margin-top') }}>{{ label }} ({{ comment_count }})</h2>
     {{ title_suffix }}
+  {% endif %}
 
+  {% if comments %}
     <ul class="uk-comment-list">
-      {{ comments }}
+        {{ comments }}
     </ul>
   {% endif %}
 
