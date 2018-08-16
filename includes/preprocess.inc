@@ -233,7 +233,7 @@ function uikit_preprocess_breadcrumb(&$variables) {
  * Implements template_preprocess_comment().
  */
 function uikit_preprocess_comment(&$variables) {
-  $indented = $variables['elements']['#comment_indent'];
+  $indented = (isset($variables['elements']['#comment_indent']) ? $variables['elements']['#comment_indent'] : FALSE);
   $variables['indented'] = FALSE;
 
   if ($indented) {
