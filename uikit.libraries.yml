@@ -1,6 +1,6 @@
 uikit:
   remote: https://getuikit.com/
-  version: 3.0.0-rc.16
+  version: 3.0.0-rc.17
   license:
     name: MIT
     url: https://github.com/uikit/uikit/blob/develop/LICENSE.md
