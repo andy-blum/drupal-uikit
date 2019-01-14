@@ -1,16 +1,16 @@
 uikit:
   remote: https://getuikit.com/
-  version: 3.0.0-rc.25
+  version: 3.0.1
   license:
     name: MIT
     url: https://github.com/uikit/uikit/blob/develop/LICENSE.md
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.25/css/uikit.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/uikit/3.0.1/css/uikit.min.css: { type: external, minified: true }
   js:
-    //cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.25/js/uikit.min.js: { type: external, minified: true }
-    //cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.25/js/uikit-icons.min.js: { type: external, minified: true }
+    //cdnjs.cloudflare.com/ajax/libs/uikit/3.0.1/js/uikit.min.js: { type: external, minified: true }
+    //cdnjs.cloudflare.com/ajax/libs/uikit/3.0.1/js/uikit-icons.min.js: { type: external, minified: true }
   dependencies:
     - core/jquery
     - core/jquery.once
