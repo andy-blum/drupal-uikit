@@ -210,6 +210,9 @@ function uikit_preprocess_breadcrumb(&$variables) {
       'active' => TRUE,
     ];
   }
+
+  // Add the url cache context.
+  $variables['#cache']['contexts'][] = 'url';
 }
 
 /**
