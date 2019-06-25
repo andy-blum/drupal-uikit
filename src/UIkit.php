@@ -5,8 +5,7 @@ namespace Drupal\uikit;
 /**
  * Provides helper functions for the UIkit base theme.
  */
-class UIkit
-{
+class UIkit {
 
   /**
    * The UIkit library project page.
@@ -20,7 +19,7 @@ class UIkit
    *
    * @var string
    */
-  const UIKIT_LIBRARY_VERSION = '3.1.5';
+  const UIKIT_LIBRARY_VERSION = '3.1.6';
 
   /**
    * The Drupal project page for the UIkit base theme.
@@ -79,8 +78,7 @@ class UIkit
    * @return string
    *   The name of the included file, if successful; FALSE otherwise.
    */
-  public static function loadIncludeFile($type, $project, $project_type = 'module', $name = NULL, $sub_directory = '')
-  {
+  public static function loadIncludeFile($type, $project, $project_type = 'module', $name = NULL, $sub_directory = '') {
     static $files = [];
 
     if (isset($sub_directory)) {
@@ -132,8 +130,7 @@ class UIkit
    * @return mixed
    *   The theme setting's value.
    */
-  public static function getThemeSetting($setting, $theme = NULL)
-  {
+  public static function getThemeSetting($setting, $theme = NULL) {
     if (empty($theme)) {
       $theme = self::getActiveTheme();
     }
@@ -156,8 +153,7 @@ class UIkit
    * @return array
    *   An array of grid classes to use in page.html.twig.
    */
-  public static function getGridClasses($sidebar_first = FALSE, $sidebar_second = FALSE)
-  {
+  public static function getGridClasses($sidebar_first = FALSE, $sidebar_second = FALSE) {
     $standard_layout = self::getThemeSetting('standard_sidebar_positions');
     $tablet_layout = self::getThemeSetting('tablet_sidebar_positions');
     $mobile_layout = self::getThemeSetting('mobile_sidebar_positions');
@@ -404,8 +400,7 @@ class UIkit
    * @return string
    *   The current page title.
    */
-  public static function getPageTitle()
-  {
+  public static function getPageTitle() {
     $request = \Drupal::request();
     $route_match = \Drupal::routeMatch();
     return \Drupal::service('title_resolver')->getTitle($request, $route_match->getRouteObject());
