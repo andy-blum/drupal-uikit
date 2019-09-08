@@ -7,10 +7,11 @@ uikit:
     gpl-compatible: true
   css:
     base:
-      //cdnjs.cloudflare.com/ajax/libs/uikit/3.2.0/css/uikit.min.css: { type: external, minified: true }
+
+      //cdn.jsdelivr.net/gh/uikit/uikit@3.2.0/dist/css/uikit.min.css: { type: external, minified: true }
   js:
-    //cdnjs.cloudflare.com/ajax/libs/uikit/3.2.0/js/uikit.min.js: { type: external, minified: true }
-    //cdnjs.cloudflare.com/ajax/libs/uikit/3.2.0/js/uikit-icons.min.js: { type: external, minified: true }
+    //cdn.jsdelivr.net/gh/uikit/uikit@3.2.0/dist/js/uikit.min.js: { type: external, minified: true }
+    //cdn.jsdelivr.net/gh/uikit/uikit@3.2.0/dist/js/uikit-icons.min.js: { type: external, minified: true }
   dependencies:
     - core/jquery
     - core/jquery.once
