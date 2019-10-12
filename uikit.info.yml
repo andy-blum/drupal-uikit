@@ -8,4 +8,19 @@ core_version_requirement: ^8 || ^9
 libraries:
   - uikit/global
 
-base theme: stable
+base theme: false
+
+regions:
+  header: 'Header'
+  primary_menu: 'Primary menu'
+  highlighted: 'Highlighted'
+  secondary_menu: 'Secondary menu'
+  pre_content: 'Pre-Content'
+  content: 'Content'
+  sidebar_first: 'Sidebar first'
+  sidebar_second: 'Sidebar second'
+  post_content: 'Post-Content'
+  footer: 'Footer'
+
+
+
