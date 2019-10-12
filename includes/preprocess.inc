@@ -24,17 +24,7 @@ function uikit_preprocess_html(array &$variables) {
  * Implements hook_preprocess_page() for page.html.twig.
  */
 function uikit_preprocess_page(array &$variables) {
-  if (theme_get_setting('include_css' , 'uikit')) {
-    $variables['page']['#attached']['library'][] = 'uikit/min_css';
-  }
-  if (theme_get_setting('include_icons', 'uikit')) {
-    $variables['page']['#attached']['library'][] = 'uikit/icons';
-  }
-  if (theme_get_setting('include_rtl', 'uikit')) {
-    $variables['page']['#attached']['library'][] = 'uikit/rtl';
-  }
 
-  kint($variables);
 }
 
 /**

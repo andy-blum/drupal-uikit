@@ -14,6 +14,18 @@ function uikit_page_attachments_alter(array &$page) {
     ],
   ];
   $page['#attached']['html_head'][] = [$ie_edge, 'ie_edge'];*/
+
+  $uikit = Drupal::config('uikit.settings')->getRawData();
+
+  if (isset($uikit['include_css'])) {
+    $page['#attached']['library'][] = 'uikit/min_css';
+  }
+  if (isset($uikit['include_icons'])) {
+    $page['#attached']['library'][] = 'uikit/icons';
+  }
+  if (isset($uikit['include_rtl'])) {
+    $page['#attached']['library'][] = 'uikit/rtl';
+  }
 }
 
 /**

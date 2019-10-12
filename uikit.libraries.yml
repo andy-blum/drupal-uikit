@@ -5,6 +5,7 @@ global:
     name: MIT
     url: https://github.com/uikit/uikit/blob/develop/LICENSE.md
     gpl-compatible: true
+  header: true
   js:
     //cdn.jsdelivr.net/gh/uikit/uikit@3.2.1/dist/js/uikit.min.js: { type: external, minified: true }
 
@@ -19,5 +20,6 @@ rtl:
       //cdn.jsdelivr.net/gh/uikit/uikit@3.2.1/dist/css/uikit-rtl.min.css: { type: external, minified: true }
 
 icons:
+  header: true
   js:
     //cdn.jsdelivr.net/gh/uikit/uikit@3.2.1/dist/js/uikit-icons.min.js: { type: external, minified: true }
