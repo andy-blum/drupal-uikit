@@ -2,15 +2,8 @@
 
 /**
  * @file
- * Conditional logic and data processing for the UIkit theme.
+ * Functions to support theming in the uikit theme.
  */
 
-use Drupal\uikit\UIkit;
-
-/**
- * Load UIkit's include files for theme processing.
- */
-UIkit::loadIncludeFile('inc', 'uikit', 'theme', 'preprocess', 'includes');
-UIkit::loadIncludeFile('inc', 'uikit', 'theme', 'process', 'includes');
-UIkit::loadIncludeFile('inc', 'uikit', 'theme', 'theme', 'includes');
-UIkit::loadIncludeFile('inc', 'uikit', 'theme', 'alter', 'includes');
+include_once('includes/alter.inc');
+include_once('includes/preprocess.inc');
